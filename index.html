@@ -175,54 +175,34 @@ body{
   .clock{font-size:74px}
 }
 <style>
-  
-.status {
-  position: absolute;
-  top: 14px;
-  left: 24px;
-  right: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  font-weight: bold;
-  z-index: 4;
-  pointer-events: none;
-}
+
 
 .status-icons {
-  display: flex;
+  display: flex !important;
+  flex-direction: row !important;
   align-items: center;
   justify-content: flex-end;
-  gap: 4px;
+  flex-wrap: nowrap;
+  gap: 5px;
   height: 16px;
-  color: white;
+  width: auto;
   white-space: nowrap;
-}
-
-.signal-icon {
-  display: block;
-  width: 18px;
-  height: 14px;
   flex-shrink: 0;
 }
 
-.network {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 19px;
+.status-icons .signal-icon,
+.status-icons .network,
+.status-icons .battery-icon {
+  display: block;
+  flex-shrink: 0;
+}
+
+.status-icons .network {
+  font-family: Arial, sans-serif;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 16px;
-  letter-spacing: -0.3px;
-}
-
-.battery-icon {
-  display: block;
-  width: 29px;
-  height: 14px;
-  flex-shrink: 0;
+  white-space: nowrap;
 }
 </style>
 </head>
@@ -234,30 +214,29 @@ body{
   <span id="statusTime">09:41</span>
 
   <span class="status-icons">
-    <!-- Cellular signal: 4 bars -->
-    <svg class="signal-icon" viewBox="0 0 20 15" aria-label="สัญญาณมือถือ">
-      <rect x="0" y="10" width="3.5" height="4" rx="0.6" fill="white"/>
-      <rect x="5" y="7" width="3.5" height="7" rx="0.6" fill="white"/>
-      <rect x="10" y="4" width="3.5" height="10" rx="0.6" fill="white"/>
-      <rect x="15" y="1" width="3.5" height="13" rx="0.6" fill="white"/>
-    </svg>
+    
+<span class="status-icons">
+  <!-- สัญญาณมือถือ 4 ขีด -->
+  <svg class="signal-icon" viewBox="0 0 20 15" aria-label="สัญญาณมือถือ">
+    <rect x="0" y="10" width="3.5" height="4" rx="0.6" fill="white"/>
+    <rect x="5" y="7" width="3.5" height="7" rx="0.6" fill="white"/>
+    <rect x="10" y="4" width="3.5" height="10" rx="0.6" fill="white"/>
+    <rect x="15" y="1" width="3.5" height="13" rx="0.6" fill="white"/>
+  </svg>
 
-    <!-- 5G -->
-    <span class="network">5G</span>
+  <!-- 5G อยู่ตรงกลาง -->
+  <span class="network">5G</span>
 
-    <!-- Battery 67% -->
-    <svg class="battery-icon" viewBox="0 0 32 15" aria-label="แบตเตอรี่ 67%">
-      <rect x="0.6" y="1" width="27" height="13" rx="3"
-        fill="none" stroke="white" stroke-width="1.2"/>
-      <rect x="2.2" y="2.6" width="17.5" height="9.8" rx="1.5"
-        fill="#34C759"/>
-      <rect x="28.5" y="4.5" width="2.5" height="6" rx="0.8"
-        fill="white"/>
-      <text x="14" y="9.9" text-anchor="middle"
-        font-family="Arial, sans-serif" font-size="7.5"
-        font-weight="700" fill="white">67</text>
-    </svg>
-  </span>
+  <!-- แบตเตอรี่สีเขียว ไม่มีตัวเลข -->
+  <svg class="battery-icon" viewBox="0 0 32 15" aria-label="แบตเตอรี่">
+    <rect x="0.6" y="1" width="27" height="13" rx="3"
+      fill="none" stroke="white" stroke-width="1.2"/>
+    <rect x="2.2" y="2.6" width="17.5" height="9.8" rx="1.5"
+      fill="#34C759"/>
+    <rect x="28.5" y="4.5" width="2.5" height="6" rx="0.8"
+      fill="white"/>
+  </svg>
+</span>
 </div>
 
   <!-- LOCK SCREEN -->
