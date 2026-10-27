@@ -3,556 +3,791 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Phone Peeking</title>
+
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;background:#171820;color:white;
-  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-  display:grid;place-items:center;min-height:100vh
-}
-.phone{
-  position:relative;width:min(100vw,390px);
-  height:min(844px,100dvh);min-height:600px;
-  overflow:hidden;border-radius:38px;
-  background:linear-gradient(145deg,#b5b1c8,#737b9c 45%,#252b49);
-  box-shadow:0 20px 60px #0007
-}
-.status{
-  position:absolute;top:14px;left:24px;right:24px;
-  display:flex;justify-content:space-between;
-  font-size:13px;font-weight:bold;z-index:4;
-  pointer-events:none
-}
-.screen{position:absolute;inset:0}
-.lock{
-  padding:85px 22px 25px;text-align:center;
-  touch-action:pan-y;user-select:none
-}
-.date{font-size:17px}
-.clock{
-  font-size:78px;font-weight:250;letter-spacing:-4px;
-  margin-top:5px;line-height:1.2
-}
-.notifications{display:grid;gap:10px;margin-top:45px;text-align:left}
-.notice{
-  padding:13px 15px;border-radius:17px;
-  background:#ffffff38;backdrop-filter:blur(20px);
-  border:1px solid #ffffff28
-}
-.small{font-size:11px;color:#ffffffdc}
-.notice h3{font-size:14px;margin:5px 0}
-.notice p{font-size:13px;margin:0;line-height:1.5}
-.bottom{
-  position:absolute;bottom:25px;left:0;right:0;
-  text-align:center;font-size:12px
-}
-.hint{margin-top:12px;animation:pulse 1.5s infinite}
-@keyframes pulse{50%{opacity:.4}}
-
-/* PASSCODE SCREEN */
-.passcode{
-  display:none;z-index:6;overflow-y:auto;
-  padding:65px 24px 35px;text-align:center;
-  background:linear-gradient(160deg,#303149,#171821);
-  color:white
-}
-.passcode-panel{width:100%;max-width:300px;margin:0 auto}
-.passcode-title{font-size:23px;font-weight:600;margin-bottom:10px}
-.passcode-subtitle{font-size:13px;color:#ffffffbd}
-.pin-dots{
-  display:flex;justify-content:center;gap:17px;
-  margin:28px 0 16px
-}
-.pin-dots span{
-  display:block;width:12px;height:12px;
-  border:1px solid white;border-radius:50%
-}
-.pin-dots span.filled{background:white}
-.pin-error{
-  min-height:32px;color:#ff8585;
-  font-size:12px;line-height:1.5
-}
-.pin-keypad{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:12px;max-width:260px;margin:0 auto
-}
-.pin-keypad button{
-  width:66px;height:66px;justify-self:center;
-  border:0;border-radius:50%;background:#414253;
-  color:white;font-size:25px;cursor:pointer;
-  -webkit-tap-highlight-color:transparent
-}
-.pin-keypad button:active{
-  background:#696a7c;transform:scale(.96)
-}
-.pin-keypad button.pin-empty{visibility:hidden}
-.pin-keypad button.pin-delete{font-size:23px}
-.pin-cancel{
-  margin-top:18px;padding:10px 20px;
-  background:transparent;border:0;color:white;
-  font-size:14px;cursor:pointer
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.home{display:none;padding:78px 20px 40px}
-.home h1{font-size:27px;margin:0}
-.subtitle{font-size:13px;color:#ffffffbd;margin:5px 0 25px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px 8px}
-.app{
-  display:flex;flex-direction:column;align-items:center;gap:7px;
-  background:none;border:0;color:white;font:inherit;
-  font-size:11px;cursor:pointer
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  background: #111;
+  color: white;
 }
-.icon{
-  width:55px;height:55px;border-radius:15px;
-  display:grid;place-items:center;font-size:26px;
-  background:#fff;color:#333;box-shadow:0 4px 12px #0002
-}
-.green{background:#42c963;color:white}
-.blue{background:#f8f8ff;color:#4788dc}
-.pink{background:linear-gradient(135deg,#f6bd76,#e65b92,#7957d5);color:white}
-.yellow{background:#ffdf68;color:#665316}
-.gray{background:#abb1bd;color:white}
-.dock{
-  position:absolute;bottom:27px;left:18px;right:18px;
-  padding:12px 8px;border-radius:23px;
-  background:#ffffff38;backdrop-filter:blur(20px);
-  display:grid;grid-template-columns:repeat(4,1fr)
-}
-.dock .icon{width:49px;height:49px}
-.view{
-  display:none;position:absolute;inset:0;z-index:5;
-  background:#f6f6fa;color:#22232b;padding-top:55px
-}
-.header{
-  height:54px;position:absolute;top:0;left:0;right:0;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 16px;background:#ffffffed;
-  border-bottom:1px solid #ddd
-}
-.back{border:0;background:none;color:#287ce0;font-size:15px}
-.title{font-weight:bold}
-.content{height:100%;overflow:auto;padding:15px 16px 40px}
-.item{
-  background:white;border:1px solid #e8e8ee;
-  border-radius:14px;padding:13px;margin-bottom:10px
-}
-.name{font-size:14px;font-weight:bold}
-.sub{font-size:13px;color:#777;margin-top:5px;line-height:1.5}
-.time{float:right;font-size:11px;color:#999}
-.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
-.photo{
-  aspect-ratio:1;border-radius:5px;
-  display:grid;place-items:center;font-size:27px;
-  background:linear-gradient(145deg,#d5b8c8,#7789a8,#303b5b)
-}
-.photo:nth-child(3n+2){background:linear-gradient(145deg,#e8d3a9,#b37b88,#554c73)}
-.photo:nth-child(3n){background:linear-gradient(145deg,#b4d5ce,#667d96,#3b425d)}
-.bubble{
-  max-width:82%;padding:11px 13px;border-radius:17px;
-  margin:10px 0;background:#e7e7ed;font-size:14px
-}
-.me{background:#2788f5;color:white;margin-left:auto}
-.post h3{font-size:14px;margin:0 0 8px}
-.post p{font-size:13px;line-height:1.5;color:#555;margin:0}
-.post-meta{font-size:11px;color:#888;margin-bottom:8px}
-.center{text-align:center;background:white;border-radius:17px;padding:22px}
-.album{
-  width:180px;aspect-ratio:1;margin:0 auto 18px;
-  border-radius:15px;background:linear-gradient(135deg,#f5a4b7,#7b66a6,#283b5c);
-  display:grid;place-items:center;font-size:50px
-}
-.setting{background:white;padding:14px;border-bottom:1px solid #eee;font-size:14px}
-.setting small{display:block;color:#888;margin-top:4px}
-.pill{
-  position:absolute;bottom:9px;left:50%;transform:translateX(-50%);
-  width:124px;height:5px;border-radius:9px;background:white;
-  z-index:8;cursor:pointer
-}
-@media(max-width:410px){
-  .phone{width:100vw;height:100dvh;border-radius:0}
-  .clock{font-size:74px}
-}
-<style>
 
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  cursor: pointer;
+}
+
+.phone {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background: linear-gradient(160deg, #8ba4bd, #d2b9bb 55%, #e4d6c8);
+}
+
+/* STATUS BAR */
+.status {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 30;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  pointer-events: none;
+}
 
 .status-icons {
-  display: flex !important;
+  display: inline-flex !important;
   flex-direction: row !important;
-  align-items: center;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
   justify-content: flex-end;
-  flex-wrap: nowrap;
   gap: 5px;
-  height: 16px;
   width: auto;
+  height: 16px;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
+.signal-icon {
+  display: block;
+  width: 18px;
+  height: 14px;
+  flex: 0 0 18px;
+}
 
-<div class="status-icons" style="display:inline-flex !important; flex-direction:row !important; align-items:center !important; flex-wrap:nowrap !important; gap:5px; white-space:nowrap;">
-  <svg style="display:block;flex-shrink:0" width="18" height="14" viewBox="0 0 20 15">
-    <rect x="0" y="10" width="3.5" height="4" rx=".6" fill="white"/>
-    <rect x="5" y="7" width="3.5" height="7" rx=".6" fill="white"/>
-    <rect x="10" y="4" width="3.5" height="10" rx=".6" fill="white"/>
-    <rect x="15" y="1" width="3.5" height="13" rx=".6" fill="white"/>
-  </svg>
-  <span style="display:inline-block !important;flex-shrink:0;font:700 12px/14px Arial,sans-serif;color:white;">5G</span>
-  <svg style="display:block;flex-shrink:0" width="29" height="14" viewBox="0 0 32 15">
-    <rect x=".6" y="1" width="27" height="13" rx="3" fill="none" stroke="white" stroke-width="1.2"/>
-    <rect x="2.2" y="2.6" width="17.5" height="9.8" rx="1.5" fill="#34C759"/>
-    <rect x="28.5" y="4.5" width="2.5" height="6" rx=".8" fill="white"/>
-  </svg>
-</div>
+.network {
+  display: inline-block !important;
+  flex: 0 0 auto;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: -0.3px;
+  color: white;
+  white-space: nowrap;
+}
+
+.battery-icon {
+  display: block;
+  width: 29px;
+  height: 14px;
+  flex: 0 0 29px;
+}
+
+/* LOCK SCREEN */
+.screen {
+  position: absolute;
+  inset: 0;
+  display: none;
+  overflow: hidden;
+}
+
+.screen.active {
+  display: block;
+}
+
+#lockScreen {
+  background: linear-gradient(
+    155deg,
+    #8498b4 0%,
+    #c0a6b5 42%,
+    #ead4c6 100%
+  );
+  touch-action: pan-y;
+}
+
+.lock-content {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.lock-date {
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.lock-time {
+  font-size: clamp(76px, 23vw, 112px);
+  line-height: 1;
+  font-weight: 300;
+  letter-spacing: -5px;
+}
+
+.lock-message {
+  margin-top: 22px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.swipe-hint {
+  position: absolute;
+  bottom: 72px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.bottom-indicators {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  right: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.round-button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.25);
+  font-size: 19px;
+}
+
+/* PASSCODE SCREEN */
+#passcodeScreen {
+  background: linear-gradient(160deg, #7e91ad, #b9a7b9 55%, #ded0c8);
+  text-align: center;
+}
+
+.passcode-content {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  right: 0;
+  padding: 0 25px;
+}
+
+.passcode-title {
+  font-size: 23px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.passcode-subtitle {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 17px;
+  margin: 30px 0 12px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid white;
+  background: transparent;
+}
+
+.dot.filled {
+  background: white;
+}
+
+.pin-error {
+  min-height: 20px;
+  font-size: 13px;
+  color: #fff;
+}
+
+.keypad {
+  position: absolute;
+  top: 40%;
+  bottom: 75px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(280px, 82vw);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.key {
+  justify-self: center;
+  align-self: center;
+  width: 66px;
+  height: 66px;
+  max-width: 19vw;
+  max-height: 19vw;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.19);
+  border: 1px solid rgba(255,255,255,0.2);
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.key:active {
+  background: rgba(255,255,255,0.4);
+}
+
+.key small {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.key.empty {
+  visibility: hidden;
+}
+
+.cancel-pin {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  background: transparent;
+  font-size: 14px;
+}
+
+.delete-pin {
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  background: transparent;
+  font-size: 14px;
+}
+
+/* HOME SCREEN */
+#homeScreen {
+  background: linear-gradient(160deg, #879bb6, #c5acbc 55%, #ead8c9);
+}
+
+.home-welcome {
+  position: absolute;
+  top: 12%;
+  left: 24px;
+  right: 24px;
+}
+
+.home-date {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.home-title {
+  margin-top: 5px;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.home-subtitle {
+  margin-top: 5px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.app-grid {
+  position: absolute;
+  top: 29%;
+  left: 24px;
+  right: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px 12px;
+}
+
+.app {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  background: transparent;
+}
+
+.app-icon {
+  width: min(58px, 15vw);
+  height: min(58px, 15vw);
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  font-size: 27px;
+  background: rgba(255,255,255,0.88);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.app-label {
+  font-size: 11px;
+  color: white;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.25);
+}
+
+.dock {
+  position: absolute;
+  bottom: 48px;
+  left: 20px;
+  right: 20px;
+  height: 85px;
+  border-radius: 26px;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.dock .app-icon {
+  width: 52px;
+  height: 52px;
+  font-size: 25px;
+}
+
+.home-indicator {
+  position: absolute;
+  z-index: 40;
+  bottom: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 135px;
+  height: 5px;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+}
+
+/* APP WINDOW */
+#appWindow {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: none;
+  background: #f7f7f7;
+  color: #222;
+}
+
+#appWindow.open {
+  display: block;
+}
+
+.app-header {
+  height: 60px;
+  padding: 20px 18px 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.back-button {
+  color: #3478f6;
+  background: transparent;
+  font-size: 16px;
+}
+
+.app-body {
+  padding: 20px;
+  color: #333;
+  font-size: 15px;
+}
+
+.app-card {
+  background: white;
+  padding: 15px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+@media (max-height: 680px) {
+  .lock-content { top: 12%; }
+  .passcode-content { top: 11%; }
+  .keypad { top: 36%; bottom: 55px; gap: 4px; }
+  .key { width: 55px; height: 55px; }
+  .app-grid { top: 26%; gap: 16px 10px; }
+  .dock { bottom: 35px; }
+}
 </style>
 </head>
+
 <body>
-<main class="phone">
+<div class="phone">
+
+  <!-- STATUS BAR: สัญญาณ | 5G | แบตเตอรี่ -->
   <div class="status">
-    
-<div class="status">
-  <span id="statusTime">09:41</span>
+    <span id="statusTime">09:41</span>
 
-  <span class="status-icons">
-    
-<span class="status-icons">
-  <!-- สัญญาณมือถือ 4 ขีด -->
-  <svg class="signal-icon" viewBox="0 0 20 15" aria-label="สัญญาณมือถือ">
-    <rect x="0" y="10" width="3.5" height="4" rx="0.6" fill="white"/>
-    <rect x="5" y="7" width="3.5" height="7" rx="0.6" fill="white"/>
-    <rect x="10" y="4" width="3.5" height="10" rx="0.6" fill="white"/>
-    <rect x="15" y="1" width="3.5" height="13" rx="0.6" fill="white"/>
-  </svg>
+    <div class="status-icons">
+      <svg class="signal-icon" viewBox="0 0 20 15" aria-label="สัญญาณมือถือ">
+        <rect x="0" y="10" width="3.5" height="4" rx=".6" fill="white"/>
+        <rect x="5" y="7" width="3.5" height="7" rx=".6" fill="white"/>
+        <rect x="10" y="4" width="3.5" height="10" rx=".6" fill="white"/>
+        <rect x="15" y="1" width="3.5" height="13" rx=".6" fill="white"/>
+      </svg>
 
-  <!-- 5G อยู่ตรงกลาง -->
-  <span class="network">5G</span>
+      <span class="network">5G</span>
 
-  <!-- แบตเตอรี่สีเขียว ไม่มีตัวเลข -->
-  <svg class="battery-icon" viewBox="0 0 32 15" aria-label="แบตเตอรี่">
-    <rect x="0.6" y="1" width="27" height="13" rx="3"
-      fill="none" stroke="white" stroke-width="1.2"/>
-    <rect x="2.2" y="2.6" width="17.5" height="9.8" rx="1.5"
-      fill="#34C759"/>
-    <rect x="28.5" y="4.5" width="2.5" height="6" rx="0.8"
-      fill="white"/>
-  </svg>
-</span>
-</div>
+      <svg class="battery-icon" viewBox="0 0 32 15" aria-label="แบตเตอรี่">
+        <rect x=".6" y="1" width="27" height="13" rx="3"
+          fill="none" stroke="white" stroke-width="1.2"/>
+        <rect x="2.2" y="2.6" width="17.5" height="9.8" rx="1.5"
+          fill="#34C759"/>
+        <rect x="28.5" y="4.5" width="2.5" height="6" rx=".8"
+          fill="white"/>
+      </svg>
+    </div>
+  </div>
 
   <!-- LOCK SCREEN -->
-  <section class="screen lock" id="lock">
-    <div class="date" id="date">Tuesday, October 27</div>
-    <div class="clock" id="clock">09:41</div>
-
-    <div class="notifications">
-      <div class="notice">
-        <div class="small">MESSAGES · NOW</div>
-        <h3>New message</h3>
-        <p>ถึงบ้านแล้วบอกด้วยนะ :)</p>
-      </div>
-      <div class="notice">
-        <div class="small">SOCIAL · 2 MIN AGO</div>
-        <h3>มีการแจ้งเตือนใหม่</h3>
-        <p>มีคนพูดถึงคุณในโพสต์หนึ่ง</p>
-      </div>
+  <section id="lockScreen" class="screen active">
+    <div class="lock-content">
+      <div class="lock-date" id="lockDate">วันอังคารที่ 27 ตุลาคม</div>
+      <div class="lock-time" id="lockTime">09:41</div>
+      <div class="lock-message">ยินดีต้อนรับกลับมา ♡</div>
     </div>
 
-    <div class="bottom">
-      ◉　　　　　　　　　◉
-      <div class="hint">ปัดหน้าจอขึ้นเพื่อใส่รหัสผ่าน</div>
+    <div class="swipe-hint">ปัดขึ้นเพื่อปลดล็อก</div>
+
+    <div class="bottom-indicators">
+      <button class="round-button" aria-label="ไฟฉาย">☼</button>
+      <button class="round-button" aria-label="กล้อง">◎</button>
     </div>
   </section>
 
   <!-- PASSCODE SCREEN -->
-  <section class="screen passcode" id="passcode">
-    <div class="passcode-panel">
-      <div class="passcode-title">Enter Passcode</div>
-      <div class="passcode-subtitle">ใส่รหัส 4 หลักเพื่อปลดล็อก</div>
+  <section id="passcodeScreen" class="screen">
+    <div class="passcode-content">
+      <div class="passcode-title">ป้อนรหัสผ่าน</div>
+      <div class="passcode-subtitle">กรอกรหัส 4 หลักเพื่อปลดล็อก</div>
 
-      <div class="pin-dots" id="pin-dots" aria-label="รหัสผ่าน 4 หลัก">
-        <span></span><span></span><span></span><span></span>
+      <div class="dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
       </div>
 
-      <div class="pin-error" id="pin-error" role="status" aria-live="polite"></div>
-
-      <div class="pin-keypad">
-        <button type="button" onclick="pressPin('1')">1</button>
-        <button type="button" onclick="pressPin('2')">2</button>
-        <button type="button" onclick="pressPin('3')">3</button>
-        <button type="button" onclick="pressPin('4')">4</button>
-        <button type="button" onclick="pressPin('5')">5</button>
-        <button type="button" onclick="pressPin('6')">6</button>
-        <button type="button" onclick="pressPin('7')">7</button>
-        <button type="button" onclick="pressPin('8')">8</button>
-        <button type="button" onclick="pressPin('9')">9</button>
-        <button type="button" class="pin-empty" disabled></button>
-        <button type="button" onclick="pressPin('0')">0</button>
-        <button type="button" class="pin-delete" onclick="deletePin()" aria-label="ลบตัวเลข">⌫</button>
-      </div>
-
-      <button type="button" class="pin-cancel" onclick="cancelPin()">ย้อนกลับ</button>
+      <div class="pin-error" id="pinError"></div>
     </div>
+
+    <div class="keypad">
+      <button class="key" data-digit="1">1</button>
+      <button class="key" data-digit="2">2<small>ABC</small></button>
+      <button class="key" data-digit="3">3<small>DEF</small></button>
+      <button class="key" data-digit="4">4<small>GHI</small></button>
+      <button class="key" data-digit="5">5<small>JKL</small></button>
+      <button class="key" data-digit="6">6<small>MNO</small></button>
+      <button class="key" data-digit="7">7<small>PQRS</small></button>
+      <button class="key" data-digit="8">8<small>TUV</small></button>
+      <button class="key" data-digit="9">9<small>WXYZ</small></button>
+      <button class="key empty"></button>
+      <button class="key" data-digit="0">0</button>
+      <button class="key empty"></button>
+    </div>
+
+    <button class="cancel-pin" id="cancelPin">ยกเลิก</button>
+    <button class="delete-pin" id="deletePin">ลบ</button>
   </section>
 
   <!-- HOME SCREEN -->
-  <section class="screen home" id="home">
-    <h1>Good evening</h1>
-    <p class="subtitle">Welcome back to your phone</p>
+  <section id="homeScreen" class="screen">
+    <div class="home-welcome">
+      <div class="home-date" id="homeDate">วันอังคารที่ 27 ตุลาคม</div>
+      <div class="home-title">Hello ♡</div>
+      <div class="home-subtitle">ยินดีต้อนรับสู่โทรศัพท์ของคุณ</div>
+    </div>
 
-    <div class="grid">
-      <button class="app" data-app="messages"><span class="icon green">▤</span>Messages</button>
-      <button class="app" data-app="contacts"><span class="icon blue">♙</span>Contacts</button>
-      <button class="app" data-app="photos"><span class="icon pink">✿</span>Photos</button>
-      <button class="app" data-app="notes"><span class="icon yellow">▤</span>Notes</button>
-      <button class="app" data-app="social"><span class="icon pink">◎</span>Social</button>
-      <button class="app" data-app="calls"><span class="icon green">☎</span>Calls</button>
-      <button class="app" data-app="calendar"><span class="icon blue">27</span>Calendar</button>
-      <button class="app" data-app="music"><span class="icon pink">♫</span>Music</button>
+    <div class="app-grid">
+      <button class="app" data-app="Messages">
+        <span class="app-icon">💬</span>
+        <span class="app-label">Messages</span>
+      </button>
+      <button class="app" data-app="Contacts">
+        <span class="app-icon">👤</span>
+        <span class="app-label">Contacts</span>
+      </button>
+      <button class="app" data-app="Photos">
+        <span class="app-icon">🌈</span>
+        <span class="app-label">Photos</span>
+      </button>
+      <button class="app" data-app="Notes">
+        <span class="app-icon">📝</span>
+        <span class="app-label">Notes</span>
+      </button>
+      <button class="app" data-app="Social">
+        <span class="app-icon">🩷</span>
+        <span class="app-label">Social</span>
+      </button>
+      <button class="app" data-app="Calls">
+        <span class="app-icon">📞</span>
+        <span class="app-label">Calls</span>
+      </button>
+      <button class="app" data-app="Calendar">
+        <span class="app-icon">📅</span>
+        <span class="app-label">Calendar</span>
+      </button>
+      <button class="app" data-app="Music">
+        <span class="app-icon">🎵</span>
+        <span class="app-label">Music</span>
+      </button>
+      <button class="app" data-app="Settings">
+        <span class="app-icon">⚙️</span>
+        <span class="app-label">Settings</span>
+      </button>
     </div>
 
     <div class="dock">
-      <button class="app" data-app="calls"><span class="icon green">☎</span></button>
-      <button class="app" data-app="messages"><span class="icon green">▤</span></button>
-      <button class="app" data-app="photos"><span class="icon pink">✿</span></button>
-      <button class="app" data-app="settings"><span class="icon gray">⚙</span></button>
+      <button class="app" data-app="Calls">
+        <span class="app-icon">📞</span>
+      </button>
+      <button class="app" data-app="Messages">
+        <span class="app-icon">💬</span>
+      </button>
+      <button class="app" data-app="Photos">
+        <span class="app-icon">🌈</span>
+      </button>
+      <button class="app" data-app="Music">
+        <span class="app-icon">🎵</span>
+      </button>
     </div>
   </section>
 
-  <!-- APP SCREENS -->
-  <section class="view" id="view">
-    <header class="header">
-      <button class="back" id="back">‹ Home</button>
-      <span class="title" id="title">Messages</span>
-      <span style="width:42px"></span>
-    </header>
-    <div class="content" id="content"></div>
-  </section>
+  <!-- APP WINDOW -->
+  <div id="appWindow">
+    <div class="app-header">
+      <button class="back-button" id="backHome">‹ กลับ</button>
+      <span id="appTitle">App</span>
+    </div>
+    <div class="app-body" id="appBody"></div>
+  </div>
 
-  <div class="pill" id="pill"></div>
-</main>
+  <!-- HOME INDICATOR -->
+  <button class="home-indicator" id="homeIndicator" aria-label="ล็อกหน้าจอ"></button>
+
+</div>
 
 <script>
-const $ = s => document.querySelector(s);
-let startY = null;
-const CORRECT_PIN = '1234';
-let enteredPin = '';
-let pinBusy = false;
-let pinTimer = null;
+const PIN = "1234";
 
-function showPasscode(){
-  enteredPin = '';
-  pinBusy = false;
-  updatePinDots();
-  $('#pin-error').textContent = '';
-  $('#lock').style.display = 'none';
-  $('#home').style.display = 'none';
-  $('#view').style.display = 'none';
-  $('#passcode').style.display = 'block';
+const lockScreen = document.getElementById("lockScreen");
+const passcodeScreen = document.getElementById("passcodeScreen");
+const homeScreen = document.getElementById("homeScreen");
+const appWindow = document.getElementById("appWindow");
+const pinError = document.getElementById("pinError");
+const dots = [...document.querySelectorAll(".dot")];
+
+let enteredPin = "";
+let touchStartY = 0;
+
+function showScreen(screen) {
+  [lockScreen, passcodeScreen, homeScreen].forEach(item => {
+    item.classList.remove("active");
+  });
+  screen.classList.add("active");
+  appWindow.classList.remove("open");
 }
 
-function unlock(){
-  // เรียกได้เมื่อรหัสถูกต้องเท่านั้น
-  $('#lock').style.display = 'none';
-  $('#passcode').style.display = 'none';
-  $('#view').style.display = 'none';
-  $('#home').style.display = 'block';
+function updatePinDots() {
+  dots.forEach((dot, index) => {
+    dot.classList.toggle("filled", index < enteredPin.length);
+  });
 }
 
-function pressPin(number){
-  if(pinBusy || enteredPin.length >= 4) return;
+function clearPin() {
+  enteredPin = "";
+  updatePinDots();
+}
 
-  enteredPin += number;
+function enterDigit(digit) {
+  if (enteredPin.length >= 4) return;
+
+  enteredPin += digit;
   updatePinDots();
 
-  if(enteredPin.length === 4){
-    if(enteredPin === CORRECT_PIN){
-      pinBusy = true;
-      $('#pin-error').textContent = 'ปลดล็อกสำเร็จ';
+  if (enteredPin.length === 4) {
+    if (enteredPin === PIN) {
+      pinError.textContent = "";
       setTimeout(() => {
-        unlock();
-        enteredPin = '';
-        pinBusy = false;
-        updatePinDots();
-      }, 250);
-    }else{
-      pinBusy = true;
-      $('#pin-error').textContent = 'รหัสไม่ถูกต้อง ลองอีกครั้ง';
-      pinTimer = setTimeout(() => {
-        enteredPin = '';
-        pinBusy = false;
-        updatePinDots();
-        $('#pin-error').textContent = '';
+        clearPin();
+        showScreen(homeScreen);
+      }, 150);
+    } else {
+      pinError.textContent = "รหัสไม่ถูกต้อง ลองอีกครั้ง";
+      setTimeout(() => {
+        clearPin();
+        pinError.textContent = "";
       }, 900);
     }
   }
 }
 
-function updatePinDots(){
-  document.querySelectorAll('#pin-dots span').forEach((dot,index)=>{
-    dot.classList.toggle('filled',index < enteredPin.length);
+document.querySelectorAll("[data-digit]").forEach(button => {
+  button.addEventListener("click", () => {
+    enterDigit(button.dataset.digit);
   });
-}
-
-function deletePin(){
-  if(pinBusy) return;
-  enteredPin = enteredPin.slice(0,-1);
-  updatePinDots();
-  $('#pin-error').textContent = '';
-}
-
-function cancelPin(){
-  if(pinTimer) clearTimeout(pinTimer);
-  enteredPin = '';
-  pinBusy = false;
-  updatePinDots();
-  $('#pin-error').textContent = '';
-  $('#passcode').style.display = 'none';
-  $('#lock').style.display = 'block';
-}
-
-function goHome(){
-  $('#view').style.display = 'none';
-  $('#home').style.display = 'block';
-}
-
-/* ปัดขึ้นจากหน้าจอล็อกเพื่อเปิดหน้ากรอกรหัส */
-$('#lock').addEventListener('touchstart',e=>{
-  startY = e.touches[0].clientY;
-},{passive:true});
-
-$('#lock').addEventListener('touchend',e=>{
-  if(startY !== null && startY - e.changedTouches[0].clientY > 25){
-    showPasscode();
-  }
-  startY = null;
-},{passive:true});
-
-$('#lock').addEventListener('mousedown',e=>{
-  startY = e.clientY;
 });
 
-$('#lock').addEventListener('mouseup',e=>{
-  if(startY !== null && startY - e.clientY > 25){
-    showPasscode();
-  }
-  startY = null;
+document.getElementById("deletePin").addEventListener("click", () => {
+  enteredPin = enteredPin.slice(0, -1);
+  pinError.textContent = "";
+  updatePinDots();
 });
 
-/* ไม่มีการปลดล็อกด้วยการแตะหน้าจอเฉย ๆ */
+document.getElementById("cancelPin").addEventListener("click", () => {
+  clearPin();
+  pinError.textContent = "";
+  showScreen(lockScreen);
+});
 
-$('#pill').onclick = ()=>{
-  if($('#view').style.display === 'block'){
-    goHome();
-  }else if($('#home').style.display === 'block'){
-    $('#home').style.display = 'none';
-    $('#view').style.display = 'none';
-    $('#passcode').style.display = 'none';
-    $('#lock').style.display = 'block';
+function unlockPrompt() {
+  clearPin();
+  pinError.textContent = "";
+  showScreen(passcodeScreen);
+}
+
+lockScreen.addEventListener("touchstart", event => {
+  touchStartY = event.touches[0].clientY;
+}, {passive: true});
+
+lockScreen.addEventListener("touchend", event => {
+  const endY = event.changedTouches[0].clientY;
+  if (touchStartY - endY > 35) unlockPrompt();
+}, {passive: true});
+
+lockScreen.addEventListener("click", event => {
+  if (event.target.closest("button")) return;
+  unlockPrompt();
+});
+
+let startY = 0;
+homeScreen.addEventListener("touchstart", event => {
+  startY = event.touches[0].clientY;
+}, {passive: true});
+
+homeScreen.addEventListener("touchend", event => {
+  const endY = event.changedTouches[0].clientY;
+  if (endY - startY > 100 && startY < 100) {
+    showScreen(lockScreen);
   }
+}, {passive: true});
+
+/* Simple demo content for each app */
+const appContent = {
+  Messages: `
+    <div class="app-card">💬 Messages</div>
+    <div class="app-card">ยังไม่มีข้อความใหม่</div>
+  `,
+  Contacts: `
+    <div class="app-card">👤 Contacts</div>
+    <div class="app-card">รายชื่อผู้ติดต่อ</div>
+  `,
+  Photos: `
+    <div class="app-card">🌈 Photos</div>
+    <div class="app-card">รูปภาพของคุณจะแสดงที่นี่</div>
+  `,
+  Notes: `
+    <div class="app-card">📝 Notes</div>
+    <div class="app-card" contenteditable="true">แตะตรงนี้เพื่อเขียนโน้ต...</div>
+  `,
+  Social: `
+    <div class="app-card">🩷 Social</div>
+    <div class="app-card">พื้นที่โซเชียลของคุณ</div>
+  `,
+  Calls: `
+    <div class="app-card">📞 Calls</div>
+    <div class="app-card">ยังไม่มีประวัติการโทร</div>
+  `,
+  Calendar: `
+    <div class="app-card">📅 Calendar</div>
+    <div class="app-card">ไม่มีนัดหมายในวันนี้</div>
+  `,
+  Music: `
+    <div class="app-card">🎵 Music</div>
+    <div class="app-card">♪ เพลงโปรดของคุณ ♪</div>
+  `,
+  Settings: `
+    <div class="app-card">⚙️ Settings</div>
+    <div class="app-card">การตั้งค่าโทรศัพท์</div>
+    <div class="app-card">หน้าจอและความสว่าง</div>
+    <div class="app-card">เสียงและการสั่น</div>
+  `
 };
 
-$('#back').onclick = goHome;
-
-const apps = {
-messages:['Messages',`
-  <div class="item" data-chat="friend"><span class="time">9:38</span><div class="name">Best friend 💬</div><div class="sub">ถึงบ้านแล้วบอกด้วยนะ :)</div></div>
-  <div class="item" data-chat="someone"><span class="time">Yesterday</span><div class="name">Someone</div><div class="sub">พรุ่งนี้เจอกันนะ</div></div>
-  <div class="item" data-chat="group"><span class="time">Monday</span><div class="name">แก๊งของเรา (4)</div><div class="sub">ส่งรูปมาอีกกก</div></div>`],
-
-contacts:['Contacts',`
-  <div class="item"><div class="name">Best friend</div><div class="sub">Mobile · 08X-XXX-1024</div></div>
-  <div class="item"><div class="name">Someone</div><div class="sub">Mobile · 09X-XXX-7831</div></div>
-  <div class="item"><div class="name">Mom</div><div class="sub">Mobile · 08X-XXX-2210</div></div>
-  <div class="item"><div class="name">Work</div><div class="sub">Mobile · 06X-XXX-5490</div></div>`],
-
-photos:['Photos',`
-  <p style="font-size:13px;color:#777">Recent · 12 Photos</p>
-  <div class="photo-grid">${['☁','🌷','🌆','☕','🌙','🌿','🎧','🪞','🌊','🍰','🌤','📷'].map(x=>`<div class="photo">${x}</div>`).join('')}</div>`],
-
-notes:['Notes',`
-  <div class="item"><h3>things to remember ✧</h3><p>ซื้อกาแฟร้านเดิม<br>ตอบข้อความด้วย<br>อย่าลืมพักผ่อนให้พอ</p></div>
-  <div class="item"><h3>little things</h3><p>เพลงที่ฟังวนอยู่ช่วงนี้<br>— track 03, track 08</p></div>
-  <div class="item"><h3>to do</h3><p>□ เก็บห้อง<br>□ ซื้อของเข้าบ้าน<br>□ โทรกลับ</p></div>`],
-
-social:['Social',`
-  <div class="item post"><div class="post-meta">someone · 8 min ago</div><h3>วันนี้อากาศดีมาก ☁</h3><p>อยากหยุดเวลาไว้ตรงนี้อีกสักหน่อย</p><p style="margin-top:10px;color:#d65a86">♡ 128　💬 14</p></div>
-  <div class="item post"><div class="post-meta">bestfriend · 1 hour ago</div><h3>photo dump 📸</h3><p>ช่วงเวลาดี ๆ กับคนเดิม ๆ</p><p style="margin-top:10px;color:#d65a86">♡ 86　💬 9</p></div>
-  <div class="item post"><div class="post-meta">someone · Yesterday</div><h3>🎧</h3><p>บางเพลงก็ทำให้นึกถึงใครบางคน</p><p style="margin-top:10px;color:#d65a86">♡ 204　💬 21</p></div>`],
-
-calls:['Calls',`
-  <div class="item"><span class="time">Today 9:12</span><div class="name">↙ Best friend</div><div class="sub">Incoming call · 4 min</div></div>
-  <div class="item"><span class="time">Yesterday 21:44</span><div class="name">↗ Mom</div><div class="sub">Outgoing call · 2 min</div></div>
-  <div class="item"><span class="time">Yesterday 18:03</span><div class="name" style="color:#e45555">↙ Someone</div><div class="sub">Missed call</div></div>`],
-
-calendar:['Calendar',`
-  <div class="item"><div style="font-size:12px;color:#888">TUESDAY</div><div style="font-size:30px;font-weight:700;margin-top:4px">27 October</div><p style="margin-top:15px">Today</p><div style="border-left:3px solid #e84b55;padding:8px 10px;margin-top:8px;background:#fff5f5;font-size:13px">18:30　Dinner with friends</div></div>`],
-
-music:['Music',`
-  <div class="center"><div class="album">♫</div><h3>slow mornings</h3><p style="font-size:13px;color:#777">playlist · 18 songs</p><div style="margin-top:24px;font-size:25px">◀　▶　▶</div><div style="height:4px;border-radius:5px;background:#e4e4e9;margin-top:20px"><div style="width:38%;height:4px;background:#8a69c7"></div></div></div>`],
-
-settings:['Settings',`
-  <div style="border-radius:13px;overflow:hidden">
-  <div class="setting">◉　Airplane Mode<small>Off</small></div>
-  <div class="setting">◉　Wi-Fi<small>Connected</small></div>
-  <div class="setting">▰　Battery<small>82%</small></div>
-  <div class="setting">☾　Focus<small>Do Not Disturb</small></div>
-  <div class="setting">▣　Wallpaper<small>Current wallpaper</small></div>
-  <div class="setting">ⓘ　About<small>Phone Peeking</small></div></div>`]
-};
-
-function openApp(key){
-  if(!apps[key]) return;
-  $('#home').style.display = 'none';
-  $('#view').style.display = 'block';
-  $('#title').textContent = apps[key][0];
-  $('#content').innerHTML = apps[key][1];
-  $('#content').querySelectorAll('[data-chat]').forEach(el=>{
-    el.onclick = ()=>openChat(el.dataset.chat);
+document.querySelectorAll("[data-app]").forEach(button => {
+  button.addEventListener("click", () => {
+    const name = button.dataset.app;
+    document.getElementById("appTitle").textContent = name;
+    document.getElementById("appBody").innerHTML =
+      appContent[name] || `<div class="app-card">${name}</div>`;
+    appWindow.classList.add("open");
   });
-}
-
-function openChat(key){
-  const chats = {
-    friend:['Best friend 💬',[
-      ['them','อยู่ไหนแล้วว'],
-      ['me','กำลังกลับบ้าน'],
-      ['them','ถึงบ้านแล้วบอกด้วยนะ :)'],
-      ['me','โอเคคค เดี๋ยวบอก']]],
-    someone:['Someone',[
-      ['them','พรุ่งนี้เจอกันนะ'],
-      ['me','เจอกันกี่โมงดี'],
-      ['them','เดี๋ยวทักไปอีกทีนะ']]],
-    group:['แก๊งของเรา (4)',[
-      ['them','ทุกคนว่างวันเสาร์มั้ย'],
-      ['me','เราว่างง'],
-      ['them','ส่งรูปมาอีกกก']]]
-  };
-  const chat = chats[key];
-  if(!chat) return;
-  $('#title').textContent = chat[0];
-  $('#content').innerHTML =
-    chat[1].map(m=>`<div class="bubble ${m[0]==='me'?'me':''}">${m[1]}</div>`).join('')+
-    '<div class="sub" style="margin-top:20px">iMessage</div>';
-}
-
-document.querySelectorAll('[data-app]').forEach(btn=>{
-  btn.onclick = ()=>openApp(btn.dataset.app);
 });
 
-function updateClock(){
-  const d = new Date();
-  const t = d.toLocaleTimeString('th-TH',{
-    hour:'2-digit',minute:'2-digit',hour12:false
+document.getElementById("backHome").addEventListener("click", () => {
+  appWindow.classList.remove("open");
+});
+
+document.getElementById("homeIndicator").addEventListener("click", () => {
+  if (appWindow.classList.contains("open")) {
+    appWindow.classList.remove("open");
+    return;
+  }
+
+  if (homeScreen.classList.contains("active")) {
+    showScreen(lockScreen);
+  } else if (passcodeScreen.classList.contains("active")) {
+    showScreen(lockScreen);
+    clearPin();
+  }
+});
+
+/* Clock and date */
+function updateClock() {
+  const now = new Date();
+  const time = now.toLocaleTimeString("th-TH", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false
   });
-  $('#clock').textContent = t;
-  $('#statusTime').textContent = t;
-  $('#date').textContent = d.toLocaleDateString('th-TH',{
-    weekday:'long',day:'numeric',month:'long'
+
+  const date = now.toLocaleDateString("th-TH", {
+    weekday: "long",
+    day: "numeric",
+    month: "long"
   });
+
+  document.getElementById("statusTime").textContent = time;
+  document.getElementById("lockTime").textContent = time;
+  document.getElementById("lockDate").textContent = date;
+  document.getElementById("homeDate").textContent = date;
 }
+
 updateClock();
-setInterval(updateClock,30000);
+setInterval(updateClock, 30000);
 </script>
 </body>
 </html>
