@@ -641,12 +641,12 @@ function clearPin() {
 }
 
 function enterDigit(digit) {
-  if (enteredPin.length >= 4) return;
+  if (enteredPin.length >= 6) return;
 
   enteredPin += digit;
   updatePinDots();
 
-  if (enteredPin.length === 4) {
+  if (enteredPin.length === 6) {
     if (enteredPin === PIN) {
       pinError.textContent = "";
       setTimeout(() => {
