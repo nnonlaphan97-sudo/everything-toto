@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phone Peeking</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;background:#171820;color:white;
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+  display:grid;place-items:center;min-height:100vh
+}
+.phone{
+  position:relative;width:min(100vw,390px);
+  height:min(844px,100dvh);min-height:600px;
+  overflow:hidden;border-radius:38px;
+  background:linear-gradient(145deg,#b5b1c8,#737b9c 45%,#252b49);
+  box-shadow:0 20px 60px #0007
+}
+.status{
+  position:absolute;top:14px;left:24px;right:24px;
+  display:flex;justify-content:space-between;
+  font-size:13px;font-weight:bold;z-index:4
+}
+.screen{position:absolute;inset:0}
+.lock{
+  padding:85px 22px 25px;text-align:center;
+  touch-action:pan-y;user-select:none
+}
+.date{font-size:17px}
+.clock{
+  font-size:78px;font-weight:250;letter-spacing:-4px;
+  margin-top:5px;line-height:1.2
+}
+.notifications{display:grid;gap:10px;margin-top:45px;text-align:left}
+.notice{
+  padding:13px 15px;border-radius:17px;
+  background:#ffffff38;backdrop-filter:blur(20px);
+  border:1px solid #ffffff28
+}
+.small{font-size:11px;color:#ffffffdc}
+.notice h3{font-size:14px;margin:5px 0}
+.notice p{font-size:13px;margin:0;line-height:1.5}
+.bottom{
+  position:absolute;bottom:25px;left:0;right:0;
+  text-align:center;font-size:12px
+}
+.hint{margin-top:12px;animation:pulse 1.5s infinite}
+@keyframes pulse{50%{opacity:.4}}
+.home{display:none;padding:78px 20px 40px}
+.home h1{font-size:27px;margin:0}
+.subtitle{font-size:13px;color:#ffffffbd;margin:5px 0 25px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px 8px}
+.app{
+  display:flex;flex-direction:column;align-items:center;gap:7px;
+  background:none;border:0;color:white;font:inherit;
+  font-size:11px;cursor:pointer
+}
+.icon{
+  width:55px;height:55px;border-radius:15px;
+  display:grid;place-items:center;font-size:26px;
+  background:#fff;color:#333;box-shadow:0 4px 12px #0002
+}
+.green{background:#42c963;color:white}
+.blue{background:#f8f8ff;color:#4788dc}
+.pink{background:linear-gradient(135deg,#f6bd76,#e65b92,#7957d5);color:white}
+.yellow{background:#ffdf68;color:#665316}
+.gray{background:#abb1bd;color:white}
+.dock{
+  position:absolute;bottom:27px;left:18px;right:18px;
+  padding:12px 8px;border-radius:23px;
+  background:#ffffff38;backdrop-filter:blur(20px);
+  display:grid;grid-template-columns:repeat(4,1fr)
+}
+.dock .icon{width:49px;height:49px}
+.view{
+  display:none;position:absolute;inset:0;z-index:5;
+  background:#f6f6fa;color:#22232b;padding-top:55px
+}
+.header{
+  height:54px;position:absolute;top:0;left:0;right:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 16px;background:#ffffffed;
+  border-bottom:1px solid #ddd
+}
+.back{border:0;background:none;color:#287ce0;font-size:15px}
+.title{font-weight:bold}
+.content{height:100%;overflow:auto;padding:15px 16px 40px}
+.item{
+  background:white;border:1px solid #e8e8ee;
+  border-radius:14px;padding:13px;margin-bottom:10px
+}
+.name{font-size:14px;font-weight:bold}
+.sub{font-size:13px;color:#777;margin-top:5px;line-height:1.5}
+.time{float:right;font-size:11px;color:#999}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.photo{
+  aspect-ratio:1;border-radius:5px;
+  display:grid;place-items:center;font-size:27px;
+  background:linear-gradient(145deg,#d5b8c8,#7789a8,#303b5b)
+}
+.photo:nth-child(3n+2){background:linear-gradient(145deg,#e8d3a9,#b37b88,#554c73)}
+.photo:nth-child(3n){background:linear-gradient(145deg,#b4d5ce,#667d96,#3b425d)}
+.bubble{
+  max-width:82%;padding:11px 13px;border-radius:17px;
+  margin:10px 0;background:#e7e7ed;font-size:14px
+}
+.me{background:#2788f5;color:white;margin-left:auto}
+.post h3{font-size:14px;margin:0 0 8px}
+.post p{font-size:13px;line-height:1.5;color:#555;margin:0}
+.post-meta{font-size:11px;color:#888;margin-bottom:8px}
+.center{text-align:center;background:white;border-radius:17px;padding:22px}
+.album{
+  width:180px;aspect-ratio:1;margin:0 auto 18px;
+  border-radius:15px;background:linear-gradient(135deg,#f5a4b7,#7b66a6,#283b5c);
+  display:grid;place-items:center;font-size:50px
+}
+.setting{background:white;padding:14px;border-bottom:1px solid #eee;font-size:14px}
+.setting small{display:block;color:#888;margin-top:4px}
+.pill{
+  position:absolute;bottom:9px;left:50%;transform:translateX(-50%);
+  width:124px;height:5px;border-radius:9px;background:white;
+  z-index:8;cursor:pointer
+}
+@media(max-width:410px){
+  .phone{width:100vw;height:100dvh;border-radius:0}
+  .clock{font-size:74px}
+}
+</style>
+</head>
+<body>
+<main class="phone">
+  <div class="status">
+    <span id="statusTime">09:41</span>
+    <span>●●● ▰ ▰</span>
+  </div>
+
+  <!-- LOCK SCREEN -->
+  <section class="screen lock" id="lock">
+    <div class="date" id="date">Tuesday, October 27</div>
+    <div class="clock" id="clock">09:41</div>
+
+    <div class="notifications">
+      <div class="notice">
+        <div class="small">MESSAGES · NOW</div>
+        <h3>New message</h3>
+        <p>ถึงบ้านแล้วบอกด้วยนะ :)</p>
+      </div>
+      <div class="notice">
+        <div class="small">SOCIAL · 2 MIN AGO</div>
+        <h3>มีการแจ้งเตือนใหม่</h3>
+        <p>มีคนพูดถึงคุณในโพสต์หนึ่ง</p>
+      </div>
+    </div>
+
+    <div class="bottom">
+      ◉　　　　　　　　　◉
+      <div class="hint">ปัดหน้าจอขึ้นเพื่อปลดล็อก</div>
+    </div>
+  </section>
+
+  <!-- HOME SCREEN -->
+  <section class="screen home" id="home">
+    <h1>Good evening</h1>
+    <p class="subtitle">Welcome back to your phone</p>
+
+    <div class="grid">
+      <button class="app" data-app="messages"><span class="icon green">▤</span>Messages</button>
+      <button class="app" data-app="contacts"><span class="icon blue">♙</span>Contacts</button>
+      <button class="app" data-app="photos"><span class="icon pink">✿</span>Photos</button>
+      <button class="app" data-app="notes"><span class="icon yellow">▤</span>Notes</button>
+      <button class="app" data-app="social"><span class="icon pink">◎</span>Social</button>
+      <button class="app" data-app="calls"><span class="icon green">☎</span>Calls</button>
+      <button class="app" data-app="calendar"><span class="icon blue">27</span>Calendar</button>
+      <button class="app" data-app="music"><span class="icon pink">♫</span>Music</button>
+    </div>
+
+    <div class="dock">
+      <button class="app" data-app="calls"><span class="icon green">☎</span></button>
+      <button class="app" data-app="messages"><span class="icon green">▤</span></button>
+      <button class="app" data-app="photos"><span class="icon pink">✿</span></button>
+      <button class="app" data-app="settings"><span class="icon gray">⚙</span></button>
+    </div>
+  </section>
+
+  <!-- APP SCREENS -->
+  <section class="view" id="view">
+    <header class="header">
+      <button class="back" id="back">‹ Home</button>
+      <span class="title" id="title">Messages</span>
+      <span style="width:42px"></span>
+    </header>
+    <div class="content" id="content"></div>
+  </section>
+
+  <div class="pill" id="pill"></div>
+</main>
+
+<script>
+const $ = s => document.querySelector(s);
+let startY = null;
+
+function unlock(){
+  $('#lock').style.display = 'none';
+  $('#home').style.display = 'block';
+}
+function goHome(){
+  $('#view').style.display = 'none';
+  $('#home').style.display = 'block';
+}
+
+$('#lock').addEventListener('touchstart', e => {
+  startY = e.touches[0].clientY;
+}, {passive:true});
+
+$('#lock').addEventListener('touchend', e => {
+  if(startY !== null && startY - e.changedTouches[0].clientY > 25) unlock();
+  startY = null;
+}, {passive:true});
+
+$('#lock').addEventListener('mousedown', e => startY = e.clientY);
+$('#lock').addEventListener('mouseup', e => {
+  if(startY !== null && startY - e.clientY > 25) unlock();
+  startY = null;
+});
+$('#lock').addEventListener('click', e => {
+  if(!e.target.closest('.notice')) unlock();
+});
+
+$('#pill').onclick = () => {
+  if($('#view').style.display === 'block') goHome();
+  else if($('#home').style.display === 'block'){
+    $('#home').style.display = 'none';
+    $('#lock').style.display = 'block';
+  }
+};
+$('#back').onclick = goHome;
+
+const apps = {
+messages:['Messages',`
+  <div class="item" data-chat="friend"><span class="time">9:38</span><div class="name">Best friend 💬</div><div class="sub">ถึงบ้านแล้วบอกด้วยนะ :)</div></div>
+  <div class="item" data-chat="someone"><span class="time">Yesterday</span><div class="name">Someone</div><div class="sub">พรุ่งนี้เจอกันนะ</div></div>
+  <div class="item" data-chat="group"><span class="time">Monday</span><div class="name">แก๊งของเรา (4)</div><div class="sub">ส่งรูปมาอีกกก</div></div>`],
+
+contacts:['Contacts',`
+  <div class="item"><div class="name">Best friend</div><div class="sub">Mobile · 08X-XXX-1024</div></div>
+  <div class="item"><div class="name">Someone</div><div class="sub">Mobile · 09X-XXX-7831</div></div>
+  <div class="item"><div class="name">Mom</div><div class="sub">Mobile · 08X-XXX-2210</div></div>
+  <div class="item"><div class="name">Work</div><div class="sub">Mobile · 06X-XXX-5490</div></div>`],
+
+photos:['Photos',`
+  <p style="font-size:13px;color:#777">Recent · 12 Photos</p>
+  <div class="photo-grid">${['☁','🌷','🌆','☕','🌙','🌿','🎧','🪞','🌊','🍰','🌤','📷'].map(x=>`<div class="photo">${x}</div>`).join('')}</div>`],
+
+notes:['Notes',`
+  <div class="item"><h3>things to remember ✧</h3><p>ซื้อกาแฟร้านเดิม<br>ตอบข้อความด้วย<br>อย่าลืมพักผ่อนให้พอ</p></div>
+  <div class="item"><h3>little things</h3><p>เพลงที่ฟังวนอยู่ช่วงนี้<br>— track 03, track 08</p></div>
+  <div class="item"><h3>to do</h3><p>□ เก็บห้อง<br>□ ซื้อของเข้าบ้าน<br>□ โทรกลับ</p></div>`],
+
+social:['Social',`
+  <div class="item post"><div class="post-meta">someone · 8 min ago</div><h3>วันนี้อากาศดีมาก ☁</h3><p>อยากหยุดเวลาไว้ตรงนี้อีกสักหน่อย</p><p style="margin-top:10px;color:#d65a86">♡ 128　💬 14</p></div>
+  <div class="item post"><div class="post-meta">bestfriend · 1 hour ago</div><h3>photo dump 📸</h3><p>ช่วงเวลาดี ๆ กับคนเดิม ๆ</p><p style="margin-top:10px;color:#d65a86">♡ 86　💬 9</p></div>
+  <div class="item post"><div class="post-meta">someone · Yesterday</div><h3>🎧</h3><p>บางเพลงก็ทำให้นึกถึงใครบางคน</p><p style="margin-top:10px;color:#d65a86">♡ 204　💬 21</p></div>`],
+
+calls:['Calls',`
+  <div class="item"><span class="time">Today 9:12</span><div class="name">↙ Best friend</div><div class="sub">Incoming call · 4 min</div></div>
+  <div class="item"><span class="time">Yesterday 21:44</span><div class="name">↗ Mom</div><div class="sub">Outgoing call · 2 min</div></div>
+  <div class="item"><span class="time">Yesterday 18:03</span><div class="name" style="color:#e45555">↙ Someone</div><div class="sub">Missed call</div></div>`],
+
+calendar:['Calendar',`
+  <div class="item"><div style="font-size:12px;color:#888">TUESDAY</div><div style="font-size:30px;font-weight:700;margin-top:4px">27 October</div><p style="margin-top:15px">Today</p><div style="border-left:3px solid #e84b55;padding:8px 10px;margin-top:8px;background:#fff5f5;font-size:13px">18:30　Dinner with friends</div></div>`],
+
+music:['Music',`
+  <div class="center"><div class="album">♫</div><h3>slow mornings</h3><p style="font-size:13px;color:#777">playlist · 18 songs</p><div style="margin-top:24px;font-size:25px">◀　▶　▶</div><div style="height:4px;border-radius:5px;background:#e4e4e9;margin-top:20px"><div style="width:38%;height:4px;background:#8a69c7"></div></div></div>`],
+
+settings:['Settings',`
+  <div style="border-radius:13px;overflow:hidden">
+  <div class="setting">◉　Airplane Mode<small>Off</small></div>
+  <div class="setting">◉　Wi-Fi<small>Connected</small></div>
+  <div class="setting">▰　Battery<small>82%</small></div>
+  <div class="setting">☾　Focus<small>Do Not Disturb</small></div>
+  <div class="setting">▣　Wallpaper<small>Current wallpaper</small></div>
+  <div class="setting">ⓘ　About<small>Phone Peeking</small></div></div>`]
+};
+
+function openApp(key){
+  $('#home').style.display = 'none';
+  $('#view').style.display = 'block';
+  $('#title').textContent = apps[key][0];
+  $('#content').innerHTML = apps[key][1];
+  $('#content').querySelectorAll('[data-chat]').forEach(el=>{
+    el.onclick = () => openChat(el.dataset.chat);
+  });
+}
+
+function openChat(key){
+  const chats = {
+    friend:['Best friend 💬',[
+      ['them','อยู่ไหนแล้วว'],
+      ['me','กำลังกลับบ้าน'],
+      ['them','ถึงบ้านแล้วบอกด้วยนะ :)'],
+      ['me','โอเคคค เดี๋ยวบอก']]],
+    someone:['Someone',[
+      ['them','พรุ่งนี้เจอกันนะ'],
+      ['me','เจอกันกี่โมงดี'],
+      ['them','เดี๋ยวทักไปอีกทีนะ']]],
+    group:['แก๊งของเรา (4)',[
+      ['them','ทุกคนว่างวันเสาร์มั้ย'],
+      ['me','เราว่างง'],
+      ['them','ส่งรูปมาอีกกก']]]
+  };
+  const chat = chats[key];
+  $('#title').textContent = chat[0];
+  $('#content').innerHTML =
+    chat[1].map(m=>`<div class="bubble ${m[0]==='me'?'me':''}">${m[1]}</div>`).join('')+
+    '<div class="sub" style="margin-top:20px">iMessage</div>';
+}
+
+document.querySelectorAll('[data-app]').forEach(btn=>{
+  btn.onclick = () => openApp(btn.dataset.app);
+});
+
+function updateClock(){
+  const d = new Date();
+  const t = d.toLocaleTimeString('th-TH',{
+    hour:'2-digit',minute:'2-digit',hour12:false
+  });
+  $('#clock').textContent = t;
+  $('#statusTime').textContent = t;
+  $('#date').textContent = d.toLocaleDateString('th-TH',{
+    weekday:'long',day:'numeric',month:'long'
+  });
+}
+updateClock();
+setInterval(updateClock,30000);
+</script>
+</body>
+</html>
