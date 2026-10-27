@@ -141,16 +141,19 @@ button {
   opacity: 0.9;
 }
 
+
 .swipe-hint {
   position: absolute;
-  bottom: 72px;
-  left: 0;
+  bottom: 40px;
+  left: 40;
   right: 0;
+  width: 100%;
   text-align: center;
   font-size: 13px;
   opacity: 0.85;
+  z-index: 10;
+  pointer-events: none;
 }
-
 .bottom-indicators {
   position: absolute;
   bottom: 28px;
@@ -447,6 +450,112 @@ button {
   .app-grid { top: 26%; gap: 16px 10px; }
   .dock { bottom: 35px; }
 }
+/* MUSIC WIDGET */
+.music-widget {
+  padding: 10px !important;
+  background: rgba(255, 255, 255, 0.20) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px !important;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  overflow: hidden;
+}
+
+.music-top {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.music-cover {
+  width: 55px;
+  height: 55px;
+  flex: 0 0 55px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.music-info {
+  margin-left: 0px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.music-title {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.music-artist {
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.music-timeline {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 15px;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.music-progress {
+  flex: 1;
+  height: 4px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.35);
+  overflow: hidden;
+}
+
+.music-progress span {
+  display: block;
+  width: 33.3%;
+  height: 100%;
+  border-radius: 10px;
+  background: white;
+}
+
+.music-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 38px;
+  margin-top: 15px;
+}
+
+.music-control {
+  font-size: 23px;
+  line-height: 1;
+}
+
+.music-pause {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.music-title,
+.music-artist,
+.music-timeline,
+.music-controls {
+  color: #ffffff !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.music-title {
+  font-weight: bold;
+}
+
+.music-artist,
+.music-timeline {
+  opacity: 1;
+}
 </style>
 </head>
 
@@ -483,9 +592,36 @@ button {
     <div class="lock-content">
       <div class="lock-date" id="lockDate">วันอังคารที่ 27 ตุลาคม</div>
       <div class="lock-time" id="lockTime">09:41</div>
-      <div class="lock-message">ยินดีต้อนรับกลับมา ♡</div>
-    </div>
+     
+<div class="music-widget">
+  <div class="music-top">
+    <img
+      class="music-cover"
+      src="https://img.youtube.com/vi/HKBifVrELZI/hqdefault.jpg"
+      alt="ปกเพลง ไม่คิดนอกใจ"
+    />
 
+    <div class="music-info">
+      <div class="music-title">ไม่คิดนอกใจ</div>
+      <div class="music-artist">LOSO</div>
+    </div>
+  </div>
+
+  <div class="music-timeline">
+    <span>01:30</span>
+    <div class="music-progress">
+      <span></span>
+    </div>
+    <span>04:31</span>
+  </div>
+
+  <div class="music-controls">
+    <span class="music-control">◀︎◀︎</span>
+    <span class="music-pause">⏸︎</span>
+    <span class="music-control">▶︎▶︎</span>
+  </div>
+</div>
+</div>
     <div class="swipe-hint">ปัดขึ้นเพื่อปลดล็อก</div>
 
     <div class="bottom-indicators">
