@@ -173,9 +173,27 @@ button {
 }
 
 /* PASSCODE SCREEN */
+
+/* PASSCODE SCREEN */
 #passcodeScreen {
-  background: linear-gradient(160deg, #7e91ad, #b9a7b9 55%, #ded0c8);
+  background-image: url("https://i.ibb.co/H8XC2by/r07qxo-R-Download.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   text-align: center;
+  isolation: isolate;
+}
+
+#passcodeScreen::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  background-image: url("https://i.ibb.co/H8XC2by/r07qxo-R-Download.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: blur(18px) brightness(0.65);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .passcode-content {
