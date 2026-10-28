@@ -1969,11 +1969,18 @@ window.showPhoneScreen = showScreen;
 
   const $ = (selector) => screen.querySelector(selector);
 // เปิดหน้ารายชื่อเพื่อน
+
 function openLineSubpage(page) {
   const friendsPage = $("#lineFriendsPage");
-  if (!friendsPage) return;
+  const groupsPage = $("#lineGroupsPage");
 
-  friendsPage.style.display = "block";
+  if (friendsPage) {
+    friendsPage.style.display = page === "friends" ? "block" : "none";
+  }
+
+  if (groupsPage) {
+    groupsPage.style.display = page === "groups" ? "block" : "none";
+  }
 
   const buttons = screen.querySelectorAll("[data-friend-category]");
   buttons.forEach(button => {
@@ -1986,6 +1993,7 @@ function openLineSubpage(page) {
   const list = $("#lineFriendsPageList");
   if (list) list.dataset.category = page;
 }
+
 
 // ปุ่มย้อนกลับ
 screen.querySelectorAll("[data-line-back]").forEach(button => {
@@ -2001,6 +2009,23 @@ screen.querySelectorAll("[data-friend-category]").forEach(button => {
     openLineSubpage(button.dataset.friendCategory);
   });
 });
+
+  // กดเมนูรายชื่อเพื่อนจากหน้าแรก
+  screen.querySelectorAll('[data-open-category="friends"]')
+    .forEach(button => {
+      button.addEventListener("click", () => {
+        openLineSubpage("friends");
+      });
+    });
+
+  // กดเมนูกลุ่มจากหน้าแรก
+  screen.querySelectorAll('[data-open-category="groups"]')
+    .forEach(button => {
+      button.addEventListener("click", () => {
+        openLineSubpage("groups");
+      });
+    });
+
   const chats = [
     {
       id: 1, name: "ครอบครัว", avatar: "♡", color: "orange",
