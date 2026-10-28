@@ -2043,10 +2043,6 @@ window.showPhoneScreen = showScreen;
   screen.dataset.initialized = "true";
 
   const $ = (selector) => screen.querySelector(selector);
-// เปิดหน้ารายชื่อเพื่อน
-
-
-
   // เปิดหน้ารายชื่อเพื่อน กลุ่ม หรือแชต
   function openLineSubpage(page) {
     const friendsPage = $("#lineFriendsPage");
@@ -2073,8 +2069,16 @@ screen.addEventListener("click", function(event) {
   const row = event.target.closest("[data-open-chat]");
   if (!row) return;
 
-  if (row.dataset.openChat === "น้องคณิต💙") {
+  const name = row.dataset.openChat;
+
+  if (name.includes("คณิต")) {
     openLineSubpage("chat");
+
+    const chatPage = $("#lineChatPage");
+    if (chatPage) {
+      chatPage.style.display = "block";
+      chatPage.style.zIndex = "100";
+    }
   }
 });
   // แสดงข้อมูลตามแท็บที่เลือก
