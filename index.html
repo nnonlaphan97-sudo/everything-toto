@@ -2615,7 +2615,31 @@ function renderFriends() {
   $("#lineComposerPlus").addEventListener("click", () => {
     showToast("เมนูแนบไฟล์จำลอง");
   });
+  // เปิดห้องแชตคณิต
+  function openKanithChat() {
+    openLineSubpage("chat");
+    renderKanithChatHistory();
+  }
 
+  // กดกลับจากแชตไปหน้ารายชื่อเพื่อน
+  const kanithChatBack = $("#kanithChatBack");
+  if (kanithChatBack) {
+    kanithChatBack.addEventListener("click", () => {
+      openLineSubpage("friends");
+      renderFriendCategory("friends");
+    });
+  }
+
+  // กดรายชื่อ "น้องณิต💙" เพื่อเปิดแชตคณิต
+  screen.addEventListener("click", (event) => {
+    const row = event.target.closest("[data-open-chat]");
+    if (!row || !screen.contains(row)) return;
+
+    const name = row.dataset.openChat || "";
+    if (name.includes("ณิต")) {
+      openKanithChat();
+    }
+  });
   renderChats();
   renderFriends();
   setTab("friends");
