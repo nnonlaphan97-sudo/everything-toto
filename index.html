@@ -64,7 +64,7 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 /* LOCK SCREEN */
 #lockScreen { display: flex; flex-direction: column; padding: 57px 15px 20px; }
 .lock-heading {
-  text-align: center; flex-shrink: 0; text-shadow: 0 2px 14px #0002; transform: translateY(60px);
+  text-align: center; flex-shrink: 0; text-shadow: 0 2px 14px #0002; transform: translateY(40px);
 }
 .lock-date { font-size: 15px; font-weight: 500; }
 .lock-clock {
@@ -324,18 +324,19 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   <section class="screen" id="lockScreen">
     <div class="camera-hole"></div>
     
+
 <div class="lock-status-icon" aria-label="หน้าจอยังไม่ได้ปลดล็อก">
   <svg viewBox="0 0 24 24" aria-hidden="true">
-    <rect x="5" y="10" width="14" height="11" rx="2.5"
-      fill="none" stroke="white" stroke-width="1.8"/>
-    <path d="M8 10V7a4 4 0 0 1 8 0v3"
-      fill="none" stroke="white" stroke-width="1.8"
-      stroke-linecap="round"/>
-    <circle cx="12" cy="15" r="1.2" fill="white"/>
-    <path d="M12 16v1.5" stroke="white"
-      stroke-width="1.5" stroke-linecap="round"/>
+    <path
+      d="M7 10V7a5 5 0 0 1 10 0v3h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h1zm2 0h6V7a3 3 0 0 0-6 0v3z"
+      fill="#000"
+      fill-rule="evenodd"
+    />
+    <circle cx="12" cy="15" r="1.5" fill="#fff"/>
+    <path d="M12 16v2" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
   </svg>
 </div>
+
 
     <div class="lock-heading">
       <div class="lock-date" id="lockDate"></div>
