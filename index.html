@@ -200,13 +200,12 @@ button {
   left: 15px;
   right: 15px;
   bottom: 57px;
-
   width: auto;
+
   display: grid;
   grid-template-columns: 48px minmax(0, 1fr) 48px;
   align-items: center;
   column-gap: 8px;
-  flex-shrink: 0;
 }
 
 
@@ -777,26 +776,74 @@ button {
   transform: translate(-50%, 0);
 }
 
+
 @media (max-height: 740px) {
-  #lockScreen { padding-top: 49px; padding-bottom: 15px; }
-  .lock-clock { font-size: 65px; }
-  .lock-spacer { min-height: 12px; }
-  .music-widget { height: 60px; padding: 6px 8px; gap: 6px; }
-  .album-hit { width: 42px; height: 42px; flex-basis: 42px; }
-  .round-shortcut { width: 42px; height: 42px; }
-.lock-bottom-row {
-  left: 15px;
-  right: 15px;
-  bottom: 49px;
-  grid-template-columns: 44px minmax(0,1fr) 44px;
-  column-gap: 6px;
-  .unlock-area { margin-top: 8px; }
-  .key { width: min(100%, 55px); }
-  .keypad { gap: 6px; }
-  .pin-title { margin-top: 7px; }
-  .pin-dots { margin-top: 16px; }
-  .player-cover { width: min(58%, 220px); margin-bottom: 18px; }
-  .player-controls { margin-top: 14px; }
+  #lockScreen {
+    padding-top: 49px;
+    padding-bottom: 15px;
+  }
+
+  .lock-clock {
+    font-size: 65px;
+  }
+
+  .lock-spacer {
+    min-height: 12px;
+  }
+
+  .music-widget {
+    height: 60px;
+    padding: 6px 8px;
+    gap: 6px;
+  }
+
+  .album-hit {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+  }
+
+  .round-shortcut {
+    width: 42px;
+    height: 42px;
+  }
+
+  .lock-bottom-row {
+    left: 15px;
+    right: 15px;
+    bottom: 49px;
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    column-gap: 6px;
+  }
+
+  .unlock-area {
+    margin-top: 8px;
+  }
+
+  .key {
+    width: min(100%, 55px);
+  }
+
+  .keypad {
+    gap: 6px;
+  }
+
+  .pin-title {
+    margin-top: 7px;
+  }
+
+  .pin-dots {
+    margin-top: 16px;
+  }
+
+  .player-cover {
+    width: min(58%, 220px);
+    margin-bottom: 18px;
+  }
+
+  .player-controls {
+    margin-top: 14px;
+  }
 }
 #lockScreen {
   position: relative;
