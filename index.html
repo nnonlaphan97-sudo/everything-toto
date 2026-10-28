@@ -1836,13 +1836,10 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
     <button type="button" class="line-back-btn" id="kanithChatBack">‹</button>
     <h2>น้องคณิต💙</h2>
   </header>
-
-  <div id="kanithChatMessages"
-       style="padding:16px; overflow-y:auto; height:calc(100% - 130px);">
-    <p style="text-align:center; color:#888; font-size:12px;">
-      วันนี้
-    </p>
-  </div>
+  
+<div id="kanithChatMessages" class="line-chat-messages">
+  <!-- JavaScript จะใส่บทสนทนาตามวันที่ตรงนี้ -->
+</div>
 
   <form id="kanithChatForm"
         style="display:flex; gap:8px; padding:10px; position:absolute; bottom:0; left:0; right:0; background:white;">
@@ -2651,6 +2648,118 @@ profileViewer?.addEventListener("click", (event) => {
     profileViewer.classList.remove("active");
   }
 });
+
+  // ===== บทสนทนาโตโต้ (ขวา) และคณิต (ซ้าย) =====
+  const kanithChatHistory = [
+    { date: "29 ก.ค.", from: "t", text: "คุณผมขอเลขบัญชีคุณหน่อย" },
+    { date: "29 ก.ค.", from: "t", text: "จะโอนให้ก่อน 5000" },
+    { date: "29 ก.ค.", from: "k", text: "ไหนบอกจะจ่ายค่าเทอมน้อง" },
+    { date: "29 ก.ค.", from: "t", text: "ก็กลัวคิดว่าบิด" },
+    { date: "29 ก.ค.", from: "k", text: "พน.มารับผมด้วยที่คอนโดด้วย" },
+    { date: "29 ก.ค.", from: "t", text: "ครับ" },
+
+    { date: "15 ส.ค.", from: "t", text: "คุณทำไมเงียบ" },
+    { date: "15 ส.ค.", from: "t", text: "ไม่ให้ผมใช้หนี้เหรอ" },
+    { date: "15 ส.ค.", from: "k", text: "ไม่อยากนั่งรถขนศพ" },
+    { date: "15 ส.ค.", from: "t", text: "งั้นไปนวดมะ" },
+    { date: "15 ส.ค.", from: "k", text: "ห้ะ" },
+
+    { date: "29 ส.ค.", from: "k", text: "วางแผนหาชู้แฟนผมได้ยัง" },
+    { date: "29 ส.ค.", from: "t", text: "ขอหาเงินจ่ายค่าเทอมน้องก่อน" },
+
+    { date: "1 ก.ย.", from: "t", text: "จัดไปกี่รอบละคุณ" },
+    { date: "1 ก.ย.", from: "k", text: "ทะลึ่ง" },
+
+    { date: "3 ก.ย.", from: "k", text: "ว่างมะ" },
+    { date: "3 ก.ย.", from: "k", text: "มีเรื่องให้ช่วย" },
+    { date: "3 ก.ย.", from: "t", text: "วันไหน ว่ามาเลยค้าบบบ" },
+
+    { date: "6 ก.ย.", from: "t", text: "คุณผมลืมกระเป๋าเงินที่ห้องคุณ" },
+    { date: "6 ก.ย.", from: "k", text: "รีบมาเอา เดี๋ยวพี่ไลอ้อนมาเจอ" },
+    { date: "6 ก.ย.", from: "t", text: "ผมจะหาคำตอบอีก 10% ให้คุณเอง", time: "23:15" },
+
+    { date: "10 ก.ย.", from: "k", text: "ไปสืบได้มาไงบ้าง" },
+    { date: "10 ก.ย.", from: "t", text: "อยากกินข้าว" },
+    { date: "10 ก.ย.", from: "k", text: "โอ๊ยออกมาเดี๋ยวเลี้ยง" },
+
+    { date: "15 ก.ย.", from: "t", text: "สวัสดีวันยุงไม่กัด" },
+    { date: "15 ก.ย.", from: "k", text: "รีบมารับผมไปฝึกเร็ว" },
+    { date: "15 ก.ย.", from: "t", text: "วีนตลอดเลยคุณเนี่ย" },
+
+    { date: "20 ก.ย.", from: "t", text: "สู้ๆ นะคุณ" },
+    { date: "20 ก.ย.", from: "t", text: "คุณสอบผ่านอยู่แล้ว" },
+
+    { date: "24 ก.ย.", from: "k", text: "ว่างวันไหน" },
+    { date: "24 ก.ย.", from: "k", text: "จะเลี้ยงข้าว" },
+    { date: "24 ก.ย.", from: "t", text: "สำหรับคุณ ผมว่างทุกวัน" },
+
+    { date: "26 ก.ย.", from: "t", text: "คณิต" },
+    { date: "26 ก.ย.", from: "t", text: "คณิตคุยกับผมก่อน" },
+
+    { date: "1 ต.ค.", from: "t", text: "คณิตไปงานวัดกัน" },
+    { date: "1 ต.ค.", from: "k", text: "อยากนอนร้องไห้ ฟังเพลงเศร้า" },
+
+    { date: "10 ต.ค.", from: "t", text: "ได้ผมแล้วทิ้งอ่อวะ" },
+
+    { date: "14 ต.ค.", from: "k", text: "คุณมีโอกาสแล้วนะ" },
+    { date: "14 ต.ค.", from: "t", text: "โอกาสอะไร" },
+    { date: "14 ต.ค.", from: "k", text: "โอกาสจะได้ขอผมเป็นแฟนไง" },
+    { date: "14 ต.ค.", from: "t", text: "รออะไรอ่ะ เป็นแฟนดิวะ" }
+  ];
+
+  // เพิ่มข้อความลงในหน้าจอแชต
+  function addKanithMessage(from, text, time = "") {
+    const messages = $("#kanithChatMessages");
+    if (!messages) return;
+
+    const row = document.createElement("div");
+    row.className =
+      "line-chat-bubble-row " + (from === "t" ? "sent" : "received");
+
+    const bubble = document.createElement("div");
+    bubble.className = "line-chat-bubble";
+    bubble.textContent = text;
+
+    row.appendChild(bubble);
+
+    if (time) {
+      const timeLabel = document.createElement("span");
+      timeLabel.className = "line-chat-time";
+      timeLabel.textContent = time;
+      row.appendChild(timeLabel);
+    }
+
+    messages.appendChild(row);
+  }
+
+  // วาดประวัติแชต โดยจัดกลุ่มตามวันที่
+  function renderKanithChatHistory() {
+    const messages = $("#kanithChatMessages");
+    if (!messages) return;
+
+    messages.replaceChildren();
+    let lastDate = "";
+
+    kanithChatHistory.forEach(message => {
+      if (message.date !== lastDate) {
+        const dateLabel = document.createElement("div");
+        dateLabel.className = "line-chat-date";
+        dateLabel.textContent = message.date;
+        messages.appendChild(dateLabel);
+        lastDate = message.date;
+      }
+
+      addKanithMessage(
+        message.from,
+        message.text,
+        message.time || ""
+      );
+    });
+  }
+
+  // แสดงประวัติเมื่อเปิดหน้าแชต
+  renderKanithChatHistory();
+
 </script>
 </body>
 </html>
