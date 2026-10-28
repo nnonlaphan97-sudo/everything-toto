@@ -556,6 +556,32 @@ button {
 .music-timeline {
   opacity: 1;
 }
+
+/* HOME SCREEN: blurred lock-screen wallpaper */
+#homeScreen {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)),
+    url("https://i.ibb.co/H8XC2by/r07qxo-R-Download.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  isolation: isolate;
+}
+
+#homeScreen::before {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  background-image: url("https://i.ibb.co/H8XC2by/r07qxo-R-Download.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: blur(12px);
+  z-index: -1;
+}
+
+#homeScreen {
+  overflow: hidden;
+}
 </style>
 </head>
 
