@@ -2144,11 +2144,17 @@ window.showPhoneScreen = showScreen;
       });
     });
 
+  
   // ปุ่มกลุ่มจากหน้าแรก
   screen.querySelectorAll('[data-open-category="groups"]')
     .forEach(button => {
       button.addEventListener("click", () => {
-        openLineSubpage("groups");
+        const friendsPage = $("#lineFriendsPage");
+
+        if (friendsPage) {
+          friendsPage.style.display = "block";
+          renderFriendCategory("groups");
+        }
       });
     });
 
