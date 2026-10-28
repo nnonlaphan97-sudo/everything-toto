@@ -786,6 +786,22 @@ button {
   .player-cover { width: min(58%, 220px); margin-bottom: 18px; }
   .player-controls { margin-top: 14px; }
 }
+#lockScreen {
+  position: relative;
+}
+
+.camera-hole {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #050505;
+  border: 1px solid #252525;
+  z-index: 20;
+}
 </style>
 </head>
 
@@ -808,12 +824,14 @@ button {
   </div>
 
   <!-- LOCK SCREEN -->
-  <section class="screen" id="lockScreen">
-    <div class="lock-heading">
-      <div class="lock-date" id="lockDate"></div>
-      <div class="lock-clock" id="lockClock">12:00</div>
-    </div>
+<section class="screen" id="lockScreen">
 
+  <div class="camera-hole"></div>
+
+  <div class="lock-heading">
+    <div class="lock-date" id="lockDate"></div>
+    <div class="lock-clock" id="lockClock">12:00</div>
+  </div>
     <div class="lock-spacer"></div>
 
     <!-- ไฟฉาย | เครื่องเล่นเพลงวงรี | กล้อง : อยู่แถวเดียวกัน -->
