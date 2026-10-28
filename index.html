@@ -163,10 +163,53 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 
 /* HOME SCREEN */
 #homeScreen { padding: 55px 20px 24px; }
-.weather-card { margin-top: 17px; padding: 14px 16px; border: 1px solid #ffffff22; border-radius: 20px; background: #26243852; backdrop-filter: blur(15px); }
-.weather-top { display: flex; align-items: center; justify-content: space-between; }
-.weather-temp { font-size: 30px; font-weight: 300; }
-.weather-desc { font-size: 12px; color: #ffffffb8; }
+
+.weather-card {
+  position: relative;
+  width: 150px;
+  aspect-ratio: 1 / 1;
+  margin-top: 22px;
+  padding: 15px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 25px;
+  background: rgba(255,255,255,.09);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 25px rgba(0,0,0,.08);
+}
+
+.weather-location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.weather-pin {
+  font-size: 12px;
+}
+
+.weather-temp {
+  margin-top: 12px;
+  font-size: 38px;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.weather-desc {
+  margin-top: 7px;
+  font-size: 10px;
+  color: rgba(255,255,255,.8);
+}
+
+.weather-icon {
+  position: absolute;
+  right: 13px;
+  bottom: 12px;
+  font-size: 31px;
+}
 .app-grid { margin-top: 25px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 21px 8px; }
 .app-button { min-width: 0; padding: 0; background: transparent; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .app-icon { width: 47px; height: 47px; border-radius: 15px; display: grid; place-items: center; font-size: 23px; border: 1px solid #ffffff1a; box-shadow: 0 4px 12px #0002; }
@@ -462,12 +505,15 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   <!-- HOME -->
  <section class="screen hidden" id="homeScreen">
   <div class="home-camera-hole"></div>
-    <div class="weather-card">
-      <div class="weather-top">
-        <div><div style="font-size:12px;opacity:.7">สภาพอากาศ</div><div class="weather-temp">☀️ 29°</div></div>
-        <div style="text-align:right"><div style="font-size:13px">มีเมฆบางส่วน</div><div class="weather-desc">หน้าจอจำลอง</div></div>
-      </div>
-    </div>
+<div class="weather-card">
+  <div class="weather-location">
+    <span class="weather-pin">📍</span>
+    <span>สำโรง</span>
+  </div>
+  <div class="weather-temp">29°</div>
+  <div class="weather-desc">มีเมฆบางส่วน</div>
+  <div class="weather-icon">🌤️</div>
+</div>
     <div class="app-grid">
       <button class="app-button" data-app="โทรศัพท์"><span class="app-icon" style="background:#4dbb83">☎️</span><span class="app-label">โทรศัพท์</span></button>
       <button class="app-button" data-app="ข้อความ"><span class="app-icon" style="background:#72c7a0">💬</span><span class="app-label">ข้อความ</span></button>
