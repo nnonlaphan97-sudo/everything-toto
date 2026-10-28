@@ -345,6 +345,23 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 #pinScreen .key:not(.action) .key-letters {
   display: none;
 }
+
+/* กล้องหน้าบน Home Screen */
+#homeScreen .home-camera-hole {
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #000;
+  border: 1px solid #252525;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.08);
+  z-index: 30;
+  pointer-events: none;
+}
+
 </style>
 </head>
 
@@ -445,7 +462,9 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   </section>
 
   <!-- HOME -->
-  <section class="screen hidden" id="homeScreen">
+ <section class="screen hidden" id="homeScreen">
+  <div class="home-camera-hole"></div>
+  <div class="home-date" id="homeDate"></div>
     <div class="home-date" id="homeDate"></div>
     <div class="home-clock" id="homeClock"></div>
     <div class="weather-card">
