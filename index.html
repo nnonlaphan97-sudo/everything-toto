@@ -194,15 +194,21 @@ button {
 
 /* ALL THREE ITEMS SHARE THE SAME ROW */
 
+
 .lock-bottom-row {
-  width: 100%;
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  bottom: 57px;
+
+  width: auto;
   display: grid;
   grid-template-columns: 48px minmax(0, 1fr) 48px;
   align-items: center;
   column-gap: 8px;
   flex-shrink: 0;
-  margin-top: auto;
 }
+
 
 .round-shortcut {
   width: 46px;
@@ -778,7 +784,12 @@ button {
   .music-widget { height: 60px; padding: 6px 8px; gap: 6px; }
   .album-hit { width: 42px; height: 42px; flex-basis: 42px; }
   .round-shortcut { width: 42px; height: 42px; }
-  .lock-bottom-row { grid-template-columns: 44px minmax(0,1fr) 44px; column-gap: 6px; }
+.lock-bottom-row {
+  left: 15px;
+  right: 15px;
+  bottom: 49px;
+  grid-template-columns: 44px minmax(0,1fr) 44px;
+  column-gap: 6px;
   .unlock-area { margin-top: 8px; }
   .key { width: min(100%, 55px); }
   .keypad { gap: 6px; }
