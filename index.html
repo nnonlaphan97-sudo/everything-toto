@@ -1356,6 +1356,45 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   padding: 12px 16px;
 }
 
+.line-favorite-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 4px;
+}
+
+.line-favorite-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #dcecf7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #42647a;
+}
+
+.line-favorite-info strong {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.line-favorite-avatar {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.line-favorite-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 </style>
 </head>
 
@@ -1990,10 +2029,31 @@ function openLineSubpage(page) {
     );
   });
 
-  const list = $("#lineFriendsPageList");
-  if (list) list.dataset.category = page;
-}
+  
+const list = $("#lineFriendsPageList");
 
+if (list) {
+  list.dataset.category = page;
+
+  if (page === "favorites") {
+    list.innerHTML = `
+      <div class="line-favorite-row">
+       
+<div class="line-favorite-avatar">
+  <img
+    src="https://i.ibb.co/4ntNZx78/B2-EE0-EC1-6048-47-BA-8-F00-5569-F467-CEB4.jpg"
+    alt="น้องณิต💙"
+  >
+</div>
+        <div class="line-favorite-info">
+          <strong>น้องณิต💙</strong>
+        </div>
+      </div>
+    `;
+  } else {
+    list.innerHTML = "";
+  }
+}
 
 // ปุ่มย้อนกลับ
 screen.querySelectorAll("[data-line-back]").forEach(button => {
