@@ -2009,95 +2009,77 @@ window.showPhoneScreen = showScreen;
   const $ = (selector) => screen.querySelector(selector);
 // เปิดหน้ารายชื่อเพื่อน
 
-function openLineSubpage(page) {
-  const friendsPage = $("#lineFriendsPage");
-  const groupsPage = $("#lineGroupsPage");
 
-  if (friendsPage) {
-    friendsPage.style.display = page === "friends" ? "block" : "none";
-  }
-
-  if (groupsPage) {
-    groupsPage.style.display = page === "groups" ? "block" : "none";
-  }
-
-  
-const buttons = screen.querySelectorAll("[data-friend-category]");
-
-buttons.forEach(button => {
-  button.classList.toggle(
-    "active",
-    button.dataset.friendCategory === page
-  );
-});
-
-const list = $("#lineFriendsPageList");
-
-if (list) {
-  list.dataset.category = page;
-
-  if (page === "favorites") {
-    list.innerHTML = `
-      <div class="line-favorite-row">
-        <div class="line-favorite-avatar">
-          <img
-            src="https://i.ibb.co/4ntNZx78/B2-EE0-EC1-6048-47-BA-8-F00-5569-F467-CEB4.jpg"
-            alt="น้องณิต💙"
-          >
-        </div>
-        <div class="line-favorite-info">
-          <strong>น้องณิต💙</strong>
-        </div>
-      </div>
-    `;
-  } else {
-    list.innerHTML = "";
-  }
-}
-
-
-  
-const list = $("#lineFriendsPageList");
-
-if (list) {
-  list.dataset.category = page;
-
-  if (page === "favorites") {
-    list.innerHTML = `
-      <div class="line-favorite-row">
-       
-<div class="line-favorite-avatar">
-  <img
-    src="https://i.ibb.co/4ntNZx78/B2-EE0-EC1-6048-47-BA-8-F00-5569-F467-CEB4.jpg"
-    alt="น้องณิต💙"
-  >
-</div>
-        <div class="line-favorite-info">
-          <strong>น้องณิต💙</strong>
-        </div>
-      </div>
-    `;
-  } else {
-    list.innerHTML = "";
-  }
-}
-
-// ปุ่มย้อนกลับ
-screen.querySelectorAll("[data-line-back]").forEach(button => {
-  button.addEventListener("click", () => {
+  // เปิดหน้ารายชื่อเพื่อนหรือกลุ่ม
+  function openLineSubpage(page) {
     const friendsPage = $("#lineFriendsPage");
-    if (friendsPage) friendsPage.style.display = "none";
-  });
-});
+    const groupsPage = $("#lineGroupsPage");
 
-// กดเมนู รายการโปรด / เพื่อน / กลุ่ม / บัญชีทางการ
-screen.querySelectorAll("[data-friend-category]").forEach(button => {
-  button.addEventListener("click", () => {
-    openLineSubpage(button.dataset.friendCategory);
-  });
-});
+    if (friendsPage) {
+      friendsPage.style.display =
+        page === "friends" ? "block" : "none";
+    }
 
-  // กดเมนูรายชื่อเพื่อนจากหน้าแรก
+    if (groupsPage) {
+      groupsPage.style.display =
+        page === "groups" ? "block" : "none";
+    }
+
+    const buttons = screen.querySelectorAll(
+      "[data-friend-category]"
+    );
+
+    buttons.forEach(button => {
+      button.classList.toggle(
+        "active",
+        button.dataset.friendCategory === page
+      );
+    });
+
+    const list = $("#lineFriendsPageList");
+
+    if (list) {
+      list.dataset.category = page;
+
+      if (page === "favorites") {
+        list.innerHTML = `
+          <div class="line-favorite-row">
+            <div class="line-favorite-avatar">
+              <img
+                src="https://i.ibb.co/4ntNZx78/B2-EE0-EC1-6048-47-BA-8-F00-5569-F467-CEB4.jpg"
+                alt="น้องณิต💙"
+              >
+            </div>
+            <div class="line-favorite-info">
+              <strong>น้องณิต💙</strong>
+            </div>
+          </div>
+        `;
+      } else {
+        list.innerHTML = "";
+      }
+    }
+  }
+
+  // ปุ่มย้อนกลับ
+  screen.querySelectorAll("[data-line-back]").forEach(button => {
+    button.addEventListener("click", () => {
+      const friendsPage = $("#lineFriendsPage");
+      const groupsPage = $("#lineGroupsPage");
+
+      if (friendsPage) friendsPage.style.display = "none";
+      if (groupsPage) groupsPage.style.display = "none";
+    });
+  });
+
+  // ปุ่มเมนูทั้งสี่
+  screen.querySelectorAll("[data-friend-category]").forEach(button => {
+    button.addEventListener("click", () => {
+      openLineSubpage(button.dataset.friendCategory);
+    });
+  });
+
+  // ปุ่มรายชื่อเพื่อนจากหน้าแรก
   screen.querySelectorAll('[data-open-category="friends"]')
     .forEach(button => {
       button.addEventListener("click", () => {
@@ -2105,13 +2087,14 @@ screen.querySelectorAll("[data-friend-category]").forEach(button => {
       });
     });
 
-  // กดเมนูกลุ่มจากหน้าแรก
+  // ปุ่มกลุ่มจากหน้าแรก
   screen.querySelectorAll('[data-open-category="groups"]')
     .forEach(button => {
       button.addEventListener("click", () => {
         openLineSubpage("groups");
       });
     });
+
 
   const chats = [
     {
