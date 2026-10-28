@@ -70,10 +70,10 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 
 .lock-clock {
   margin-top: 3px;
-  font-size: clamp(100px, 30vw, 160px);
+  font-size: clamp(90px, 27vw, 145px);
   line-height: 1;
   font-weight: 600;
-  letter-spacing: -4px;
+  letter-spacing: -6px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -206,7 +206,10 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 /* RESPONSIVE */
 @media (max-height: 740px) {
   #lockScreen { padding-top: 49px; padding-bottom: 15px; }
- .lock-clock { font-size: clamp(100px, 30vw, 160px); }
+.lock-clock {
+  font-size: clamp(90px, 27vw, 145px);
+  letter-spacing: -6px;
+}
   .lock-spacer { min-height: 12px; }
   .music-widget { height: 60px; padding: 6px 8px; gap: 6px; }
   .album-hit { width: 42px; height: 42px; flex-basis: 42px; }
@@ -228,7 +231,10 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 }
 @media (max-height: 560px) {
   .lock-heading { transform: translateY(15px); }
-  .lock-clock { font-size: clamp(100px, 30vw, 160px); }
+  .lock-clock {
+  font-size: clamp(90px, 27vw, 145px);
+  letter-spacing: -6px;
+}
   .lock-bottom-row { bottom: 43px; }
   .music-widget { height: 54px; }
   .album-hit { width: 38px; height: 38px; flex-basis: 38px; }
