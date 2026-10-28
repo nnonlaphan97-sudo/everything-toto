@@ -2143,7 +2143,11 @@ window.showPhoneScreen = showScreen;
     const friendsPage = $("#lineFriendsPage");
     const groupsPage = $("#lineGroupsPage");
     const chatPage = $("#lineChatPage");
-
+if (chatPage) {
+  chatPage.style.display = "block";
+  chatPage.style.zIndex = "100";
+  renderKanithChatHistory();
+}
     if (friendsPage) {
       friendsPage.style.display =
         page === "friends" ? "block" : "none";
@@ -2159,11 +2163,7 @@ window.showPhoneScreen = showScreen;
         page === "chat" ? "block" : "none";
     }
   }
-if (chatPage) {
-  chatPage.style.display = "block";
-  chatPage.style.zIndex = "100";
-  renderKanithChatHistory();
-}
+
   // กดรายชื่อเพื่อเปิดแชตน้องคณิต
   screen.addEventListener("click", function(event) {
     const row = event.target.closest("[data-open-chat]");
