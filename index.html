@@ -1184,6 +1184,90 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   font-size: 22px;
   cursor: pointer;
 }
+
+.line-friends-shortcuts {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 18px 16px;
+  background: #fff;
+}
+
+.line-friends-title {
+  margin: 0 0 18px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+}
+
+.line-friends-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 12px;
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+}
+
+.line-four-avatar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  width: 56px;
+  height: 56px;
+  flex: 0 0 56px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #eee;
+}
+
+.line-four-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  object-fit: cover;
+}
+
+.line-friends-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  gap: 5px;
+}
+
+.line-friends-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #222;
+}
+
+.line-friends-names {
+  display: block;
+  overflow: hidden;
+  font-size: 12px;
+  color: #888;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.line-friends-arrow {
+  flex: 0 0 auto;
+  color: #aaa;
+  font-size: 24px;
+  line-height: 1;
+}
+
 </style>
 </head>
 
@@ -1441,21 +1525,38 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   >
 </div>
 </div>
-      <div class="line-section-title">เพื่อน</div>
-      <button class="line-action-row" data-line-action="add-friend">
-        <span class="line-action-icon green">＋</span>
-        <span>เพิ่มเพื่อน</span>
-        <span class="line-chevron">›</span>
-      </button>
-      <button class="line-action-row" data-line-action="groups">
-        <span class="line-action-icon lime">♧</span>
-        <span>กลุ่ม</span>
-        <span class="line-chevron">›</span>
-      </button>
-      <div class="line-section-title">รายชื่อเพื่อน</div>
-      <div id="lineFriendList" class="line-list"></div>
-    </section>
+   
+<div class="line-friends-shortcuts">
+  <h2 class="line-friends-title">รายชื่อเพื่อน</h2>
 
+  <button class="line-friends-row" data-open-category="friends">
+    <span class="line-four-avatar">
+      <img src="https://placehold.co/80x80/E7DDFB/6D5BA6?text=N" alt="">
+      <img src="https://placehold.co/80x80/D9ECFF/4778A8?text=L" alt="">
+      <img src="https://placehold.co/80x80/FFE5D5/A56845?text=A" alt="">
+      <img src="https://placehold.co/80x80/F8DCE8/A65B7C?text=+" alt="">
+    </span>
+    <span class="line-friends-text">
+      <span class="line-friends-label">เพื่อน</span>
+      <span class="line-friends-names">น้องณิต💙, หลิว, อัคคี</span>
+    </span>
+    <span class="line-friends-arrow">›</span>
+  </button>
+
+  <button class="line-friends-row" data-open-category="groups">
+    <span class="line-four-avatar">
+      <img src="https://placehold.co/80x80/D9ECFF/4778A8?text=G" alt="">
+      <img src="https://placehold.co/80x80/FBE3C7/A56845?text=M" alt="">
+      <img src="https://placehold.co/80x80/E7DDFB/6D5BA6?text=E" alt="">
+      <img src="https://placehold.co/80x80/D9F2E3/438566?text=+" alt="">
+    </span>
+    <span class="line-friends-text">
+      <span class="line-friends-label">กลุ่ม</span>
+      <span class="line-friends-names">กู้ภัยกู้ใจ, มูลนิธิเจม, everythingtoto</span>
+    </span>
+    <span class="line-friends-arrow">›</span>
+  </button>
+</div>
     <!-- NEWS -->
     <section class="line-tab-panel" data-line-panel="news">
       <div class="line-section-title">ข่าวสาร</div>
@@ -1542,7 +1643,6 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   </svg>
   <span>เพื่อน</span>
 </button>
-
 <button class="line-nav-item" data-line-tab="chats">
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <path d="M4 5.5h16v11H11l-5 3v-3H4z"/>
