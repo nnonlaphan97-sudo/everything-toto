@@ -2068,7 +2068,15 @@ window.showPhoneScreen = showScreen;
         page === "chat" ? "block" : "none";
     }
   }
+// กดรายชื่อเพื่อเปิดแชตน้องคณิต
+screen.addEventListener("click", function(event) {
+  const row = event.target.closest("[data-open-chat]");
+  if (!row) return;
 
+  if (row.dataset.openChat === "น้องคณิต💙") {
+    openLineSubpage("chat");
+  }
+});
   // แสดงข้อมูลตามแท็บที่เลือก
   function renderFriendCategory(category) {
     const list = $("#lineFriendsPageList");
