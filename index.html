@@ -433,6 +433,641 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   pointer-events: none;
 }
 
+/* ===== LINE APP: LIGHT THEME ===== */
+#lineScreen {
+  --line-green: #06c755;
+  --line-text: #171717;
+  --line-muted: #8b8b8b;
+  --line-border: #eeeeee;
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+  color: var(--line-text);
+  font-family: inherit;
+}
+
+#lineScreen * {
+  box-sizing: border-box;
+}
+
+#lineScreen button,
+#lineScreen input {
+  font: inherit;
+}
+
+#lineScreen button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.line-header {
+  flex: 0 0 auto;
+  padding: max(env(safe-area-inset-top), 8px) 16px 10px;
+  background: #fff;
+}
+
+.line-header-top {
+  height: 45px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.line-header-top h1 {
+  flex: 1;
+  margin: 0;
+  font-size: 23px;
+  font-weight: 750;
+  letter-spacing: -.5px;
+}
+
+.line-header-btn {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #222;
+}
+
+.line-header-btn svg,
+.line-search-box svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.line-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  margin-top: 10px;
+  padding: 0 10px;
+  border-radius: 9px;
+  background: #f3f3f3;
+  color: #888;
+}
+
+.line-search-box svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.line-search-box input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #222;
+  font-size: 12px;
+}
+
+.line-search-box button {
+  display: none;
+  border: 0;
+  padding: 0 3px;
+  background: transparent;
+  color: #777;
+  font-size: 20px;
+}
+
+.line-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fff;
+}
+
+.line-tab-panel {
+  display: none;
+  min-height: 100%;
+  padding-bottom: 12px;
+}
+
+.line-tab-panel.active {
+  display: block;
+}
+
+.line-filter-row {
+  display: flex;
+  gap: 8px;
+  padding: 5px 16px 13px;
+}
+
+.line-filter {
+  border: 1px solid #e7e7e7;
+  border-radius: 18px;
+  padding: 6px 13px;
+  background: #fff;
+  color: #555;
+  font-size: 12px !important;
+}
+
+.line-filter.active {
+  border-color: #222;
+  background: #222;
+  color: #fff;
+}
+
+.line-list {
+  width: 100%;
+}
+
+.line-chat-row,
+.line-friend-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 76px;
+  padding: 10px 16px;
+  border: 0;
+  border-bottom: 1px solid #f3f3f3;
+  background: #fff;
+  color: inherit;
+  text-align: left;
+}
+
+.line-chat-row:active,
+.line-friend-row:active,
+.line-action-row:active {
+  background: #f7f7f7;
+}
+
+.line-avatar {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 49px;
+  width: 49px;
+  height: 49px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #e4f3e9;
+  color: #23834a;
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.line-avatar.group {
+  background: #f0e9ff;
+  color: #7855b8;
+}
+
+.line-avatar.orange {
+  background: #fff0df;
+  color: #bd7434;
+}
+
+.line-avatar.blue {
+  background: #e5f1ff;
+  color: #3b78ba;
+}
+
+.line-chat-main,
+.line-friend-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.line-chat-name-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.line-chat-name {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.line-chat-preview {
+  overflow: hidden;
+  color: #888;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.line-chat-meta {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: flex-end;
+  align-self: stretch;
+  justify-content: center;
+  gap: 7px;
+  color: #999;
+  font-size: 10px;
+}
+
+.line-unread {
+  display: grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 10px;
+  background: var(--line-green);
+  color: white;
+  font-size: 10px;
+}
+
+.line-section-title {
+  padding: 15px 16px 9px;
+  color: #777;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.line-action-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 57px;
+  padding: 8px 16px;
+  border: 0;
+  background: #fff;
+  color: #222;
+  text-align: left;
+  font-size: 13px !important;
+}
+
+.line-action-icon {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  color: white;
+  font-size: 23px;
+}
+
+.line-action-icon.green {
+  background: #06c755;
+}
+
+.line-action-icon.lime {
+  background: #9bcf48;
+}
+
+.line-chevron {
+  margin-left: auto;
+  color: #aaa;
+  font-size: 23px;
+}
+
+.line-friend-main strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.line-friend-main small {
+  display: block;
+  margin-top: 4px;
+  color: #999;
+  font-size: 11px;
+}
+
+.line-news-card {
+  overflow: hidden;
+  margin: 0 16px 15px;
+  border: 1px solid #eee;
+  border-radius: 13px;
+  background: #fff;
+}
+
+.line-news-banner {
+  display: flex;
+  align-items: center;
+  height: 115px;
+  padding: 18px;
+  background: #e6f8ed;
+  color: #06a849;
+  font-size: 24px;
+  font-weight: 850;
+  letter-spacing: -.7px;
+}
+
+.line-news-banner-2 {
+  background: #f1eaff;
+  color: #7654b6;
+}
+
+.line-news-body {
+  padding: 13px 14px 15px;
+}
+
+.line-news-body strong {
+  font-size: 13px;
+}
+
+.line-news-body p {
+  margin: 6px 0 0;
+  color: #888;
+  font-size: 11px;
+}
+
+.line-wallet-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 18px 16px;
+  font-size: 21px;
+}
+
+.line-wallet-heading span {
+  color: var(--line-green);
+  font-weight: 850;
+}
+
+.line-wallet-heading strong {
+  font-weight: 650;
+}
+
+.line-wallet-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 16px 18px;
+  padding: 18px;
+  border-radius: 15px;
+  background: #f0faf3;
+}
+
+.line-wallet-card span {
+  display: block;
+  color: #6e8d77;
+  font-size: 11px;
+}
+
+.line-wallet-card strong {
+  display: block;
+  margin-top: 7px;
+  color: #183d27;
+  font-size: 25px;
+  font-weight: 750;
+}
+
+.line-wallet-symbol {
+  display: grid !important;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  background: var(--line-green);
+  color: white !important;
+  font-size: 24px !important;
+  font-weight: 700;
+}
+
+.line-service-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px 5px;
+  padding: 12px 10px;
+}
+
+.line-service-grid button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  color: #444;
+  font-size: 10px !important;
+}
+
+.line-service-icon {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border: 1px solid #e8eee9;
+  border-radius: 14px;
+  background: #f8fbf8;
+  color: #16a34a;
+  font-size: 21px;
+}
+
+.line-disclaimer {
+  padding: 12px 16px;
+  color: #999;
+  font-size: 10px;
+  text-align: center;
+}
+
+.line-bottom-nav {
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: space-around;
+  padding: 8px 3px max(env(safe-area-inset-bottom), 7px);
+  border-top: 1px solid #eee;
+  background: #fff;
+}
+
+.line-nav-item {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  min-height: 48px;
+  border: 0;
+  background: transparent;
+  color: #999;
+  font-size: 10px !important;
+}
+
+.line-nav-item svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.line-nav-item.active {
+  color: var(--line-green);
+  font-weight: 650;
+}
+
+.line-nav-item i {
+  position: absolute;
+  top: 0;
+  right: 22%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff4d4f;
+}
+
+.line-empty {
+  padding: 35px 20px;
+  color: #999;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Conversation view */
+.line-conversation {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  flex-direction: column;
+  background: #f5f5f5;
+}
+
+.line-conversation.open {
+  display: flex;
+}
+
+.line-conversation-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 58px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e8e8e8;
+  background: #fff;
+}
+
+.line-conversation-header button {
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 26px;
+}
+
+.line-conversation-header div {
+  flex: 1;
+  min-width: 0;
+}
+
+.line-conversation-header strong,
+.line-conversation-header small {
+  display: block;
+}
+
+.line-conversation-header strong {
+  font-size: 14px;
+}
+
+.line-conversation-header small {
+  margin-top: 3px;
+  color: #999;
+  font-size: 10px;
+}
+
+.line-message-list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  padding: 16px 12px;
+}
+
+.line-date-chip {
+  align-self: center;
+  padding: 5px 10px;
+  border-radius: 12px;
+  background: #e6e6e6;
+  color: #777;
+  font-size: 10px;
+}
+
+.line-bubble {
+  max-width: 78%;
+  padding: 10px 12px;
+  border-radius: 15px;
+  background: #fff;
+  color: #222;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.line-bubble.mine {
+  align-self: flex-end;
+  background: #a8ed82;
+}
+
+.line-composer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px max(env(safe-area-inset-bottom), 9px);
+  border-top: 1px solid #e7e7e7;
+  background: #fff;
+}
+
+.line-composer button {
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  color: #555;
+  font-size: 22px;
+}
+
+.line-composer input {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 20px;
+  outline: none;
+  background: #f3f3f3;
+  font-size: 12px;
+}
+
+.line-toast {
+  position: absolute;
+  z-index: 5;
+  bottom: 75px;
+  left: 50%;
+  max-width: 85%;
+  padding: 10px 14px;
+  transform: translateX(-50%);
+  border-radius: 20px;
+  background: rgba(35, 35, 35, .92);
+  color: white;
+  font-size: 11px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s;
+}
+
+.line-toast.show {
+  opacity: 1;
+}
 </style>
 </head>
 
@@ -627,6 +1262,183 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 </main>
 </div>
 
+<!-- LINE App Screen -->
+<div id="lineScreen" class="app-screen line-screen" style="display:none">
+
+  <header class="line-header">
+    <div class="line-header-top">
+      <button class="line-header-btn" id="lineBackBtn" aria-label="กลับหน้า Home">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+      </button>
+      <h1 id="lineHeaderTitle">แชต</h1>
+      <button class="line-header-btn" id="lineSearchBtn" aria-label="ค้นหา">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="10.8" cy="10.8" r="6.8"/>
+          <path d="m16 16 5 5"/>
+        </svg>
+      </button>
+      <button class="line-header-btn" id="lineAddBtn" aria-label="เพิ่ม">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="line-search-box" id="lineSearchBox">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="10.8" cy="10.8" r="6.8"/>
+        <path d="m16 16 5 5"/>
+      </svg>
+      <input id="lineSearchInput" type="search"
+             placeholder="ค้นหาแชต เพื่อน หรือข้อความ">
+      <button id="lineSearchClear" aria-label="ล้างการค้นหา">×</button>
+    </div>
+  </header>
+
+  <main class="line-content">
+
+    <!-- CHATS -->
+    <section class="line-tab-panel active" data-line-panel="chats">
+      <div class="line-filter-row">
+        <button class="line-filter active" data-chat-filter="all">ทั้งหมด</button>
+        <button class="line-filter" data-chat-filter="unread">ยังไม่อ่าน</button>
+        <button class="line-filter" data-chat-filter="groups">กลุ่ม</button>
+      </div>
+      <div id="lineChatList" class="line-list"></div>
+    </section>
+
+    <!-- FRIENDS -->
+    <section class="line-tab-panel" data-line-panel="friends">
+      <div class="line-section-title">เพื่อน</div>
+      <button class="line-action-row" data-line-action="add-friend">
+        <span class="line-action-icon green">＋</span>
+        <span>เพิ่มเพื่อน</span>
+        <span class="line-chevron">›</span>
+      </button>
+      <button class="line-action-row" data-line-action="groups">
+        <span class="line-action-icon lime">♧</span>
+        <span>กลุ่ม</span>
+        <span class="line-chevron">›</span>
+      </button>
+      <div class="line-section-title">รายชื่อเพื่อน</div>
+      <div id="lineFriendList" class="line-list"></div>
+    </section>
+
+    <!-- NEWS -->
+    <section class="line-tab-panel" data-line-panel="news">
+      <div class="line-section-title">ข่าวสาร</div>
+      <div class="line-news-card">
+        <div class="line-news-banner">LINE TODAY</div>
+        <div class="line-news-body">
+          <strong>ข่าวสารและเรื่องราวที่น่าสนใจ</strong>
+          <p>พื้นที่จำลองสำหรับแสดงข่าวและบทความ</p>
+        </div>
+      </div>
+      <div class="line-news-card">
+        <div class="line-news-banner line-news-banner-2">DISCOVER</div>
+        <div class="line-news-body">
+          <strong>ค้นพบสิ่งใหม่ ๆ</strong>
+          <p>อัปเดตเนื้อหาที่คุณอาจสนใจ</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WALLET / SERVICES -->
+    <section class="line-tab-panel" data-line-panel="wallet">
+      <div class="line-wallet-heading">
+        <span>LINE</span>
+        <strong>Wallet</strong>
+      </div>
+      <div class="line-wallet-card">
+        <div>
+          <span>ยอดเงินจำลอง</span>
+          <strong>฿ 0.00</strong>
+        </div>
+        <span class="line-wallet-symbol">฿</span>
+      </div>
+      <div class="line-section-title">บริการ</div>
+      <div class="line-service-grid">
+        <button data-line-action="payments">
+          <span class="line-service-icon">฿</span>
+          <span>การชำระเงิน</span>
+        </button>
+        <button data-line-action="coupons">
+          <span class="line-service-icon">▤</span>
+          <span>คูปอง</span>
+        </button>
+        <button data-line-action="shopping">
+          <span class="line-service-icon">▣</span>
+          <span>ช้อปปิ้ง</span>
+        </button>
+        <button data-line-action="settings">
+          <span class="line-service-icon">⚙</span>
+          <span>ตั้งค่า</span>
+        </button>
+      </div>
+      <p class="line-disclaimer">
+        หน้าจอนี้เป็นการจำลอง ไม่มีการชำระเงินจริง
+      </p>
+    </section>
+
+    <!-- CHAT CONVERSATION -->
+    <section class="line-conversation" id="lineConversation">
+      <div class="line-conversation-header">
+        <button id="lineConversationBack" aria-label="กลับรายการแชต">‹</button>
+        <div>
+          <strong id="lineConversationName">ชื่อแชต</strong>
+          <small id="lineConversationStatus">LINE</small>
+        </div>
+        <button id="lineConversationMore" aria-label="ตัวเลือกเพิ่มเติม">⋯</button>
+      </div>
+      <div class="line-message-list" id="lineMessageList"></div>
+      <form class="line-composer" id="lineComposer">
+        <button type="button" id="lineComposerPlus" aria-label="เพิ่มเติม">＋</button>
+        <input id="lineMessageInput" placeholder="พิมพ์ข้อความ" autocomplete="off">
+        <button type="submit" aria-label="ส่งข้อความ">➤</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- Bottom navigation -->
+  <nav class="line-bottom-nav" aria-label="เมนู LINE">
+    <button class="line-nav-item active" data-line-tab="chats">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 5.5h16v11H11l-5 3v-3H4z"/>
+      </svg>
+      <span>แชต</span>
+      <i id="lineTotalBadge" hidden></i>
+    </button>
+    <button class="line-nav-item" data-line-tab="friends">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="9" cy="8" r="3.2"/>
+        <path d="M3 19v-1.5a6 6 0 0 1 12 0V19z"/>
+        <path d="M16 5.5a3 3 0 0 1 0 5.8M18 14a4.5 4.5 0 0 1 3 4.3"/>
+      </svg>
+      <span>เพื่อน</span>
+    </button>
+    <button class="line-nav-item" data-line-tab="news">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="4" y="4" width="16" height="16" rx="2"/>
+        <path d="M8 8h8M8 12h8M8 16h5"/>
+      </svg>
+      <span>ข่าวสาร</span>
+    </button>
+    <button class="line-nav-item" data-line-tab="wallet">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="6" width="18" height="14" rx="2"/>
+        <path d="M3 9h18M16 14h2"/>
+        <path d="M6 6V4h12v2"/>
+      </svg>
+      <span>Wallet</span>
+    </button>
+  </nav>
+
+  <div class="line-toast" id="lineToast" role="status"></div>
+</div>
+
 <script>
 (() => {
   const CORRECT_PIN = "121269";
@@ -778,6 +1590,317 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   updateClock();
   setInterval(updateClock, 1000);
   setPlaying(false);
+})();
+
+(() => {
+  const screen = document.getElementById("lineScreen");
+  if (!screen || screen.dataset.initialized === "true") return;
+  screen.dataset.initialized = "true";
+
+  const $ = (selector) => screen.querySelector(selector);
+
+  const chats = [
+    {
+      id: 1, name: "ครอบครัว", avatar: "♡", color: "orange",
+      preview: "วันนี้กลับบ้านกี่โมง", time: "10:42",
+      unread: 2, group: true,
+      messages: [
+        { text: "กินข้าวหรือยัง", mine: false },
+        { text: "วันนี้กลับบ้านกี่โมง", mine: false }
+      ]
+    },
+    {
+      id: 2, name: "เพื่อนสนิท", avatar: "P", color: "",
+      preview: "ส่งรูปมาให้ดูหน่อย", time: "09:18",
+      unread: 1, group: false,
+      messages: [
+        { text: "ว่างแล้วทักมานะ", mine: false },
+        { text: "ส่งรูปมาให้ดูหน่อย", mine: false }
+      ]
+    },
+    {
+      id: 3, name: "TayNew Fan Club", avatar: "TN", color: "group",
+      preview: "มีใครเตรียมตัวไปเวียดนามแล้วบ้าง", time: "เมื่อวาน",
+      unread: 8, group: true,
+      messages: [
+        { text: "มีใครเตรียมตัวไปเวียดนามแล้วบ้าง", mine: false },
+        { text: "กำลังเตรียมอยู่เลย!", mine: true }
+      ]
+    },
+    {
+      id: 4, name: "LINE Official Account", avatar: "L", color: "blue",
+      preview: "ยินดีต้อนรับ!", time: "จ.", unread: 0, group: false,
+      messages: [
+        { text: "ยินดีต้อนรับสู่บัญชีจำลอง", mine: false }
+      ]
+    },
+    {
+      id: 5, name: "เมย์", avatar: "ม", color: "orange",
+      preview: "โอเค ไว้คุยกันนะ", time: "อา.",
+      unread: 0, group: false,
+      messages: [
+        { text: "โอเค ไว้คุยกันนะ", mine: false }
+      ]
+    }
+  ];
+
+  const friends = [
+    { name: "เมย์", detail: "เพื่อน" },
+    { name: "เพื่อนสนิท", detail: "เพื่อน" },
+    { name: "ครอบครัว", detail: "กลุ่ม" },
+    { name: "TayNew Fan Club", detail: "กลุ่ม" }
+  ];
+
+  let currentTab = "chats";
+  let currentFilter = "all";
+  let currentChatId = null;
+  let searchText = "";
+
+  const escapeHTML = (value) =>
+    String(value).replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;",
+      '"': "&quot;", "'": "&#39;"
+    })[char]);
+
+  function showToast(message) {
+    const toast = $("#lineToast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(showToast.timer);
+    showToast.timer = setTimeout(() => toast.classList.remove("show"), 1800);
+  }
+
+  function setTab(tab) {
+    currentTab = tab;
+    $("#lineHeaderTitle").textContent = ({
+      chats: "แชต",
+      friends: "เพื่อน",
+      news: "ข่าวสาร",
+      wallet: "Wallet"
+    })[tab] || "LINE";
+
+    screen.querySelectorAll("[data-line-tab]").forEach((button) => {
+      button.classList.toggle("active", button.dataset.lineTab === tab);
+    });
+
+    screen.querySelectorAll("[data-line-panel]").forEach((panel) => {
+      panel.classList.toggle("active", panel.dataset.linePanel === tab);
+    });
+
+    $("#lineSearchBox").style.display = tab === "chats" ? "flex" : "none";
+    $("#lineConversation").classList.remove("open");
+    $("#lineConversation").setAttribute("aria-hidden", "true");
+    renderChats();
+  }
+
+  function renderChats() {
+    const list = $("#lineChatList");
+    const query = searchText.trim().toLowerCase();
+
+    const filtered = chats.filter((chat) => {
+      const matchesFilter =
+        currentFilter === "all" ||
+        (currentFilter === "unread" && chat.unread > 0) ||
+        (currentFilter === "groups" && chat.group);
+
+      const matchesSearch =
+        !query ||
+        chat.name.toLowerCase().includes(query) ||
+        chat.preview.toLowerCase().includes(query);
+
+      return matchesFilter && matchesSearch;
+    });
+
+    if (!filtered.length) {
+      list.innerHTML = '<div class="line-empty">ไม่พบแชตที่ค้นหา</div>';
+      return;
+    }
+
+    list.innerHTML = filtered.map((chat) => `
+      <button class="line-chat-row" data-chat-id="${chat.id}">
+        <span class="line-avatar ${chat.color}">
+          ${escapeHTML(chat.avatar)}
+        </span>
+        <span class="line-chat-main">
+          <span class="line-chat-name-row">
+            <span class="line-chat-name">${escapeHTML(chat.name)}</span>
+          </span>
+          <span class="line-chat-preview">${escapeHTML(chat.preview)}</span>
+        </span>
+        <span class="line-chat-meta">
+          <span>${escapeHTML(chat.time)}</span>
+          ${chat.unread ? `<span class="line-unread">${chat.unread}</span>` : ""}
+        </span>
+      </button>
+    `).join("");
+  }
+
+  function renderFriends() {
+    $("#lineFriendList").innerHTML = friends
+      .filter((friend) => {
+        const query = searchText.trim().toLowerCase();
+        return !query || friend.name.toLowerCase().includes(query);
+      })
+      .map((friend, index) => `
+        <button class="line-friend-row" data-friend-name="${escapeHTML(friend.name)}">
+          <span class="line-avatar ${index % 2 ? "blue" : ""}">
+            ${escapeHTML(friend.name.slice(0, 1))}
+          </span>
+          <span class="line-friend-main">
+            <strong>${escapeHTML(friend.name)}</strong>
+            <small>${escapeHTML(friend.detail)}</small>
+          </span>
+        </button>
+      `).join("");
+  }
+
+  function openChat(id) {
+    const chat = chats.find((item) => item.id === Number(id));
+    if (!chat) return;
+
+    currentChatId = chat.id;
+    chat.unread = 0;
+    $("#lineConversationName").textContent = chat.name;
+    $("#lineConversationStatus").textContent = "แชตจำลอง";
+    $("#lineConversation").classList.add("open");
+    $("#lineConversation").setAttribute("aria-hidden", "false");
+    renderMessages();
+    renderChats();
+  }
+
+  function renderMessages() {
+    const chat = chats.find((item) => item.id === currentChatId);
+    if (!chat) return;
+
+    $("#lineMessageList").innerHTML =
+      '<div class="line-date-chip">วันนี้</div>' +
+      chat.messages.map((message) => `
+        <div class="line-bubble ${message.mine ? "mine" : ""}">
+          ${escapeHTML(message.text)}
+        </div>
+      `).join("");
+
+    $("#lineMessageList").scrollTop = $("#lineMessageList").scrollHeight;
+  }
+
+  function closeChat() {
+    $("#lineConversation").classList.remove("open");
+    $("#lineConversation").setAttribute("aria-hidden", "true");
+    currentChatId = null;
+  }
+
+  screen.addEventListener("click", (event) => {
+    const tabButton = event.target.closest("[data-line-tab]");
+    if (tabButton) {
+      setTab(tabButton.dataset.lineTab);
+      return;
+    }
+
+    const filterButton = event.target.closest("[data-chat-filter]");
+    if (filterButton) {
+      currentFilter = filterButton.dataset.chatFilter;
+      screen.querySelectorAll("[data-chat-filter]").forEach((button) => {
+        button.classList.toggle("active", button === filterButton);
+      });
+      renderChats();
+      return;
+    }
+
+    const chatButton = event.target.closest("[data-chat-id]");
+    if (chatButton) {
+      openChat(chatButton.dataset.chatId);
+      return;
+    }
+
+    const friendButton = event.target.closest("[data-friend-name]");
+    if (friendButton) {
+      const existing = chats.find((chat) =>
+        chat.name === friendButton.dataset.friendName
+      );
+      if (existing) openChat(existing.id);
+      else showToast("นี่เป็นรายชื่อเพื่อนจำลอง");
+      return;
+    }
+
+    const actionButton = event.target.closest("[data-line-action]");
+    if (actionButton) {
+      showToast("ฟังก์ชันนี้เป็นหน้าจอจำลอง");
+    }
+  });
+
+  $("#lineSearchBtn").addEventListener("click", () => {
+    const box = $("#lineSearchBox");
+    box.style.display = box.style.display === "none" ? "flex" : "none";
+    if (box.style.display !== "none") $("#lineSearchInput").focus();
+  });
+
+  $("#lineSearchInput").addEventListener("input", (event) => {
+    searchText = event.target.value;
+    renderChats();
+    renderFriends();
+  });
+
+  $("#lineSearchClear").addEventListener("click", () => {
+    $("#lineSearchInput").value = "";
+    searchText = "";
+    renderChats();
+    renderFriends();
+  });
+
+  $("#lineBackBtn").addEventListener("click", () => {
+    closeChat();
+    if (typeof window.showHomeScreen === "function") {
+      window.showHomeScreen();
+    } else {
+      screen.style.display = "none";
+      const home = document.getElementById("homeScreen");
+      if (home) home.style.display = "";
+    }
+  });
+
+  $("#lineConversationBack").addEventListener("click", closeChat);
+
+  $("#lineComposer").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const input = $("#lineMessageInput");
+    const message = input.value.trim();
+    const chat = chats.find((item) => item.id === currentChatId);
+
+    if (!chat || !message) return;
+
+    chat.messages.push({ text: message, mine: true });
+    chat.preview = message;
+    chat.time = "ตอนนี้";
+    chats.splice(chats.indexOf(chat), 1);
+    chats.unshift(chat);
+
+    input.value = "";
+    renderMessages();
+    renderChats();
+  });
+
+  $("#lineAddBtn").addEventListener("click", () => {
+    showToast("เพิ่มเพื่อนและสร้างกลุ่มยังไม่เชื่อมระบบจริง");
+  });
+
+  $("#lineConversationMore").addEventListener("click", () => {
+    showToast("ตัวเลือกเพิ่มเติม");
+  });
+
+  $("#lineComposerPlus").addEventListener("click", () => {
+    showToast("เมนูแนบไฟล์จำลอง");
+  });
+
+  renderChats();
+  renderFriends();
+  setTab("chats");
+
+  // เปิด LINE เมื่อระบบหลักเรียก openApp("LINE")
+  window.openLineApp = function () {
+    closeChat();
+    screen.style.display = "flex";
+    setTab("chats");
+  };
 })();
 </script>
 </body>
