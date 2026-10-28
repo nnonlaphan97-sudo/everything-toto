@@ -1403,6 +1403,104 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   line-height: 1.4;
 }
 
+/* หน้าแชตน้องคณิต */
+#lineChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #8cabd0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* แถบชื่อด้านบน */
+#lineChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#lineChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#lineChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* พื้นที่ข้อความ */
+#lineChatPage #kanithChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  height: auto !important;
+  box-sizing: border-box;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+/* ช่องพิมพ์ด้านล่าง */
+#lineChatPage #kanithChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  background: #fff;
+  z-index: 2;
+}
+
+#lineChatPage #kanithChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+#lineChatPage #kanithChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: white;
+  cursor: pointer;
+}
+
 </style>
 </head>
 
@@ -2101,8 +2199,10 @@ window.showPhoneScreen = showScreen;
     });
 
     const favoriteHTML = `
-      <div class="line-favorite-row">
-        <div class="line-favorite-avatar">
+      <div class="line-favorite-row"
+     data-open-chat="น้องณิต💙"
+     style="cursor:pointer">
+  <div class="line-favorite-avatar">
           <img src="https://i.ibb.co/4ntNZx78/B2-EE0-EC1-6048-47-BA-8-F00-5569-F467-CEB4.jpg" alt="น้องณิต💙">
         </div>
         <div class="line-favorite-info">
