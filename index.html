@@ -3,111 +3,162 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Phone Peeking</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111116">
+<title>Phone Peeking — Galaxy Z Fold8</title>
 
 <style>
+:root {
+  --white: #fff;
+  --muted: rgba(255,255,255,.66);
+  --glass: rgba(28,27,36,.64);
+  --accent: #d9c7ff;
+  --pink: #e84aff;
+}
+
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
+
 html, body {
+  margin: 0;
   width: 100%;
   height: 100%;
-  margin: 0;
-  overflow: hidden;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-  background: #080808;
-  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Noto Sans Thai", sans-serif;
+  color: var(--white);
+  background: #101015;
+}
+
+button { font: inherit; color: inherit; }
+
+button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
 }
 
 body {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100dvh;
+  padding: 10px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 15% 15%, #39304d, transparent 42%),
+    radial-gradient(ellipse at 85% 85%, #39263f, transparent 42%),
+    #101015;
 }
-
-button {
-  font: inherit;
-  color: inherit;
-  border: 0;
-  cursor: pointer;
-}
-
-
 
 .phone {
   position: relative;
-  width: min(calc(100vw - 48px), 360px);
-  height: min(calc(100dvh - 48px), 780px);
-  flex-shrink: 0;
+  isolation: isolate;
+  width: min(100%, 390px);
+  height: min(calc(100dvh - 20px), 850px);
+  min-height: 440px;
   overflow: hidden;
-  box-sizing: border-box;
-
-  border: 1px solid #45454a;
-  border-radius: 44px;
-  background: #000;
-
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  border: 3px solid #34343b;
+  border-radius: 40px;
+  background: #17171d;
+  box-shadow: 0 24px 70px #000a, inset 0 0 0 1px #ffffff12;
+  touch-action: pan-y;
 }
 
-/* STATUS BAR */
-.status {
+.wallpaper {
   position: absolute;
-  top: 14px;
-  left: 24px;
-  right: 24px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 30;
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(180deg, #10101a18 0%, #17142116 40%, #10101570 100%),
+    url("https://i.ibb.co/H8XC2by/r07qxo-R-Download.jpg") center / cover no-repeat,
+    linear-gradient(145deg, #696080, #25243b 55%, #a17a9b);
+  transform: scale(1.02);
+}
+
+.wallpaper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #00000012, transparent 40%, #00000028);
   pointer-events: none;
 }
 
-.status-icons {
-  display: inline-flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  align-items: center !important;
-  justify-content: flex-end;
-  gap: 5px;
-  width: auto;
-  height: 16px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.signal-icon {
-  display: block;
-  width: 18px;
-  height: 14px;
-  flex: 0 0 18px;
-}
-
-.network {
-  display: inline-block !important;
-  flex: 0 0 auto;
-  font-family: Arial, sans-serif;
+.status-bar {
+  position: absolute;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 21px;
   font-size: 12px;
-  font-weight: 700;
-  line-height: 14px;
-  letter-spacing: -0.3px;
-  color: white;
-  white-space: nowrap;
+  font-weight: 650;
+  pointer-events: none;
+  text-shadow: 0 1px 5px #0008;
 }
 
-.battery-icon {
+.status-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.signal {
+  display: flex;
+  align-items: end;
+  gap: 2px;
+  height: 12px;
+}
+
+.signal i {
+  width: 3px;
+  border-radius: 2px;
+  background: white;
+}
+.signal i:nth-child(1) { height: 4px; }
+.signal i:nth-child(2) { height: 6px; }
+.signal i:nth-child(3) { height: 9px; }
+.signal i:nth-child(4) { height: 11px; }
+
+.wifi {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.battery {
+  position: relative;
+  width: 23px;
+  height: 12px;
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 2px;
+  margin-left: 2px;
+}
+
+.battery::before {
+  content: "";
   display: block;
-  width: 29px;
-  height: 14px;
-  flex: 0 0 29px;
+  height: 100%;
+  width: 78%;
+  border-radius: 1px;
+  background: white;
 }
 
-/* LOCK SCREEN */
+.battery::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: 3px;
+  width: 2px;
+  height: 4px;
+  border-radius: 0 2px 2px 0;
+  background: white;
+}
+
 .screen {
   position: absolute;
   inset: 0;
@@ -115,908 +166,1375 @@ button {
   overflow: hidden;
 }
 
-.screen.active {
-  display: block;
-}
+.screen.active { display: block; }
+
 #lockScreen {
-  background-image: url("https://i.ibb.co/H8XC2by/r07qxo-R-Download.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  touch-action: pan-y;
+  padding: 51px 20px 35px;
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
 }
 
-
-.lock-content {
-  position: absolute;
-  top: 15%;
-  left: 0;
-  right: 0;
-  text-align: center;
-  padding: 0 20px;
-}
+#lockScreen.active { display: flex; }
 
 .lock-date {
-  font-size: 17px;
-  font-weight: 500;
-  margin-bottom: 5px;
+  margin-top: 12px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 550;
+  color: #fffffff0;
+  text-shadow: 0 2px 12px #0005;
 }
 
-.lock-time {
-  font-size: clamp(76px, 23vw, 112px);
-  line-height: 1;
+.lock-clock {
+  margin: 7px 0 0;
+  text-align: center;
+  font-size: clamp(67px, 19vw, 84px);
   font-weight: 300;
   letter-spacing: -5px;
+  line-height: 1.06;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 3px 18px #0003;
 }
 
-.lock-message {
-  margin-top: 22px;
-  font-size: 14px;
-  opacity: 0.9;
-}
-
-
-.swipe-hint {
+/* แคปซูลเพลงบนหน้าจอล็อก */
+.mini-player {
   position: absolute;
-  bottom: 40px;
-  left: 40;
-  right: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 13px;
-  opacity: 0.85;
-  z-index: 10;
-  pointer-events: none;
+  left: 50%;
+  bottom: 88px;
+  transform: translateX(-50%);
+  width: min(260px, calc(100% - 48px));
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 10px;
+  border: 1px solid #ffffff18;
+  border-radius: 32px;
+  background: rgba(28, 25, 38, .78);
+  box-shadow: 0 8px 28px #0003;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
 }
-.bottom-indicators {
+
+.mini-open {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.mini-art {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: linear-gradient(135deg, #9d77ad, #272333);
+}
+
+.mini-info { min-width: 0; }
+
+.mini-title {
+  font-size: 11px;
+  font-weight: 750;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-artist {
+  margin-top: 3px;
+  font-size: 9px;
+  color: #ffffffa8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-controls {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.mini-controls button {
+  width: 27px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.mini-controls .mini-play {
+  font-size: 19px;
+}
+
+.lock-shortcuts {
   position: absolute;
-  bottom: 28px;
   left: 28px;
   right: 28px;
+  bottom: 31px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.round-button {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+.shortcut {
+  width: 45px;
+  height: 45px;
   display: grid;
   place-items: center;
-  background: rgba(255,255,255,0.2);
-  border: 1px solid rgba(255,255,255,0.25);
-  font-size: 19px;
+  border: 1px solid #ffffff2a;
+  border-radius: 50%;
+  background: #16151e66;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  font-size: 20px;
+  cursor: pointer;
 }
 
-/* PASSCODE SCREEN */
-
-/* PASSCODE SCREEN */
-#passcodeScreen {
-  background-image: url("https://i.ibb.co/H8XC2by/r07qxo-R-Download.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  text-align: center;
-  isolation: isolate;
-}
-
-#passcodeScreen::before {
-  content: "";
+.unlock-hint {
   position: absolute;
-  inset: -20px;
-  background-image: url("https://i.ibb.co/H8XC2by/r07qxo-R-Download.jpg");
-  background-size: cover;
-  background-position: center;
-  filter: blur(18px) brightness(0.65);
-  z-index: -1;
+  left: 0;
+  right: 0;
+  bottom: 13px;
+  text-align: center;
+  font-size: 10px;
+  color: #ffffffb8;
   pointer-events: none;
 }
 
-.passcode-content {
-  position: absolute;
-  top: 15%;
-  left: 0;
-  right: 0;
-  padding: 0 25px;
+/* หน้าเล่นเพลงเต็มจอ */
+#playerScreen {
+  padding: 48px 23px 35px;
+  background: linear-gradient(180deg, #37303f, #17161e 65%, #111116);
 }
 
-.passcode-title {
-  font-size: 23px;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.passcode-subtitle {
-  font-size: 14px;
-  opacity: 0.85;
-}
-
-.dots {
+.player-top {
   display: flex;
-  justify-content: center;
-  gap: 17px;
-  margin: 30px 0 12px;
+  justify-content: space-between;
+  align-items: center;
+  height: 32px;
+  margin-bottom: 18px;
 }
 
-.dot {
+.round-button {
+  width: 35px;
+  height: 35px;
+  border: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #ffffff12;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.player-label {
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+  color: #ffffffa8;
+}
+
+.player-album {
+  display: block;
+  width: min(100%, 310px);
+  aspect-ratio: 1;
+  margin: 8px auto 23px;
+  object-fit: cover;
+  border-radius: 23px;
+  background: linear-gradient(135deg, #8a7099, #292436);
+  box-shadow: 0 18px 45px #0005;
+}
+
+.player-track-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 21px;
+}
+
+.player-track-info { min-width: 0; flex: 1; }
+
+.player-track-title {
+  font-size: 21px;
+  font-weight: 750;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.player-track-artist {
+  margin-top: 5px;
+  font-size: 13px;
+  color: #ffffffa5;
+}
+
+.player-favorite {
+  border: 0;
+  background: transparent;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.player-status {
+  margin: -11px 0 13px;
+  font-size: 10px;
+  color: #ffffff82;
+}
+
+.progress-slider {
+  width: 100%;
+  height: 4px;
+  margin: 0;
+  border-radius: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: #ffffff42;
+  outline: none;
+  cursor: pointer;
+}
+
+.progress-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: 1px solid white;
-  background: transparent;
+  background: white;
+  box-shadow: 0 0 0 3px #ffffff1a;
 }
 
-.dot.filled {
+.progress-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 0;
+  border-radius: 50%;
   background: white;
 }
 
+.player-times {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 10px;
+  color: #ffffffa1;
+  font-variant-numeric: tabular-nums;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 17px;
+}
+
+.player-controls button {
+  width: 43px;
+  height: 43px;
+  border: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.player-controls .main-play {
+  width: 59px;
+  height: 59px;
+  border-radius: 50%;
+  background: white;
+  color: #22212a;
+  font-size: 24px;
+}
+
+.player-bottom-note {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 10px;
+  color: #ffffff6e;
+}
+
+/* PIN */
+#pinScreen {
+  padding: 74px 25px 35px;
+  text-align: center;
+  background: #17151dd9;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+}
+
+.pin-lock-icon {
+  font-size: 30px;
+  margin: 6px 0 17px;
+}
+
+.pin-heading {
+  font-size: 23px;
+  font-weight: 650;
+}
+
+.pin-subtitle {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.pin-dots {
+  display: flex;
+  justify-content: center;
+  gap: 17px;
+  margin: 30px 0 18px;
+}
+
+.pin-dot {
+  width: 10px;
+  height: 10px;
+  border: 1px solid #ffffffc9;
+  border-radius: 50%;
+}
+
+.pin-dot.filled { background: white; }
+
 .pin-error {
-  min-height: 20px;
-  font-size: 13px;
-  color: #fff;
+  min-height: 19px;
+  font-size: 11px;
+  color: #ffb9c5;
 }
 
 .keypad {
-  position: absolute;
-  top: 40%;
-  bottom: 75px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(280px, 82vw);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  gap: 10px;
+  gap: 9px 20px;
+  width: min(100%, 270px);
+  margin: 10px auto 0;
 }
 
 .key {
-  justify-self: center;
-  align-self: center;
-  width: 66px;
-  height: 66px;
-  max-width: 19vw;
-  max-height: 19vw;
+  width: 100%;
+  height: 53px;
+  border: 1px solid #ffffff20;
   border-radius: 50%;
-  background: rgba(255,255,255,0.19);
-  border: 1px solid rgba(255,255,255,0.2);
-  font-size: 28px;
-  font-weight: 400;
+  background: #ffffff13;
+  font-size: 23px;
+  cursor: pointer;
 }
 
-.key:active {
-  background: rgba(255,255,255,0.4);
-}
+.key:active { background: #ffffff35; }
 
-.key small {
+.key .letters {
   display: block;
-  font-size: 9px;
+  margin-top: 0;
+  font-size: 7px;
   letter-spacing: 1px;
+  opacity: .7;
 }
 
-.key.empty {
-  visibility: hidden;
-}
-
-.cancel-pin {
-  position: absolute;
-  bottom: 28px;
-  left: 28px;
+.key.action {
+  font-size: 11px;
+  border-color: transparent;
   background: transparent;
-  font-size: 14px;
 }
 
-.delete-pin {
-  position: absolute;
-  bottom: 28px;
-  right: 28px;
-  background: transparent;
-  font-size: 14px;
-}
-
-/* HOME SCREEN */
 #homeScreen {
-  background: linear-gradient(160deg, #879bb6, #c5acbc 55%, #ead8c9);
+  padding: 55px 19px 30px;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
+#homeScreen::-webkit-scrollbar { display: none; }
 
-.home-welcome {
-  position: absolute;
-  top: 12%;
-  left: 24px;
-  right: 24px;
+.home-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 4px 3px 22px;
 }
 
 .home-date {
-  font-size: 14px;
-  opacity: 0.9;
+  font-size: 12px;
+  text-shadow: 0 1px 5px #0005;
 }
 
-.home-title {
-  margin-top: 5px;
-  font-size: 32px;
-  font-weight: 700;
+.home-weather {
+  font-size: 13px;
+  text-shadow: 0 1px 5px #0005;
 }
 
-.home-subtitle {
-  margin-top: 5px;
-  font-size: 14px;
-  opacity: 0.9;
+.home-clock {
+  font-size: 53px;
+  font-weight: 350;
+  letter-spacing: -2px;
+  line-height: 1;
+  margin: 0 0 24px 2px;
+  font-variant-numeric: tabular-nums;
 }
 
-.app-grid {
-  position: absolute;
-  top: 29%;
-  left: 24px;
-  right: 24px;
+.home-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px 12px;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 20px 8px;
+  padding: 8px 0 18px;
 }
 
-.app {
+.app-icon {
   min-width: 0;
+  border: 0;
+  background: none;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 7px;
-  background: transparent;
-}
-
-.app-icon {
-  width: min(58px, 15vw);
-  height: min(58px, 15vw);
-  border-radius: 15px;
-  display: grid;
-  place-items: center;
-  font-size: 27px;
-  background: rgba(255,255,255,0.88);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.app-label {
-  font-size: 11px;
-  color: white;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.25);
-}
-
-.dock {
-  position: absolute;
-  bottom: 48px;
-  left: 20px;
-  right: 20px;
-  height: 85px;
-  border-radius: 26px;
-  background: rgba(255,255,255,0.25);
-  backdrop-filter: blur(20px);
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.dock .app-icon {
-  width: 52px;
-  height: 52px;
-  font-size: 25px;
-}
-
-.home-indicator {
-  position: absolute;
-  z-index: 40;
-  bottom: 9px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 135px;
-  height: 5px;
-  border-radius: 10px;
-  background: white;
   cursor: pointer;
 }
 
-/* APP WINDOW */
-#appWindow {
-  position: absolute;
-  inset: 0;
-  z-index: 20;
-  display: none;
-  background: #f7f7f7;
-  color: #222;
+.app-art {
+  width: 49px;
+  height: 49px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  box-shadow: 0 4px 12px #0003;
+  background: #f3f3f5;
+  color: #292832;
+  font-size: 23px;
 }
 
-#appWindow.open {
-  display: block;
+.app-label {
+  font-size: 10px;
+  line-height: 1.2;
+  color: white;
+  text-align: center;
+  max-width: 72px;
+  overflow-wrap: anywhere;
+  text-shadow: 0 1px 5px #000a;
 }
+
+.dock {
+  position: sticky;
+  bottom: 4px;
+  margin: 8px -5px 0;
+  padding: 9px 8px;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 7px;
+  border-radius: 23px;
+  border: 1px solid #ffffff24;
+  background: #25232f88;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.dock .app-label { display: none; }
+.dock .app-art { width: 46px; height: 46px; }
+
+.app-window {
+  position: absolute;
+  z-index: 35;
+  inset: 39px 9px 13px;
+  display: none;
+  flex-direction: column;
+  border-radius: 27px;
+  overflow: hidden;
+  border: 1px solid #ffffff26;
+  background: #191820f5;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.app-window.open { display: flex; }
 
 .app-header {
-  height: 60px;
-  padding: 20px 18px 10px;
   display: flex;
   align-items: center;
   gap: 12px;
-  font-weight: 700;
-  border-bottom: 1px solid #e6e6e6;
+  padding: 17px;
+  border-bottom: 1px solid #ffffff15;
 }
 
 .back-button {
-  color: #3478f6;
-  background: transparent;
-  font-size: 16px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: #ffffff15;
+  font-size: 22px;
+  cursor: pointer;
 }
 
-.app-body {
-  padding: 20px;
-  color: #333;
-  font-size: 15px;
+.app-header h2 {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 650;
+}
+
+.app-content {
+  padding: 17px;
+  overflow: auto;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #ffffffeb;
 }
 
 .app-card {
-  background: white;
-  padding: 15px;
-  border-radius: 14px;
+  padding: 14px;
   margin-bottom: 12px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  border-radius: 17px;
+  background: #ffffff0d;
+  border: 1px solid #ffffff0c;
 }
 
-@media (max-height: 680px) {
-  .lock-content { top: 12%; }
-  .passcode-content { top: 11%; }
-  .keypad { top: 36%; bottom: 55px; gap: 4px; }
-  .key { width: 55px; height: 55px; }
-  .app-grid { top: 26%; gap: 16px 10px; }
-  .dock { bottom: 35px; }
-}
-/* MUSIC WIDGET */
-.music-widget {
-  padding: 10px !important;
-  background: rgba(255, 255, 255, 0.20) !important;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 20px !important;
-  box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  overflow: hidden;
-}
-
-.music-top {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.music-cover {
-  width: 55px;
-  height: 55px;
-  flex: 0 0 55px;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-.music-info {
-  margin-left: 0px;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.music-title {
-  font-size: 17px;
-  font-weight: 700;
-  line-height: 1.4;
-}
-
-.music-artist {
-  font-size: 14px;
-  font-weight: 400;
-  opacity: 0.8;
-}
-
-.music-timeline {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-top: 15px;
-  font-size: 11px;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.music-progress {
-  flex: 1;
-  height: 4px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.35);
-  overflow: hidden;
-}
-
-.music-progress span {
+.app-card strong {
   display: block;
-  width: 33.3%;
-  height: 100%;
-  border-radius: 10px;
-  background: white;
+  margin-bottom: 5px;
 }
 
-.music-controls {
+.setting-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 38px;
-  margin-top: 15px;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #ffffff17;
 }
 
-.music-control {
-  font-size: 23px;
-  line-height: 1;
+.toggle {
+  width: 42px;
+  height: 24px;
+  border: 0;
+  border-radius: 20px;
+  background: #777;
+  padding: 3px;
+  cursor: pointer;
 }
 
-.music-pause {
-  font-size: 28px;
-  line-height: 1;
+.toggle::after {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  transition: transform .2s;
 }
 
-.music-title,
-.music-artist,
-.music-timeline,
-.music-controls {
-  color: #ffffff !important;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+.toggle.on { background: #9c83ee; }
+.toggle.on::after { transform: translateX(18px); }
+
+.toast {
+  position: absolute;
+  z-index: 70;
+  bottom: 48px;
+  left: 50%;
+  transform: translate(-50%, 10px);
+  opacity: 0;
+  pointer-events: none;
+  padding: 9px 14px;
+  border-radius: 20px;
+  background: #19181feF;
+  font-size: 11px;
+  white-space: nowrap;
+  transition: .2s;
 }
 
-.music-title {
-  font-weight: bold;
-}
-
-.music-artist,
-.music-timeline {
+.toast.show {
   opacity: 1;
+  transform: translate(-50%, 0);
 }
 
-/* HOME SCREEN: blurred lock-screen wallpaper */
-#homeScreen {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)),
-    url("https://i.ibb.co/H8XC2by/r07qxo-R-Download.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  isolation: isolate;
-}
-
-#homeScreen::before {
-  content: "";
+.gesture-bar {
   position: absolute;
-  inset: -12px;
-  background-image: url("https://i.ibb.co/H8XC2by/r07qxo-R-Download.jpg");
-  background-size: cover;
-  background-position: center;
-  filter: blur(12px);
-  z-index: -1;
-}
-
-#homeScreen {
-  overflow: hidden;
-}
-
-
-/* ตัวเครื่องและขอบหน้าจอ */
-.phone {
-  border: 2px solid #343438;
-  border-radius: 48px;
-  overflow: hidden;
-  background: #000;
-}
-
-.phone > .screen,
-.phone > #appWindow {
-  border-radius: 43px;
-  overflow: hidden;
-}
-
-/* Dynamic Island */
-.phone::before {
-  content: "";
-  position: absolute;
-  z-index: 50;
-  top: 10px;
+  z-index: 65;
+  bottom: 7px;
   left: 50%;
   transform: translateX(-50%);
-  width: 96px;
-  height: 27px;
-  border-radius: 20px;
-  background: #000;
-  pointer-events: none;
+  width: 104px;
+  height: 4px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 1px 5px #0005;
+  cursor: pointer;
 }
 
-/* Status bar */
-.phone > .status {
-  z-index: 51;
+@media (max-height: 690px) {
+  .phone { min-height: 0; }
+  #lockScreen { padding-top: 43px; }
+  .lock-date { margin-top: 7px; }
+  .lock-clock { font-size: 62px; }
+  .mini-player { bottom: 77px; }
+  .lock-shortcuts { bottom: 24px; }
+  .shortcut { width: 39px; height: 39px; }
+  #playerScreen { padding-top: 42px; }
+  .player-top { margin-bottom: 7px; }
+  .player-album {
+    width: min(65%, 250px);
+    margin: 3px auto 13px;
+  }
+  .player-track-row { margin-bottom: 14px; }
+  .player-controls { margin-top: 10px; }
+  .player-controls .main-play { width: 51px; height: 51px; }
+  .player-bottom-note { margin-top: 10px; }
+  #pinScreen { padding-top: 55px; }
+  .pin-dots { margin: 20px 0 12px; }
+  .keypad { gap: 5px 20px; margin-top: 5px; }
+  .key { height: 47px; }
+  .home-grid { gap: 13px 7px; }
+}
+
+@media (max-height: 570px) {
+  .player-album { width: min(53%, 195px); }
+  .player-track-title { font-size: 18px; }
+  .player-controls button { height: 37px; }
+  .player-controls .main-play { width: 44px; height: 44px; }
+  .pin-lock-icon { display: none; }
+  .pin-heading { margin-top: 4px; }
+  .pin-subtitle { margin-top: 4px; }
+  .pin-dots { margin: 14px 0 8px; }
+  .key { height: 41px; }
 }
 </style>
 </head>
 
 <body>
-<div class="phone">
+<main class="phone" id="phone">
+  <div class="wallpaper"></div>
 
-  <!-- STATUS BAR: สัญญาณ | 5G | แบตเตอรี่ -->
-  <div class="status">
+  <div class="status-bar">
     <span id="statusTime">09:41</span>
-
-    <div class="status-icons">
-      <svg class="signal-icon" viewBox="0 0 20 15" aria-label="สัญญาณมือถือ">
-        <rect x="0" y="10" width="3.5" height="4" rx=".6" fill="white"/>
-        <rect x="5" y="7" width="3.5" height="7" rx=".6" fill="white"/>
-        <rect x="10" y="4" width="3.5" height="10" rx=".6" fill="white"/>
-        <rect x="15" y="1" width="3.5" height="13" rx=".6" fill="white"/>
-      </svg>
-
-      <span class="network">5G</span>
-
-      <svg class="battery-icon" viewBox="0 0 32 15" aria-label="แบตเตอรี่">
-        <rect x=".6" y="1" width="27" height="13" rx="3"
-          fill="none" stroke="white" stroke-width="1.2"/>
-        <rect x="2.2" y="2.6" width="17.5" height="9.8" rx="1.5"
-          fill="#34C759"/>
-        <rect x="28.5" y="4.5" width="2.5" height="6" rx=".8"
-          fill="white"/>
-      </svg>
+    <div class="status-right">
+      <span class="signal"><i></i><i></i><i></i><i></i></span>
+      <span class="wifi">⌁</span>
+      <span class="battery"></span>
     </div>
   </div>
 
   <!-- LOCK SCREEN -->
-  <section id="lockScreen" class="screen active">
-    <div class="lock-content">
-      <div class="lock-date" id="lockDate">วันอังคารที่ 27 ตุลาคม</div>
-      <div class="lock-time" id="lockTime">09:41</div>
-     
-<div class="music-widget">
-  <div class="music-top">
-    <img
-      class="music-cover"
-      src="https://img.youtube.com/vi/HKBifVrELZI/hqdefault.jpg"
-      alt="ปกเพลง ไม่คิดนอกใจ"
-    />
+  <section class="screen active" id="lockScreen">
+    <div class="lock-date" id="lockDate">วันอังคารที่ 27 ตุลาคม</div>
+    <div class="lock-clock" id="lockClock">09:41</div>
 
-    <div class="music-info">
-      <div class="music-title">ไม่คิดนอกใจ</div>
-      <div class="music-artist">LOSO</div>
+    <!-- แตะปกเพลงหรือรายละเอียดเพื่อเปิดหน้าเล่นเพลง -->
+    <div class="mini-player">
+      <button class="mini-open" id="openPlayer" aria-label="เปิดหน้าเล่นเพลง">
+        <img
+          class="mini-art"
+          src="https://img.youtube.com/vi/HKBifVrELZI/hqdefault.jpg"
+          alt="ปกเพลง"
+          onerror="this.style.background='linear-gradient(135deg,#8a6a91,#282333)'"
+        >
+        <span class="mini-info">
+          <span class="mini-title" id="miniTitle">ไม่คิดนอกใจ</span>
+          <span class="mini-artist" id="miniArtist">LOSO</span>
+        </span>
+      </button>
+
+      <div class="mini-controls">
+        <button id="miniPrevious" aria-label="เพลงก่อนหน้า">|◀</button>
+        <button class="mini-play" id="miniToggle" aria-label="เล่นหรือหยุด">▶</button>
+        <button id="miniNext" aria-label="เพลงถัดไป">▶|</button>
+      </div>
     </div>
-  </div>
 
-  <div class="music-timeline">
-    <span>01:30</span>
-    <div class="music-progress">
-      <span></span>
+    <div class="lock-shortcuts">
+      <button class="shortcut" id="lockPhone" aria-label="โทรศัพท์">☎</button>
+      <button class="shortcut" id="lockCamera" aria-label="กล้อง">▣</button>
     </div>
-    <span>04:31</span>
-  </div>
 
-  <div class="music-controls">
-    <span class="music-control">◀︎◀︎</span>
-    <span class="music-pause">⏸︎</span>
-    <span class="music-control">▶︎▶︎</span>
-  </div>
-</div>
-</div>
-    <div class="swipe-hint">ปัดขึ้นเพื่อปลดล็อก</div>
-
-    <div class="bottom-indicators">
-      <button class="round-button" aria-label="ไฟฉาย">☼</button>
-      <button class="round-button" aria-label="กล้อง">◎</button>
-    </div>
+    <div class="unlock-hint">ปัดขึ้นเพื่อปลดล็อก</div>
   </section>
 
-  <!-- PASSCODE SCREEN -->
-  <section id="passcodeScreen" class="screen">
-    <div class="passcode-content">
-      <div class="passcode-title">ป้อนรหัสผ่าน</div>
-      <div class="passcode-subtitle">กรอกรหัส 6 หลักเพื่อปลดล็อก</div>
-
-      <div class="dots">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
-
-      <div class="pin-error" id="pinError"></div>
+  <!-- FULL MUSIC PLAYER -->
+  <section class="screen" id="playerScreen">
+    <div class="player-top">
+      <button class="round-button" id="playerBack" aria-label="กลับหน้าล็อก">⌄</button>
+      <div class="player-label">กำลังเล่น</div>
+      <button class="round-button" id="playerMore" aria-label="ตัวเลือก">⋮</button>
     </div>
+
+    <img
+      class="player-album"
+      id="playerAlbum"
+      src="https://img.youtube.com/vi/HKBifVrELZI/hqdefault.jpg"
+      alt="ปกอัลบั้ม"
+      onerror="this.style.background='linear-gradient(135deg,#8a6a91,#282333)'"
+    >
+
+    <div class="player-track-row">
+      <div class="player-track-info">
+        <div class="player-track-title" id="playerTitle">ไม่คิดนอกใจ</div>
+        <div class="player-track-artist" id="playerArtist">LOSO</div>
+      </div>
+      <button class="player-favorite" id="favoriteButton" aria-label="ถูกใจ">♡</button>
+    </div>
+
+    <div class="player-status" id="playerStatus">หยุดเล่นอยู่ · โหมดจำลอง</div>
+
+    <input
+      class="progress-slider"
+      id="progressSlider"
+      type="range"
+      min="0"
+      max="228"
+      value="84"
+      aria-label="ตำแหน่งเพลง"
+    >
+
+    <div class="player-times">
+      <span id="currentTime">1:24</span>
+      <span id="durationTime">3:48</span>
+    </div>
+
+    <div class="player-controls">
+      <button id="shuffleButton" aria-label="สุ่มเพลง">⤨</button>
+      <button id="playerPrevious" aria-label="เพลงก่อนหน้า">|◀</button>
+      <button class="main-play" id="playerToggle" aria-label="เล่นหรือหยุด">▶</button>
+      <button id="playerNext" aria-label="เพลงถัดไป">▶|</button>
+      <button id="repeatButton" aria-label="เล่นซ้ำ">↻</button>
+    </div>
+
+    <div class="player-bottom-note">Music Player · โหมดจำลอง ไม่มีเสียงจริง</div>
+  </section>
+
+  <!-- PIN SCREEN -->
+  <section class="screen" id="pinScreen">
+    <div class="pin-lock-icon">♙</div>
+    <div class="pin-heading">ใส่ PIN</div>
+    <div class="pin-subtitle">ป้อน PIN เพื่อปลดล็อกโทรศัพท์</div>
+
+    <div class="pin-dots" id="pinDots">
+      <span class="pin-dot"></span>
+      <span class="pin-dot"></span>
+      <span class="pin-dot"></span>
+      <span class="pin-dot"></span>
+      <span class="pin-dot"></span>
+      <span class="pin-dot"></span>
+    </div>
+
+    <div class="pin-error" id="pinError"></div>
 
     <div class="keypad">
-      <button class="key" data-digit="1">1</button>
-      <button class="key" data-digit="2">2<small>ABC</small></button>
-      <button class="key" data-digit="3">3<small>DEF</small></button>
-      <button class="key" data-digit="4">4<small>GHI</small></button>
-      <button class="key" data-digit="5">5<small>JKL</small></button>
-      <button class="key" data-digit="6">6<small>MNO</small></button>
-      <button class="key" data-digit="7">7<small>PQRS</small></button>
-      <button class="key" data-digit="8">8<small>TUV</small></button>
-      <button class="key" data-digit="9">9<small>WXYZ</small></button>
-      <button class="key empty"></button>
-      <button class="key" data-digit="0">0</button>
-      <button class="key empty"></button>
+      <button class="key" data-pin="1">1</button>
+      <button class="key" data-pin="2">2<span class="letters">ABC</span></button>
+      <button class="key" data-pin="3">3<span class="letters">DEF</span></button>
+      <button class="key" data-pin="4">4<span class="letters">GHI</span></button>
+      <button class="key" data-pin="5">5<span class="letters">JKL</span></button>
+      <button class="key" data-pin="6">6<span class="letters">MNO</span></button>
+      <button class="key" data-pin="7">7<span class="letters">PQRS</span></button>
+      <button class="key" data-pin="8">8<span class="letters">TUV</span></button>
+      <button class="key" data-pin="9">9<span class="letters">WXYZ</span></button>
+      <button class="key action" id="pinCancel">ยกเลิก</button>
+      <button class="key" data-pin="0">0</button>
+      <button class="key action" id="pinDelete">ลบ</button>
     </div>
-
-    <button class="cancel-pin" id="cancelPin">ยกเลิก</button>
-    <button class="delete-pin" id="deletePin">ลบ</button>
   </section>
 
   <!-- HOME SCREEN -->
-  <section id="homeScreen" class="screen">
-    <div class="home-welcome">
-      <div class="home-date" id="homeDate">วันอังคารที่ 27 ตุลาคม</div>
-      <div class="home-title">Hello ♡</div>
-      <div class="home-subtitle">ยินดีต้อนรับสู่โทรศัพท์ของคุณ</div>
+  <section class="screen" id="homeScreen">
+    <div class="home-top">
+      <div class="home-date" id="homeDate">วันอังคาร 27 ต.ค.</div>
+      <div class="home-weather">☀ 29°</div>
     </div>
 
-    <div class="app-grid">
-      <button class="app" data-app="Messages">
-        <span class="app-icon">💬</span>
-        <span class="app-label">Messages</span>
+    <div class="home-clock" id="homeClock">09:41</div>
+
+    <div class="home-grid">
+      <button class="app-icon" data-app="LINE">
+        <span class="app-art" style="background:#06c755;color:white">●</span>
+        <span class="app-label">LINE</span>
       </button>
-      <button class="app" data-app="Contacts">
-        <span class="app-icon">👤</span>
-        <span class="app-label">Contacts</span>
+
+      <button class="app-icon" data-app="รูปภาพ">
+        <span class="app-art" style="background:#fff0d9">🌈</span>
+        <span class="app-label">รูปภาพ</span>
       </button>
-      <button class="app" data-app="Photos">
-        <span class="app-icon">🌈</span>
-        <span class="app-label">Photos</span>
+
+      <button class="app-icon" data-app="YouTube">
+        <span class="app-art" style="background:#ff0033;color:white">▶</span>
+        <span class="app-label">YouTube</span>
       </button>
-      <button class="app" data-app="Notes">
-        <span class="app-icon">📝</span>
-        <span class="app-label">Notes</span>
+
+      <button class="app-icon" data-app="Instagram">
+        <span class="app-art" style="background:linear-gradient(135deg,#7645d8,#ed2b77,#ffb64c);color:white">◎</span>
+        <span class="app-label">Instagram</span>
       </button>
-      <button class="app" data-app="Social">
-        <span class="app-icon">🩷</span>
-        <span class="app-label">Social</span>
+
+      <button class="app-icon" data-app="Facebook">
+        <span class="app-art" style="background:#1877f2;color:white;font-weight:bold">f</span>
+        <span class="app-label">Facebook</span>
       </button>
-      <button class="app" data-app="Calls">
-        <span class="app-icon">📞</span>
-        <span class="app-label">Calls</span>
+
+      <button class="app-icon" data-app="TikTok">
+        <span class="app-art" style="background:#101015;color:white">♫</span>
+        <span class="app-label">TikTok</span>
       </button>
-      <button class="app" data-app="Calendar">
-        <span class="app-icon">📅</span>
-        <span class="app-label">Calendar</span>
+
+      <button class="app-icon" data-app="ปฏิทิน">
+        <span class="app-art" style="color:#e34d59">27</span>
+        <span class="app-label">ปฏิทิน</span>
       </button>
-      <button class="app" data-app="Music">
-        <span class="app-icon">🎵</span>
-        <span class="app-label">Music</span>
+
+      <button class="app-icon" data-app="โน้ต">
+        <span class="app-art" style="background:#ffe36b">📝</span>
+        <span class="app-label">โน้ต</span>
       </button>
-      <button class="app" data-app="Settings">
-        <span class="app-icon">⚙️</span>
-        <span class="app-label">Settings</span>
+
+      <button class="app-icon" data-app="แผนที่">
+        <span class="app-art" style="background:#d8f0df">📍</span>
+        <span class="app-label">แผนที่</span>
+      </button>
+
+      <button class="app-icon" data-app="นาฬิกา">
+        <span class="app-art" style="background:#ececf2">◷</span>
+        <span class="app-label">นาฬิกา</span>
+      </button>
+
+      <button class="app-icon" data-app="การตั้งค่า">
+        <span class="app-art" style="background:#b9bdc8">⚙</span>
+        <span class="app-label">การตั้งค่า</span>
+      </button>
+
+      <button class="app-icon" data-app="เพลง">
+        <span class="app-art" style="background:linear-gradient(135deg,#d6c4f4,#7960a9);color:white">♫</span>
+        <span class="app-label">เพลง</span>
       </button>
     </div>
 
     <div class="dock">
-      <button class="app" data-app="Calls">
-        <span class="app-icon">📞</span>
+      <button class="app-icon" data-app="โทรศัพท์">
+        <span class="app-art" style="background:#35c96c;color:white">☎</span>
+        <span class="app-label">โทรศัพท์</span>
       </button>
-      <button class="app" data-app="Messages">
-        <span class="app-icon">💬</span>
+      <button class="app-icon" data-app="ข้อความ">
+        <span class="app-art" style="background:#55b9fa;color:white">▰</span>
+        <span class="app-label">ข้อความ</span>
       </button>
-      <button class="app" data-app="Photos">
-        <span class="app-icon">🌈</span>
+      <button class="app-icon" data-app="LINE">
+        <span class="app-art" style="background:#06c755;color:white">●</span>
+        <span class="app-label">LINE</span>
       </button>
-      <button class="app" data-app="Music">
-        <span class="app-icon">🎵</span>
+      <button class="app-icon" data-app="กล้อง">
+        <span class="app-art" style="background:#d9dce5">▣</span>
+        <span class="app-label">กล้อง</span>
       </button>
     </div>
   </section>
 
   <!-- APP WINDOW -->
-  <div id="appWindow">
-    <div class="app-header">
-      <button class="back-button" id="backHome">‹ กลับ</button>
-      <span id="appTitle">App</span>
-    </div>
-    <div class="app-body" id="appBody"></div>
-  </div>
+  <section class="app-window" id="appWindow">
+    <header class="app-header">
+      <button class="back-button" id="closeApp" aria-label="ย้อนกลับ">‹</button>
+      <h2 id="appTitle">แอป</h2>
+    </header>
+    <div class="app-content" id="appContent"></div>
+  </section>
 
-  <!-- HOME INDICATOR -->
-  <button class="home-indicator" id="homeIndicator" aria-label="ล็อกหน้าจอ"></button>
-
-</div>
+  <div class="toast" id="toast"></div>
+  <div class="gesture-bar" id="gestureBar" aria-label="กลับหรือปัดขึ้น"></div>
+</main>
 
 <script>
-const PIN = "121269";
+(() => {
+  const $ = id => document.getElementById(id);
 
-const lockScreen = document.getElementById("lockScreen");
-const passcodeScreen = document.getElementById("passcodeScreen");
-const homeScreen = document.getElementById("homeScreen");
-const appWindow = document.getElementById("appWindow");
-const pinError = document.getElementById("pinError");
-const dots = [...document.querySelectorAll(".dot")];
+  const CORRECT_PIN = "121269";
+  const screens = ["lockScreen", "playerScreen", "pinScreen", "homeScreen"];
 
-let enteredPin = "";
-let touchStartY = 0;
+  let currentScreen = "lockScreen";
+  let enteredPin = "";
+  let isMusicOn = false;
+  let isFavorite = false;
+  let isShuffle = false;
+  let isRepeat = false;
+  let toastTimer;
+  let touchStartY = 0;
+  let touchStartX = 0;
 
-function showScreen(screen) {
-  [lockScreen, passcodeScreen, homeScreen].forEach(item => {
-    item.classList.remove("active");
-  });
-  screen.classList.add("active");
-  appWindow.classList.remove("open");
-}
+  const tracks = [
+    {
+      title: "ไม่คิดนอกใจ",
+      artist: "LOSO",
+      image: "https://img.youtube.com/vi/HKBifVrELZI/hqdefault.jpg",
+      duration: 228,
+      position: 84
+    },
+    {
+      title: "Like A G6",
+      artist: "Far East Movement",
+      image: "https://img.youtube.com/vi/w4s6H4ku6ZY/hqdefault.jpg",
+      duration: 217,
+      position: 151
+    }
+  ];
 
-function updatePinDots() {
-  dots.forEach((dot, index) => {
-    dot.classList.toggle("filled", index < enteredPin.length);
-  });
-}
+  let trackIndex = 0;
 
-function clearPin() {
-  enteredPin = "";
-  updatePinDots();
-}
+  function toast(message) {
+    $("toast").textContent = message;
+    $("toast").classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      $("toast").classList.remove("show");
+    }, 1700);
+  }
 
-function enterDigit(digit) {
-  if (enteredPin.length >= 6) return;
+  function showScreen(id) {
+    screens.forEach(screenId => $(screenId).classList.remove("active"));
+    $(id).classList.add("active");
+    currentScreen = id;
+    $("appWindow").classList.remove("open");
+  }
 
-  enteredPin += digit;
-  updatePinDots();
+  function openPin() {
+    enteredPin = "";
+    updatePinDots();
+    $("pinError").textContent = "";
+    showScreen("pinScreen");
+  }
 
-  if (enteredPin.length === 6) {
-    if (enteredPin === PIN) {
-      pinError.textContent = "";
-      setTimeout(() => {
-        clearPin();
-        showScreen(homeScreen);
-      }, 150);
+  function updatePinDots() {
+    document.querySelectorAll(".pin-dot").forEach((dot, index) => {
+      dot.classList.toggle("filled", index < enteredPin.length);
+    });
+  }
+
+  function addPin(number) {
+    if (enteredPin.length >= 6) return;
+
+    enteredPin += number;
+    updatePinDots();
+    $("pinError").textContent = "";
+
+    if (enteredPin.length !== 6) return;
+
+    if (enteredPin === CORRECT_PIN) {
+      showScreen("homeScreen");
+      toast("ปลดล็อกแล้ว");
     } else {
-      pinError.textContent = "รหัสไม่ถูกต้อง ลองอีกครั้ง";
+      $("pinError").textContent = "PIN ไม่ถูกต้อง ลองอีกครั้ง";
+      document.querySelectorAll("[data-pin]").forEach(button => {
+        button.disabled = true;
+      });
+
       setTimeout(() => {
-        clearPin();
-        pinError.textContent = "";
-      }, 900);
+        enteredPin = "";
+        updatePinDots();
+        document.querySelectorAll("[data-pin]").forEach(button => {
+          button.disabled = false;
+        });
+        $("pinError").textContent = "";
+      }, 650);
     }
   }
-}
 
-document.querySelectorAll("[data-digit]").forEach(button => {
-  button.addEventListener("click", () => {
-    enterDigit(button.dataset.digit);
-  });
-});
-
-document.getElementById("deletePin").addEventListener("click", () => {
-  enteredPin = enteredPin.slice(0, -1);
-  pinError.textContent = "";
-  updatePinDots();
-});
-
-document.getElementById("cancelPin").addEventListener("click", () => {
-  clearPin();
-  pinError.textContent = "";
-  showScreen(lockScreen);
-});
-
-function unlockPrompt() {
-  clearPin();
-  pinError.textContent = "";
-  showScreen(passcodeScreen);
-}
-
-lockScreen.addEventListener("touchstart", event => {
-  touchStartY = event.touches[0].clientY;
-}, {passive: true});
-
-lockScreen.addEventListener("touchend", event => {
-  const endY = event.changedTouches[0].clientY;
-  if (touchStartY - endY > 35) unlockPrompt();
-}, {passive: true});
-
-lockScreen.addEventListener("click", event => {
-  if (event.target.closest("button")) return;
-  unlockPrompt();
-});
-
-let startY = 0;
-homeScreen.addEventListener("touchstart", event => {
-  startY = event.touches[0].clientY;
-}, {passive: true});
-
-homeScreen.addEventListener("touchend", event => {
-  const endY = event.changedTouches[0].clientY;
-  if (endY - startY > 100 && startY < 100) {
-    showScreen(lockScreen);
+  function formatTime(seconds) {
+    const s = Math.max(0, Math.floor(Number(seconds) || 0));
+    return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
   }
-}, {passive: true});
 
-/* Simple demo content for each app */
-const appContent = {
-  Messages: `
-    <div class="app-card">💬 Messages</div>
-    <div class="app-card">ยังไม่มีข้อความใหม่</div>
-  `,
-  Contacts: `
-    <div class="app-card">👤 Contacts</div>
-    <div class="app-card">รายชื่อผู้ติดต่อ</div>
-  `,
-  Photos: `
-    <div class="app-card">🌈 Photos</div>
-    <div class="app-card">รูปภาพของคุณจะแสดงที่นี่</div>
-  `,
-  Notes: `
-    <div class="app-card">📝 Notes</div>
-    <div class="app-card" contenteditable="true">แตะตรงนี้เพื่อเขียนโน้ต...</div>
-  `,
-  Social: `
-    <div class="app-card">🩷 Social</div>
-    <div class="app-card">พื้นที่โซเชียลของคุณ</div>
-  `,
-  Calls: `
-    <div class="app-card">📞 Calls</div>
-    <div class="app-card">ยังไม่มีประวัติการโทร</div>
-  `,
-  Calendar: `
-    <div class="app-card">📅 Calendar</div>
-    <div class="app-card">ไม่มีนัดหมายในวันนี้</div>
-  `,
-  Music: `
-    <div class="app-card">🎵 Music</div>
-    <div class="app-card">♪ เพลงโปรดของคุณ ♪</div>
-  `,
-  Settings: `
-    <div class="app-card">⚙️ Settings</div>
-    <div class="app-card">การตั้งค่าโทรศัพท์</div>
-    <div class="app-card">หน้าจอและความสว่าง</div>
-    <div class="app-card">เสียงและการสั่น</div>
-  `
-};
+  function currentTrack() {
+    return tracks[trackIndex];
+  }
 
-document.querySelectorAll("[data-app]").forEach(button => {
-  button.addEventListener("click", () => {
-    const name = button.dataset.app;
-    document.getElementById("appTitle").textContent = name;
-    document.getElementById("appBody").innerHTML =
+  function updateTrackUI() {
+    const track = currentTrack();
+
+    $("miniTitle").textContent = track.title;
+    $("miniArtist").textContent = track.artist;
+    $("playerTitle").textContent = track.title;
+    $("playerArtist").textContent = track.artist;
+
+    $("playerAlbum").src = track.image;
+    document.querySelector(".mini-art").src = track.image;
+
+    $("progressSlider").max = track.duration;
+    $("progressSlider").value = track.position;
+
+    $("currentTime").textContent = formatTime(track.position);
+    $("durationTime").textContent = formatTime(track.duration);
+
+    updateMusicState();
+  }
+
+  function updateMusicState() {
+    const icon = isMusicOn ? "Ⅱ" : "▶";
+
+    $("miniToggle").textContent = icon;
+    $("playerToggle").textContent = icon;
+
+    $("playerStatus").textContent = isMusicOn
+      ? "กำลังเล่นอยู่ · โหมดจำลอง"
+      : "หยุดเล่นอยู่ · โหมดจำลอง";
+
+    $("miniToggle").setAttribute(
+      "aria-label",
+      isMusicOn ? "หยุดเพลง" : "เล่นเพลง"
+    );
+
+    $("playerToggle").setAttribute(
+      "aria-label",
+      isMusicOn ? "หยุดเพลง" : "เล่นเพลง"
+    );
+  }
+
+  function toggleMusic() {
+    // เปลี่ยนเฉพาะสถานะ ไม่มีการเล่นเสียงจริง
+    isMusicOn = !isMusicOn;
+    updateMusicState();
+  }
+
+  function changeTrack(direction) {
+    trackIndex = (trackIndex + direction + tracks.length) % tracks.length;
+    updateTrackUI();
+    toast("เปลี่ยนเพลงแล้ว");
+  }
+
+  function updateClock() {
+    const now = new Date();
+
+    const time = new Intl.DateTimeFormat("th-TH", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false
+    }).format(now);
+
+    const dateLong = new Intl.DateTimeFormat("th-TH", {
+      weekday: "long",
+      day: "numeric",
+      month: "long"
+    }).format(now);
+
+    const dateShort = new Intl.DateTimeFormat("th-TH", {
+      weekday: "short",
+      day: "numeric",
+      month: "short"
+    }).format(now);
+
+    $("statusTime").textContent = time;
+    $("lockClock").textContent = time;
+    $("homeClock").textContent = time;
+    $("lockDate").textContent = dateLong;
+    $("homeDate").textContent = dateShort;
+  }
+
+  const appContent = {
+    "LINE": `
+      <div class="app-card"><strong>LINE</strong>หน้าจอจำลอง</div>
+      <div class="app-card">💬 แชต</div>
+      <div class="app-card">👥 รายชื่อเพื่อน</div>
+      <p>ไม่ได้เชื่อมต่อบัญชี LINE จริง</p>`,
+
+    "รูปภาพ": `
+      <div class="app-card"><strong>รูปภาพ</strong>คลังรูปภาพจำลอง</div>
+      <p>หน้าจอแกลเลอรีจำลอง</p>`,
+
+    "YouTube": `
+      <div class="app-card"><strong>▶ YouTube</strong>วิดีโอและเพลง</div>
+      <p>หน้าจอจำลอง ไม่มีการเล่นวิดีโอจริง</p>`,
+
+    "Instagram": `
+      <div class="app-card"><strong>Instagram</strong>แชร์ช่วงเวลาของคุณ</div>
+      <p>หน้าจอจำลอง</p>`,
+
+    "Facebook": `
+      <div class="app-card"><strong>Facebook</strong>ติดตามเรื่องราวและเพื่อน ๆ</div>
+      <p>หน้าจอจำลอง</p>`,
+
+    "TikTok": `
+      <div class="app-card"><strong>TikTok</strong>วิดีโอสั้น</div>
+      <p>หน้าจอจำลอง</p>`,
+
+    "ปฏิทิน": `
+      <div class="app-card">
+        <strong>ปฏิทินของฉัน</strong>
+        <span id="calendarToday"></span>
+      </div>
+      <div class="app-card">📌 วางแผนวันสำคัญ</div>`,
+
+    "โน้ต": `
+      <div class="app-card">
+        <strong>โน้ตใหม่</strong>
+        <textarea id="noteText" placeholder="พิมพ์โน้ตของคุณ..."
+          style="width:100%;min-height:130px;border:0;border-radius:12px;padding:12px;background:#ffffff12;color:white;font:inherit;resize:vertical"></textarea>
+        <button id="saveNote"
+          style="margin-top:10px;border:0;border-radius:18px;padding:9px 16px;background:#d9c7ff;color:#272131">
+          บันทึกโน้ต
+        </button>
+      </div>`,
+
+    "แผนที่": `
+      <div class="app-card"><strong>📍 แผนที่</strong>ตำแหน่งจำลอง</div>
+      <p>ยังไม่ได้เชื่อมต่อแผนที่จริง</p>`,
+
+    "นาฬิกา": `
+      <div class="app-card">
+        <strong>เวลาปัจจุบัน</strong>
+        <div id="appClock" style="font-size:36px"></div>
+      </div>
+      <div class="app-card">⏱ นาฬิกาจับเวลา</div>
+      <div class="app-card">⏰ ตั้งปลุก</div>`,
+
+    "การตั้งค่า": `
+      <div class="app-card"><strong>การตั้งค่า</strong>Galaxy Z Fold — หน้าจอจำลอง</div>
+      <div class="setting-row">
+        <span>โหมดมืด</span>
+        <button class="toggle on" id="darkToggle" aria-label="สลับโหมดมืด"></button>
+      </div>
+      <div class="setting-row">
+        <span>สถานะเพลง</span>
+        <button class="toggle" id="settingMusicToggle" aria-label="สลับสถานะเพลง"></button>
+      </div>
+      <div class="setting-row"><span>PIN หน้าจอ</span><span>••••••</span></div>
+      <p style="margin-top:14px;font-size:12px;opacity:.7">PIN สำหรับปลดล็อก: 121269</p>`,
+
+    "เพลง": `
+      <div class="app-card" style="text-align:center">
+        <img id="appAlbum" src="" alt="ปกเพลง"
+          style="width:100%;max-width:220px;border-radius:18px">
+        <strong id="appTrackTitle" style="margin-top:12px"></strong>
+        <div id="appTrackArtist"></div>
+        <p id="appMusicStatus" style="margin-top:12px"></p>
+        <button id="appMusicToggle"
+          style="border:0;border-radius:50%;width:54px;height:54px;background:#fff;color:#222;font-size:20px">▶</button>
+      </div>
+      <p style="font-size:12px;opacity:.7">เปลี่ยนสถานะจำลองเท่านั้น ไม่มีเสียงจริง</p>`,
+
+    "โทรศัพท์": `
+      <div class="app-card"><strong>☎ โทรศัพท์</strong>แป้นกดหมายเลขจำลอง</div>
+      <div style="font-size:25px;text-align:center;padding:20px;line-height:2">
+        1　2　3<br>4　5　6<br>7　8　9<br>＊　0　#
+      </div>`,
+
+    "ข้อความ": `
+      <div class="app-card"><strong>ข้อความ</strong>ยังไม่มีข้อความใหม่</div>
+      <p>หน้าจอข้อความจำลอง</p>`,
+
+    "กล้อง": `
+      <div class="app-card" style="text-align:center;padding:30px 12px">
+        <div style="font-size:65px">▣</div>
+        <strong>กล้อง</strong>
+        <p>ตัวอย่างหน้าจอกล้อง</p>
+        <button id="fakeShutter"
+          style="border:4px solid white;background:#ddd;width:60px;height:60px;border-radius:50%">
+        </button>
+      </div>`
+  };
+
+  function openApp(name) {
+    $("appTitle").textContent = name;
+    $("appContent").innerHTML =
       appContent[name] || `<div class="app-card">${name}</div>`;
-    appWindow.classList.add("open");
-  });
-});
 
-document.getElementById("backHome").addEventListener("click", () => {
-  appWindow.classList.remove("open");
-});
+    $("appWindow").classList.add("open");
 
-document.getElementById("homeIndicator").addEventListener("click", () => {
-  if (appWindow.classList.contains("open")) {
-    appWindow.classList.remove("open");
-    return;
+    if (name === "นาฬิกา") {
+      updateAppClock();
+    }
+
+    if (name === "ปฏิทิน") {
+      $("calendarToday").textContent = new Intl.DateTimeFormat("th-TH", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      }).format(new Date());
+    }
+
+    if (name === "การตั้งค่า") {
+      $("settingMusicToggle").classList.toggle("on", isMusicOn);
+
+      $("settingMusicToggle").addEventListener("click", () => {
+        toggleMusic();
+        $("settingMusicToggle").classList.toggle("on", isMusicOn);
+      });
+
+      $("darkToggle").addEventListener("click", event => {
+        event.currentTarget.classList.toggle("on");
+        toast("ปรับการแสดงผลแล้ว");
+      });
+    }
+
+    if (name === "เพลง") {
+      $("appAlbum").src = currentTrack().image;
+      $("appTrackTitle").textContent = currentTrack().title;
+      $("appTrackArtist").textContent = currentTrack().artist;
+
+      const updateAppMusic = () => {
+        $("appMusicStatus").textContent = isMusicOn
+          ? "กำลังเล่นอยู่ · โหมดจำลอง"
+          : "หยุดเล่นอยู่";
+
+        $("appMusicToggle").textContent = isMusicOn ? "Ⅱ" : "▶";
+      };
+
+      updateAppMusic();
+
+      $("appMusicToggle").addEventListener("click", () => {
+        toggleMusic();
+        updateAppMusic();
+      });
+    }
+
+    if (name === "โน้ต") {
+      $("saveNote").addEventListener("click", () => {
+        toast("บันทึกในหน้าจอนี้แล้ว");
+      });
+    }
+
+    if (name === "กล้อง") {
+      $("fakeShutter").addEventListener("click", () => {
+        toast("โหมดกล้องจำลอง");
+      });
+    }
   }
 
-  if (homeScreen.classList.contains("active")) {
-    showScreen(lockScreen);
-  } else if (passcodeScreen.classList.contains("active")) {
-    showScreen(lockScreen);
-    clearPin();
+  function updateAppClock() {
+    const el = $("appClock");
+    if (el) el.textContent = $("statusTime").textContent;
   }
-});
 
-/* Clock and date */
-function updateClock() {
-  const now = new Date();
-  const time = now.toLocaleTimeString("th-TH", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false
+  // ปุ่มตัวเลข PIN
+  document.querySelectorAll("[data-pin]").forEach(button => {
+    button.addEventListener("click", () => addPin(button.dataset.pin));
   });
 
-  const date = now.toLocaleDateString("th-TH", {
-    weekday: "long",
-    day: "numeric",
-    month: "long"
+  $("pinDelete").addEventListener("click", () => {
+    enteredPin = enteredPin.slice(0, -1);
+    updatePinDots();
+    $("pinError").textContent = "";
   });
 
-  document.getElementById("statusTime").textContent = time;
-  document.getElementById("lockTime").textContent = time;
-  document.getElementById("lockDate").textContent = date;
-  document.getElementById("homeDate").textContent = date;
-}
+  $("pinCancel").addEventListener("click", () => {
+    showScreen("lockScreen");
+  });
 
-updateClock();
-setInterval(updateClock, 30000);
+  // แตะหน้าจอล็อกเพื่อกรอก PIN ยกเว้นปุ่มและตัวเล่นเพลง
+  $("lockScreen").addEventListener("click", event => {
+    if (event.target.closest("button")) return;
+    openPin();
+  });
+
+  // เปิดหน้าเล่นเพลง
+  $("openPlayer").addEventListener("click", () => {
+    updateTrackUI();
+    showScreen("playerScreen");
+  });
+
+  $("miniToggle").addEventListener("click", toggleMusic);
+  $("playerToggle").addEventListener("click", toggleMusic);
+
+  $("miniPrevious").addEventListener("click", () => changeTrack(-1));
+  $("miniNext").addEventListener("click", () => changeTrack(1));
+  $("playerPrevious").addEventListener("click", () => changeTrack(-1));
+  $("playerNext").addEventListener("click", () => changeTrack(1));
+
+  $("playerBack").addEventListener("click", () => showScreen("lockScreen"));
+
+  $("playerMore").addEventListener("click", () => {
+    toast("Music Player · โหมดจำลอง");
+  });
+
+  $("favoriteButton").addEventListener("click", () => {
+    isFavorite = !isFavorite;
+    $("favoriteButton").textContent = isFavorite ? "♥" : "♡";
+    toast(isFavorite ? "เพิ่มในรายการโปรดแล้ว" : "นำออกจากรายการโปรดแล้ว");
+  });
+
+  $("shuffleButton").addEventListener("click", () => {
+    isShuffle = !isShuffle;
+    $("shuffleButton").style.color = isShuffle ? "#e5b4ff" : "white";
+    toast(isShuffle ? "เปิดสุ่มเพลง" : "ปิดสุ่มเพลง");
+  });
+
+  $("repeatButton").addEventListener("click", () => {
+    isRepeat = !isRepeat;
+    $("repeatButton").style.color = isRepeat ? "#e5b4ff" : "white";
+    toast(isRepeat ? "เปิดเล่นซ้ำ" : "ปิดเล่นซ้ำ");
+  });
+
+  $("progressSlider").addEventListener("input", event => {
+    currentTrack().position = Number(event.target.value);
+    $("currentTime").textContent = formatTime(currentTrack().position);
+  });
+
+  $("lockPhone").addEventListener("click", () => {
+    openPin();
+  });
+
+  $("lockCamera").addEventListener("click", () => {
+    openPin();
+  });
+
+  // ปัดขึ้นจากหน้าล็อกเพื่อเปิด PIN
+  $("phone").addEventListener("touchstart", event => {
+    touchStartY = event.changedTouches[0].clientY;
+    touchStartX = event.changedTouches[0].clientX;
+  }, { passive: true });
+
+  $("phone").addEventListener("touchend", event => {
+    const endY = event.changedTouches[0].clientY;
+    const endX = event.changedTouches[0].clientX;
+    const deltaY = touchStartY - endY;
+    const deltaX = Math.abs(touchStartX - endX);
+
+    if (deltaY > 45 && deltaY > deltaX) {
+      if (currentScreen === "lockScreen") {
+        openPin();
+      } else if (currentScreen === "playerScreen") {
+        showScreen("lockScreen");
+      } else if (currentScreen === "homeScreen" &&
+                 !$("appWindow").classList.contains("open")) {
+        toast("หน้าจอหลัก");
+      }
+    }
+
+    if (endY - touchStartY > 65 &&
+        currentScreen === "playerScreen") {
+      showScreen("lockScreen");
+    }
+  }, { passive: true });
+
+  // Gesture bar
+  $("gestureBar").addEventListener("click", () => {
+    if (currentScreen === "lockScreen") {
+      openPin();
+    } else if (currentScreen === "playerScreen") {
+      showScreen("lockScreen");
+    } else if (currentScreen === "pinScreen") {
+      showScreen("lockScreen");
+    } else if ($("appWindow").classList.contains("open")) {
+      $("appWindow").classList.remove("open");
+    } else {
+      toast("หน้าจอหลัก");
+    }
+  });
+
+  document.querySelectorAll("[data-app]").forEach(button => {
+    button.addEventListener("click", () => openApp(button.dataset.app));
+  });
+
+  $("closeApp").addEventListener("click", () => {
+    $("appWindow").classList.remove("open");
+  });
+
+  updateClock();
+  updateTrackUI();
+  setInterval(updateClock, 1000);
+
+})();
 </script>
 </body>
 </html>
