@@ -11,8 +11,6 @@
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
-
-html, body 
 html, body {
   width: 100%;
   height: 100%;
@@ -39,8 +37,8 @@ button {
 
 .phone {
   position: relative;
-  width: min(calc(100vw - 12px), 393px);
-  height: min(calc(100dvh - 12px), 852px);
+  width: min(calc(100vw - 28px), 375px);
+  height: min(calc(100dvh - 28px), 812px);
   flex-shrink: 0;
   overflow: hidden;
   box-sizing: border-box;
@@ -600,24 +598,18 @@ button {
   overflow: hidden;
 }
 
-/* iPhone screen frame with rounded corners */
-#phone,
-.phone-frame,
-.iphone-frame {
+
+/* ตัวเครื่องและขอบหน้าจอ */
+.phone {
+  border: 2px solid #343438;
   border-radius: 48px;
   overflow: hidden;
+  background: #000;
 }
 
-/* Round the corners of each simulated screen */
-.screen {
-  border-radius: 42px;
-  overflow: hidden;
-}
-
-/* iPhone-style screen corners */
 .phone > .screen,
 .phone > #appWindow {
-  border-radius: 43px;
+  border-radius: 45px;
   overflow: hidden;
 }
 
@@ -629,14 +621,14 @@ button {
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 104px;
-  height: 29px;
+  width: 96px;
+  height: 27px;
   border-radius: 20px;
   background: #000;
   pointer-events: none;
 }
 
-/* Keep status icons above the screen */
+/* Status bar */
 .phone > .status {
   z-index: 51;
 }
