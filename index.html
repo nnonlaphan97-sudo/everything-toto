@@ -1978,24 +1978,31 @@ window.showPhoneScreen = showScreen;
     `).join("");
   }
 
-  function renderFriends() {
-    $("#lineFriendList").innerHTML = friends
-      .filter((friend) => {
-        const query = searchText.trim().toLowerCase();
-        return !query || friend.name.toLowerCase().includes(query);
-      })
-      .map((friend, index) => `
-        <button class="line-friend-row" data-friend-name="${escapeHTML(friend.name)}">
-          <span class="line-avatar ${index % 2 ? "blue" : ""}">
-            ${escapeHTML(friend.name.slice(0, 1))}
-          </span>
-          <span class="line-friend-main">
-            <strong>${escapeHTML(friend.name)}</strong>
-            <small>${escapeHTML(friend.detail)}</small>
-          </span>
-        </button>
-      `).join("");
-  }
+  
+function renderFriends() {
+  const list = $("#lineFriendList");
+  if (!list) return;
+
+  const query = searchText.trim().toLowerCase();
+
+  list.innerHTML = friends
+    .filter(friend =>
+      !query || friend.name.toLowerCase().includes(query)
+    )
+    .map((friend, index) => `
+      <button class="line-friend-row"
+        data-friend-name="${escapeHTML(friend.name)}">
+        <span class="line-avatar ${index % 2 ? "blue" : ""}">
+          ${escapeHTML(friend.name.slice(0, 1))}
+        </span>
+        <span class="line-friend-main">
+          <strong>${escapeHTML(friend.name)}</strong>
+          <small>${escapeHTML(friend.detail)}</small>
+        </span>
+      </button>
+    `).join("");
+}
+
 
   function openChat(id) {
     const chat = chats.find((item) => item.id === Number(id));
