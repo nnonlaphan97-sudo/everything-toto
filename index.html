@@ -1268,6 +1268,94 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   line-height: 1;
 }
 
+#lineFriendsPage {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: #fff;
+  color: #222;
+  overflow-y: auto;
+}
+
+#lineFriendsPage .line-subpage-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 48px;
+  border-bottom: none;
+  background: #fff;
+}
+
+#lineFriendsPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#lineFriendsPage .line-back-btn {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.line-friends-search {
+  padding: 8px 16px 12px;
+}
+
+.line-friends-search input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 38px;
+  padding: 0 14px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  background: #f2f3f5;
+  color: #222;
+  font-size: 14px;
+}
+
+.line-friends-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 4px;
+  box-sizing: border-box;
+}
+
+.line-friends-menu button {
+  flex: 1;
+  min-width: 0;
+  padding: 13px 1px;
+  border: none;
+  border-bottom: none;
+  background: transparent;
+  color: #555;
+  font-size: 11px;
+  font-weight: 400;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.line-friends-menu button.active {
+  color: #222;
+  font-weight: 700;
+}
+
+#lineFriendsPageList {
+  padding: 12px 16px;
+}
+
 </style>
 </head>
 
@@ -1557,7 +1645,46 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
     <span class="line-friends-arrow">›</span>
   </button>
 </div>
+
+<!-- หน้าเมนูรายชื่อเพื่อน -->
+<section class="line-subpage" id="lineFriendsPage">
+
+  <header class="line-subpage-header">
+    <button type="button" class="line-back-btn" data-line-back>‹</button>
+    <h2>รายชื่อเพื่อน</h2>
+  </header>
+
+  <!-- แถบค้นหา -->
+  <div class="line-friends-search">
+    <input
+      type="search"
+      id="lineFriendsSearch"
+      placeholder="ค้นหา"
+      autocomplete="off"
+    >
+  </div>
+
+  <!-- เมนูแนวนอน -->
+  <nav class="line-friends-menu">
+    <button type="button" data-friend-category="favorites">
+      รายการโปรด
+    </button>
+    <button type="button" class="active" data-friend-category="friends">
+      เพื่อน
+    </button>
+    <button type="button" data-friend-category="groups">
+      กลุ่ม
+    </button>
+    <button type="button" data-friend-category="official">
+      บัญชีทางการ
+    </button>
+  </nav>
+
+  <!-- พื้นที่แสดงเนื้อหา -->
+  <div class="line-subpage-content" id="lineFriendsPageList"></div>
 </section>
+</section>
+
     <!-- NEWS -->
     <section class="line-tab-panel" data-line-panel="news">
       <div class="line-section-title">ข่าวสาร</div>
@@ -1841,7 +1968,39 @@ window.showPhoneScreen = showScreen;
   screen.dataset.initialized = "true";
 
   const $ = (selector) => screen.querySelector(selector);
+// เปิดหน้ารายชื่อเพื่อน
+function openLineSubpage(page) {
+  const friendsPage = $("#lineFriendsPage");
+  if (!friendsPage) return;
 
+  friendsPage.style.display = "block";
+
+  const buttons = screen.querySelectorAll("[data-friend-category]");
+  buttons.forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.friendCategory === page
+    );
+  });
+
+  const list = $("#lineFriendsPageList");
+  if (list) list.dataset.category = page;
+}
+
+// ปุ่มย้อนกลับ
+screen.querySelectorAll("[data-line-back]").forEach(button => {
+  button.addEventListener("click", () => {
+    const friendsPage = $("#lineFriendsPage");
+    if (friendsPage) friendsPage.style.display = "none";
+  });
+});
+
+// กดเมนู รายการโปรด / เพื่อน / กลุ่ม / บัญชีทางการ
+screen.querySelectorAll("[data-friend-category]").forEach(button => {
+  button.addEventListener("click", () => {
+    openLineSubpage(button.dataset.friendCategory);
+  });
+});
   const chats = [
     {
       id: 1, name: "ครอบครัว", avatar: "♡", color: "orange",
