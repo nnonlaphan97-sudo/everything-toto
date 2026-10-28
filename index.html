@@ -2140,30 +2140,26 @@ window.showPhoneScreen = showScreen;
   const $ = (selector) => screen.querySelector(selector);
   // เปิดหน้ารายชื่อเพื่อน กลุ่ม หรือแชต
   function openLineSubpage(page) {
-    const friendsPage = $("#lineFriendsPage");
-    const groupsPage = $("#lineGroupsPage");
-    const chatPage = $("#lineChatPage");
-if (chatPage) {
-  chatPage.style.display = "block";
-  chatPage.style.zIndex = "100";
-  renderKanithChatHistory();
-}
-    if (friendsPage) {
-      friendsPage.style.display =
-        page === "friends" ? "block" : "none";
-    }
+  const friendsPage = $("#lineFriendsPage");
+  const groupsPage = $("#lineGroupsPage");
+  const chatPage = $("#lineChatPage");
 
-    if (groupsPage) {
-      groupsPage.style.display =
-        page === "groups" ? "block" : "none";
-    }
-
-    if (chatPage) {
-      chatPage.style.display =
-        page === "chat" ? "block" : "none";
-    }
+  if (friendsPage) {
+    friendsPage.style.display = page === "friends" ? "block" : "none";
   }
 
+  if (groupsPage) {
+    groupsPage.style.display = page === "groups" ? "block" : "none";
+  }
+
+  if (chatPage) {
+    chatPage.style.display = page === "chat" ? "block" : "none";
+    if (page === "chat") {
+      chatPage.style.zIndex = "100";
+      renderKanithChatHistory();
+    }
+  }
+}
   // กดรายชื่อเพื่อเปิดแชตน้องคณิต
   screen.addEventListener("click", function(event) {
     const row = event.target.closest("[data-open-chat]");
@@ -2729,9 +2725,6 @@ function renderFriends() {
       );
     });
   }
-
-  // แสดงประวัติเมื่อเปิดหน้าแชต
-  renderKanithChatHistory();
   // เปิด LINE เมื่อระบบหลักเรียก openApp("LINE")
   window.openLineApp = function () {
     closeChat();
