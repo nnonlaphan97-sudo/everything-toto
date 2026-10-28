@@ -2021,13 +2021,40 @@ function openLineSubpage(page) {
     groupsPage.style.display = page === "groups" ? "block" : "none";
   }
 
-  const buttons = screen.querySelectorAll("[data-friend-category]");
-  buttons.forEach(button => {
-    button.classList.toggle(
-      "active",
-      button.dataset.friendCategory === page
-    );
-  });
+  
+const buttons = screen.querySelectorAll("[data-friend-category]");
+
+buttons.forEach(button => {
+  button.classList.toggle(
+    "active",
+    button.dataset.friendCategory === page
+  );
+});
+
+const list = $("#lineFriendsPageList");
+
+if (list) {
+  list.dataset.category = page;
+
+  if (page === "favorites") {
+    list.innerHTML = `
+      <div class="line-favorite-row">
+        <div class="line-favorite-avatar">
+          <img
+            src="https://i.ibb.co/4ntNZx78/B2-EE0-EC1-6048-47-BA-8-F00-5569-F467-CEB4.jpg"
+            alt="น้องณิต💙"
+          >
+        </div>
+        <div class="line-favorite-info">
+          <strong>น้องณิต💙</strong>
+        </div>
+      </div>
+    `;
+  } else {
+    list.innerHTML = "";
+  }
+}
+
 
   
 const list = $("#lineFriendsPageList");
