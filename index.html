@@ -632,9 +632,13 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   const CORRECT_PIN = "121269";
   const $ = id => document.getElementById(id);
   const screens = {
-    lock: $("lockScreen"), pin: $("pinScreen"), home: $("homeScreen"),
-    player: $("playerScreen"), app: $("appScreen")
-  };
+  lock: $("lockScreen"),
+  pin: $("pinScreen"),
+  home: $("homeScreen"),
+  player: $("playerScreen"),
+  app: $("appScreen"),
+  line: $("lineScreen")
+};
   let currentScreen = "lock";
   let pin = "";
   let isPlaying = false;
@@ -660,9 +664,7 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
     const date = now.toLocaleDateString("th-TH", { weekday: "long", day: "numeric", month: "long" });
     $("statusTime").textContent = time;
     $("lockClock").textContent = time;
-    $("homeClock").textContent = time;
     $("lockDate").textContent = date;
-    $("homeDate").textContent = date;
   }
   function updatePinDots() {
     document.querySelectorAll(".pin-dot").forEach((dot, index) => dot.classList.toggle("filled", index < pin.length));
@@ -723,7 +725,18 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   $("emergencyButton").addEventListener("click", () => showToast("หน้าจอฉุกเฉินจำลอง"));
 
   function openApp(name) {
-    if (name === "เพลง") { openPlayer(); return; }
+  if (name === "เพลง") {
+    openPlayer();
+    return;
+  }
+
+  if (name === "LINE") {
+    showScreen("line");
+    if (typeof window.openLineApp === "function") {
+      window.openLineApp();
+    }
+    return;
+  }
     $("appWindowTitle").textContent = name;
     const content = {
       "โทรศัพท์": `<div class="mock-card"><div style="font-size:12px;color:#777">แป้นกด</div><div style="font-size:28px;text-align:center;margin:24px 0">＋</div><button class="mock-primary" onclick="phoneDemoToast('โทรศัพท์จำลอง')">โทร</button></div>`,
