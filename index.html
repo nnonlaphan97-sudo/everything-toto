@@ -2159,7 +2159,11 @@ window.showPhoneScreen = showScreen;
         page === "chat" ? "block" : "none";
     }
   }
-
+if (chatPage) {
+  chatPage.style.display = "block";
+  chatPage.style.zIndex = "100";
+  renderKanithChatHistory();
+}
   // กดรายชื่อเพื่อเปิดแชตน้องคณิต
   screen.addEventListener("click", function(event) {
     const row = event.target.closest("[data-open-chat]");
@@ -2618,38 +2622,7 @@ function renderFriends() {
   renderChats();
   renderFriends();
   setTab("friends");
-
-  // เปิด LINE เมื่อระบบหลักเรียก openApp("LINE")
-  window.openLineApp = function () {
-    closeChat();
-    screen.style.display = "flex";
-    setTab("friends");
-  };
-})();
-
-const myProfileAvatar = document.querySelector(
-  ".line-my-profile-avatar img"
-);
-const profileViewer = document.getElementById("lineProfileViewer");
-const profileLargeImage = document.getElementById("lineProfileLargeImage");
-const profileViewerClose = document.getElementById("lineProfileViewerClose");
-
-myProfileAvatar?.addEventListener("click", () => {
-  profileLargeImage.src = myProfileAvatar.src;
-  profileViewer.classList.add("active");
-});
-
-profileViewerClose?.addEventListener("click", () => {
-  profileViewer.classList.remove("active");
-});
-
-profileViewer?.addEventListener("click", (event) => {
-  if (event.target === profileViewer) {
-    profileViewer.classList.remove("active");
-  }
-});
-
-  // ===== บทสนทนาโตโต้ (ขวา) และคณิต (ซ้าย) =====
+// ===== บทสนทนาโตโต้ (ขวา) และคณิต (ซ้าย) =====
   const kanithChatHistory = [
     { date: "29 ก.ค.", from: "t", text: "คุณผมขอเลขบัญชีคุณหน่อย" },
     { date: "29 ก.ค.", from: "t", text: "จะโอนให้ก่อน 5000" },
@@ -2759,6 +2732,35 @@ profileViewer?.addEventListener("click", (event) => {
 
   // แสดงประวัติเมื่อเปิดหน้าแชต
   renderKanithChatHistory();
+  // เปิด LINE เมื่อระบบหลักเรียก openApp("LINE")
+  window.openLineApp = function () {
+    closeChat();
+    screen.style.display = "flex";
+    setTab("friends");
+  };
+})();
+
+const myProfileAvatar = document.querySelector(
+  ".line-my-profile-avatar img"
+);
+const profileViewer = document.getElementById("lineProfileViewer");
+const profileLargeImage = document.getElementById("lineProfileLargeImage");
+const profileViewerClose = document.getElementById("lineProfileViewerClose");
+
+myProfileAvatar?.addEventListener("click", () => {
+  profileLargeImage.src = myProfileAvatar.src;
+  profileViewer.classList.add("active");
+});
+
+profileViewerClose?.addEventListener("click", () => {
+  profileViewer.classList.remove("active");
+});
+
+profileViewer?.addEventListener("click", (event) => {
+  if (event.target === profileViewer) {
+    profileViewer.classList.remove("active");
+  }
+});
 
 </script>
 </body>
