@@ -1395,6 +1395,14 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   display: block;
 }
 
+.line-favorite-status {
+  margin-top: 5px;
+  color: #888;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
 </style>
 </head>
 
@@ -2041,19 +2049,23 @@ window.showPhoneScreen = showScreen;
     });
 
     if (category === "favorites") {
-      list.innerHTML = `
-        <div class="line-favorite-row">
-          <div class="line-favorite-avatar">
-            <img
-              src="https://i.ibb.co/4ntNZx78/B2-EE0-EC1-6048-47-BA-8-F00-5569-F467-CEB4.jpg"
-              alt="น้องณิต💙"
-            >
-          </div>
-          <div class="line-favorite-info">
-            <strong>น้องณิต💙</strong>
-          </div>
-        </div>
-      `;
+      
+list.innerHTML = `
+  <div class="line-favorite-row">
+    <div class="line-favorite-avatar">
+      <img
+        src="https://i.ibb.co/4ntNZx78/B2-EE0-EC1-6048-47-BA-8-F00-5569-F467-CEB4.jpg"
+        alt="น้องณิต💙"
+      >
+    </div>
+    <div class="line-favorite-info">
+      <strong>น้องณิต💙</strong>
+      <div class="line-favorite-status">
+        fly with me free my heart
+      </div>
+    </div>
+  </div>
+`;
     } else {
       list.innerHTML = "";
     }
