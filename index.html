@@ -1150,6 +1150,40 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   border-radius: 50%;
 }
 
+.line-profile-viewer {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.92);
+  align-items: center;
+  justify-content: center;
+}
+
+.line-profile-viewer.active {
+  display: flex;
+}
+
+.line-profile-viewer img {
+  width: min(85%, 360px);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.line-profile-viewer-close {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  right: 18px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
 </style>
 </head>
 
@@ -1535,8 +1569,14 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 
   <div class="line-toast" id="lineToast" role="status"></div>
 </div>
-
   <div class="toast" id="toast"></div>
+  <!-- Profile photo viewer -->
+<div class="line-profile-viewer" id="lineProfileViewer">
+  <button class="line-profile-viewer-close" id="lineProfileViewerClose">
+    ✕
+  </button>
+  <img id="lineProfileLargeImage" src="" alt="รูปโปรไฟล์ขนาดใหญ่">
+</div>
 </main>
 </div>
 <script>
@@ -2002,6 +2042,28 @@ window.showPhoneScreen = showScreen;
     setTab("friends");
   };
 })();
+
+const myProfileAvatar = document.querySelector(
+  ".line-my-profile-avatar img"
+);
+const profileViewer = document.getElementById("lineProfileViewer");
+const profileLargeImage = document.getElementById("lineProfileLargeImage");
+const profileViewerClose = document.getElementById("lineProfileViewerClose");
+
+myProfileAvatar?.addEventListener("click", () => {
+  profileLargeImage.src = myProfileAvatar.src;
+  profileViewer.classList.add("active");
+});
+
+profileViewerClose?.addEventListener("click", () => {
+  profileViewer.classList.remove("active");
+});
+
+profileViewer?.addEventListener("click", (event) => {
+  if (event.target === profileViewer) {
+    profileViewer.classList.remove("active");
+  }
+});
 </script>
 </body>
 </html>
