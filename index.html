@@ -233,11 +233,21 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   .key { width: min(100%, 48px); }
   .player-cover { width: min(48%, 180px); margin-bottom: 12px; }
 }
+
 .camera-hole {
-  position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
-  width: 13px; height: 13px; border-radius: 50%; background: #050505;
-  border: 1px solid #252525; z-index: 20;
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #000;
+  border: 1px solid #252525;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.08);
+  z-index: 30;
 }
+
 
 /* FIX: KEEP THE BOTTOM ROW AT THE BOTTOM OF THE LOCK SCREEN */
 .screen#lockScreen {
@@ -264,13 +274,14 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 }
 
 /* Lock icon: fixed in place, without moving other elements */
+
 #lockScreen > .lock-status-icon {
   position: absolute;
-  top: 29px;
+  top: 30px;
   left: 50%;
   transform: translateX(-50%);
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   z-index: 30;
   display: grid;
   place-items: center;
@@ -281,9 +292,17 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   display: block;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 1px 3px rgba(0,0,0,.3));
+  filter: drop-shadow(0 1px 2px rgba(255,255,255,.35));
 }
 
+#lockScreen > .lock-status-icon svg rect,
+#lockScreen > .lock-status-icon svg path {
+  stroke: #000;
+}
+
+#lockScreen > .lock-status-icon svg circle {
+  fill: #000;
+}
 </style>
 </head>
 
