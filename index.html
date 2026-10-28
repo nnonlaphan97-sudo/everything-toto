@@ -2025,42 +2025,40 @@ window.showPhoneScreen = showScreen;
         page === "groups" ? "block" : "none";
     }
 
-    const buttons = screen.querySelectorAll(
-      "[data-friend-category]"
-    );
+      }
 
-    buttons.forEach(button => {
+  // แสดงข้อมูลตามแท็บที่เลือก
+  function renderFriendCategory(category) {
+    const list = $("#lineFriendsPageList");
+    if (!list) return;
+
+    list.dataset.category = category;
+
+    screen.querySelectorAll("[data-friend-category]").forEach(button => {
       button.classList.toggle(
         "active",
-        button.dataset.friendCategory === page
+        button.dataset.friendCategory === category
       );
     });
 
-    const list = $("#lineFriendsPageList");
-
-    if (list) {
-      list.dataset.category = page;
-
-      if (page === "favorites") {
-        list.innerHTML = `
-          <div class="line-favorite-row">
-            <div class="line-favorite-avatar">
-              <img
-                src="https://i.ibb.co/4ntNZx78/B2-EE0-EC1-6048-47-BA-8-F00-5569-F467-CEB4.jpg"
-                alt="น้องณิต💙"
-              >
-            </div>
-            <div class="line-favorite-info">
-              <strong>น้องณิต💙</strong>
-            </div>
+    if (category === "favorites") {
+      list.innerHTML = `
+        <div class="line-favorite-row">
+          <div class="line-favorite-avatar">
+            <img
+              src="https://i.ibb.co/4ntNZx78/B2-EE0-EC1-6048-47-BA-8-F00-5569-F467-CEB4.jpg"
+              alt="น้องณิต💙"
+            >
           </div>
-        `;
-      } else {
-        list.innerHTML = "";
-      }
+          <div class="line-favorite-info">
+            <strong>น้องณิต💙</strong>
+          </div>
+        </div>
+      `;
+    } else {
+      list.innerHTML = "";
     }
   }
-
   // ปุ่มย้อนกลับ
   screen.querySelectorAll("[data-line-back]").forEach(button => {
     button.addEventListener("click", () => {
@@ -2074,8 +2072,10 @@ window.showPhoneScreen = showScreen;
 
   // ปุ่มเมนูทั้งสี่
   screen.querySelectorAll("[data-friend-category]").forEach(button => {
-    button.addEventListener("click", () => {
-      openLineSubpage(button.dataset.friendCategory);
+    button.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      renderFriendCategory(button.dataset.friendCategory);
     });
   });
 
