@@ -2088,12 +2088,34 @@ window.showPhoneScreen = showScreen;
               : ""}
           </div>
         </div>
+      
+      `).join("");
+    } else if (category === "groups") {
+      const groupList = [
+        {
+          name: "กู้ภัยกู้ใจ (3)",
+          image: "https://i.ibb.co/GvP7f8Tt/r07qxo-R-Download.jpg"
+        },
+        {
+          name: "ท้ายมูลนิธิ (6)",
+          image: "https://i.ibb.co/zhD7Hbp8/r07qxo-R-Download.jpg"
+        }
+      ];
+
+      list.innerHTML = groupList.map(group => `
+        <div class="line-favorite-row">
+          <div class="line-favorite-avatar">
+            <img src="${group.image}" alt="${group.name}">
+          </div>
+          <div class="line-favorite-info">
+            <strong>${group.name}</strong>
+          </div>
+        </div>
       `).join("");
     } else {
       list.innerHTML = "";
     }
   }
-
   // ปุ่มย้อนกลับ
   screen.querySelectorAll("[data-line-back]").forEach(button => {
     button.addEventListener("click", () => {
