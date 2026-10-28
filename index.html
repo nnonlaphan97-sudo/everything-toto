@@ -2136,29 +2136,27 @@ window.showPhoneScreen = showScreen;
     });
   });
 
-  // ปุ่มรายชื่อเพื่อนจากหน้าแรก
-  screen.querySelectorAll('[data-open-category="friends"]')
-    .forEach(button => {
-      button.addEventListener("click", () => {
-        openLineSubpage("friends");
-      });
+ // ปุ่มเพื่อนจากหน้าแรก
+screen.querySelectorAll('[data-open-category="friends"]')
+  .forEach(button => {
+    button.addEventListener("click", () => {
+      openLineSubpage("friends");
+      renderFriendCategory("friends");
     });
+  });
 
-  
-  // ปุ่มกลุ่มจากหน้าแรก
-  screen.querySelectorAll('[data-open-category="groups"]')
-    .forEach(button => {
-      button.addEventListener("click", () => {
-        const friendsPage = $("#lineFriendsPage");
+// ปุ่มกลุ่มจากหน้าแรก
+screen.querySelectorAll('[data-open-category="groups"]')
+  .forEach(button => {
+    button.addEventListener("click", () => {
+      const friendsPage = $("#lineFriendsPage");
 
-        if (friendsPage) {
-          friendsPage.style.display = "block";
-          renderFriendCategory("groups");
-        }
-      });
+      if (friendsPage) {
+        friendsPage.style.display = "block";
+        renderFriendCategory("groups");
+      }
     });
-
-
+  });
   const chats = [
     {
       id: 1, name: "ครอบครัว", avatar: "♡", color: "orange",
