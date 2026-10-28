@@ -35,23 +35,22 @@ button {
 }
 
 
+
 .phone {
   position: relative;
-  width: min(calc(100vw - 28px), 375px);
-  height: min(calc(100dvh - 28px), 812px);
+  width: min(calc(100vw - 48px), 360px);
+  height: min(calc(100dvh - 48px), 780px);
   flex-shrink: 0;
   overflow: hidden;
   box-sizing: border-box;
 
-  border: 6px solid #29292d;
-  border-radius: 50px;
+  border: 1px solid #45454a;
+  border-radius: 44px;
+  background: #000;
 
-  background: linear-gradient(160deg, #8ba4bd, #d2b9bb 55%, #e4d6c8);
-
-  box-shadow:
-    0 0 0 2px #080808,
-    0 12px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
+
 /* STATUS BAR */
 .status {
   position: absolute;
@@ -609,7 +608,7 @@ button {
 
 .phone > .screen,
 .phone > #appWindow {
-  border-radius: 45px;
+  border-radius: 43px;
   overflow: hidden;
 }
 
