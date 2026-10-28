@@ -1258,10 +1258,7 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
     <div class="app-content" id="appContent"></div>
     <div class="app-home-gesture" id="appHomeGesture"></div>
   </section>
-  <div class="toast" id="toast"></div>
-</main>
-</div>
-
+  
 <!-- LINE App Screen -->
 <div id="lineScreen" class="app-screen line-screen" style="display:none">
 
@@ -1439,6 +1436,9 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   <div class="line-toast" id="lineToast" role="status"></div>
 </div>
 
+  <div class="toast" id="toast"></div>
+</main>
+</div>
 <script>
 (() => {
   const CORRECT_PIN = "121269";
@@ -1458,9 +1458,11 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   let toastTimer;
 
   function showScreen(name) {
-    Object.entries(screens).forEach(([key, screen]) => screen.classList.toggle("hidden", key !== name));
-    currentScreen = name;
-  }
+  Object.entries(screens).forEach(([key, screen]) => screen.classList.toggle("hidden", key !== name));
+  currentScreen = name;
+}
+
+window.showPhoneScreen = showScreen;
   function showToast(message) {
     const toast = $("toast");
     toast.textContent = message;
@@ -1651,7 +1653,7 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
     { name: "TayNew Fan Club", detail: "กลุ่ม" }
   ];
 
-  let currentTab = "chats";
+  let currentTab = "freinds";
   let currentFilter = "all";
   let currentChatId = null;
   let searchText = "";
@@ -1848,15 +1850,13 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   });
 
   $("#lineBackBtn").addEventListener("click", () => {
-    closeChat();
-    if (typeof window.showHomeScreen === "function") {
-      window.showHomeScreen();
-    } else {
-      screen.style.display = "none";
-      const home = document.getElementById("homeScreen");
-      if (home) home.style.display = "";
-    }
-  });
+  closeChat();
+  screen.style.display = "none";
+
+  if (typeof window.showPhoneScreen === "function") {
+    window.showPhoneScreen("home");
+  }
+});
 
   $("#lineConversationBack").addEventListener("click", closeChat);
 
@@ -1893,13 +1893,13 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 
   renderChats();
   renderFriends();
-  setTab("chats");
+  setTab("friends");
 
   // เปิด LINE เมื่อระบบหลักเรียก openApp("LINE")
   window.openLineApp = function () {
     closeChat();
     screen.style.display = "flex";
-    setTab("chats");
+    setTab("friends");
   };
 })();
 </script>
