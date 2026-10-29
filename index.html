@@ -2856,31 +2856,60 @@ window.showPhoneScreen = showScreen;
     }
   }
   
-  // กดรายชื่อเพื่อเปิดแชต
+
+  // เปิดห้องแชตจากรายชื่อเพื่อนหรือกลุ่ม
   screen.addEventListener("click", function(event) {
-    const row = event.target.closest("[data-open-chat]");
+    const friendRow = event.target.closest("[data-open-chat]");
+    const groupRow = event.target.closest("[data-open-group]");
+    const row = friendRow || groupRow;
+
     if (!row || !screen.contains(row)) return;
 
-    const name = row.dataset.openChat || "";
+    const name = friendRow
+      ? row.dataset.openChat
+      : row.dataset.openGroup;
 
-    if (name.includes("ณิต")) {
-      openLineSubpage("chat");
-    } else if (name === "จ๊ะโอ๋") {
-      openLineSubpage("jaoOh");
+    const pageId = lineChatRoutes[name];
+    if (!pageId) return;
+
+    const targetPage = document.getElementById(pageId);
+    if (!targetPage) {
+      console.warn("ไม่พบหน้าห้องแชต:", pageId);
+      return;
     }
+
+    // ซ่อนหน้ารายชื่อและห้องแชตอื่นก่อน
+    const friendsPage = document.getElementById("lineFriendsPage");
+    const groupsPage = document.getElementById("lineGroupsPage");
+
+    if (friendsPage) friendsPage.style.display = "none";
+    if (groupsPage) groupsPage.style.display = "none";
+
+    screen.querySelectorAll(".line-subpage").forEach(page => {
+      page.style.display = "none";
+    });
+
+    // เปิดเฉพาะห้องที่เลือก
+    targetPage.style.display = "flex";
+    targetPage.style.zIndex = "100";
   });
 
-  // ปุ่มย้อนกลับ
-  screen.querySelectorAll("[data-line-back]").forEach(button => {
-    button.addEventListener("click", () => {
-      const friendsPage = $("#lineFriendsPage");
-      const groupsPage = $("#lineGroupsPage");
+  // กดกลับจากห้องแชตเพื่อกลับหน้ารายชื่อ
+  screen.querySelectorAll("[data-chat-back]").forEach(button => {
+    button.addEventListener("click", function(event) {
+      event.preventDefault();
+      event.stopPropagation();
 
-      if (friendsPage) friendsPage.style.display = "none";
-      if (groupsPage) groupsPage.style.display = "none";
+      screen.querySelectorAll(".line-subpage").forEach(page => {
+        page.style.display = "none";
+      });
+
+      const friendsPage = document.getElementById("lineFriendsPage");
+      if (friendsPage) {
+        friendsPage.style.display = "block";
+      }
     });
   });
-
   // ปุ่มเมนูทั้งสี่
   screen.querySelectorAll("[data-friend-category]").forEach(button => {
     button.addEventListener("click", event => {
