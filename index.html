@@ -3226,10 +3226,7 @@ if (kanithChatBack) {
 // กดกลับจากแชตจ๊ะโอ๋ไปหน้ารายชื่อเพื่อน
 const jaoOhChatBack = $("#jaoOhChatBack");
 if (jaoOhChatBack) {
-  jaoOhChatBack.addEventListener("click", (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-
+  jaoOhChatBack.addEventListener("click", () => {
     openLineSubpage("friends");
     renderFriendCategory("friends");
   });
