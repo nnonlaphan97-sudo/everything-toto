@@ -1733,6 +1733,7 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   color: #999;
 }
 
+/* ===== เลย์เอาต์ร่วมของห้องแชต ===== */
 #lineChatPage,
 #jaoOhChatPage {
   position: absolute;
@@ -1740,106 +1741,216 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  background: #f5f5f5;
+  background: #8cabd0;
   overflow: hidden;
-}
-
-#jaoOhChatPage .line-chat-messages {
-  height: calc(100% - 120px);
-  overflow-y: auto;
-  padding: 12px 10px 16px;
-  box-sizing: border-box;
-}
-
-#jaoOhChatPage #jaoOhChatForm {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  box-sizing: border-box;
-}
-
-/* ===== ปรับเลย์เอาต์ห้องแชตจ๊ะโอ๋ ===== */
-
-#jaoOhChatPage {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
-  background: #f5f5f5;
+  z-index: 100;
 }
 
 /* แถบหัวแชต */
+#lineChatPage .line-subpage-header,
 #jaoOhChatPage .line-subpage-header {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 52px;
   padding: 0 48px;
   box-sizing: border-box;
   background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
 }
 
-/* ปุ่มย้อนกลับอยู่ซ้าย */
+#lineChatPage .line-subpage-header h2,
+#jaoOhChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#lineChatPage .line-back-btn,
 #jaoOhChatPage .line-back-btn {
   position: absolute;
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-}
-
-/* ชื่ออยู่กึ่งกลางจริง */
-#jaoOhChatPage .line-subpage-header h2 {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: max-content;
-  max-width: calc(100% - 100px);
-  margin: 0;
-  text-align: center;
-  font-size: 16px;
-  font-weight: 600;
+  border: 0;
+  background: transparent;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
 }
 
 /* พื้นที่ข้อความ */
+#lineChatPage #kanithChatMessages,
 #jaoOhChatPage #jaoOhChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
-  height: calc(100% - 112px);
-  overflow-y: auto;
-  padding: 12px 10px 16px;
+  gap: 1px;
+  padding: 12px 10px;
   box-sizing: border-box;
+  overflow-y: auto;
 }
 
-/* จำกัดขนาดรูปโปรไฟล์ในข้อความ */
+/* วันที่ */
+#lineChatPage .line-chat-date,
+#jaoOhChatPage .line-chat-date {
+  align-self: center;
+  margin: 14px auto 10px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: #d8d8d8;
+  color: #fff;
+  font-size: 10px;
+  text-align: center;
+}
+
+/* แถวข้อความ */
+#lineChatPage .line-chat-bubble-row,
+#jaoOhChatPage .line-chat-bubble-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  width: 100%;
+  margin: 1px 0;
+}
+
+#lineChatPage .line-chat-bubble-row.sent,
+#jaoOhChatPage .line-chat-bubble-row.sent {
+  justify-content: flex-end;
+}
+
+#lineChatPage .line-chat-bubble-row.received,
+#jaoOhChatPage .line-chat-bubble-row.received {
+  justify-content: flex-start;
+}
+
+/* รูปโปรไฟล์ */
+#lineChatPage .line-chat-avatar,
 #jaoOhChatPage .line-chat-avatar {
-  width: 27px !important;
-  height: 27px !important;
-  min-width: 27px !important;
-  max-width: 27px !important;
-  flex: 0 0 27px !important;
-  border-radius: 50% !important;
-  object-fit: cover !important;
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
 }
 
-/* ช่องพิมพ์ด้านล่าง */
+#lineChatPage .line-chat-avatar-placeholder,
+#jaoOhChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* บับเบิ้ลข้อความ */
+#lineChatPage .line-chat-bubble,
+#jaoOhChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 74%;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+#lineChatPage .line-chat-bubble-row.received .line-chat-bubble,
+#jaoOhChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  order: 1;
+  background: #fff;
+  color: #222;
+}
+
+#lineChatPage .line-chat-bubble-row.sent .line-chat-bubble,
+#jaoOhChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  order: 1;
+  background: #b8f2a6;
+  color: #222;
+}
+
+/* เอาหางบับเบิ้ลออก */
+#lineChatPage .line-chat-bubble::before,
+#lineChatPage .line-chat-bubble::after,
+#jaoOhChatPage .line-chat-bubble::before,
+#jaoOhChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* เวลา */
+#lineChatPage .line-chat-time,
+#jaoOhChatPage .line-chat-time {
+  position: static !important;
+  display: inline-block;
+  flex: 0 0 auto;
+  align-self: flex-end;
+  margin: 0 2px 3px;
+  color: #999;
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+#lineChatPage .line-chat-bubble-row.sent .line-chat-time,
+#jaoOhChatPage .line-chat-bubble-row.sent .line-chat-time {
+  order: 0;
+}
+
+#lineChatPage .line-chat-bubble-row.received .line-chat-time,
+#jaoOhChatPage .line-chat-bubble-row.received .line-chat-time {
+  order: 2;
+}
+
+/* ช่องพิมพ์ */
+#lineChatPage #kanithChatForm,
 #jaoOhChatPage #jaoOhChatForm {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
+  min-height: 64px;
   display: flex;
   align-items: center;
-  width: 100%;
-  min-height: 60px;
+  gap: 8px;
+  padding: 10px;
   box-sizing: border-box;
   background: #fff;
   z-index: 2;
+}
+
+#lineChatPage #kanithChatInput,
+#jaoOhChatPage #jaoOhChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+#lineChatPage #kanithChatForm button,
+#jaoOhChatPage #jaoOhChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: #fff;
+  cursor: pointer;
 }
 
 </style>
@@ -2997,14 +3108,22 @@ function renderFriends() {
     renderKanithChatHistory();
   }
 
-  // กดกลับจากแชตไปหน้ารายชื่อเพื่อน
-  const kanithChatBack = $("#kanithChatBack");
-  if (kanithChatBack) {
-    kanithChatBack.addEventListener("click", () => {
-      openLineSubpage("friends");
-      renderFriendCategory("friends");
-    });
-  }
+  // กดกลับจากแชตคณิตไปหน้ารายชื่อเพื่อน
+const kanithChatBack = $("#kanithChatBack");
+if (kanithChatBack) {
+  kanithChatBack.addEventListener("click", () => {
+    openLineSubpage("friends");
+    renderFriendCategory("friends");
+  });
+}
+// กดกลับจากแชตจ๊ะโอ๋ไปหน้ารายชื่อเพื่อน
+const jaoOhChatBack = $("#jaoOhChatBack");
+if (jaoOhChatBack) {
+  jaoOhChatBack.addEventListener("click", () => {
+    openLineSubpage("friends");
+    renderFriendCategory("friends");
+  });
+}
 
   // กดรายชื่อ "น้องณิต💙" เพื่อเปิดแชตคณิต
   screen.addEventListener("click", (event) => {
