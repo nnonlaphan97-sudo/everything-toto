@@ -2881,22 +2881,68 @@ function renderFriends() {
     { date: "14 ต.ค.", from: "t", text: "รออะไรอ่ะ เป็นแฟนดิวะ" }
   ];
 
+
+  // เก็บผู้ส่งและวันที่ของข้อความก่อนหน้า
+  let previousKanithSender = "";
+  let previousKanithDate = "";
+
   // เพิ่มข้อความลงในหน้าจอแชต
-  function addKanithMessage(from, text, time = "") {
+  function addKanithMessage(from, text, time = "", date = "") {
     const messages = $("#kanithChatMessages");
     if (!messages) return;
 
+    const isNewGroup =
+      from !== previousKanithSender ||
+      date !== previousKanithDate;
+
     const row = document.createElement("div");
     row.className =
-      "line-chat-bubble-row " + (from === "t" ? "sent" : "received");
+      "line-chat-bubble-row " +
+      (from === "t" ? "sent" : "received") +
+      (isNewGroup ? " first-in-group" : "");
 
+    // รูปโปรไฟล์คณิต เฉพาะตอนเริ่มกลุ่มข้อความ
+    if (from !== "t") {
+      if (isNewGroup) {
+        const avatar = document.createElement("img");
+        avatar.className = "line-chat-avatar";
+
+        // ใช้รูปโปรไฟล์จากรายชื่อเพื่อนที่มีอยู่ใน LINE
+        const kanithFriend = screen.querySelector(
+          '[data-open-chat="น้องณิต💙"] img, [data-friend-name="น้องณิต💙"] img'
+        );
+
+        if (kanithFriend && kanithFriend.src) {
+          avatar.src = kanithFriend.src;
+        } else {
+          avatar.src = "";
+          avatar.style.display = "none";
+        }
+
+        avatar.alt = "คณิต";
+        row.appendChild(avatar);
+      } else {
+        const placeholder = document.createElement("span");
+        placeholder.className = "line-chat-avatar-placeholder";
+        row.appendChild(placeholder);
+      }
+    }
+
+    // เวลาอยู่ด้านนอกบับเบิ้ล
+    if (time && from === "t") {
+      const timeLabel = document.createElement("span");
+      timeLabel.className = "line-chat-time";
+      timeLabel.textContent = time;
+      row.appendChild(timeLabel);
+    }
+
+    // ข้อความ
     const bubble = document.createElement("div");
     bubble.className = "line-chat-bubble";
     bubble.textContent = text;
-
     row.appendChild(bubble);
 
-    if (time) {
+    if (time && from !== "t") {
       const timeLabel = document.createElement("span");
       timeLabel.className = "line-chat-time";
       timeLabel.textContent = time;
@@ -2904,14 +2950,24 @@ function renderFriends() {
     }
 
     messages.appendChild(row);
+
+    previousKanithSender = from;
+    previousKanithDate = date;
   }
 
+
+  
   // วาดประวัติแชต โดยจัดกลุ่มตามวันที่
   function renderKanithChatHistory() {
     const messages = $("#kanithChatMessages");
     if (!messages) return;
 
     messages.replaceChildren();
+
+    // เริ่มจัดกลุ่มใหม่ทุกครั้งที่วาดประวัติ
+    previousKanithSender = "";
+    previousKanithDate = "";
+
     let lastDate = "";
 
     kanithChatHistory.forEach(message => {
@@ -2926,10 +2982,18 @@ function renderFriends() {
       addKanithMessage(
         message.from,
         message.text,
-        message.time || ""
+        message.time || "",
+        message.date || ""
       );
+
+      // เว้นกลุ่มเมื่อขึ้นวันใหม่
+      if (message.date !== lastDate) {
+        previousKanithSender = "";
+        previousKanithDate = "";
+      }
     });
   }
+
   // เปิด LINE เมื่อระบบหลักเรียก openApp("LINE")
   window.openLineApp = function () {
     closeChat();
