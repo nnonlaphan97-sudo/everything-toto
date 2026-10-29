@@ -1732,6 +1732,33 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   line-height: 1.2;
   color: #999;
 }
+
+#lineChatPage,
+#jaoOhChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+
+#jaoOhChatPage .line-chat-messages {
+  height: calc(100% - 120px);
+  overflow-y: auto;
+  padding: 12px 10px 16px;
+  box-sizing: border-box;
+}
+
+#jaoOhChatPage #jaoOhChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+}
+
 </style>
 </head>
 
@@ -2109,7 +2136,6 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
       ส่ง
     </button>
   </form>
-
 </section>
 
     <!-- NEWS -->
@@ -2396,6 +2422,7 @@ window.showPhoneScreen = showScreen;
 
   const $ = (selector) => screen.querySelector(selector);
  
+  
   // เปิดหน้ารายชื่อเพื่อน กลุ่ม หรือแชต
   function openLineSubpage(page) {
     const friendsPage = $("#lineFriendsPage");
@@ -2403,33 +2430,34 @@ window.showPhoneScreen = showScreen;
     const chatPage = $("#lineChatPage");
     const jaoOhPage = $("#jaoOhChatPage");
 
-    if (friendsPage) {
-      friendsPage.style.display = page === "friends" ? "block" : "none";
+    // ซ่อนหน้าทุกหน้าก่อน
+    if (friendsPage) friendsPage.style.display = "none";
+    if (groupsPage) groupsPage.style.display = "none";
+    if (chatPage) chatPage.style.display = "none";
+    if (jaoOhPage) jaoOhPage.style.display = "none";
+
+    // เปิดเฉพาะหน้าที่เลือก
+    if (page === "friends" && friendsPage) {
+      friendsPage.style.display = "block";
     }
 
-    if (groupsPage) {
-      groupsPage.style.display = page === "groups" ? "block" : "none";
+    if (page === "groups" && groupsPage) {
+      groupsPage.style.display = "block";
     }
 
-    if (chatPage) {
-      chatPage.style.display = page === "chat" ? "block" : "none";
-
-      if (page === "chat") {
-        chatPage.style.zIndex = "100";
-        renderKanithChatHistory();
-      }
+    if (page === "chat" && chatPage) {
+      chatPage.style.display = "block";
+      chatPage.style.zIndex = "100";
+      renderKanithChatHistory();
     }
 
-    if (jaoOhPage) {
-      jaoOhPage.style.display = page === "jaoOh" ? "block" : "none";
-
-      if (page === "jaoOh") {
-        jaoOhPage.style.zIndex = "101";
-        renderJaoOhChatHistory();
-      }
+    if (page === "jaoOh" && jaoOhPage) {
+      jaoOhPage.style.display = "block";
+      jaoOhPage.style.zIndex = "100";
+      renderJaoOhChatHistory();
     }
   }
- 
+
   // กดรายชื่อเพื่อเปิดห้องแชต
   screen.addEventListener("click", function(event) {
     const row = event.target.closest("[data-open-chat]");
