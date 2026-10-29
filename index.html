@@ -1552,6 +1552,135 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   border-top-right-radius: 4px;
 }
 
+/* ===== จัดกลุ่มข้อความแชต ===== */
+#lineChatPage #kanithChatMessages {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+}
+
+#lineChatPage .line-chat-date {
+  align-self: center;
+  margin: 14px auto 10px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: #d8d8d8;
+  color: #fff;
+  font-size: 10px;
+  text-align: center;
+}
+
+#lineChatPage .line-chat-bubble-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  width: 100%;
+  margin: 1px 0;
+}
+
+/* โตโต้ขวา คณิตซ้าย */
+#lineChatPage .line-chat-bubble-row.sent {
+  justify-content: flex-end;
+}
+
+#lineChatPage .line-chat-bubble-row.received {
+  justify-content: flex-start;
+}
+
+/* รูปโปรไฟล์คณิต */
+#lineChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+/* ช่องว่างแทนรูปในข้อความต่อเนื่อง */
+#lineChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* บับเบิ้ล */
+#lineChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 74%;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* คณิต */
+#lineChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  background: #fff;
+  color: #222;
+  border-top-left-radius: 15px;
+}
+
+/* โตโต้ */
+#lineChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  background: #b8f2a6;
+  color: #222;
+  border-top-right-radius: 15px;
+}
+
+/* ปลายเล็กเฉพาะข้อความแรกของกลุ่ม */
+#lineChatPage .line-chat-bubble-row.received.first-in-group .line-chat-bubble::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 7px;
+  width: 0;
+  height: 0;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-right: 4px solid #fff;
+}
+
+#lineChatPage .line-chat-bubble-row.sent.first-in-group .line-chat-bubble::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  top: 7px;
+  width: 0;
+  height: 0;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-left: 4px solid #b8f2a6;
+}
+
+/* เวลาเล็ก อยู่ด้านนอกคนละฝั่ง */
+#lineChatPage .line-chat-time {
+  flex: 0 0 auto;
+  margin: 0 2px 3px;
+  color: #999;
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+#lineChatPage .line-chat-bubble-row.sent .line-chat-time {
+  order: 0;
+}
+
+#lineChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  order: 1;
+}
+
+#lineChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  order: 1;
+}
+
+#lineChatPage .line-chat-bubble-row.received .line-chat-time {
+  order: 2;
+}
+
 </style>
 </head>
 
