@@ -2723,8 +2723,6 @@ window.showPhoneScreen = showScreen;
       renderJaoOhChatHistory();
     }
   }
-
- 
   // เชื่อมโปรไฟล์เพื่อนและกลุ่มกับหน้าห้องแชต
   const lineChatRoutes = {
     "น้องณิต💙": "lineChatPage",
@@ -2793,7 +2791,8 @@ window.showPhoneScreen = showScreen;
           <div class="line-favorite-info">
             <strong>${friend.name}</strong>
             ${friend.status
-              ? `<div class="line-favorite-status">${friend.status}</div>`
+              ? `<
+            div class="line-favorite-status">${friend.status}</div>`
               : ""}
           </div>
         </div>
@@ -3228,7 +3227,9 @@ if (kanithChatBack) {
 
 const jaoOhChatBack = $("#jaoOhChatBack");
 if (jaoOhChatBack) {
-  jaoOhChatBack.addEventListener("click", () => {
+  jaoOhChatBack.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     openLineSubpage("friends");
     renderFriendCategory("friends");
   });
