@@ -2086,6 +2086,32 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 
 </section>
 
+<!-- หน้าแชตจ๊ะโอ๋ -->
+<section class="line-subpage" id="jaoOhChatPage" style="display:none;">
+
+  <header class="line-subpage-header">
+    <button type="button" class="line-back-btn" id="jaoOhChatBack">‹</button>
+    <h2>จ๊ะโอ๋</h2>
+  </header>
+
+  <div id="jaoOhChatMessages" class="line-chat-messages">
+    <!-- JavaScript จะใส่บทสนทนาตามวันที่ตรงนี้ -->
+  </div>
+
+  <form id="jaoOhChatForm"
+        style="display:flex; gap:8px; padding:10px; position:absolute; bottom:0; left:0; right:0; background:white;">
+    <input id="jaoOhChatInput"
+           type="text"
+           placeholder="พิมพ์ข้อความ..."
+           style="flex:1; min-width:0; border:1px solid #ddd; border-radius:20px; padding:10px 14px;">
+    <button type="submit"
+            style="border:0; border-radius:20px; padding:0 16px; background:#06c755; color:white;">
+      ส่ง
+    </button>
+  </form>
+
+</section>
+
     <!-- NEWS -->
     <section class="line-tab-panel" data-line-panel="news">
       <div class="line-section-title">ข่าวสาร</div>
@@ -2369,30 +2395,42 @@ window.showPhoneScreen = showScreen;
   screen.dataset.initialized = "true";
 
   const $ = (selector) => screen.querySelector(selector);
+ 
   // เปิดหน้ารายชื่อเพื่อน กลุ่ม หรือแชต
   function openLineSubpage(page) {
-  const friendsPage = $("#lineFriendsPage");
-  const groupsPage = $("#lineGroupsPage");
-  const chatPage = $("#lineChatPage");
+    const friendsPage = $("#lineFriendsPage");
+    const groupsPage = $("#lineGroupsPage");
+    const chatPage = $("#lineChatPage");
+    const jaoOhPage = $("#jaoOhChatPage");
 
-  if (friendsPage) {
-    friendsPage.style.display = page === "friends" ? "block" : "none";
-  }
+    if (friendsPage) {
+      friendsPage.style.display = page === "friends" ? "block" : "none";
+    }
 
-  if (groupsPage) {
-    groupsPage.style.display = page === "groups" ? "block" : "none";
-  }
+    if (groupsPage) {
+      groupsPage.style.display = page === "groups" ? "block" : "none";
+    }
 
-  if (chatPage) {
-    chatPage.style.display = page === "chat" ? "block" : "none";
+    if (chatPage) {
+      chatPage.style.display = page === "chat" ? "block" : "none";
 
-    if (page === "chat") {
-      chatPage.style.zIndex = "100";
-      renderKanithChatHistory();
+      if (page === "chat") {
+        chatPage.style.zIndex = "100";
+        renderKanithChatHistory();
+      }
+    }
+
+    if (jaoOhPage) {
+      jaoOhPage.style.display = page === "jaoOh" ? "block" : "none";
+
+      if (page === "jaoOh") {
+        jaoOhPage.style.zIndex = "101";
+        renderJaoOhChatHistory();
+      }
     }
   }
-}
-  // กดรายชื่อเพื่อเปิดแชตน้องคณิต
+ 
+  // กดรายชื่อเพื่อเปิดห้องแชต
   screen.addEventListener("click", function(event) {
     const row = event.target.closest("[data-open-chat]");
     if (!row || !screen.contains(row)) return;
@@ -2400,17 +2438,9 @@ window.showPhoneScreen = showScreen;
     const name = row.dataset.openChat || "";
 
     if (name.includes("ณิต")) {
-      const friendsPage = $("#lineFriendsPage");
-      const groupsPage = $("#lineGroupsPage");
-      const chatPage = $("#lineChatPage");
-
-      if (friendsPage) friendsPage.style.display = "none";
-      if (groupsPage) groupsPage.style.display = "none";
-
-      if (chatPage) {
-        chatPage.style.display = "block";
-        chatPage.style.zIndex = "100";
-      }
+      openLineSubpage("chat");
+    } else if (name.includes("จ๊ะโอ๋") || name.includes("จะโอ๋")) {
+      openLineSubpage("jaoOh");
     }
   });
   // แสดงข้อมูลตามแท็บที่เลือก
@@ -2498,17 +2528,21 @@ window.showPhoneScreen = showScreen;
       list.innerHTML = "";
     }
   }
+  
   // กดรายชื่อเพื่อเปิดแชต
-screen.addEventListener("click", function(event) {
-  const row = event.target.closest("[data-open-chat]");
-  if (!row) return;
+  screen.addEventListener("click", function(event) {
+    const row = event.target.closest("[data-open-chat]");
+    if (!row || !screen.contains(row)) return;
 
-  const name = row.dataset.openChat;
+    const name = row.dataset.openChat || "";
 
-  if (name === "น้องคณิต💙") {
-    openKanithChat();
-  }
-});
+    if (name.includes("ณิต")) {
+      openLineSubpage("chat");
+    } else if (name === "จ๊ะโอ๋") {
+      openLineSubpage("jaoOh");
+    }
+  });
+
   // ปุ่มย้อนกลับ
   screen.querySelectorAll("[data-line-back]").forEach(button => {
     button.addEventListener("click", () => {
@@ -3079,6 +3113,58 @@ const jaoOhChatHistory = [
     });
   }
 
+  // วาดประวัติแชตจ๊ะโอ๋
+  function renderJaoOhChatHistory() {
+    const messages = $("#jaoOhChatMessages");
+    if (!messages) return;
+
+    messages.replaceChildren();
+
+    let lastDate = "";
+    let previousSender = "";
+
+    jaoOhChatHistory.forEach(message => {
+      if (message.date !== lastDate) {
+        const dateLabel = document.createElement("div");
+        dateLabel.className = "line-chat-date";
+        dateLabel.textContent = message.date;
+        messages.appendChild(dateLabel);
+
+        lastDate = message.date;
+        previousSender = "";
+      }
+
+      const isNewGroup = message.from !== previousSender;
+
+      const row = document.createElement("div");
+      row.className =
+        "line-chat-bubble-row " +
+        (message.from === "t" ? "sent" : "received") +
+        (isNewGroup ? " first-in-group" : "");
+
+      if (message.from === "j") {
+        if (isNewGroup) {
+          const avatar = document.createElement("img");
+avatar.className = "line-chat-avatar";
+avatar.src = "https://i.ibb.co/wnFJH2v/IMG-3320.jpg";
+avatar.alt = "จ๊ะโอ๋";
+row.appendChild(avatar);
+        } else {
+          const placeholder = document.createElement("span");
+          placeholder.className = "line-chat-avatar-placeholder";
+          row.appendChild(placeholder);
+        }
+      }
+
+      const bubble = document.createElement("div");
+      bubble.className = "line-chat-bubble";
+      bubble.textContent = message.text;
+      row.appendChild(bubble);
+
+      messages.appendChild(row);
+      previousSender = message.from;
+    });
+  }
   // เปิด LINE เมื่อระบบหลักเรียก openApp("LINE")
   window.openLineApp = function () {
     closeChat();
