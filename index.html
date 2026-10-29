@@ -2827,6 +2827,7 @@ window.showPhoneScreen = showScreen;
     }
   }
 
+
   // เปิดห้องแชตจากรายชื่อเพื่อนหรือกลุ่ม
   screen.addEventListener("click", function(event) {
     const friendRow = event.target.closest("[data-open-chat]");
@@ -2848,7 +2849,6 @@ window.showPhoneScreen = showScreen;
       return;
     }
 
-    // ซ่อนหน้ารายชื่อและห้องแชตอื่นก่อน
     const friendsPage = document.getElementById("lineFriendsPage");
     const groupsPage = document.getElementById("lineGroupsPage");
 
@@ -2859,14 +2859,13 @@ window.showPhoneScreen = showScreen;
       page.style.display = "none";
     });
 
-    // เปิดเฉพาะห้องที่เลือก
     targetPage.style.display = "flex";
     targetPage.style.zIndex = "100";
 
     if (pageId === "jaoOhChatPage") {
       renderJaoOhChatHistory();
     }
-  });
+  }); // ปิดตัวดักคลิกตรงนี้ ก่อนเริ่มตัวจัดการปุ่มอื่น
 
   // กดกลับจากห้องแชตเพื่อกลับหน้ารายชื่อ
   screen.querySelectorAll("[data-chat-back]").forEach(button => {
