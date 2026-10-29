@@ -2740,34 +2740,6 @@ window.showPhoneScreen = showScreen;
     "ท้ายมูลนิธิ (6)": "thanFoundationChatPage"
   };
 
-  screen.addEventListener("click", function(event) {
-    const friendRow = event.target.closest("[data-open-chat]");
-    const groupRow = event.target.closest("[data-open-group]");
-
-    const row = friendRow || groupRow;
-    if (!row || !screen.contains(row)) return;
-
-    const name = friendRow
-      ? row.dataset.openChat
-      : row.dataset.openGroup;
-
-    const pageId = lineChatRoutes[name];
-    if (!pageId) return;
-
-    const targetPage = document.getElementById(pageId);
-    if (!targetPage || !screen.contains(targetPage)) {
-      console.warn("ยังไม่พบหน้าห้องแชต:", name, pageId);
-      return;
-    }
-
-    screen.querySelectorAll(".line-subpage").forEach(page => {
-      page.style.display = "none";
-    });
-
-    targetPage.style.display = "block";
-    targetPage.style.zIndex = "100";
-  });
-
   // แสดงข้อมูลตามแท็บที่เลือก
   function renderFriendCategory(category) {
     const list = $("#lineFriendsPageList");
