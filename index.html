@@ -1732,6 +1732,61 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   line-height: 1.2;
   color: #999;
 }
+/* ให้แต่ละแถวเรียงบับเบิ้ลและเวลาในแนวตั้ง */
+#lineChatPage .line-chat-bubble-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+}
+
+/* ฝั่งขวา: จัดบับเบิ้ลและเวลาไปทางขวา */
+#lineChatPage .line-chat-bubble-row.sent {
+  align-items: flex-end;
+}
+
+/* ฝั่งซ้าย: บับเบิ้ลอยู่ซ้าย เวลาอยู่ใต้บับเบิ้ล */
+#lineChatPage .line-chat-bubble-row.received {
+  align-items: flex-start;
+}
+
+/* เวลาอยู่ใต้บับเบิ้ลเสมอ */
+#lineChatPage .line-chat-time {
+  position: static !important;
+  order: 2 !important;
+  display: block;
+  margin: 0 4px 2px;
+  font-size: 9px;
+  line-height: 1.2;
+  color: #999;
+}
+
+/* รูปโปรไฟล์ฝั่งซ้ายยังอยู่ข้างบับเบิ้ล */
+#lineChatPage .line-chat-bubble-row.received {
+  display: grid;
+  grid-template-columns: 27px minmax(0, auto);
+  grid-template-rows: auto auto;
+  column-gap: 5px;
+  align-items: start;
+}
+
+#lineChatPage .line-chat-bubble-row.received .line-chat-avatar,
+#lineChatPage .line-chat-bubble-row.received .line-chat-avatar-placeholder {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#lineChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#lineChatPage .line-chat-bubble-row.received .line-chat-time {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: end;
+}
 </style>
 </head>
 
