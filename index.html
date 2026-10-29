@@ -2931,7 +2931,43 @@ function renderFriends() {
     { date: "14 ต.ค.", from: "k", text: "โอกาสจะได้ขอผมเป็นแฟนไง" },
     { date: "14 ต.ค.", from: "t", text: "รออะไรอ่ะ เป็นแฟนดิวะ" }
   ];
+const jaoOhChatHistory = [
+  // 7 ก.ย.
+  { date: "7 ก.ย.", from: "t", text: "จ๊ะโอ๋วันนี้มึงว่างปะวะ" },
+  { date: "7 ก.ย.", from: "j", text: "ว่างพี่" },
+  { date: "7 ก.ย.", from: "t", text: "สนใจไปจับชู้กับกูเปล่า" },
+  { date: "7 ก.ย.", from: "j", text: "เอาดิพี่โต้" },
+  { date: "7 ก.ย.", from: "j", text: "วันไหน" },
+  { date: "7 ก.ย.", from: "j", text: "เมื่อไหร่" },
+  { date: "7 ก.ย.", from: "j", text: "ที่ไหน" },
+  { date: "7 ก.ย.", from: "j", text: "ของใคร" },
+  { date: "7 ก.ย.", from: "j", text: "ผมคนไทย มีบัตรประชาชน" },
+  { date: "7 ก.ย.", from: "t", text: "ไอ้สัสเดี๋ยวบอก" },
+  { date: "7 ก.ย.", from: "t", text: "มึงได้ไปแน่" },
 
+  // 9 ก.ย.
+  { date: "9 ก.ย.", from: "j", text: "สนุกว่ะพี่ วันชวนผมอีกนะ" },
+
+  // 10 ก.ย.
+  { date: "10 ก.ย.", from: "j", text: "พี่โต้วันนี้ไปจับชู้มั้ย" },
+  { date: "10 ก.ย.", from: "t", text: "ไม่ไป" },
+
+  // 14 ก.ย.
+  { date: "14 ก.ย.", from: "j", text: "พี่โต้วันนี้จับชู้มั้ย" },
+
+  // 15 ก.ย.
+  { date: "15 ก.ย.", from: "j", text: "พี่โต้วันนี้ไปมั้ย" },
+
+  // 28 ก.ย.
+  { date: "28 ก.ย.", from: "t", text: "ได้เวลาของมึงแล้วจ๊ะโอ๋" },
+  { date: "28 ก.ย.", from: "t", text: "เจอกันที่มูลนิธิ" },
+  { date: "28 ก.ย.", from: "j", text: "กรี๊ดดดดดดดดด" },
+
+  // 11 พ.ย.
+  { date: "11 พ.ย.", from: "t", text: "ส่งรูป" },
+  { date: "11 พ.ย.", from: "t", text: "มางานแต่งกูด้วย" },
+  { date: "11 พ.ย.", from: "j", text: "จัดไปค้าบผม" }
+];
 
   // เก็บผู้ส่งและวันที่ของข้อความก่อนหน้า
   let previousKanithSender = "";
@@ -3006,8 +3042,6 @@ function renderFriends() {
     previousKanithDate = date;
   }
 
-
-  
   // วาดประวัติแชต โดยจัดกลุ่มตามวันที่
   function renderKanithChatHistory() {
     const messages = $("#kanithChatMessages");
