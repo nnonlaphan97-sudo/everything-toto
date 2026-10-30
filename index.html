@@ -2883,6 +2883,9 @@ ${(() => {
         console.warn("ไม่พบเส้นทางแชต:", name);
         return;
       }
+      // บันทึกว่าห้องนี้อ่านแล้ว และลบวงรี
+
+markChatAsRead(name, getChatHistoryByName(name));
 chatOpenedFrom = "chats";
 setTab("friends");
       
