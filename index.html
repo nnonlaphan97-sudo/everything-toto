@@ -2924,15 +2924,29 @@ if (lineFriendsBack) {
 }
 
   // กดรายชื่อ "น้องณิต💙" เพื่อเปิดแชตคณิต
-  screen.addEventListener("click", (event) => {
-    const row = event.target.closest("[data-open-chat]");
-    if (!row || !screen.contains(row)) return;
+  
+screen.addEventListener("click", (event) => {
+  const row = event.target.closest(
+    "[data-open-chat], [data-open-group]"
+  );
 
-    const name = row.dataset.openChat || "";
-    if (name.includes("ณิต")) {
-      openKanithChat();
-    }
-  });
+  if (!row || !screen.contains(row)) return;
+
+  const name =
+    row.dataset.openChat ||
+    row.dataset.openGroup ||
+    "";
+
+  const pageId = lineChatRoutes[name];
+  if (!pageId) return;
+
+  if (pageId === "lineChatPage") {
+    openKanithChat();
+    return;
+  }
+
+  openLineSubpage(pageId);
+});
   renderChats();
   renderFriends();
   setTab("friends");
