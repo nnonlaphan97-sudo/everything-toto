@@ -2521,7 +2521,7 @@ function openLineSubpage(page) {
     const name = friendRow
       ? row.dataset.openChat
       : row.dataset.openGroup;
-
+chatOpenedFrom = "friends";
     const pageId = lineChatRoutes[name];
     if (!pageId) return;
 
@@ -2578,21 +2578,29 @@ if (pageId === "rescueLoveChatPage") {
   }); // ปิดตัวดักคลิกตรงนี้ ก่อนเริ่มตัวจัดการปุ่มอื่น
 
   // กดกลับจากห้องแชตเพื่อกลับหน้ารายชื่อ
-  screen.querySelectorAll("[data-chat-back]").forEach(button => {
-    button.addEventListener("click", function(event) {
-      event.preventDefault();
-      event.stopPropagation();
 
-      screen.querySelectorAll(".line-subpage").forEach(page => {
-        page.style.display = "none";
-      });
+screen.querySelectorAll("[data-chat-back]").forEach(button => {
+  button.addEventListener("click", function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    screen.querySelectorAll(".line-subpage").forEach(page => {
+      page.style.display = "none";
+    });
+
+    if (chatOpenedFrom === "chats") {
+      setTab("chats");
+      chatOpenedFrom = "friends";
+    } else {
+      setTab("friends");
 
       const friendsPage = document.getElementById("lineFriendsPage");
       if (friendsPage) {
         friendsPage.style.display = "block";
       }
-    });
+    }
   });
+});
 
   // ปุ่มเมนูทั้งสี่
   screen.querySelectorAll("[data-friend-category]").forEach(button => {
