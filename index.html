@@ -1576,10 +1576,44 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 #rescueLoveChatPage #rescueLoveChatInput { flex: 1; width: 0; min-width: 0; box-sizing: border-box; border: 1px solid #ddd; border-radius: 20px; padding: 10px 14px; outline: none; }/* ปุ่มส่ง */
 #rescueLoveChatPage #rescueLoveChatForm button { flex-shrink: 0; border: 0; border-radius: 20px; padding: 10px 16px; background: #06c755; color: #fff; cursor: pointer; }
 
-/* Shared chat appearance: no bubble tails, avatars centered */
-.line-chat-bubble-row { align-items: center; }
-.line-chat-avatar { align-self: center; margin-bottom: 0; }
-.line-chat-bubble::before, .line-chat-bubble::after {
+/* จัดรูปโปรไฟล์ให้อยู่กึ่งกลางบับเบิ้ลทุกห้อง */
+:is(
+  #lineChatPage,
+  #jaoOhChatPage,
+  #jaeSoChatPage,
+  #tongChatPage,
+  #tonLiewChatPage,
+  #beerChatPage,
+  #porChatPage,
+  #akkeeChatPage,
+  #phailinChatPage,
+  #thanFoundationChatPage,
+  #rescueLoveChatPage
+) .line-chat-bubble-row {
+  align-items: center;
+}
+
+:is(
+  #lineChatPage,
+  #jaoOhChatPage,
+  #jaeSoChatPage,
+  #tongChatPage,
+  #tonLiewChatPage,
+  #beerChatPage,
+  #porChatPage,
+  #akkeeChatPage,
+  #phailinChatPage,
+  #thanFoundationChatPage,
+  #rescueLoveChatPage
+) .line-chat-avatar {
+  align-self: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* ไม่มีหางบับเบิ้ล */
+.line-chat-bubble::before,
+.line-chat-bubble::after {
   content: none !important;
   display: none !important;
 }
