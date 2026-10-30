@@ -6411,13 +6411,16 @@ function renderThanFoundationChatHistory() {
         avatar.className = "line-chat-avatar";
 
         const memberName = memberNames[message.from] || message.from;
-const member = typeof friendList !== "undefined"
-  ? friendList.find(friend => friend.name === memberName)
-  : null;
-if (member) {
-  avatar.src = member.image;
-}
 
+const memberImages = {
+  por: "https://i.ibb.co/B27JJ3Qj/IMG-3319.jpg",
+  akkee: "https://i.ibb.co/BVHVS8Rz/IMG-3304.jpg",
+  beer: "https://i.ibb.co/mFXQ1qSV/r07qxo-R-Download.jpg",
+  jaoOh: "https://i.ibb.co/wnFJH2v/IMG-3320.jpg",
+  tong: "https://i.ibb.co/4RdSdn5C/r07qxo-R-Download.jpg"
+};
+
+avatar.src = memberImages[message.from];
 avatar.alt = memberName;
 row.appendChild(avatar);
       } else {
