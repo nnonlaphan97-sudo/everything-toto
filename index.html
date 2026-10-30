@@ -2760,12 +2760,23 @@ if (!targetPage) return;
 targetPage.style.display = "flex";
 targetPage.style.zIndex = "100";
 
-if (pageId === "lineChatPage") {
-  renderKanithChatHistory();
-}
 
-if (pageId === "jaoOhChatPage") {
-  renderJaoOhChatHistory();
+const chatRenderers = {
+  lineChatPage: renderKanithChatHistory,
+  jaoOhChatPage: renderJaoOhChatHistory,
+  jaeSoChatPage: renderJaeSoChatHistory,
+  tongChatPage: renderTongChatHistory,
+  tonLiewChatPage: renderTonLiewChatHistory,
+  beerChatPage: renderBeerChatHistory,
+  porChatPage: renderPorChatHistory,
+  akkeeChatPage: renderAkkeeChatHistory,
+  phailinChatPage: renderPhailinChatHistory,
+  rescueLoveChatPage: renderRescueLoveChatHistory,
+  thanFoundationChatPage: renderThanFoundationChatHistory
+};
+
+if (chatRenderers[pageId]) {
+  chatRenderers[pageId]();
 }
     });
   });
