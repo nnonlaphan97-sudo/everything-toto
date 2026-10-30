@@ -2725,6 +2725,7 @@ function getChatHistoryByName(chatName) {
   }
 }
 
+
 function getUnreadCount(chatName, history) {
   if (!Array.isArray(history) || history.length === 0) {
     return 0;
@@ -2732,16 +2733,21 @@ function getUnreadCount(chatName, history) {
 
   const latest = history[history.length - 1];
 
-  // ข้อความสุดท้ายเป็นของเรา (ด้านขวา) ไม่แสดงวงรี
-  if (latest.from === "t") {
-    return 0;
-  }
+  // ถ้าข้อความสุดท้ายเป็นฝั่งขวา ไม่แสดงวงรี
+  if (latest.from === "t") return 0;
 
+  // ใช้วันที่ของข้อความสุดท้าย
+  const latestDate = latest.date;
+
+  // นับเฉพาะข้อความที่ยังไม่อ่านในวันที่ล่าสุด
   const readCount = chatReadState[chatName] ?? 0;
 
   return history
     .slice(readCount)
-    .filter(message => message.from !== "t")
+    .filter(message =>
+      message.date === latestDate &&
+      message.from !== "t"
+    )
     .length;
 }
 
@@ -2826,10 +2832,15 @@ function renderChats() {
           style="width:100%;height:100%;object-fit:cover;display:block;"
         >
       </span>
-      <span class="line-chat-main">
-        <span class="line-chat-name-row">
-          <span class="line-chat-name">${escapeHTML(chat.name)}</span>
-      
+     
+<span class="line-chat-main">
+  <span class="line-chat-name-row">
+    <span class="line-chat-name">${escapeHTML(chat.name)}</span>
+  </span>
+
+  <span class="line-chat-preview">${escapeHTML(getLatestChatMessage(chat.name))}</span>
+</span>
+
 ${(() => {
   const unread = getUnreadCount(
     chat.name,
@@ -2839,22 +2850,23 @@ ${(() => {
   return unread > 0
     ? `<span style="
         background:#06C755;
-        color:white;
+        color:#ffffff;
         border-radius:999px;
-        padding:2px 7px;
-        min-width:20px;
+        padding:3px 8px;
+        min-width:22px;
         font-size:12px;
         font-weight:700;
         text-align:center;
         display:inline-block;
-        margin-left:8px;
+        margin-left:auto;
+        flex-shrink:0;
+        box-sizing:border-box;
       ">${unread}</span>`
     : "";
 })()}
-          </span>
-   <span class="line-chat-preview">${escapeHTML(getLatestChatMessage(chat.name))}</span>
-      </span>
-    </button>
+
+</button>
+
   `).join("");
   
   list.querySelectorAll(".line-chat-row").forEach(button => {
