@@ -525,6 +525,7 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   position: relative;
   color: #666;
   font-size: 18px;
+  cursor: pointer;
 }
 
 .sms-nav-item.active {
@@ -649,6 +650,74 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   padding-bottom: 3px;
   color: #888;
   font-size: 11px;
+}
+
+/* ===== SMS CONTACTS ===== */
+.sms-contacts[hidden] {
+  display: none !important;
+}
+
+.sms-contacts {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px 0 24px;
+  background: #f8f8f8;
+  scrollbar-width: none;
+}
+
+.sms-contact-self,
+.sms-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 22px;
+  color: #171717;
+  font-size: 17px;
+}
+
+.sms-contact-self {
+  margin-bottom: 12px;
+  background: #fff;
+  border-radius: 28px;
+  min-height: 76px;
+}
+
+.sms-contact-heading {
+  padding: 18px 24px 12px;
+  color: #555;
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.sms-contact-card {
+  background: #fff;
+  border-radius: 28px;
+  padding: 8px 0;
+  margin-bottom: 16px;
+}
+
+.sms-contact-row {
+  min-height: 64px;
+}
+
+.sms-contact-avatar {
+  flex-shrink: 0;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  background: #e8edf2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #536c7c;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.sms-self-avatar {
+  background: #88a6b8;
+  color: white;
 }
 
 .toast {
@@ -2954,6 +3023,43 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
       </div>
     </div>
 
+<!-- หน้าแท็บรายชื่อ -->
+<div class="sms-contacts" hidden>
+  <div class="sms-contact-self">
+    <div class="sms-contact-avatar sms-self-avatar">ต</div>
+    <span>โตโต้รักน้องณิต</span>
+  </div>
+
+  <div class="sms-contact-heading">★ &nbsp; รายชื่อที่ชอบ</div>
+
+  <div class="sms-contact-card">
+    <div class="sms-contact-row">
+      <div class="sms-contact-avatar">ณ</div>
+      <span>น้องณิต+</span>
+    </div>
+  </div>
+
+  <div class="sms-contact-card sms-contact-group">
+    <div class="sms-contact-row">
+      <div class="sms-contact-avatar">♧</div>
+      <span>กลุ่ม</span>
+    </div>
+  </div>
+
+  <div class="sms-contact-heading">รายชื่อ</div>
+
+  <div class="sms-contact-card">
+    <div class="sms-contact-row"><div class="sms-contact-avatar">อ</div><span>อัคคี</span></div>
+    <div class="sms-contact-row"><div class="sms-contact-avatar">บ</div><span>เบียร์</span></div>
+    <div class="sms-contact-row"><div class="sms-contact-avatar">จ</div><span>จ๊ะโอ๋</span></div>
+    <div class="sms-contact-row"><div class="sms-contact-avatar">ต</div><span>ตอง</span></div>
+    <div class="sms-contact-row"><div class="sms-contact-avatar">พ</div><span>ไพลิน</span></div>
+    <div class="sms-contact-row"><div class="sms-contact-avatar">ซ</div><span>เจ๊โซ่</span></div>
+    <div class="sms-contact-row"><div class="sms-contact-avatar">ส</div><span>เฮียเส็ง</span></div>
+    <div class="sms-contact-row"><div class="sms-contact-avatar">ป</div><span>ป๋อ</span></div>
+  </div>
+</div>
+
     <button class="sms-compose" aria-label="เขียนข้อความใหม่">
       <svg width="29" height="29" viewBox="0 0 24 24"
            fill="none" stroke="currentColor"
@@ -2988,6 +3094,30 @@ if (name === "ข้อความ") {
   const smsPage = document.querySelector("#appContent .sms-page");
   const smsDetail = smsPage.querySelector(".sms-detail");
   const smsBack = smsDetail.querySelector(".sms-detail-back");
+
+const smsContacts = smsPage.querySelector(".sms-contacts");
+const smsList = smsPage.querySelector(".sms-conversation-list");
+const smsFolders = smsPage.querySelector(".sms-folder-tabs");
+const smsCompose = smsPage.querySelector(".sms-compose");
+const smsNavItems = smsPage.querySelectorAll(".sms-nav-item");
+
+smsNavItems[0].addEventListener("click", () => {
+  smsContacts.hidden = true;
+  smsList.style.display = "";
+  smsFolders.style.display = "";
+  smsCompose.style.display = "";
+  smsNavItems[0].classList.add("active");
+  smsNavItems[1].classList.remove("active");
+});
+
+smsNavItems[1].addEventListener("click", () => {
+  smsContacts.hidden = false;
+  smsList.style.display = "none";
+  smsFolders.style.display = "none";
+  smsCompose.style.display = "none";
+  smsNavItems[0].classList.remove("active");
+  smsNavItems[1].classList.add("active");
+});
 
   smsPage.querySelectorAll(".sms-conversation").forEach(row => {
     row.style.cursor = "pointer";
