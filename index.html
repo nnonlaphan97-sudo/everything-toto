@@ -2859,7 +2859,10 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "à¸‚à
     if (delta > 65) {
       if (currentScreen === "lock") openPin();
       else if (currentScreen === "player") showScreen("lock");
-      else if (currentScreen === "app") showScreen("home");
+      else if (currentScreen === "app") {
+  if (!document.getElementById("appScreen").classList.contains("sms-mode")) {
+    showScreen("home");
+  }
     } else if (delta < -65) {
       if (currentScreen === "pin") showScreen("lock");
       else if (currentScreen === "home") showScreen("lock");
