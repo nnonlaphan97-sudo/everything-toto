@@ -3594,7 +3594,200 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   color: #fff;
   cursor: pointer;
 }
+/* ===== กลุ่มกู้ภัยกู้ใจ (3) ===== */
+#rescueLoveChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #8cabd0;
+  z-index: 100;
+  overflow: hidden;
+}
 
+/* แถบชื่อกลุ่ม */
+#rescueLoveChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#rescueLoveChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#rescueLoveChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* พื้นที่แสดงบทสนทนา */
+#rescueLoveChatPage #rescueLoveChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* จัดแถวข้อความ */
+#rescueLoveChatPage .line-chat-bubble-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+#rescueLoveChatPage .line-chat-bubble-row.received {
+  justify-content: flex-start;
+}
+
+#rescueLoveChatPage .line-chat-bubble-row.sent {
+  justify-content: flex-end;
+}
+
+/* รูปโปรไฟล์อัคคีและเบียร์ */
+#rescueLoveChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+/* เว้นช่องรูปสำหรับข้อความต่อเนื่อง */
+#rescueLoveChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* กล่องรวมชื่อสมาชิกและข้อความ */
+#rescueLoveChatPage .rescue-love-chat-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 74%;
+  min-width: 0;
+}
+
+/* ข้อความโตโต้อยู่ฝั่งขวา */
+#rescueLoveChatPage .line-chat-bubble-row.sent
+.rescue-love-chat-content {
+  align-items: flex-end;
+}
+
+/* ชื่อสมาชิกเหนือบับเบิ้ล */
+#rescueLoveChatPage .rescue-love-chat-sender {
+  font-size: 11px;
+  font-weight: 500;
+  color: #34465c;
+  margin: 0 0 3px 7px;
+}
+
+/* รูปร่างบับเบิ้ล */
+#rescueLoveChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ข้อความอัคคีและเบียร์ สีขาว */
+#rescueLoveChatPage
+.line-chat-bubble-row.received .line-chat-bubble {
+  background: #fff;
+  color: #222;
+}
+
+/* ข้อความโตโต้ สีเขียว */
+#rescueLoveChatPage
+.line-chat-bubble-row.sent .line-chat-bubble {
+  background: #b8f2a6;
+  color: #222;
+}
+
+/* เอาหางแหลมออก */
+#rescueLoveChatPage .line-chat-bubble::before,
+#rescueLoveChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ช่องพิมพ์ข้อความด้านล่าง */
+#rescueLoveChatPage #rescueLoveChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 2;
+}
+
+/* ช่องกรอกข้อความ */
+#rescueLoveChatPage #rescueLoveChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+/* ปุ่มส่ง */
+#rescueLoveChatPage #rescueLoveChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: #fff;
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -4583,6 +4776,9 @@ if (pageId === "phailinChatPage") {
 }
 if (pageId === "thanFoundationChatPage") {
   renderThanFoundationChatHistory();
+}
+if (pageId === "rescueLoveChatPage") {
+  renderRescueLoveChatHistory();
 }
   }); // ปิดตัวดักคลิกตรงนี้ ก่อนเริ่มตัวจัดการปุ่มอื่น
 
@@ -6436,6 +6632,84 @@ row.appendChild(avatar);
     if (!isMine && isNewGroup) {
       const senderName = document.createElement("div");
       senderName.className = "foundation-chat-sender";
+      senderName.textContent =
+        memberNames[message.from] || message.from;
+      content.appendChild(senderName);
+    }
+
+    const bubble = document.createElement("div");
+    bubble.className = "line-chat-bubble";
+    bubble.textContent = message.text;
+    content.appendChild(bubble);
+
+    row.appendChild(content);
+    messages.appendChild(row);
+
+    previousSender = message.from;
+  });
+}
+// วาดประวัติแชตกลุ่มกู้ภัยกู้ใจ
+function renderRescueLoveChatHistory() {
+  const messages = $("#rescueLoveChatMessages");
+  if (!messages) return;
+
+  messages.replaceChildren();
+
+  const memberNames = {
+    akkee: "อัคคี",
+    beer: "เบียร์🍻"
+  };
+
+  const memberImages = {
+    akkee: "https://i.ibb.co/BVHVS8Rz/IMG-3304.jpg",
+    beer: "https://i.ibb.co/mFXQ1qSV/r07qxo-R-Download.jpg"
+  };
+
+  let lastDate = "";
+  let previousSender = "";
+
+  rescueLoveChatHistory.forEach(message => {
+    if (message.date !== lastDate) {
+      const dateLabel = document.createElement("div");
+      dateLabel.className = "line-chat-date";
+      dateLabel.textContent = message.date;
+      messages.appendChild(dateLabel);
+
+      lastDate = message.date;
+      previousSender = "";
+    }
+
+    const isMine = message.from === "toto";
+    const isNewGroup = message.from !== previousSender;
+
+    const row = document.createElement("div");
+    row.className =
+      "line-chat-bubble-row " +
+      (isMine ? "sent" : "received") +
+      (isNewGroup ? " first-in-group" : "");
+
+    if (!isMine) {
+      if (isNewGroup) {
+        const avatar = document.createElement("img");
+        avatar.className = "line-chat-avatar";
+
+        avatar.src = memberImages[message.from] || "";
+        avatar.alt = memberNames[message.from] || message.from;
+
+        row.appendChild(avatar);
+      } else {
+        const placeholder = document.createElement("span");
+        placeholder.className = "line-chat-avatar-placeholder";
+        row.appendChild(placeholder);
+      }
+    }
+
+    const content = document.createElement("div");
+    content.className = "rescue-love-chat-content";
+
+    if (!isMine && isNewGroup) {
+      const senderName = document.createElement("div");
+      senderName.className = "rescue-love-chat-sender";
       senderName.textContent =
         memberNames[message.from] || message.from;
       content.appendChild(senderName);
