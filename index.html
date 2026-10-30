@@ -1576,79 +1576,12 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 #rescueLoveChatPage #rescueLoveChatInput { flex: 1; width: 0; min-width: 0; box-sizing: border-box; border: 1px solid #ddd; border-radius: 20px; padding: 10px 14px; outline: none; }/* ปุ่มส่ง */
 #rescueLoveChatPage #rescueLoveChatForm button { flex-shrink: 0; border: 0; border-radius: 20px; padding: 10px 16px; background: #06c755; color: #fff; cursor: pointer; }
 
-/* จัดรูปโปรไฟล์ให้อยู่กึ่งกลางบับเบิ้ลทุกห้อง */
-:is(
-  #lineChatPage,
-  #jaoOhChatPage,
-  #jaeSoChatPage,
-  #tongChatPage,
-  #tonLiewChatPage,
-  #beerChatPage,
-  #porChatPage,
-  #akkeeChatPage,
-  #phailinChatPage,
-  #thanFoundationChatPage,
-  #rescueLoveChatPage
-) .line-chat-bubble-row {
-  align-items: center;
-}
-
-:is(
-  #lineChatPage,
-  #jaoOhChatPage,
-  #jaeSoChatPage,
-  #tongChatPage,
-  #tonLiewChatPage,
-  #beerChatPage,
-  #porChatPage,
-  #akkeeChatPage,
-  #phailinChatPage,
-  #thanFoundationChatPage,
-  #rescueLoveChatPage
-) .line-chat-avatar {
-  align-self: center;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-/* ไม่มีหางบับเบิ้ล */
-.line-chat-bubble::before,
-.line-chat-bubble::after {
+/* Shared chat appearance: no bubble tails, avatars centered */
+.line-chat-bubble-row { align-items: center; }
+.line-chat-avatar { align-self: center; margin-bottom: 0; }
+.line-chat-bubble::before, .line-chat-bubble::after {
   content: none !important;
   display: none !important;
-}
-/* จัดบับเบิ้ลซ้าย-ขวา และเวลาใต้ข้อความ */
-.line-chat-bubble-row.sent {
-  justify-content: flex-end !important;
-}
-
-.line-chat-bubble-row.received {
-  justify-content: flex-start !important;
-}
-
-.line-chat-bubble {
-  color: #000 !important;
-}
-
-/* เวลาของทุกห้อง */
-.line-chat-time {
-  color: #555 !important;
-  font-size: 10px;
-  line-height: 1.3;
-}
-
-/* ห้องอื่นที่ยังไม่มีเวลา */
-.line-chat-message-time {
-  display: block;
-  margin-top: 4px;
-  color: #555;
-  font-size: 10px;
-  line-height: 1.3;
-  text-align: right;
-}
-
-.line-chat-bubble-row.received .line-chat-message-time {
-  text-align: left;
 }
 </style>
 </head>
@@ -3897,12 +3830,7 @@ const rescueLoveChatHistory = [
     bubble.className = "line-chat-bubble";
     bubble.textContent = text;
     row.appendChild(bubble);
-if (message.time) {
-  const timeLabel = document.createElement("div");
-  timeLabel.className = "line-chat-message-time";
-  timeLabel.textContent = message.time;
-  bubble.appendChild(timeLabel);
-}
+
     if (time && from !== "t") {
       const timeLabel = document.createElement("span");
       timeLabel.className = "line-chat-time";
