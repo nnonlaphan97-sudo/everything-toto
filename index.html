@@ -2697,6 +2697,28 @@ const chats = [
     renderChats();
   }
   let chatOpenedFrom = "friends";
+  
+function getLatestChatMessage(chatName) {
+  const histories = {
+    "น้องณิต💙": kanithChatHistory,
+    "จ๊ะโอ๋": jaoOhChatHistory,
+    "เจ๊โซ่": jaeSoChatHistory,
+    "ตอง": tongChatHistory,
+    "ต้นหลิว": tonLiewChatHistory,
+    "เบียร์🍻": beerChatHistory,
+    "ป๋อ": porChatHistory,
+    "อัคคี": akkeeChatHistory,
+    "ไพลิน": phailinChatHistory,
+    "กู้ภัยกู้ใจ (3)": rescueLoveChatHistory,
+    "ท้ายมูลนิธิ (6)": thanFoundationChatHistory
+  };
+
+  const history = histories[chatName] || [];
+  const latest = history[history.length - 1];
+
+  return latest ? latest.text : "ยังไม่มีข้อความ";
+}
+
 function renderChats() {
   const list = $("#lineChatList");
   if (!list) return;
@@ -2736,7 +2758,7 @@ function renderChats() {
         <span class="line-chat-name-row">
           <span class="line-chat-name">${escapeHTML(chat.name)}</span>
         </span>
-        <span class="line-chat-preview">แตะเพื่อดูบทสนทนา</span>
+       <span class="line-chat-preview">${escapeHTML(getLatestChatMessage(chat.name))}</span>
       </span>
     </button>
   `).join("");
