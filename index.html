@@ -2783,6 +2783,156 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   color: #fff;
   cursor: pointer;
 }
+/* ===== หน้าแชตต้นหลิว ===== */
+#tonLiewChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #8cabd0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* แถบชื่อด้านบน */
+#tonLiewChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#tonLiewChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#tonLiewChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 30px;
+  line-height: 1;
+}
+
+/* พื้นที่ข้อความ */
+#tonLiewChatPage #tonLiewChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* รูปโปรไฟล์ต้นหลิว */
+#tonLiewChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+#tonLiewChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* บับเบิ้ลข้อความ */
+#tonLiewChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 74%;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ข้อความต้นหลิว สีขาว */
+#tonLiewChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  order: 1;
+  background: #fff;
+  color: #222;
+}
+
+/* ข้อความโตโต้ สีเขียว */
+#tonLiewChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  order: 1;
+  background: #b8f2a6;
+  color: #222;
+}
+
+/* เอาหางแหลมออก */
+#tonLiewChatPage .line-chat-bubble::before,
+#tonLiewChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ช่องพิมพ์ข้อความ */
+#tonLiewChatPage #tonLiewChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 2;
+}
+
+#tonLiewChatPage #tonLiewChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+#tonLiewChatPage #tonLiewChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: #fff;
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -3753,6 +3903,9 @@ if (pageId === "jaeSoChatPage") {
 }
 if (pageId === "tongChatPage") {
   renderTongChatHistory();
+}
+if (pageId === "tonLiewChatPage") {
+  renderTonLiewChatHistory();
 }
   }); // ปิดตัวดักคลิกตรงนี้ ก่อนเริ่มตัวจัดการปุ่มอื่น
 
