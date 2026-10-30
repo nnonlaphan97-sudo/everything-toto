@@ -2688,8 +2688,6 @@ const chats = [
     $("#lineConversation").setAttribute("aria-hidden", "true");
     renderChats();
   }
-
-  
 function renderChats() {
   const list = $("#lineChatList");
   if (!list) return;
@@ -2748,7 +2746,7 @@ function renderChats() {
         console.warn("ไม่พบเส้นทางแชต:", name);
         return;
       }
-
+setTab("friends");
       
 screen.querySelectorAll(".line-subpage").forEach(page => {
   page.style.display = "none";
