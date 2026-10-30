@@ -1402,117 +1402,2392 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   font-weight: 400;
   line-height: 1.4;
 }
-#phailinChatPage #phailinChatMessages,
-#thanFoundationChatPage #thanFoundationChatMessages,
-#rescueLoveChatPage #rescueLoveChatMessages {
-  position:absolute; top:56px; bottom:64px; left:0; right:0;
-  height:auto; display:flex; flex-direction:column; gap:1px;
-  padding:12px 10px; box-sizing:border-box; overflow-y:auto;
+
+/* หน้าแชตน้องคณิต */
+#lineChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #8cabd0;
+  z-index: 100;
+  overflow: hidden;
 }
-/* Dates, message rows, avatars */
-:is(#lineChatPage,#jaoOhChatPage,#jaeSoChatPage,#tongChatPage,#tonLiewChatPage,#beerChatPage,#porChatPage,#akkeeChatPage,#phailinChatPage,#thanFoundationChatPage,#rescueLoveChatPage) .line-chat-date {
-  display:block; align-self:center; width:fit-content; max-width:80%;
-  margin:14px auto 10px; padding:4px 10px; border-radius:12px;
-  background:#d8d8d8; color:#fff; font-size:10px; text-align:center;
+
+/* แถบชื่อด้านบน */
+#lineChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
 }
-:is(#lineChatPage,#jaoOhChatPage,#jaeSoChatPage,#tongChatPage,#tonLiewChatPage,#beerChatPage,#porChatPage,#akkeeChatPage,#phailinChatPage,#thanFoundationChatPage,#rescueLoveChatPage) .line-chat-bubble-row {
-  display:flex; align-items:center; gap:6px; width:100%;
-  margin:1px 0; flex-shrink:0;
+
+#lineChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
 }
-:is(#lineChatPage,#jaoOhChatPage,#jaeSoChatPage,#tongChatPage,#tonLiewChatPage,#beerChatPage,#porChatPage,#akkeeChatPage,#phailinChatPage,#thanFoundationChatPage,#rescueLoveChatPage) .line-chat-bubble-row.received { justify-content:flex-start; }
-:is(#lineChatPage,#jaoOhChatPage,#jaeSoChatPage,#tongChatPage,#tonLiewChatPage,#beerChatPage,#porChatPage,#akkeeChatPage,#phailinChatPage,#thanFoundationChatPage,#rescueLoveChatPage) .line-chat-bubble-row.sent { justify-content:flex-end; }
-:is(#lineChatPage,#jaoOhChatPage,#jaeSoChatPage,#tongChatPage,#tonLiewChatPage,#beerChatPage,#porChatPage,#akkeeChatPage,#phailinChatPage,#thanFoundationChatPage,#rescueLoveChatPage) .line-chat-avatar {
-  width:27px; height:27px; min-width:27px; max-width:27px;
-  flex:0 0 27px; border-radius:50%; object-fit:cover;
-  margin-bottom:0; align-self:center;
+
+#lineChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
 }
-:is(#lineChatPage,#jaoOhChatPage,#jaeSoChatPage,#tongChatPage,#tonLiewChatPage,#beerChatPage,#porChatPage,#akkeeChatPage,#phailinChatPage,#thanFoundationChatPage,#rescueLoveChatPage) .line-chat-avatar-placeholder {
-  width:27px; height:1px; flex:0 0 27px;
+
+/* พื้นที่ข้อความ */
+#lineChatPage #kanithChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  height: auto !important;
+  box-sizing: border-box;
+  overflow-y: auto;
+  padding: 16px;
 }
-/* Bubble styling; no tails are generated */
-:is(#lineChatPage,#jaoOhChatPage,#jaeSoChatPage,#tongChatPage,#tonLiewChatPage,#beerChatPage,#porChatPage,#akkeeChatPage,#phailinChatPage,#thanFoundationChatPage,#rescueLoveChatPage) .line-chat-bubble {
-  position:relative; max-width:74%; box-sizing:border-box;
-  padding:8px 11px; border-radius:15px; font-size:13px;
-  line-height:1.45; overflow-wrap:anywhere; white-space:pre-wrap;
+
+/* ช่องพิมพ์ด้านล่าง */
+#lineChatPage #kanithChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  background: #fff;
+  z-index: 2;
 }
-:is(#lineChatPage,#jaoOhChatPage,#jaeSoChatPage,#tongChatPage,#tonLiewChatPage,#beerChatPage,#porChatPage,#akkeeChatPage,#phailinChatPage,#thanFoundationChatPage,#rescueLoveChatPage) .line-chat-bubble-row.received .line-chat-bubble {
-  order:1; background:#fff; color:#222;
+
+#lineChatPage #kanithChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
 }
-:is(#lineChatPage,#jaoOhChatPage,#jaeSoChatPage,#tongChatPage,#tonLiewChatPage,#beerChatPage,#porChatPage,#akkeeChatPage,#phailinChatPage,#thanFoundationChatPage,#rescueLoveChatPage) .line-chat-bubble-row.sent .line-chat-bubble {
-  order:1; background:#b8f2a6; color:#222;
+
+#lineChatPage #kanithChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: white;
+  cursor: pointer;
 }
-/* Group bubbles are sized by their content wrapper */
-#thanFoundationChatPage .foundation-chat-content,
-#rescueLoveChatPage .rescue-love-chat-content {
-  display:flex; flex-direction:column; align-items:flex-start;
-  max-width:74%; min-width:0;
+
+.line-chat-date {
+  display: block;
+  width: fit-content;
+  max-width: 80%;
+  margin: 16px auto;
+  padding: 5px 12px;
+  text-align: center;
+  font-size: 12px;
+  color: #ffffff;
+  background: #b7b7b7;
+  border-radius: 14px;
 }
-#thanFoundationChatPage .sent .foundation-chat-content,
-#rescueLoveChatPage .sent .rescue-love-chat-content { align-items:flex-end; }
-#thanFoundationChatPage .foundation-chat-sender,
-#rescueLoveChatPage .rescue-love-chat-sender {
-  font-size:11px; font-weight:500; color:#34465c;
-  margin:0 0 3px 7px;
+
+.line-chat-bubble-row {
+  display: flex;
+  width: 100%;
+  margin: 7px 0;
+  align-items: flex-end;
+  gap: 6px;
 }
-:is(#thanFoundationChatPage,#rescueLoveChatPage) .line-chat-bubble { max-width:100%; }
-/* Time stamps in one-to-one chats */
-:is(#lineChatPage,#jaoOhChatPage,#jaeSoChatPage,#tongChatPage,#tonLiewChatPage,#beerChatPage,#porChatPage,#akkeeChatPage,#phailinChatPage) .line-chat-time {
-  position:static; display:inline-block; flex:0 0 auto;
-  align-self:flex-end; margin:0 2px 3px;
-  color:#999; font-size:9px; line-height:1.2;
+
+.line-chat-bubble-row.received {
+  justify-content: flex-start;
 }
-:is(#lineChatPage,#jaoOhChatPage,#jaeSoChatPage,#tongChatPage,#tonLiewChatPage,#beerChatPage,#porChatPage,#akkeeChatPage,#phailinChatPage) .sent .line-chat-time { order:0; }
-:is(#lineChatPage,#jaoOhChatPage,#jaeSoChatPage,#tongChatPage,#tonLiewChatPage,#beerChatPage,#porChatPage,#akkeeChatPage,#phailinChatPage) .received .line-chat-time { order:2; }
-/* Bottom composer */
+
+.line-chat-bubble-row.sent {
+  justify-content: flex-end;
+}
+
+.line-chat-bubble {
+  max-width: 75%;
+  padding: 9px 12px;
+  border-radius: 16px;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.line-chat-bubble-row.received .line-chat-bubble {
+  margin-right: auto;
+  background: #ffffff;
+  color: #222222;
+  border-top-left-radius: 4px;
+}
+
+.line-chat-bubble-row.sent .line-chat-bubble {
+  margin-left: auto;
+  background: #b8f2a6;
+  color: #222222;
+  border-top-right-radius: 4px;
+}
+
+/* ===== จัดกลุ่มข้อความแชต ===== */
+#lineChatPage #kanithChatMessages {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+}
+
+#lineChatPage .line-chat-date {
+  align-self: center;
+  margin: 14px auto 10px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: #d8d8d8;
+  color: #fff;
+  font-size: 10px;
+  text-align: center;
+}
+
+#lineChatPage .line-chat-bubble-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  width: 100%;
+  margin: 1px 0;
+}
+
+/* โตโต้ขวา คณิตซ้าย */
+#lineChatPage .line-chat-bubble-row.sent {
+  justify-content: flex-end;
+}
+
+#lineChatPage .line-chat-bubble-row.received {
+  justify-content: flex-start;
+}
+
+/* รูปโปรไฟล์คณิต */
+#lineChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+/* ช่องว่างแทนรูปในข้อความต่อเนื่อง */
+#lineChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* บับเบิ้ล */
+#lineChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 74%;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* คณิต */
+#lineChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  background: #fff;
+  color: #222;
+  border-top-left-radius: 15px;
+}
+
+/* โตโต้ */
+#lineChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  background: #b8f2a6;
+  color: #222;
+  border-top-right-radius: 15px;
+}
+
+/* ปลายเล็กเฉพาะข้อความแรกของกลุ่ม */
+#lineChatPage .line-chat-bubble-row.received.first-in-group .line-chat-bubble::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 7px;
+  width: 0;
+  height: 0;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-right: 4px solid #fff;
+}
+
+#lineChatPage .line-chat-bubble-row.sent.first-in-group .line-chat-bubble::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  top: 7px;
+  width: 0;
+  height: 0;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-left: 4px solid #b8f2a6;
+}
+
+/* เวลาเล็ก อยู่ด้านนอกคนละฝั่ง */
+#lineChatPage .line-chat-time {
+  flex: 0 0 auto;
+  margin: 0 2px 3px;
+  color: #999;
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+#lineChatPage .line-chat-bubble-row.sent .line-chat-time {
+  order: 0;
+}
+
+#lineChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  order: 1;
+}
+
+#lineChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  order: 1;
+}
+
+#lineChatPage .line-chat-bubble-row.received .line-chat-time {
+  order: 2;
+}
+/* เอาหางชี้ออกทั้งสองฝั่ง */
+#lineChatPage .line-chat-bubble-row.first-in-group .line-chat-bubble::before,
+#lineChatPage .line-chat-bubble-row.first-in-group .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* จัดตำแหน่งเวลาและบับเบิ้ล */
+#lineChatPage .line-chat-bubble-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  width: 100%;
+}
+
+/* ฝั่งขวา: เวลา → บับเบิ้ล */
+#lineChatPage .line-chat-bubble-row.sent {
+  justify-content: flex-end;
+}
+
+;
+/* แถบหัวแชต */
+#lineChatPage .line-subpage-header,
+#jaoOhChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#lineChatPage .line-subpage-header h2,
+#jaoOhChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#lineChatPage .line-back-btn,
+#jaoOhChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* พื้นที่ข้อความ */
+#lineChatPage #kanithChatMessages,
+#jaoOhChatPage #jaoOhChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* วันที่ */
+#lineChatPage .line-chat-date,
+#jaoOhChatPage .line-chat-date {
+  align-self: center;
+  margin: 14px auto 10px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: #d8d8d8;
+  color: #fff;
+  font-size: 10px;
+  text-align: center;
+}
+
+/* แถวข้อความ */
+#lineChatPage .line-chat-bubble-row,
+#jaoOhChatPage .line-chat-bubble-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  margin: 1px 0;
+}
+
+#lineChatPage .line-chat-bubble-row.sent,
+#jaoOhChatPage .line-chat-bubble-row.sent {
+  justify-content: flex-end;
+}
+
+#lineChatPage .line-chat-bubble-row.received,
+#jaoOhChatPage .line-chat-bubble-row.received {
+  justify-content: flex-start;
+}
+
+/* รูปโปรไฟล์ */
+#lineChatPage .line-chat-avatar,
+#jaoOhChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+#lineChatPage .line-chat-avatar-placeholder,
+#jaoOhChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* บับเบิ้ลข้อความ */
+#lineChatPage .line-chat-bubble,
+#jaoOhChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 74%;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+#lineChatPage .line-chat-bubble-row.received .line-chat-bubble,
+#jaoOhChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  order: 1;
+  background: #fff;
+  color: #222;
+}
+
+#lineChatPage .line-chat-bubble-row.sent .line-chat-bubble,
+#jaoOhChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  order: 1;
+  background: #b8f2a6;
+  color: #222;
+}
+
+/* เอาหางบับเบิ้ลออก */
+#lineChatPage .line-chat-bubble::before,
+#lineChatPage .line-chat-bubble::after,
+#jaoOhChatPage .line-chat-bubble::before,
+#jaoOhChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* เวลา */
+#lineChatPage .line-chat-time,
+#jaoOhChatPage .line-chat-time {
+  position: static !important;
+  display: inline-block;
+  flex: 0 0 auto;
+  align-self: flex-end;
+  margin: 0 2px 3px;
+  color: #999;
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+#lineChatPage .line-chat-bubble-row.sent .line-chat-time,
+#jaoOhChatPage .line-chat-bubble-row.sent .line-chat-time {
+  order: 0;
+}
+
+#lineChatPage .line-chat-bubble-row.received .line-chat-time,
+#jaoOhChatPage .line-chat-bubble-row.received .line-chat-time {
+  order: 2;
+}
+
+/* ช่องพิมพ์ */
 #lineChatPage #kanithChatForm,
-#jaoOhChatPage #jaoOhChatForm,
-#jaeSoChatPage #jaeSoChatForm,
-#tongChatPage #tongChatForm,
-#tonLiewChatPage #tonLiewChatForm,
-#beerChatPage #beerChatForm,
-#porChatPage #porChatForm,
-#akkeeChatPage #akkeeChatForm,
-#phailinChatPage #phailinChatForm,
-#thanFoundationChatPage #thanFoundationChatForm,
-#rescueLoveChatPage #rescueLoveChatForm {
-  position:absolute; bottom:0; left:0; right:0; min-height:64px;
-  display:flex; align-items:center; gap:8px; padding:10px;
-  box-sizing:border-box; background:#fff; z-index:2;
+#jaoOhChatPage #jaoOhChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 2;
 }
+
 #lineChatPage #kanithChatInput,
-#jaoOhChatPage #jaoOhChatInput,
-#jaeSoChatPage #jaeSoChatInput,
-#tongChatPage #tongChatInput,
-#tonLiewChatPage #tonLiewChatInput,
-#beerChatPage #beerChatInput,
-#porChatPage #porChatInput,
-#akkeeChatPage #akkeeChatInput,
-#phailinChatPage #phailinChatInput,
-#thanFoundationChatPage #thanFoundationChatInput,
-#rescueLoveChatPage #rescueLoveChatInput {
-  flex:1; width:0; min-width:0; box-sizing:border-box;
-  border:1px solid #ddd; border-radius:20px;
-  padding:10px 14px; outline:none;
+#jaoOhChatPage #jaoOhChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
 }
+
 #lineChatPage #kanithChatForm button,
-#jaoOhChatPage #jaoOhChatForm button,
-#jaeSoChatPage #jaeSoChatForm button,
-#tongChatPage #tongChatForm button,
-#tonLiewChatPage #tonLiewChatForm button,
-#beerChatPage #beerChatForm button,
-#porChatPage #porChatForm button,
-#akkeeChatPage #akkeeChatForm button,
-#phailinChatPage #phailinChatForm button,
-#thanFoundationChatPage #thanFoundationChatForm button,
-#rescueLoveChatPage #rescueLoveChatForm button {
-  flex-shrink:0; border:0; border-radius:20px;
-  padding:10px 16px; background:#06c755;
-  color:#fff; cursor:pointer;
+#jaoOhChatPage #jaoOhChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: #fff;
+  cursor: pointer;
 }
-/* Keep friends page stacking as in the supplied CSS */
-#lineFriendsPage { z-index:20; }
+/* หน้าแชตน้องคณิต */
+#lineChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #8cabd0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* แถบชื่อด้านบน */
+#lineChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#lineChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#lineChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* พื้นที่ข้อความ */
+#lineChatPage #kanithChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  height: auto !important;
+  box-sizing: border-box;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+/* ช่องพิมพ์ด้านล่าง */
+#lineChatPage #kanithChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  background: #fff;
+  z-index: 2;
+}
+
+#lineChatPage #kanithChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+#lineChatPage #kanithChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: white;
+  cursor: pointer;
+}
+
+.line-chat-date {
+  display: block;
+  width: fit-content;
+  max-width: 80%;
+  margin: 16px auto;
+  padding: 5px 12px;
+  text-align: center;
+  font-size: 12px;
+  color: #ffffff;
+  background: #b7b7b7;
+  border-radius: 14px;
+}
+
+.line-chat-bubble-row {
+  display: flex;
+  width: 100%;
+  margin: 7px 0;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.line-chat-bubble-row.received {
+  justify-content: flex-start;
+}
+
+.line-chat-bubble-row.sent {
+  justify-content: flex-end;
+}
+
+.line-chat-bubble {
+  max-width: 75%;
+  padding: 9px 12px;
+  border-radius: 16px;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.line-chat-bubble-row.received .line-chat-bubble {
+  margin-right: auto;
+  background: #ffffff;
+  color: #222222;
+  border-top-left-radius: 4px;
+}
+
+.line-chat-bubble-row.sent .line-chat-bubble {
+  margin-left: auto;
+  background: #b8f2a6;
+  color: #222222;
+  border-top-right-radius: 4px;
+}
+
+/* ===== จัดกลุ่มข้อความแชต ===== */
+#lineChatPage #kanithChatMessages {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+}
+
+#lineChatPage .line-chat-date {
+  align-self: center;
+  margin: 14px auto 10px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: #d8d8d8;
+  color: #fff;
+  font-size: 10px;
+  text-align: center;
+}
+
+#lineChatPage .line-chat-bubble-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  width: 100%;
+  margin: 1px 0;
+}
+
+/* โตโต้ขวา คณิตซ้าย */
+#lineChatPage .line-chat-bubble-row.sent {
+  justify-content: flex-end;
+}
+
+#lineChatPage .line-chat-bubble-row.received {
+  justify-content: flex-start;
+}
+
+/* รูปโปรไฟล์คณิต */
+#lineChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+/* ช่องว่างแทนรูปในข้อความต่อเนื่อง */
+#lineChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* บับเบิ้ล */
+#lineChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 74%;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* คณิต */
+#lineChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  background: #fff;
+  color: #222;
+  border-top-left-radius: 15px;
+}
+
+/* โตโต้ */
+#lineChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  background: #b8f2a6;
+  color: #222;
+  border-top-right-radius: 15px;
+}
+
+/* ปลายเล็กเฉพาะข้อความแรกของกลุ่ม */
+#lineChatPage .line-chat-bubble-row.received.first-in-group .line-chat-bubble::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 7px;
+  width: 0;
+  height: 0;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-right: 4px solid #fff;
+}
+
+#lineChatPage .line-chat-bubble-row.sent.first-in-group .line-chat-bubble::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  top: 7px;
+  width: 0;
+  height: 0;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-left: 4px solid #b8f2a6;
+}
+
+/* เวลาเล็ก อยู่ด้านนอกคนละฝั่ง */
+#lineChatPage .line-chat-time {
+  flex: 0 0 auto;
+  margin: 0 2px 3px;
+  color: #999;
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+#lineChatPage .line-chat-bubble-row.sent .line-chat-time {
+  order: 0;
+}
+
+#lineChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  order: 1;
+}
+
+#lineChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  order: 1;
+}
+
+#lineChatPage .line-chat-bubble-row.received .line-chat-time {
+  order: 2;
+}
+/* เอาหางชี้ออกทั้งสองฝั่ง */
+#lineChatPage .line-chat-bubble-row.first-in-group .line-chat-bubble::before,
+#lineChatPage .line-chat-bubble-row.first-in-group .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* จัดตำแหน่งเวลาและบับเบิ้ล */
+#lineChatPage .line-chat-bubble-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  width: 100%;
+}
+
+/* ฝั่งขวา: เวลา → บับเบิ้ล */
+#lineChatPage .line-chat-bubble-row.sent {
+  justify-content: flex-end;
+}
+
+;
+/* แถบหัวแชต */
+#lineChatPage .line-subpage-header,
+#jaoOhChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#lineChatPage .line-subpage-header h2,
+#jaoOhChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#lineChatPage .line-back-btn,
+#jaoOhChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* พื้นที่ข้อความ */
+#lineChatPage #kanithChatMessages,
+#jaoOhChatPage #jaoOhChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* วันที่ */
+#lineChatPage .line-chat-date,
+#jaoOhChatPage .line-chat-date {
+  align-self: center;
+  margin: 14px auto 10px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: #d8d8d8;
+  color: #fff;
+  font-size: 10px;
+  text-align: center;
+}
+
+/* แถวข้อความ */
+#lineChatPage .line-chat-bubble-row,
+#jaoOhChatPage .line-chat-bubble-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  margin: 1px 0;
+}
+
+#lineChatPage .line-chat-bubble-row.sent,
+#jaoOhChatPage .line-chat-bubble-row.sent {
+  justify-content: flex-end;
+}
+
+#lineChatPage .line-chat-bubble-row.received,
+#jaoOhChatPage .line-chat-bubble-row.received {
+  justify-content: flex-start;
+}
+
+/* รูปโปรไฟล์ */
+#lineChatPage .line-chat-avatar,
+#jaoOhChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+#lineChatPage .line-chat-avatar-placeholder,
+#jaoOhChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* บับเบิ้ลข้อความ */
+#lineChatPage .line-chat-bubble,
+#jaoOhChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 74%;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+#lineChatPage .line-chat-bubble-row.received .line-chat-bubble,
+#jaoOhChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  order: 1;
+  background: #fff;
+  color: #222;
+}
+
+#lineChatPage .line-chat-bubble-row.sent .line-chat-bubble,
+#jaoOhChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  order: 1;
+  background: #b8f2a6;
+  color: #222;
+}
+
+/* เอาหางบับเบิ้ลออก */
+#lineChatPage .line-chat-bubble::before,
+#lineChatPage .line-chat-bubble::after,
+#jaoOhChatPage .line-chat-bubble::before,
+#jaoOhChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* เวลา */
+#lineChatPage .line-chat-time,
+#jaoOhChatPage .line-chat-time {
+  position: static !important;
+  display: inline-block;
+  flex: 0 0 auto;
+  align-self: flex-end;
+  margin: 0 2px 3px;
+  color: #999;
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+#lineChatPage .line-chat-bubble-row.sent .line-chat-time,
+#jaoOhChatPage .line-chat-bubble-row.sent .line-chat-time {
+  order: 0;
+}
+
+#lineChatPage .line-chat-bubble-row.received .line-chat-time,
+#jaoOhChatPage .line-chat-bubble-row.received .line-chat-time {
+  order: 2;
+}
+
+/* ช่องพิมพ์ */
+#lineChatPage #kanithChatForm,
+#jaoOhChatPage #jaoOhChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 2;
+}
+
+#lineChatPage #kanithChatInput,
+#jaoOhChatPage #jaoOhChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+#lineChatPage #kanithChatForm button,
+#jaoOhChatPage #jaoOhChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: #fff;
+  cursor: pointer;
+}
 
 
+
+/* หน้าแชตจ๊ะโอ๋ */
+#jaoOhChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(
+    to bottom,
+    #fff 0,
+    #fff 38px,
+    #8cabd0 38px,
+    #8cabd0 100%
+  );
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* แถบชื่อและปุ่มย้อนกลับ เลื่อนลงจากขอบบน 38px */
+#jaoOhChatPage .line-subpage-header {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+/* พื้นที่ข้อความเริ่มใต้แถบชื่อ */
+#jaoOhChatPage #jaoOhChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* ป้องกันหน้ารายชื่อเพื่อนซ้อน */
+#lineFriendsPage {
+  z-index: 20;
+}
+/* หน้าแชตเจ๊โซ่ */
+#jaeSoChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(
+    to bottom,
+    #fff 0,
+    #fff 38px,
+    #8cabd0 38px,
+    #8cabd0 100%
+  );
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* แถบชื่อด้านบน */
+#jaeSoChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#jaeSoChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#jaeSoChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 30px;
+  line-height: 1;
+}
+
+/* พื้นที่ข้อความ */
+#jaeSoChatPage #jaeSoChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* ช่องพิมพ์ข้อความ */
+#jaeSoChatPage #jaeSoChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 2;
+}
+
+#jaeSoChatPage #jaeSoChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+#jaeSoChatPage #jaeSoChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: #fff;
+  cursor: pointer;
+}
+/* ปรับรูปโปรไฟล์เจ๊โซ่ให้เท่าคณิต */
+#jaeSoChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+#jaeSoChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* บับเบิ้ลเจ๊โซ่ */
+#jaeSoChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 74%;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ข้อความเจ๊โซ่ สีขาว */
+#jaeSoChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  order: 1;
+  background: #fff;
+  color: #222;
+}
+
+/* ข้อความโตโต้ สีเขียว */
+#jaeSoChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  order: 1;
+  background: #b8f2a6;
+  color: #222;
+}
+
+/* เอาหางแหลมออก */
+#jaeSoChatPage .line-chat-bubble::before,
+#jaeSoChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+/* เวลาในแชต */
+#jaeSoChatPage .line-chat-time {
+  position: static !important;
+  display: inline-block;
+  flex: 0 0 auto;
+  align-self: flex-end;
+  margin: 0 2px 3px;
+  color: #999;
+  font-size: 9px;
+  line-height: 1.2;
+}
+/* หน้าแชตตอง */
+#tongChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #8cabd0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* แถบชื่อด้านบน */
+#tongChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#tongChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+#tongChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 30px;
+  line-height: 1;
+}
+
+/* พื้นที่แสดงข้อความ */
+#tongChatPage #tongChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* รูปโปรไฟล์ตอง */
+#tongChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+#tongChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* บับเบิ้ลข้อความ */
+#tongChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 74%;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ข้อความตอง */
+#tongChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  order: 1;
+  background: #fff;
+  color: #222;
+}
+
+/* ข้อความโตโต้ */
+#tongChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  order: 1;
+  background: #b8f2a6;
+  color: #222;
+}
+
+/* เอาหางแหลมออก */
+#tongChatPage .line-chat-bubble::before,
+#tongChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ช่องพิมพ์ข้อความ */
+#tongChatPage #tongChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 2;
+}
+
+#tongChatPage #tongChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+#tongChatPage #tongChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: #fff;
+  cursor: pointer;
+}
+/* ===== หน้าแชตต้นหลิว ===== */
+#tonLiewChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #8cabd0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* แถบชื่อด้านบน */
+#tonLiewChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#tonLiewChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#tonLiewChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 30px;
+  line-height: 1;
+}
+
+/* พื้นที่ข้อความ */
+#tonLiewChatPage #tonLiewChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* รูปโปรไฟล์ต้นหลิว */
+#tonLiewChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+#tonLiewChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* บับเบิ้ลข้อความ */
+#tonLiewChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 74%;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ข้อความต้นหลิว สีขาว */
+#tonLiewChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  order: 1;
+  background: #fff;
+  color: #222;
+}
+
+/* ข้อความโตโต้ สีเขียว */
+#tonLiewChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  order: 1;
+  background: #b8f2a6;
+  color: #222;
+}
+
+/* เอาหางแหลมออก */
+#tonLiewChatPage .line-chat-bubble::before,
+#tonLiewChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ช่องพิมพ์ข้อความ */
+#tonLiewChatPage #tonLiewChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 2;
+}
+
+#tonLiewChatPage #tonLiewChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+#tonLiewChatPage #tonLiewChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: #fff;
+  cursor: pointer;
+}
+/* ===== หน้าแชตเบียร์ ===== */
+#beerChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #8cabd0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* แถบชื่อด้านบน */
+#beerChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#beerChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#beerChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 30px;
+  line-height: 1;
+}
+
+/* พื้นที่แสดงข้อความ */
+#beerChatPage #beerChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* รูปโปรไฟล์เบียร์ */
+#beerChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+#beerChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* บับเบิ้ลข้อความ */
+#beerChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 74%;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ข้อความเบียร์ สีขาว */
+#beerChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  order: 1;
+  background: #fff;
+  color: #222;
+}
+
+/* ข้อความโตโต้ สีเขียว */
+#beerChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  order: 1;
+  background: #b8f2a6;
+  color: #222;
+}
+
+/* เอาหางแหลมออก */
+#beerChatPage .line-chat-bubble::before,
+#beerChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ช่องพิมพ์ข้อความ */
+#beerChatPage #beerChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 2;
+}
+
+#beerChatPage #beerChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+#beerChatPage #beerChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: #fff;
+  cursor: pointer;
+}
+/* ===== หน้าแชตป๋อ ===== */
+#porChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #8cabd0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* แถบชื่อด้านบน */
+#porChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#porChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#porChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 30px;
+  line-height: 1;
+}
+
+/* พื้นที่แสดงข้อความ */
+#porChatPage #porChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* รูปโปรไฟล์ป๋อ */
+#porChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+#porChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* บับเบิ้ลข้อความ */
+#porChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 74%;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ข้อความป๋อ สีขาว */
+#porChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  order: 1;
+  background: #fff;
+  color: #222;
+}
+
+/* ข้อความโตโต้ สีเขียว */
+#porChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  order: 1;
+  background: #b8f2a6;
+  color: #222;
+}
+
+/* เอาหางแหลมออก */
+#porChatPage .line-chat-bubble::before,
+#porChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ช่องพิมพ์ข้อความ */
+#porChatPage #porChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 2;
+}
+
+#porChatPage #porChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+#porChatPage #porChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: #fff;
+  cursor: pointer;
+}
+/* ===== หน้าแชตอัคคีและไพลิน ===== */
+#akkeeChatPage,
+#phailinChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #8cabd0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* แถบชื่อด้านบน */
+#akkeeChatPage .line-subpage-header,
+#phailinChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+/* ชื่อห้องแชต */
+#akkeeChatPage .line-subpage-header h2,
+#phailinChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ปุ่มย้อนกลับ */
+#akkeeChatPage .line-back-btn,
+#phailinChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 30px;
+  line-height: 1;
+}
+
+/* พื้นที่แสดงบทสนทนา */
+#akkeeChatPage #akkeeChatMessages,
+#phailinChatPage #phailinChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* รูปโปรไฟล์ขนาด 27×27 */
+#akkeeChatPage .line-chat-avatar,
+#phailinChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+/* ช่องว่างแทนรูปโปรไฟล์ */
+#akkeeChatPage .line-chat-avatar-placeholder,
+#phailinChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* รูปร่างบับเบิ้ล */
+#akkeeChatPage .line-chat-bubble,
+#phailinChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 74%;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ข้อความอัคคีและไพลิน สีขาว */
+#akkeeChatPage .line-chat-bubble-row.received .line-chat-bubble,
+#phailinChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  order: 1;
+  background: #fff;
+  color: #222;
+}
+
+/* ข้อความโตโต้ สีเขียว */
+#akkeeChatPage .line-chat-bubble-row.sent .line-chat-bubble,
+#phailinChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  order: 1;
+  background: #b8f2a6;
+  color: #222;
+}
+
+/* เอาหางแหลมออก */
+#akkeeChatPage .line-chat-bubble::before,
+#akkeeChatPage .line-chat-bubble::after,
+#phailinChatPage .line-chat-bubble::before,
+#phailinChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ช่องพิมพ์ข้อความ */
+#akkeeChatPage #akkeeChatForm,
+#phailinChatPage #phailinChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 2;
+}
+
+/* ช่องกรอกข้อความ */
+#akkeeChatPage #akkeeChatInput,
+#phailinChatPage #phailinChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+/* ปุ่มส่ง */
+#akkeeChatPage #akkeeChatForm button,
+#phailinChatPage #phailinChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: #fff;
+  cursor: pointer;
+}
+/* ===== กลุ่มท้ายมูลนิธิ (6) ===== */
+#thanFoundationChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #8cabd0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* แถบชื่อกลุ่ม */
+#thanFoundationChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#thanFoundationChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#thanFoundationChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* พื้นที่แสดงบทสนทนา */
+#thanFoundationChatPage #thanFoundationChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* จัดแถวข้อความ */
+#thanFoundationChatPage .line-chat-bubble-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+#thanFoundationChatPage .line-chat-bubble-row.received {
+  justify-content: flex-start;
+}
+
+#thanFoundationChatPage .line-chat-bubble-row.sent {
+  justify-content: flex-end;
+}
+
+/* รูปโปรไฟล์สมาชิก */
+#thanFoundationChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+#thanFoundationChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* กล่องรวมชื่อสมาชิกและบับเบิ้ล */
+#thanFoundationChatPage .foundation-chat-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 74%;
+  min-width: 0;
+}
+
+/* ข้อความโตโต้อยู่ฝั่งขวา */
+#thanFoundationChatPage .line-chat-bubble-row.sent
+.foundation-chat-content {
+  align-items: flex-end;
+}
+
+/* ชื่อสมาชิกเหนือข้อความ */
+#thanFoundationChatPage .foundation-chat-sender {
+  font-size: 11px;
+  font-weight: 500;
+  color: #34465c;
+  margin: 0 0 3px 7px;
+}
+
+/* รูปร่างบับเบิ้ล */
+#thanFoundationChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ข้อความสมาชิก สีขาว */
+#thanFoundationChatPage
+.line-chat-bubble-row.received .line-chat-bubble {
+  background: #fff;
+  color: #222;
+}
+
+/* ข้อความโตโต้ สีเขียว */
+#thanFoundationChatPage
+.line-chat-bubble-row.sent .line-chat-bubble {
+  background: #b8f2a6;
+  color: #222;
+}
+
+/* เอาหางแหลมออก */
+#thanFoundationChatPage .line-chat-bubble::before,
+#thanFoundationChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ช่องพิมพ์ข้อความด้านล่าง */
+#thanFoundationChatPage #thanFoundationChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 2;
+}
+
+#thanFoundationChatPage #thanFoundationChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+#thanFoundationChatPage #thanFoundationChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: #fff;
+  cursor: pointer;
+}
+/* ===== กลุ่มกู้ภัยกู้ใจ (3) ===== */
+#rescueLoveChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #8cabd0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* แถบชื่อกลุ่ม */
+#rescueLoveChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#rescueLoveChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#rescueLoveChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* พื้นที่แสดงบทสนทนา */
+#rescueLoveChatPage #rescueLoveChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* จัดแถวข้อความ */
+#rescueLoveChatPage .line-chat-bubble-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+#rescueLoveChatPage .line-chat-bubble-row.received {
+  justify-content: flex-start;
+}
+
+#rescueLoveChatPage .line-chat-bubble-row.sent {
+  justify-content: flex-end;
+}
+
+/* รูปโปรไฟล์อัคคีและเบียร์ */
+#rescueLoveChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+/* เว้นช่องรูปสำหรับข้อความต่อเนื่อง */
+#rescueLoveChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* กล่องรวมชื่อสมาชิกและข้อความ */
+#rescueLoveChatPage .rescue-love-chat-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 74%;
+  min-width: 0;
+}
+
+/* ข้อความโตโต้อยู่ฝั่งขวา */
+#rescueLoveChatPage .line-chat-bubble-row.sent
+.rescue-love-chat-content {
+  align-items: flex-end;
+}
+
+/* ชื่อสมาชิกเหนือบับเบิ้ล */
+#rescueLoveChatPage .rescue-love-chat-sender {
+  font-size: 11px;
+  font-weight: 500;
+  color: #34465c;
+  margin: 0 0 3px 7px;
+}
+
+/* รูปร่างบับเบิ้ล */
+#rescueLoveChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ข้อความอัคคีและเบียร์ สีขาว */
+#rescueLoveChatPage
+.line-chat-bubble-row.received .line-chat-bubble {
+  background: #fff;
+  color: #222;
+}
+
+/* ข้อความโตโต้ สีเขียว */
+#rescueLoveChatPage
+.line-chat-bubble-row.sent .line-chat-bubble {
+  background: #b8f2a6;
+  color: #222;
+}
+
+/* เอาหางแหลมออก */
+#rescueLoveChatPage .line-chat-bubble::before,
+#rescueLoveChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ช่องพิมพ์ข้อความด้านล่าง */
+#rescueLoveChatPage #rescueLoveChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 2;
+}
+
+/* ช่องกรอกข้อความ */
+#rescueLoveChatPage #rescueLoveChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+/* ปุ่มส่ง */
+#rescueLoveChatPage #rescueLoveChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: #fff;
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -4480,7 +6755,7 @@ profileViewer?.addEventListener("click", (event) => {
     profileViewer.classList.remove("active");
   }
 });
-</style>
+
 </script>
 </body>
 </html>
