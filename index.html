@@ -2933,6 +2933,156 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   color: #fff;
   cursor: pointer;
 }
+/* ===== หน้าแชตเบียร์ ===== */
+#beerChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #8cabd0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* แถบชื่อด้านบน */
+#beerChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#beerChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#beerChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 30px;
+  line-height: 1;
+}
+
+/* พื้นที่แสดงข้อความ */
+#beerChatPage #beerChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* รูปโปรไฟล์เบียร์ */
+#beerChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+#beerChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* บับเบิ้ลข้อความ */
+#beerChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 74%;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ข้อความเบียร์ สีขาว */
+#beerChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  order: 1;
+  background: #fff;
+  color: #222;
+}
+
+/* ข้อความโตโต้ สีเขียว */
+#beerChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  order: 1;
+  background: #b8f2a6;
+  color: #222;
+}
+
+/* เอาหางแหลมออก */
+#beerChatPage .line-chat-bubble::before,
+#beerChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ช่องพิมพ์ข้อความ */
+#beerChatPage #beerChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 2;
+}
+
+#beerChatPage #beerChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+#beerChatPage #beerChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: #fff;
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -3906,6 +4056,9 @@ if (pageId === "tongChatPage") {
 }
 if (pageId === "tonLiewChatPage") {
   renderTonLiewChatHistory();
+}
+if (pageId === "beerChatPage") {
+  renderBeerChatHistory();
 }
   }); // ปิดตัวดักคลิกตรงนี้ ก่อนเริ่มตัวจัดการปุ่มอื่น
 
@@ -5424,6 +5577,68 @@ function renderTonLiewChatHistory() {
         }
 
         avatar.alt = "ต้นหลิว";
+        row.appendChild(avatar);
+      } else {
+        const placeholder = document.createElement("span");
+        placeholder.className = "line-chat-avatar-placeholder";
+        row.appendChild(placeholder);
+      }
+    }
+
+    const bubble = document.createElement("div");
+    bubble.className = "line-chat-bubble";
+    bubble.textContent = message.text;
+    row.appendChild(bubble);
+
+    messages.appendChild(row);
+    previousSender = message.from;
+  });
+}
+// วาดประวัติแชตเบียร์
+function renderBeerChatHistory() {
+  const messages = $("#beerChatMessages");
+  if (!messages) return;
+
+  messages.replaceChildren();
+
+  let lastDate = "";
+  let previousSender = "";
+
+  beerChatHistory.forEach(message => {
+    if (message.date !== lastDate) {
+      const dateLabel = document.createElement("div");
+      dateLabel.className = "line-chat-date";
+      dateLabel.textContent = message.date;
+      messages.appendChild(dateLabel);
+
+      lastDate = message.date;
+      previousSender = "";
+    }
+
+    const isNewGroup = message.from !== previousSender;
+
+    const row = document.createElement("div");
+    row.className =
+      "line-chat-bubble-row " +
+      (message.from === "t" ? "sent" : "received") +
+      (isNewGroup ? " first-in-group" : "");
+
+    if (message.from !== "t") {
+      if (isNewGroup) {
+        const avatar = document.createElement("img");
+        avatar.className = "line-chat-avatar";
+
+        const friend = screen.querySelector(
+          '[data-open-chat="เบียร์🍻"] img, [data-friend-name="เบียร์🍻"] img'
+        );
+
+        if (friend?.src) {
+          avatar.src = friend.src;
+        } else {
+          avatar.style.visibility = "hidden";
+        }
+
+        avatar.alt = "เบียร์";
         row.appendChild(avatar);
       } else {
         const placeholder = document.createElement("span");
