@@ -3743,8 +3743,15 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
     };
     $("appContent").innerHTML = content[name] || `<div class="mock-card">${name}</div>`;
    
+
 if (name === "กล้อง") {
   const camera = document.querySelector("#appContent .samsung-camera");
+  const video = camera.querySelector(".camera-preview-video");
+  const shutter = camera.querySelector(".camera-shutter");
+  const galleryButton = camera.querySelector(".camera-gallery");
+
+  // เก็บภาพที่ถ่ายระหว่างใช้งานหน้าเว็บ
+  window.cameraCapturedPhotos = window.cameraCapturedPhotos || [];
 
   camera.querySelectorAll("[data-zoom]").forEach(button => {
     button.addEventListener("click", () => {
@@ -3760,24 +3767,170 @@ if (name === "กล้อง") {
       camera.querySelectorAll("[data-camera-mode]").forEach(b => {
         b.classList.remove("active");
       });
+
       button.classList.add("active");
 
-      const shutter = camera.querySelector(".camera-shutter");
       shutter.style.background =
-        button.dataset.cameraMode === "VIDEO" ? "#f44336" : "#f9f8f4";
+        button.dataset.cameraMode === "VIDEO"
+          ? "#f44336"
+          : "#f9f8f4";
     });
   });
 
-  camera.querySelector(".camera-shutter").addEventListener("click", () => {
-    phoneDemoToast("ยังไม่ได้เชื่อมกล้องจริง");
+  // แสดงรูปที่ถ่ายล่าสุดในปุ่มแกลเลอรี
+  function updateCameraThumbnail() {
+    const photos = window.cameraCapturedPhotos;
+    if (!photos.length) return;
+
+    galleryButton.innerHTML = "";
+
+    const thumbnail = document.createElement("img");
+    thumbnail.src = photos[photos.length - 1];
+    thumbnail.alt = "ภาพที่ถ่ายล่าสุด";
+
+    Object.assign(thumbnail.style, {
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      borderRadius: "50%"
+    });
+
+    galleryButton.appendChild(thumbnail);
+    galleryButton.style.overflow = "hidden";
+  }
+
+  updateCameraThumbnail();
+
+  // กดชัตเตอร์เพื่อจับเฟรมจากวิดีโอ
+  shutter.addEventListener("click", () => {
+    if (!video || !video.videoWidth || !video.videoHeight) {
+      phoneDemoToast("กรุณารอให้คลิปโหลดก่อน");
+      return;
+    }
+
+    try {
+      const canvas = document.createElement("canvas");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      const photo = canvas.toDataURL("image/jpeg", 0.9);
+      window.cameraCapturedPhotos.push(photo);
+
+      // เอฟเฟกต์แฟลช
+      const flash = document.createElement("div");
+      Object.assign(flash.style, {
+        position: "absolute",
+        inset: "0",
+        background: "white",
+        opacity: "0.75",
+        zIndex: "30",
+        pointerEvents: "none",
+        transition: "opacity 180ms ease"
+      });
+
+      camera.appendChild(flash);
+
+      requestAnimationFrame(() => {
+        flash.style.opacity = "0";
+      });
+
+      setTimeout(() => flash.remove(), 220);
+
+      // ภาพย่อเคลื่อนจากช่องมองภาพไปยังปุ่มแกลเลอรี
+      const previewRect = video.getBoundingClientRect();
+      const targetRect = galleryButton.getBoundingClientRect();
+
+      const flyingPhoto = document.createElement("img");
+      flyingPhoto.src = photo;
+
+      Object.assign(flyingPhoto.style, {
+        position: "fixed",
+        left: `${previewRect.left + previewRect.width / 2 - 45}px`,
+        top: `${previewRect.top + previewRect.height / 2 - 45}px`,
+        width: "90px",
+        height: "90px",
+        objectFit: "cover",
+        borderRadius: "12px",
+        zIndex: "99999",
+        pointerEvents: "none",
+        transition: "all 420ms ease-in"
+      });
+
+      document.body.appendChild(flyingPhoto);
+
+      requestAnimationFrame(() => {
+        flyingPhoto.style.left =
+          `${targetRect.left + targetRect.width / 2 - 20}px`;
+        flyingPhoto.style.top =
+          `${targetRect.top + targetRect.height / 2 - 20}px`;
+        flyingPhoto.style.width = "40px";
+        flyingPhoto.style.height = "40px";
+        flyingPhoto.style.borderRadius = "50%";
+      });
+
+      setTimeout(() => {
+        flyingPhoto.remove();
+        updateCameraThumbnail();
+      }, 440);
+
+    } catch (error) {
+      console.error("Camera capture failed:", error);
+      phoneDemoToast("จับภาพไม่ได้ กรุณาตรวจสอบไฟล์วิดีโอ");
+    }
   });
 
   camera.querySelector(".camera-flip").addEventListener("click", () => {
     phoneDemoToast("สลับกล้องจำลอง");
   });
 
-  camera.querySelector(".camera-gallery").addEventListener("click", () => {
-    openApp("แกลเลอรี");
+  // กดรูปย่อเพื่อดูภาพที่ถ่าย
+  galleryButton.addEventListener("click", () => {
+    const photos = window.cameraCapturedPhotos;
+
+    if (!photos.length) {
+      openApp("แกลเลอรี");
+      return;
+    }
+
+    const viewer = document.createElement("div");
+    Object.assign(viewer.style, {
+      position: "absolute",
+      inset: "0",
+      background: "#000",
+      zIndex: "40",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center"
+    });
+
+    const back = document.createElement("button");
+    back.textContent = "‹";
+    Object.assign(back.style, {
+      position: "absolute",
+      top: "45px",
+      left: "20px",
+      color: "white",
+      background: "transparent",
+      border: "0",
+      fontSize: "38px"
+    });
+
+    back.addEventListener("click", () => viewer.remove());
+
+    const image = document.createElement("img");
+    image.src = photos[photos.length - 1];
+    Object.assign(image.style, {
+      width: "100%",
+      maxHeight: "80%",
+      objectFit: "contain"
+    });
+
+    viewer.append(back, image);
+    camera.appendChild(viewer);
   });
 
   camera.querySelector(".camera-tools").addEventListener("click", () => {
