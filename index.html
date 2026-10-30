@@ -2749,7 +2749,24 @@ function renderChats() {
         return;
       }
 
-      openLineSubpage(pageId);
+      
+screen.querySelectorAll(".line-subpage").forEach(page => {
+  page.style.display = "none";
+});
+
+const targetPage = document.getElementById(pageId);
+if (!targetPage) return;
+
+targetPage.style.display = "flex";
+targetPage.style.zIndex = "100";
+
+if (pageId === "lineChatPage") {
+  renderKanithChatHistory();
+}
+
+if (pageId === "jaoOhChatPage") {
+  renderJaoOhChatHistory();
+}
     });
   });
 
