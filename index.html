@@ -3403,6 +3403,198 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   color: #fff;
   cursor: pointer;
 }
+/* ===== กลุ่มท้ายมูลนิธิ (6) ===== */
+#thanFoundationChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #8cabd0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* แถบชื่อกลุ่ม */
+#thanFoundationChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#thanFoundationChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+#thanFoundationChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* พื้นที่แสดงบทสนทนา */
+#thanFoundationChatPage #thanFoundationChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* จัดแถวข้อความ */
+#thanFoundationChatPage .line-chat-bubble-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+#thanFoundationChatPage .line-chat-bubble-row.received {
+  justify-content: flex-start;
+}
+
+#thanFoundationChatPage .line-chat-bubble-row.sent {
+  justify-content: flex-end;
+}
+
+/* รูปโปรไฟล์สมาชิก */
+#thanFoundationChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+#thanFoundationChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* กล่องรวมชื่อสมาชิกและบับเบิ้ล */
+#thanFoundationChatPage .foundation-chat-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 74%;
+  min-width: 0;
+}
+
+/* ข้อความโตโต้อยู่ฝั่งขวา */
+#thanFoundationChatPage .line-chat-bubble-row.sent
+.foundation-chat-content {
+  align-items: flex-end;
+}
+
+/* ชื่อสมาชิกเหนือข้อความ */
+#thanFoundationChatPage .foundation-chat-sender {
+  font-size: 11px;
+  font-weight: 500;
+  color: #34465c;
+  margin: 0 0 3px 7px;
+}
+
+/* รูปร่างบับเบิ้ล */
+#thanFoundationChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ข้อความสมาชิก สีขาว */
+#thanFoundationChatPage
+.line-chat-bubble-row.received .line-chat-bubble {
+  background: #fff;
+  color: #222;
+}
+
+/* ข้อความโตโต้ สีเขียว */
+#thanFoundationChatPage
+.line-chat-bubble-row.sent .line-chat-bubble {
+  background: #b8f2a6;
+  color: #222;
+}
+
+/* เอาหางแหลมออก */
+#thanFoundationChatPage .line-chat-bubble::before,
+#thanFoundationChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ช่องพิมพ์ข้อความด้านล่าง */
+#thanFoundationChatPage #thanFoundationChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 2;
+}
+
+#thanFoundationChatPage #thanFoundationChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+#thanFoundationChatPage #thanFoundationChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: #fff;
+  cursor: pointer;
+}
+
 </style>
 </head>
 <body>
@@ -4388,6 +4580,9 @@ if (pageId === "akkeeChatPage") {
 }
 if (pageId === "phailinChatPage") {
   renderPhailinChatHistory();
+}
+if (pageId === "thanFoundationChatPage") {
+  renderThanFoundationChatHistory();
 }
   }); // ปิดตัวดักคลิกตรงนี้ ก่อนเริ่มตัวจัดการปุ่มอื่น
 
@@ -6169,6 +6364,93 @@ function renderPhailinChatHistory() {
     row.appendChild(bubble);
 
     messages.appendChild(row);
+    previousSender = message.from;
+  });
+}
+// วาดประวัติแชตกลุ่มท้ายมูลนิธิ
+function renderThanFoundationChatHistory() {
+  const messages = $("#thanFoundationChatMessages");
+  if (!messages) return;
+
+  messages.replaceChildren();
+
+  const memberNames = {
+    por: "ป๋อ",
+    akkee: "อัคคี",
+    beer: "เบียร์🍻",
+    jaoOh: "จ๊ะโอ๋",
+    tong: "ตอง"
+  };
+
+  let lastDate = "";
+  let previousSender = "";
+
+  thanFoundationChatHistory.forEach(message => {
+    if (message.date !== lastDate) {
+      const dateLabel = document.createElement("div");
+      dateLabel.className = "line-chat-date";
+      dateLabel.textContent = message.date;
+      messages.appendChild(dateLabel);
+
+      lastDate = message.date;
+      previousSender = "";
+    }
+
+    const isMine = message.from === "toto";
+    const isNewGroup = message.from !== previousSender;
+
+    const row = document.createElement("div");
+    row.className =
+      "line-chat-bubble-row " +
+      (isMine ? "sent" : "received") +
+      (isNewGroup ? " first-in-group" : "");
+
+    if (!isMine) {
+      if (isNewGroup) {
+        const avatar = document.createElement("img");
+        avatar.className = "line-chat-avatar";
+
+        const memberName = memberNames[message.from] || message.from;
+        const friend = Array.from(
+          screen.querySelectorAll("[data-open-chat]")
+        ).find(el => el.dataset.openChat === memberName);
+
+        const friendImage = friend?.querySelector("img");
+
+        if (friendImage?.src) {
+          avatar.src = friendImage.src;
+        } else {
+          avatar.style.visibility = "hidden";
+        }
+
+        avatar.alt = memberName;
+        row.appendChild(avatar);
+      } else {
+        const placeholder = document.createElement("span");
+        placeholder.className = "line-chat-avatar-placeholder";
+        row.appendChild(placeholder);
+      }
+    }
+
+    const content = document.createElement("div");
+    content.className = "foundation-chat-content";
+
+    if (!isMine && isNewGroup) {
+      const senderName = document.createElement("div");
+      senderName.className = "foundation-chat-sender";
+      senderName.textContent =
+        memberNames[message.from] || message.from;
+      content.appendChild(senderName);
+    }
+
+    const bubble = document.createElement("div");
+    bubble.className = "line-chat-bubble";
+    bubble.textContent = message.text;
+    content.appendChild(bubble);
+
+    row.appendChild(content);
+    messages.appendChild(row);
+
     previousSender = message.from;
   });
 }
