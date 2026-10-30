@@ -3531,8 +3531,12 @@ function openLineSubpage(page) {
     targetPage.style.zIndex = "100";
 
     if (pageId === "jaoOhChatPage") {
-      renderJaoOhChatHistory();
-    }
+  renderJaoOhChatHistory();
+}
+
+if (pageId === "jaeSoChatPage") {
+  renderJaeSoChatHistory();
+}
   }); // ปิดตัวดักคลิกตรงนี้ ก่อนเริ่มตัวจัดการปุ่มอื่น
 
   // กดกลับจากห้องแชตเพื่อกลับหน้ารายชื่อ
@@ -4920,7 +4924,59 @@ profileViewer?.addEventListener("click", (event) => {
     profileViewer.classList.remove("active");
   }
 });
+// วาดประวัติแชตเจ๊โซ่
+function renderJaeSoChatHistory() {
+  const messages = $("#jaeSoChatMessages");
+  if (!messages) return;
 
+  messages.replaceChildren();
+
+  let lastDate = "";
+  let previousSender = "";
+
+  jaeSoChatHistory.forEach(message => {
+    if (message.date !== lastDate) {
+      const dateLabel = document.createElement("div");
+      dateLabel.className = "line-chat-date";
+      dateLabel.textContent = message.date;
+      messages.appendChild(dateLabel);
+
+      lastDate = message.date;
+      previousSender = "";
+    }
+
+    const isNewGroup = message.from !== previousSender;
+
+    const row = document.createElement("div");
+    row.className =
+      "line-chat-bubble-row " +
+      (message.from === "t" ? "sent" : "received") +
+      (isNewGroup ? " first-in-group" : "");
+
+    // รูปโปรไฟล์เจ๊โซ่
+    if (message.from === "z") {
+      if (isNewGroup) {
+        const avatar = document.createElement("img");
+        avatar.className = "line-chat-avatar";
+        avatar.src = "https://i.ibb.co/VpWsqm28/4-C1-BAB46-A19-D-4482-A47-D-216-F8-FA2-A924.png";
+        avatar.alt = "เจ๊โซ่";
+        row.appendChild(avatar);
+      } else {
+        const placeholder = document.createElement("span");
+        placeholder.className = "line-chat-avatar-placeholder";
+        row.appendChild(placeholder);
+      }
+    }
+
+    const bubble = document.createElement("div");
+    bubble.className = "line-chat-bubble";
+    bubble.textContent = message.text;
+    row.appendChild(bubble);
+
+    messages.appendChild(row);
+    previousSender = message.from;
+  });
+}
 </script>
 </body>
 </html>
