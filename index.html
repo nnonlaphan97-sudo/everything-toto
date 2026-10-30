@@ -2698,10 +2698,7 @@ const chats = [
   }
   let chatOpenedFrom = "friends";
   
-const chatReadState = JSON.parse(
-  localStorage.getItem("lineChatReadState") || "{}"
-);
-
+const chatReadState = {};
 
 function getChatHistoryByName(chatName) {
   const histories = {
@@ -2751,16 +2748,11 @@ function getUnreadCount(chatName, history) {
     .length;
 }
 
+
 function markChatAsRead(chatName, history) {
   if (!Array.isArray(history)) return;
 
   chatReadState[chatName] = history.length;
-
-  localStorage.setItem(
-    "lineChatReadState",
-    JSON.stringify(chatReadState)
-  );
-
   renderChats();
 }
 
