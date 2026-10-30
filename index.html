@@ -3033,7 +3033,7 @@ if (name === "ข้อความ") {
   
 let touchStartY = null;
 let touchStartedInSmsList = false;
-
+let touchStartedOnHomeGesture = false;
 $("phone").addEventListener("touchstart", event => {
   if (event.touches.length !== 1) return;
 
@@ -3044,38 +3044,68 @@ $("phone").addEventListener("touchstart", event => {
     !!event.target.closest(".sms-conversation-list");
 }, { passive: true });
 
+
+$("phone").addEventListener("touchstart", event => {
+  if (event.touches.length !== 1) return;
+
+  touchStartY = event.touches[0].clientY;
+
+  touchStartedInSmsList =
+    currentScreen === "app" &&
+    !!event.target.closest(".sms-conversation-list");
+
+  touchStartedOnHomeGesture =
+    currentScreen === "app" &&
+    !!event.target.closest("#appHomeGesture");
+
+}, { passive: true });
+
 $("phone").addEventListener("touchend", event => {
   if (touchStartY === null || !event.changedTouches.length) return;
 
   const endY = event.changedTouches[0].clientY;
   const delta = touchStartY - endY;
 
-  if (touchStartedInSmsList) {
-    touchStartY = null;
-    touchStartedInSmsList = false;
-    return;
-  }
+  const startedInSmsList = touchStartedInSmsList;
+  const startedOnHomeGesture = touchStartedOnHomeGesture;
 
   touchStartY = null;
+  touchStartedInSmsList = false;
+  touchStartedOnHomeGesture = false;
+
+  // เลื่อนรายการ SMS ได้โดยไม่กลับโฮม
+  if (startedInSmsList && !startedOnHomeGesture) {
+    return;
+  }
 
   if (delta > 65) {
     if (currentScreen === "lock") {
       openPin();
+
     } else if (currentScreen === "player") {
       showScreen("lock");
+
     } else if (currentScreen === "app") {
-      if (!document.getElementById("appScreen").classList.contains("sms-mode")) {
+      const isSms = document.getElementById("appScreen")
+        .classList.contains("sms-mode");
+
+      // แอปข้อความต้องเริ่มปัดจากแถบ Home
+      if (!isSms || startedOnHomeGesture) {
         showScreen("home");
       }
     }
+
   } else if (delta < -65) {
     if (currentScreen === "pin") {
       showScreen("lock");
+
     } else if (currentScreen === "home") {
       showScreen("lock");
     }
   }
+
 }, { passive: true });
+
 
 
   updateClock();
