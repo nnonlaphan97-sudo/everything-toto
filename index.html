@@ -1908,61 +1908,39 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   cursor: pointer;
 }
 
-/* หน้าแชตจ๊ะโอ๋ */
+
+/* หน้าแชตจ๊ะโอ๋ — ใช้ระยะเดียวกับหน้าคณิต */
 #jaoOhChatPage {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  background: linear-gradient(
-    to bottom,
-    #fff 0,
-    #fff 38px,
-    #8cabd0 38px,
-    #8cabd0 100%
-  );
+  background: #8cabd0;
   z-index: 100;
   overflow: hidden;
 }
 
-/* แถบชื่อและปุ่มย้อนกลับ เลื่อนลงจากขอบบน 38px */
+/* หัวแชต: ระยะและขนาดเหมือนคณิต */
 #jaoOhChatPage .line-subpage-header {
-  position: absolute;
-  top: 38px;
-  left: 0;
-  right: 0;
+  top: 0;
   height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 48px;
-  box-sizing: border-box;
-  background: #fff;
-  border-bottom: 1px solid #eee;
-  z-index: 2;
-}
-
-/* พื้นที่ข้อความเริ่มใต้แถบชื่อ */
-#jaoOhChatPage #jaoOhChatMessages {
-  position: absolute;
-  top: 94px;
-  bottom: 64px;
   left: 0;
   right: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  padding: 12px 10px;
-  box-sizing: border-box;
-  overflow-y: auto;
+  background: #fff;
 }
 
-/* ป้องกันหน้ารายชื่อเพื่อนซ้อน */
+/* ข้อความเริ่มใต้หัวแชตพอดี */
+#jaoOhChatPage #jaoOhChatMessages {
+  top: 56px;
+  bottom: 64px;
+}
+
+/* ป้องกันรายชื่อเพื่อนซ้อน */
 #lineFriendsPage {
   z-index: 20;
 }
-</style>
+
 </head>
 
 <body>
