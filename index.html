@@ -2625,49 +2625,18 @@ screen.querySelectorAll('[data-open-category="groups"]')
     });
   });
   const chats = [
-    {
-      id: 1, name: "ครอบครัว", avatar: "♡", color: "orange",
-      preview: "วันนี้กลับบ้านกี่โมง", time: "10:42",
-      unread: 2, group: true,
-      messages: [
-        { text: "กินข้าวหรือยัง", mine: false },
-        { text: "วันนี้กลับบ้านกี่โมง", mine: false }
-      ]
-    },
-    {
-      id: 2, name: "เพื่อนสนิท", avatar: "P", color: "",
-      preview: "ส่งรูปมาให้ดูหน่อย", time: "09:18",
-      unread: 1, group: false,
-      messages: [
-        { text: "ว่างแล้วทักมานะ", mine: false },
-        { text: "ส่งรูปมาให้ดูหน่อย", mine: false }
-      ]
-    },
-    {
-      id: 3, name: "TayNew Fan Club", avatar: "TN", color: "group",
-      preview: "มีใครเตรียมตัวไปเวียดนามแล้วบ้าง", time: "เมื่อวาน",
-      unread: 8, group: true,
-      messages: [
-        { text: "มีใครเตรียมตัวไปเวียดนามแล้วบ้าง", mine: false },
-        { text: "กำลังเตรียมอยู่เลย!", mine: true }
-      ]
-    },
-    {
-      id: 4, name: "LINE Official Account", avatar: "L", color: "blue",
-      preview: "ยินดีต้อนรับ!", time: "จ.", unread: 0, group: false,
-      messages: [
-        { text: "ยินดีต้อนรับสู่บัญชีจำลอง", mine: false }
-      ]
-    },
-    {
-      id: 5, name: "เมย์", avatar: "ม", color: "orange",
-      preview: "โอเค ไว้คุยกันนะ", time: "อา.",
-      unread: 0, group: false,
-      messages: [
-        { text: "โอเค ไว้คุยกันนะ", mine: false }
-      ]
-    }
-  ];
+  { id: 1, name: "น้องณิต💙", group: false },
+  { id: 2, name: "จ๊ะโอ๋", group: false },
+  { id: 3, name: "เจ๊โซ่", group: false },
+  { id: 4, name: "ตอง", group: false },
+  { id: 5, name: "ต้นหลิว", group: false },
+  { id: 6, name: "เบียร์🍻", group: false },
+  { id: 7, name: "ป๋อ", group: false },
+  { id: 8, name: "อัคคี", group: false },
+  { id: 9, name: "ไพลิน", group: false },
+  { id: 10, name: "กู้ภัยกู้ใจ (3)", group: true },
+  { id: 11, name: "ท้ายมูลนิธิ (6)", group: true }
+];
 
   const friends = [
     { name: "เมย์", detail: "เพื่อน" },
@@ -2718,49 +2687,44 @@ screen.querySelectorAll('[data-open-category="groups"]')
     renderChats();
   }
 
-  function renderChats() {
-    const list = $("#lineChatList");
-    const query = searchText.trim().toLowerCase();
+  
+function renderChats() {
+  const list = $("#lineChatList");
+  const query = searchText.trim().toLowerCase();
 
-    const filtered = chats.filter((chat) => {
-      const matchesFilter =
-        currentFilter === "all" ||
-        (currentFilter === "unread" && chat.unread > 0) ||
-        (currentFilter === "groups" && chat.group);
+  const filtered = chats.filter((chat) => {
+    const matchesFilter =
+      currentFilter === "all" ||
+      (currentFilter === "unread" && (chat.unread || 0) > 0) ||
+      (currentFilter === "groups" && chat.group);
 
-      const matchesSearch =
-        !query ||
-        chat.name.toLowerCase().includes(query) ||
-        chat.preview.toLowerCase().includes(query);
+    const matchesSearch =
+      !query ||
+      chat.name.toLowerCase().includes(query);
 
-      return matchesFilter && matchesSearch;
-    });
+    return matchesFilter && matchesSearch;
+  });
 
-    if (!filtered.length) {
-      list.innerHTML = '<div class="line-empty">ไม่พบแชตที่ค้นหา</div>';
-      return;
-    }
-
-    list.innerHTML = filtered.map((chat) => `
-      <button class="line-chat-row" data-chat-id="${chat.id}">
-        <span class="line-avatar ${chat.color}">
-          ${escapeHTML(chat.avatar)}
-        </span>
-        <span class="line-chat-main">
-          <span class="line-chat-name-row">
-            <span class="line-chat-name">${escapeHTML(chat.name)}</span>
-          </span>
-          <span class="line-chat-preview">${escapeHTML(chat.preview)}</span>
-        </span>
-        <span class="line-chat-meta">
-          <span>${escapeHTML(chat.time)}</span>
-          ${chat.unread ? `<span class="line-unread">${chat.unread}</span>` : ""}
-        </span>
-      </button>
-    `).join("");
+  if (!filtered.length) {
+    list.innerHTML = '<div class="line-empty">ไม่พบแชตที่ค้นหา</div>';
+    return;
   }
 
-  
+  list.innerHTML = filtered.map((chat) => `
+    <button class="line-chat-row" data-chat-id="${chat.id}">
+      <span class="line-avatar">
+        ${escapeHTML(chat.name.slice(0, 1))}
+      </span>
+      <span class="line-chat-main">
+        <span class="line-chat-name-row">
+          <span class="line-chat-name">${escapeHTML(chat.name)}</span>
+        </span>
+        <span class="line-chat-preview">แตะเพื่อดูบทสนทนา</span>
+      </span>
+    </button>
+  `).join("");
+}
+
 function renderFriends() {
   const list = $("#lineFriendList");
   if (!list) return;
@@ -2838,11 +2802,39 @@ function renderFriends() {
       return;
     }
 
-    const chatButton = event.target.closest("[data-chat-id]");
-    if (chatButton) {
-      openChat(chatButton.dataset.chatId);
-      return;
-    }
+    
+const chatButton = event.target.closest("[data-chat-id]");
+if (chatButton) {
+  const chat = chats.find(
+    item => item.id === Number(chatButton.dataset.chatId)
+  );
+
+  if (!chat) return;
+
+  const pageId = lineChatRoutes[chat.name];
+  if (!pageId) return;
+
+  const targetPage = document.getElementById(pageId);
+  if (!targetPage) return;
+
+  screen.querySelectorAll(".line-subpage").forEach(page => {
+    page.style.display = "none";
+  });
+
+  targetPage.style.display = "flex";
+  targetPage.style.zIndex = "100";
+
+  if (pageId === "lineChatPage") {
+    openKanithChat();
+  }
+
+  if (pageId === "jaoOhChatPage") {
+    renderJaoOhChatHistory();
+  }
+
+  return;
+}
+
 
     const friendButton = event.target.closest("[data-friend-name]");
     if (friendButton) {
