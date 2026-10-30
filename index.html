@@ -4899,36 +4899,7 @@ row.appendChild(avatar);
       previousSender = message.from;
     });
   }
-  // เปิด LINE เมื่อระบบหลักเรียก openApp("LINE")
-  window.openLineApp = function () {
-    closeChat();
-    screen.style.display = "flex";
-    setTab("friends");
-  };
-})();
-
-const myProfileAvatar = document.querySelector(
-  ".line-my-profile-avatar img"
-);
-const profileViewer = document.getElementById("lineProfileViewer");
-const profileLargeImage = document.getElementById("lineProfileLargeImage");
-const profileViewerClose = document.getElementById("lineProfileViewerClose");
-
-myProfileAvatar?.addEventListener("click", () => {
-  profileLargeImage.src = myProfileAvatar.src;
-  profileViewer.classList.add("active");
-});
-
-profileViewerClose?.addEventListener("click", () => {
-  profileViewer.classList.remove("active");
-});
-
-profileViewer?.addEventListener("click", (event) => {
-  if (event.target === profileViewer) {
-    profileViewer.classList.remove("active");
-  }
-});
-// วาดประวัติแชตเจ๊โซ่
+  // วาดประวัติแชตเจ๊โซ่
 function renderJaeSoChatHistory() {
   const messages = $("#jaeSoChatMessages");
   if (!messages) return;
@@ -4981,6 +4952,36 @@ function renderJaeSoChatHistory() {
     previousSender = message.from;
   });
 }
+  // เปิด LINE เมื่อระบบหลักเรียก openApp("LINE")
+  window.openLineApp = function () {
+    closeChat();
+    screen.style.display = "flex";
+    setTab("friends");
+  };
+})();
+
+const myProfileAvatar = document.querySelector(
+  ".line-my-profile-avatar img"
+);
+const profileViewer = document.getElementById("lineProfileViewer");
+const profileLargeImage = document.getElementById("lineProfileLargeImage");
+const profileViewerClose = document.getElementById("lineProfileViewerClose");
+
+myProfileAvatar?.addEventListener("click", () => {
+  profileLargeImage.src = myProfileAvatar.src;
+  profileViewer.classList.add("active");
+});
+
+profileViewerClose?.addEventListener("click", () => {
+  profileViewer.classList.remove("active");
+});
+
+profileViewer?.addEventListener("click", (event) => {
+  if (event.target === profileViewer) {
+    profileViewer.classList.remove("active");
+  }
+});
+
 </script>
 </body>
 </html>
