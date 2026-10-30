@@ -2804,11 +2804,15 @@ function renderChats() {
   const query = searchText.trim().toLowerCase();
 
   const filtered = chats.filter(chat => {
-    const matchesFilter =
-      currentFilter === "all" ||
-      (currentFilter === "groups" && chat.group) ||
-      (currentFilter === "unread" && (chat.unread || 0) > 0);
-
+    
+const matchesFilter =
+  currentFilter === "all" ||
+  (currentFilter === "groups" && chat.group) ||
+  (currentFilter === "unread" &&
+    getUnreadCount(
+      chat.name,
+      getChatHistoryByName(chat.name)
+    ) > 0);
     return matchesFilter &&
       chat.name.toLowerCase().includes(query);
   });
