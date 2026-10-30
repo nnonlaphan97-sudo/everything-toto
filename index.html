@@ -6411,17 +6411,13 @@ function renderThanFoundationChatHistory() {
         avatar.className = "line-chat-avatar";
 
         const memberName = memberNames[message.from] || message.from;
-        const friend = Array.from(
-          screen.querySelectorAll("[data-open-chat]")
-        ).find(el => el.dataset.openChat === memberName);
+        const member = friendList.find(
+  friend => friend.name === memberName
+);
 
-        const friendImage = friend?.querySelector("img");
+if (member) {
+  avatar.src = member.image;
 
-        if (friendImage?.src) {
-          avatar.src = friendImage.src;
-        } else {
-          avatar.style.visibility = "hidden";
-        }
 
         avatar.alt = memberName;
         row.appendChild(avatar);
