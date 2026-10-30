@@ -2848,13 +2848,25 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "à¸‚à
   $("homeGesture").addEventListener("click", () => showScreen("lock"));
 
   let touchStartY = null;
-  $("phone").addEventListener("touchstart", event => {
-    if (event.touches.length === 1) touchStartY = event.touches[0].clientY;
-  }, { passive: true });
+  let touchStartedInSmsList = false;
+$("phone").addEventListener("touchstart", event => {
+  if (event.touches.length !== 1) return;
+
+  touchStartY = event.touches[0].clientY;
+
+  touchStartedInSmsList =
+    currentScreen === "app" &&
+    !!event.target.closest(".sms-conversation-list");
+}, { passive: true });
   $("phone").addEventListener("touchend", event => {
     if (touchStartY === null || !event.changedTouches.length) return;
     const endY = event.changedTouches[0].clientY;
     const delta = touchStartY - endY;
+    if (touchStartedInSmsList) {
+  touchStartY = null;
+  touchStartedInSmsList = false;
+  return;
+}
     touchStartY = null;
     if (delta > 65) {
       if (currentScreen === "lock") openPin();
