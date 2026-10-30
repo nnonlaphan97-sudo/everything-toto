@@ -2607,7 +2607,7 @@ window.showPhoneScreen = showScreen;
     return;
   }
     $("appWindowTitle").textContent = name;
-  $("appScreen").classList.toggle("sms-mode", name === "ข้อความ");
+document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข้อความ");
     const content = {
       "โทรศัพท์": `<div class="mock-card"><div style="font-size:12px;color:#777">แป้นกด</div><div style="font-size:28px;text-align:center;margin:24px 0">＋</div><button class="mock-primary" onclick="phoneDemoToast('โทรศัพท์จำลอง')">โทร</button></div>`,
 
