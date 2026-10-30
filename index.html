@@ -2688,6 +2688,7 @@ const chats = [
     $("#lineConversation").setAttribute("aria-hidden", "true");
     renderChats();
   }
+  let chatOpenedFrom = "friends";
 function renderChats() {
   const list = $("#lineChatList");
   if (!list) return;
@@ -2746,6 +2747,7 @@ function renderChats() {
         console.warn("ไม่พบเส้นทางแชต:", name);
         return;
       }
+chatOpenedFrom = "chats";
 setTab("friends");
       
 screen.querySelectorAll(".line-subpage").forEach(page => {
@@ -2934,8 +2936,13 @@ function renderFriends() {
 const kanithChatBack = $("#kanithChatBack");
 if (kanithChatBack) {
   kanithChatBack.addEventListener("click", () => {
-    openLineSubpage("friends");
-    renderFriendCategory("friends");
+    if (chatOpenedFrom === "chats") {
+  setTab("chats");
+  chatOpenedFrom = "friends";
+} else {
+  openLineSubpage("friends");
+  renderFriendCategory("friends");
+}
   });
 }
 
@@ -2943,8 +2950,13 @@ if (kanithChatBack) {
 const jaoOhChatBack = $("#jaoOhChatBack");
 if (jaoOhChatBack) {
   jaoOhChatBack.addEventListener("click", () => {
-    openLineSubpage("friends");
-    renderFriendCategory("friends");
+    if (chatOpenedFrom === "chats") {
+  setTab("chats");
+  chatOpenedFrom = "friends";
+} else {
+  openLineSubpage("friends");
+  renderFriendCategory("friends");
+}
   });
 }
 
