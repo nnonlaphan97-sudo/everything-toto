@@ -2733,6 +2733,26 @@ function renderChats() {
       </span>
     </button>
   `).join("");
+  
+  list.querySelectorAll(".line-chat-row").forEach(button => {
+    button.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const name =
+        button.dataset.openChat ||
+        button.dataset.openGroup;
+
+      const pageId = lineChatRoutes[name];
+      if (!pageId) {
+        console.warn("ไม่พบเส้นทางแชต:", name);
+        return;
+      }
+
+      openLineSubpage(pageId);
+    });
+  });
+
 }
 
 function renderFriends() {
