@@ -2698,6 +2698,66 @@ const chats = [
   }
   let chatOpenedFrom = "friends";
   
+const chatReadState = JSON.parse(
+  localStorage.getItem("lineChatReadState") || "{}"
+);
+
+
+function getChatHistoryByName(chatName) {
+  const histories = {
+    "น้องณิต💙": () => kanithChatHistory,
+    "จ๊ะโอ๋": () => jaoOhChatHistory,
+    "เจ๊โซ่": () => jaeSoChatHistory,
+    "ตอง": () => tongChatHistory,
+    "ต้นหลิว": () => tonLiewChatHistory,
+    "เบียร์🍻": () => beerChatHistory,
+    "ป๋อ": () => porChatHistory,
+    "อัคคี": () => akkeeChatHistory,
+    "ไพลิน": () => phailinChatHistory,
+    "กู้ภัยกู้ใจ (3)": () => rescueLoveChatHistory,
+    "ท้ายมูลนิธิ (6)": () => thanFoundationChatHistory
+  };
+
+  try {
+    return histories[chatName]?.() || [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function getUnreadCount(chatName, history) {
+  if (!Array.isArray(history) || history.length === 0) {
+    return 0;
+  }
+
+  const latest = history[history.length - 1];
+
+  // ข้อความสุดท้ายเป็นของเรา (ด้านขวา) ไม่แสดงวงรี
+  if (latest.from === "t") {
+    return 0;
+  }
+
+  const readCount = chatReadState[chatName] ?? 0;
+
+  return history
+    .slice(readCount)
+    .filter(message => message.from !== "t")
+    .length;
+}
+
+function markChatAsRead(chatName, history) {
+  if (!Array.isArray(history)) return;
+
+  chatReadState[chatName] = history.length;
+
+  localStorage.setItem(
+    "lineChatReadState",
+    JSON.stringify(chatReadState)
+  );
+
+  renderChats();
+}
+
 
 function getLatestChatMessage(chatName) {
   const histories = {
@@ -2769,7 +2829,29 @@ function renderChats() {
       <span class="line-chat-main">
         <span class="line-chat-name-row">
           <span class="line-chat-name">${escapeHTML(chat.name)}</span>
-        </span>
+      
+${(() => {
+  const unread = getUnreadCount(
+    chat.name,
+    getChatHistoryByName(chat.name)
+  );
+
+  return unread > 0
+    ? `<span style="
+        background:#06C755;
+        color:white;
+        border-radius:999px;
+        padding:2px 7px;
+        min-width:20px;
+        font-size:12px;
+        font-weight:700;
+        text-align:center;
+        display:inline-block;
+        margin-left:8px;
+      ">${unread}</span>`
+    : "";
+})()}
+          </span>
    <span class="line-chat-preview">${escapeHTML(getLatestChatMessage(chat.name))}</span>
       </span>
     </button>
