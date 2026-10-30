@@ -6431,6 +6431,72 @@ if (member) {
     const content = document.createElement("div");
     content.className = "foundation-chat-content";
 
+    // วาดประวัติแชตกลุ่มท้ายมูลนิธิ
+function renderThanFoundationChatHistory() {
+  const messages = $("#thanFoundationChatMessages");
+  if (!messages) return;
+
+  messages.replaceChildren();
+
+  const memberNames = {
+    por: "ป๋อ",
+    akkee: "อัคคี",
+    beer: "เบียร์🍻",
+    jaoOh: "จ๊ะโอ๋",
+    tong: "ตอง"
+  };
+
+  let lastDate = "";
+  let previousSender = "";
+
+  thanFoundationChatHistory.forEach(message => {
+    if (message.date !== lastDate) {
+      const dateLabel = document.createElement("div");
+      dateLabel.className = "line-chat-date";
+      dateLabel.textContent = message.date;
+      messages.appendChild(dateLabel);
+
+      lastDate = message.date;
+      previousSender = "";
+    }
+
+    const isMine = message.from === "toto";
+    const isNewGroup = message.from !== previousSender;
+
+    const row = document.createElement("div");
+    row.className =
+      "line-chat-bubble-row " +
+      (isMine ? "sent" : "received") +
+      (isNewGroup ? " first-in-group" : "");
+
+    if (!isMine) {
+      if (isNewGroup) {
+        const avatar = document.createElement("img");
+        avatar.className = "line-chat-avatar";
+
+        const memberName = memberNames[message.from] || message.from;
+
+        // ดึงรูปโปรไฟล์จริงจาก friendList
+        const member = friendList.find(
+          friend => friend.name === memberName
+        );
+
+        if (member) {
+          avatar.src = member.image;
+        }
+
+        avatar.alt = memberName;
+        row.appendChild(avatar);
+      } else {
+        const placeholder = document.createElement("span");
+        placeholder.className = "line-chat-avatar-placeholder";
+        row.appendChild(placeholder);
+      }
+    }
+
+    const content = document.createElement("div");
+    content.className = "foundation-chat-content";
+
     if (!isMine && isNewGroup) {
       const senderName = document.createElement("div");
       senderName.className = "foundation-chat-sender";
