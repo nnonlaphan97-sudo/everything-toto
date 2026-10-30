@@ -2847,8 +2847,10 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "à¸‚à
   $("appHomeGesture").addEventListener("click", () => showScreen("home"));
   $("homeGesture").addEventListener("click", () => showScreen("lock"));
 
-  let touchStartY = null;
-  let touchStartedInSmsList = false;
+  
+let touchStartY = null;
+let touchStartedInSmsList = false;
+
 $("phone").addEventListener("touchstart", event => {
   if (event.touches.length !== 1) return;
 
@@ -2858,28 +2860,40 @@ $("phone").addEventListener("touchstart", event => {
     currentScreen === "app" &&
     !!event.target.closest(".sms-conversation-list");
 }, { passive: true });
-  $("phone").addEventListener("touchend", event => {
-    if (touchStartY === null || !event.changedTouches.length) return;
-    const endY = event.changedTouches[0].clientY;
-    const delta = touchStartY - endY;
-    if (touchStartedInSmsList) {
-  touchStartY = null;
-  touchStartedInSmsList = false;
-  return;
-}
+
+$("phone").addEventListener("touchend", event => {
+  if (touchStartY === null || !event.changedTouches.length) return;
+
+  const endY = event.changedTouches[0].clientY;
+  const delta = touchStartY - endY;
+
+  if (touchStartedInSmsList) {
     touchStartY = null;
-    if (delta > 65) {
-      if (currentScreen === "lock") openPin();
-      else if (currentScreen === "player") showScreen("lock");
-      else if (currentScreen === "app") {
-  if (!document.getElementById("appScreen").classList.contains("sms-mode")) {
-    showScreen("home");
+    touchStartedInSmsList = false;
+    return;
   }
-    } else if (delta < -65) {
-      if (currentScreen === "pin") showScreen("lock");
-      else if (currentScreen === "home") showScreen("lock");
+
+  touchStartY = null;
+
+  if (delta > 65) {
+    if (currentScreen === "lock") {
+      openPin();
+    } else if (currentScreen === "player") {
+      showScreen("lock");
+    } else if (currentScreen === "app") {
+      if (!document.getElementById("appScreen").classList.contains("sms-mode")) {
+        showScreen("home");
+      }
     }
-  }, { passive: true });
+  } else if (delta < -65) {
+    if (currentScreen === "pin") {
+      showScreen("lock");
+    } else if (currentScreen === "home") {
+      showScreen("lock");
+    }
+  }
+}, { passive: true });
+
 
   updateClock();
   setInterval(updateClock, 1000);
