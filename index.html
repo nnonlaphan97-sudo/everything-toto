@@ -2573,6 +2573,67 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   color: #fff;
   cursor: pointer;
 }
+/* ปรับรูปโปรไฟล์เจ๊โซ่ให้เท่าคณิต */
+#jaeSoChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+#jaeSoChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* บับเบิ้ลเจ๊โซ่ */
+#jaeSoChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 74%;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ข้อความเจ๊โซ่ สีขาว */
+#jaeSoChatPage .line-chat-bubble-row.received .line-chat-bubble {
+  order: 1;
+  background: #fff;
+  color: #222;
+}
+
+/* ข้อความโตโต้ สีเขียว */
+#jaeSoChatPage .line-chat-bubble-row.sent .line-chat-bubble {
+  order: 1;
+  background: #b8f2a6;
+  color: #222;
+}
+
+/* เอาหางแหลมออก */
+#jaeSoChatPage .line-chat-bubble::before,
+#jaeSoChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+/* เวลาในแชต */
+#jaeSoChatPage .line-chat-time {
+  position: static !important;
+  display: inline-block;
+  flex: 0 0 auto;
+  align-self: flex-end;
+  margin: 0 2px 3px;
+  color: #999;
+  font-size: 9px;
+  line-height: 1.2;
+}
 </style>
 </head>
 <body>
