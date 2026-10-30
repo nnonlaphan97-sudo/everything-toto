@@ -2690,39 +2690,44 @@ window.showPhoneScreen = showScreen;
  
   
   // เปิดหน้ารายชื่อเพื่อน กลุ่ม หรือแชต
-  function openLineSubpage(page) {
-    const friendsPage = $("#lineFriendsPage");
-    const groupsPage = $("#lineGroupsPage");
-    const chatPage = $("#lineChatPage");
-    const jaoOhPage = $("#jaoOhChatPage");
+  
+function openLineSubpage(page) {
+  // ซ่อนหน้ารายชื่อและห้องแชตทุกหน้าใน LINE ก่อน
+  screen.querySelectorAll(".line-subpage").forEach(subpage => {
+    subpage.style.display = "none";
+  });
 
-    // ซ่อนหน้าทุกหน้าก่อน
-    if (friendsPage) friendsPage.style.display = "none";
-    if (groupsPage) groupsPage.style.display = "none";
-    if (chatPage) chatPage.style.display = "none";
-    if (jaoOhPage) jaoOhPage.style.display = "none";
+  const pageMap = {
+    friends: "lineFriendsPage",
+    groups: "lineGroupsPage",
+    chat: "lineChatPage",
+    jaoOh: "jaoOhChatPage"
+  };
 
-    // เปิดเฉพาะหน้าที่เลือก
-    if (page === "friends" && friendsPage) {
-      friendsPage.style.display = "block";
-    }
+  const pageId = pageMap[page] || page;
+  const targetPage = document.getElementById(pageId);
 
-    if (page === "groups" && groupsPage) {
-      groupsPage.style.display = "block";
-    }
-
-    if (page === "chat" && chatPage) {
-      chatPage.style.display = "block";
-      chatPage.style.zIndex = "100";
-      renderKanithChatHistory();
-    }
-
-    if (page === "jaoOh" && jaoOhPage) {
-      jaoOhPage.style.display = "block";
-      jaoOhPage.style.zIndex = "100";
-      renderJaoOhChatHistory();
-    }
+  if (!targetPage || !screen.contains(targetPage)) {
+    console.warn("ไม่พบหน้า LINE:", pageId);
+    return;
   }
+
+  // แสดงเฉพาะหน้าที่เลือก
+  targetPage.style.display =
+    pageId === "lineFriendsPage" || pageId === "lineGroupsPage"
+      ? "block"
+      : "flex";
+
+  targetPage.style.zIndex = "100";
+
+  if (pageId === "jaoOhChatPage") {
+    renderJaoOhChatHistory();
+  }
+
+  if (pageId === "lineChatPage") {
+    renderKanithChatHistory();
+  }
+}
   // เชื่อมโปรไฟล์เพื่อนและกลุ่มกับหน้าห้องแชต
   const lineChatRoutes = {
     "น้องณิต💙": "lineChatPage",
@@ -3223,13 +3228,11 @@ if (kanithChatBack) {
     renderFriendCategory("friends");
   });
 }
-// กดกลับจากแชตจ๊ะโอ๋ไปหน้ารายชื่อเพื่อน
 
+// กดกลับจากแชตจ๊ะโอ๋ไปหน้ารายชื่อเพื่อน
 const jaoOhChatBack = $("#jaoOhChatBack");
 if (jaoOhChatBack) {
-  jaoOhChatBack.addEventListener("click", (event) => {
-    event.preventDefault();
-    event.stopPropagation();
+  jaoOhChatBack.addEventListener("click", () => {
     openLineSubpage("friends");
     renderFriendCategory("friends");
   });
