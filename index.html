@@ -285,174 +285,271 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 .app-content { padding-top: 20px; font-size: 14px; line-height: 1.7; }
 .mock-card { margin-top: 13px; padding: 16px; border-radius: 17px; background: white; box-shadow: 0 4px 15px #2416320a; }
 .mock-primary { margin-top: 12px; width: 100%; padding: 12px; border-radius: 13px; background: #6654a3; color: white; font-weight: 650; }
+#appScreen .app-home-gesture { background: #33313a; }
 
-/* SAMSUNG MESSAGES - LIGHT MODE */
-#appScreen.messages-mode {
+/* ===== SAMSUNG MESSAGES LIGHT MODE ===== */
+
+#appScreen.sms-mode {
   padding: 0;
-  background: #fafafa;
-  color: #171717;
+  background: #f8f8f8;
+  color: #191919;
 }
 
-#appScreen.messages-mode .app-window-header {
+#appScreen.sms-mode .app-window-header {
   display: none;
 }
 
-#appScreen.messages-mode .app-content {
+#appScreen.sms-mode .app-content {
   height: 100%;
   padding: 0;
   overflow: hidden;
-  font-size: 14px;
   line-height: normal;
 }
 
-#appScreen.messages-mode .app-home-gesture {
+#appScreen.sms-mode .app-home-gesture {
   background: #333;
 }
 
 .sms-page {
-  height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
-  background: #fafafa;
-  font-family: inherit;
+  height: 100%;
+  background: #f8f8f8;
+  overflow: hidden;
 }
 
-.sms-hero {
+/* หัวข้อและปุ่มด้านบน */
+.sms-header {
   flex-shrink: 0;
-  min-height: 235px;
-  padding: 95px 24px 15px;
-  text-align: center;
-}
-
-.sms-hero-title {
-  font-size: 35px;
-  font-weight: 400;
-  line-height: 1.25;
-  letter-spacing: -1px;
-}
-
-.sms-view-btn {
-  margin-top: 15px;
-  padding: 9px 32px;
-  border-radius: 30px;
-  background: #e9e9e9;
-  color: #222;
-  font-size: 15px;
-}
-
-.sms-toolbar {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  padding: 76px 24px 0;
+}
+
+.sms-title {
+  font-size: 29px;
+  font-weight: 700;
+  color: #171717;
+}
+
+.sms-header-actions {
+  display: flex;
   align-items: center;
   gap: 20px;
-  padding: 12px 24px;
-  font-size: 25px;
 }
 
-.sms-tabs {
+.sms-icon-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #222;
+}
+
+.sms-menu-dot {
+  position: absolute;
+  top: 0;
+  right: -5px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff565b;
+}
+
+/* แท็บข้อความเข้า */
+.sms-folder-tabs {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 30px;
-  padding: 22px 24px 12px;
-  font-size: 17px;
+  margin-top: 48px;
+  padding: 0 24px 13px;
 }
 
-.sms-tab-active {
-  color: #258cf0;
-  border-bottom: 3px solid #258cf0;
-  padding-bottom: 6px;
+.sms-folder-active {
+  position: relative;
+  padding-bottom: 7px;
+  color: #258bf2;
+  font-size: 18px;
   font-weight: 650;
 }
 
-.sms-list {
+.sms-folder-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  border-radius: 3px;
+  background: #258bf2;
+}
+
+.sms-folder-add {
+  font-size: 30px;
+  font-weight: 300;
+  color: #333;
+  line-height: 1;
+}
+
+/* รายการข้อความ */
+.sms-conversation-list {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
   background: #fff;
-  border-radius: 28px 28px 0 0;
-  padding: 12px 20px;
+  border-radius: 30px 30px 0 0;
+  padding: 10px 20px 20px;
+  scrollbar-width: none;
 }
 
-.sms-row {
+.sms-conversation-list::-webkit-scrollbar {
+  display: none;
+}
+
+.sms-conversation {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 16px 0;
+  min-height: 92px;
 }
 
 .sms-avatar {
-  width: 44px;
-  height: 44px;
+  width: 43px;
+  height: 43px;
   flex-shrink: 0;
-  border: 1.5px solid #aaa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #a6a6a6;
+  border-radius: 50%;
+  color: #555;
+}
+
+.sms-conversation-body {
+  flex: 1;
+  min-width: 0;
+  padding: 16px 0;
+  border-bottom: 1px solid #ededed;
+}
+
+.sms-conversation-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.sms-sender {
+  font-size: 17px;
+  font-weight: 650;
+  color: #171717;
+}
+
+.sms-date {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: #777;
+}
+
+.sms-conversation-bottom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.sms-preview {
+  flex: 1;
+  min-width: 0;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.sms-unread {
+  flex-shrink: 0;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ff575b;
+  color: #111;
+  font-size: 12px;
+}
+
+/* ปุ่มเขียนข้อความ */
+.sms-compose {
+  position: absolute;
+  right: 20px;
+  bottom: 112px;
+  z-index: 3;
+  width: 62px;
+  height: 62px;
+  border: 0;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #666;
-  font-size: 23px;
+  background: #65b6fa;
+  color: #17364d;
+  box-shadow: 0 3px 10px #00000012;
 }
 
-.sms-row-content {
-  flex: 1;
-  min-width: 0;
-  border-bottom: 1px solid #eeeeee;
-  padding-bottom: 14px;
-}
-
-.sms-row-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-
-.sms-name {
-  font-size: 17px;
-  font-weight: 650;
-}
-
-.sms-date {
-  font-size: 12px;
-  color: #777;
-  white-space: nowrap;
-}
-
-.sms-preview {
-  margin-top: 5px;
-  color: #777;
-  font-size: 13px;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.sms-bottom {
+/* แถบเมนูด้านล่าง */
+.sms-bottom-nav {
+  flex-shrink: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 75px;
-  flex-shrink: 0;
-  background: #fafafa;
-  font-size: 17px;
+  height: 83px;
+  padding-bottom: 10px;
+  background: #f8f8f8;
 }
 
-.sms-compose {
+.sms-nav-item {
+  position: relative;
+  color: #666;
+  font-size: 18px;
+}
+
+.sms-nav-item.active {
+  color: #258bf2;
+  font-weight: 650;
+  border-bottom: 3px solid #258bf2;
+  padding-bottom: 5px;
+}
+
+.sms-nav-badge {
   position: absolute;
-  right: 20px;
-  bottom: 110px;
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  background: #69b8ff;
-  color: #173b55;
-  font-size: 29px;
-  box-shadow: 0 3px 12px #00000020;
-  z-index: 2;
+  top: -10px;
+  right: -27px;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  background: #ff575b;
+  color: #111;
+  font-size: 12px;
+  font-weight: 400;
 }
-
-#appScreen .app-home-gesture { background: #33313a; }
 .toast {
   position: absolute; z-index: 100; bottom: 70px; left: 50%; transform: translate(-50%, 10px);
   padding: 10px 15px; border-radius: 22px; background: #181722ed; border: 1px solid #ffffff1c;
@@ -2510,92 +2607,231 @@ window.showPhoneScreen = showScreen;
     return;
   }
     $("appWindowTitle").textContent = name;
-    $("appScreen").classList.toggle("messages-mode", name === "ข้อความ");
+  $("appScreen").classList.toggle("sms-mode", name === "ข้อความ");
     const content = {
       "โทรศัพท์": `<div class="mock-card"><div style="font-size:12px;color:#777">แป้นกด</div><div style="font-size:28px;text-align:center;margin:24px 0">＋</div><button class="mock-primary" onclick="phoneDemoToast('โทรศัพท์จำลอง')">โทร</button></div>`,
 
 "ข้อความ": `
   <div class="sms-page">
-    <div class="sms-hero">
-      <div class="sms-hero-title">293 ข้อความที่ไม่ได้อ่าน</div>
-      <button class="sms-view-btn">ดู</button>
-    </div>
 
-    <div class="sms-toolbar">
-      <span>⌕</span>
-      <span>⋮</span>
-    </div>
+    <div class="sms-header">
+      <div class="sms-title">ข้อความ</div>
 
-    <div class="sms-tabs">
-      <span class="sms-tab-active">ข้อความเข้า</span>
-      <span>＋</span>
-    </div>
+      <div class="sms-header-actions">
+        <button class="sms-icon-button" aria-label="ค้นหา">
+          <svg width="25" height="25" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round">
+            <circle cx="10.8" cy="10.8" r="6.8"/>
+            <path d="m16 16 5 5"/>
+          </svg>
+        </button>
 
-    <div class="sms-list">
-      <div class="sms-row">
-        <div class="sms-avatar">●</div>
-        <div class="sms-row-content">
-          <div class="sms-row-top">
-            <span class="sms-name">TikTok</span>
-            <span class="sms-date">18 พ.ค.</span>
-          </div>
-          <div class="sms-preview">[#][TikTok] 515230 คือรหัสยืนยันของคุณ</div>
-        </div>
-      </div>
-
-      <div class="sms-row">
-        <div class="sms-avatar">●</div>
-        <div class="sms-row-content">
-          <div class="sms-row-top">
-            <span class="sms-name">True</span>
-            <span class="sms-date">18 พ.ค.</span>
-          </div>
-          <div class="sms-preview">ลูกค้าที่ชอบอิ่มอร่อยและใช้งานเน็ต สนุกทุกมื้อพร้อมเน็ตแรง</div>
-        </div>
-      </div>
-
-      <div class="sms-row">
-        <div class="sms-avatar">●</div>
-        <div class="sms-row-content">
-          <div class="sms-row-top">
-            <span class="sms-name">Huawei</span>
-            <span class="sms-date">18 พ.ค.</span>
-          </div>
-          <div class="sms-preview">819021 - รหัสการยืนยัน Huawei</div>
-        </div>
-      </div>
-
-      <div class="sms-row">
-        <div class="sms-avatar">●</div>
-        <div class="sms-row-content">
-          <div class="sms-row-top">
-            <span class="sms-name">+6627777777</span>
-            <span class="sms-date">18 พ.ค.</span>
-          </div>
-          <div class="sms-preview">สมัครแอพ SCB Easy บนอุปกรณ์ใหม่</div>
-        </div>
-      </div>
-
-      <div class="sms-row">
-        <div class="sms-avatar">●</div>
-        <div class="sms-row-content">
-          <div class="sms-row-top">
-            <span class="sms-name">Marshall</span>
-            <span class="sms-date">1 พ.ค.</span>
-          </div>
-          <div class="sms-preview">สมัครรับโปรโมชั่นพิเศษ</div>
-        </div>
+        <button class="sms-icon-button" aria-label="เมนู">
+          <svg width="24" height="24" viewBox="0 0 24 24"
+               fill="currentColor">
+            <circle cx="12" cy="5" r="1.6"/>
+            <circle cx="12" cy="12" r="1.6"/>
+            <circle cx="12" cy="19" r="1.6"/>
+          </svg>
+          <span class="sms-menu-dot"></span>
+        </button>
       </div>
     </div>
 
-    <button class="sms-compose">✎</button>
-
-    <div class="sms-bottom">
-      <span style="color:#258cf0;font-weight:650">การสนทนา</span>
-      <span>รายชื่อ</span>
+    <div class="sms-folder-tabs">
+      <span class="sms-folder-active">ข้อความเข้า</span>
+      <span class="sms-folder-add">+</span>
     </div>
+
+    <div class="sms-conversation-list">
+
+      <div class="sms-conversation">
+        <div class="sms-avatar">⌂</div>
+        <div class="sms-conversation-body">
+          <div class="sms-conversation-top">
+            <span class="sms-sender">HOME LOAN</span>
+            <span class="sms-date">วันนี้</span>
+          </div>
+          <div class="sms-conversation-bottom">
+            <span class="sms-preview">แจ้งเตือนค่างวดสินเชื่อบ้าน 18,500 บาท ครบกำหนดชำระ 5 พ.ย. กรุณาเตรียมยอดเงินให้เพียงพอ</span>
+            <span class="sms-unread">1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sms-conversation">
+        <div class="sms-avatar">฿</div>
+        <div class="sms-conversation-body">
+          <div class="sms-conversation-top">
+            <span class="sms-sender">K PLUS</span>
+            <span class="sms-date">วันนี้</span>
+          </div>
+          <div class="sms-conversation-bottom">
+            <span class="sms-preview">มีเงินโอนเข้าบัญชีของคุณ 35,000.00 บาท รายการสำเร็จ</span>
+            <span class="sms-unread">2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sms-conversation">
+        <div class="sms-avatar">▤</div>
+        <div class="sms-conversation-body">
+          <div class="sms-conversation-top">
+            <span class="sms-sender">SCHOOL FINANCE</span>
+            <span class="sms-date">เมื่อวาน</span>
+          </div>
+          <div class="sms-conversation-bottom">
+            <span class="sms-preview">แจ้งกำหนดชำระค่าเทอมภาคเรียนใหม่ จำนวน 24,800 บาท ภายในวันที่ 10 พ.ย.</span>
+            <span class="sms-unread">1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sms-conversation">
+        <div class="sms-avatar">⚡</div>
+        <div class="sms-conversation-body">
+          <div class="sms-conversation-top">
+            <span class="sms-sender">MEA</span>
+            <span class="sms-date">28 ต.ค.</span>
+          </div>
+          <div class="sms-conversation-bottom">
+            <span class="sms-preview">ได้รับชำระค่าไฟฟ้า 2,146.38 บาทเรียบร้อยแล้ว ขอบคุณที่ใช้บริการ</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sms-conversation">
+        <div class="sms-avatar">◉</div>
+        <div class="sms-conversation-body">
+          <div class="sms-conversation-top">
+            <span class="sms-sender">MWA</span>
+            <span class="sms-date">28 ต.ค.</span>
+          </div>
+          <div class="sms-conversation-bottom">
+            <span class="sms-preview">แจ้งยอดค่าน้ำประปา 486.20 บาท กรุณาชำระภายในวันที่ 8 พ.ย.</span>
+            <span class="sms-unread">1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sms-conversation">
+        <div class="sms-avatar">A</div>
+        <div class="sms-conversation-body">
+          <div class="sms-conversation-top">
+            <span class="sms-sender">AIS</span>
+            <span class="sms-date">27 ต.ค.</span>
+          </div>
+          <div class="sms-conversation-bottom">
+            <span class="sms-preview">ชำระค่าบริการโทรศัพท์รายเดือน 1,299.00 บาทเรียบร้อยแล้ว</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sms-conversation">
+        <div class="sms-avatar">E</div>
+        <div class="sms-conversation-body">
+          <div class="sms-conversation-top">
+            <span class="sms-sender">EVERYTHING TOTO</span>
+            <span class="sms-date">27 ต.ค.</span>
+          </div>
+          <div class="sms-conversation-bottom">
+            <span class="sms-preview">แจ้งเตือนรายการสั่งซื้อใหม่ 3 รายการ กรุณาตรวจสอบและเตรียมจัดส่งสินค้า</span>
+            <span class="sms-unread">3</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sms-conversation">
+        <div class="sms-avatar">F</div>
+        <div class="sms-conversation-body">
+          <div class="sms-conversation-top">
+            <span class="sms-sender">Flash Express</span>
+            <span class="sms-date">26 ต.ค.</span>
+          </div>
+          <div class="sms-conversation-bottom">
+            <span class="sms-preview">พัสดุหมายเลข TH2847XXXX จัดส่งถึงผู้รับเรียบร้อยแล้ว</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sms-conversation">
+        <div class="sms-avatar">S</div>
+        <div class="sms-conversation-body">
+          <div class="sms-conversation-top">
+            <span class="sms-sender">SCB EASY</span>
+            <span class="sms-date">25 ต.ค.</span>
+          </div>
+          <div class="sms-conversation-bottom">
+            <span class="sms-preview">รหัส OTP ของคุณคือ •••••• ใช้สำหรับยืนยันรายการ ห้ามเปิดเผยรหัสแก่ผู้อื่น</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sms-conversation">
+        <div class="sms-avatar">☎</div>
+        <div class="sms-conversation-body">
+          <div class="sms-conversation-top">
+            <span class="sms-sender">02-XXX-XXXX</span>
+            <span class="sms-date">24 ต.ค.</span>
+          </div>
+          <div class="sms-conversation-bottom">
+            <span class="sms-preview">คุณมีสายที่ไม่ได้รับจากหมายเลขนี้ กรุณาติดต่อกลับหากต้องการ</span>
+            <span class="sms-unread">1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sms-conversation">
+        <div class="sms-avatar">%</div>
+        <div class="sms-conversation-body">
+          <div class="sms-conversation-top">
+            <span class="sms-sender">PROMOTION</span>
+            <span class="sms-date">23 ต.ค.</span>
+          </div>
+          <div class="sms-conversation-bottom">
+            <span class="sms-preview">รับสิทธิพิเศษสำหรับลูกค้าคนสำคัญ ส่วนลดและของรางวัลจำนวนจำกัด</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sms-conversation">
+        <div class="sms-avatar">?</div>
+        <div class="sms-conversation-body">
+          <div class="sms-conversation-top">
+            <span class="sms-sender">09X-XXX-XXXX</span>
+            <span class="sms-date">22 ต.ค.</span>
+          </div>
+          <div class="sms-conversation-bottom">
+            <span class="sms-preview">สินเชื่ออนุมัติไว ไม่ต้องใช้หลักประกัน สมัครวันนี้รับวงเงินพิเศษ</span>
+            <span class="sms-unread">2</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="sms-compose" aria-label="เขียนข้อความใหม่">
+      <svg width="29" height="29" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor"
+           stroke-width="1.8" stroke-linecap="round"
+           stroke-linejoin="round">
+        <path d="M12 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-6"/>
+        <path d="m16 5 3 3M10 14l-1 4 4-1 8-8a2.12 2.12 0 0 0-3-3l-8 8Z"/>
+      </svg>
+    </button>
+
+    <div class="sms-bottom-nav">
+      <span class="sms-nav-item active">
+        การสนทนา
+        <span class="sms-nav-badge">11</span>
+      </span>
+      <span class="sms-nav-item">รายชื่อ</span>
+    </div>
+
   </div>
 `,
+
       "แกลเลอรี": `<div class="mock-card" style="text-align:center"><div style="font-size:55px">🌄</div><strong>รูปภาพของคุณ</strong><p>แกลเลอรีจำลอง</p></div>`,
       "กล้อง": `<div class="mock-card" style="text-align:center;background:#292732;color:white;padding:45px 12px"><div style="font-size:48px">📷</div><p>หน้าจอกล้องจำลอง</p><button class="mock-primary" onclick="phoneDemoToast('ถ่ายภาพจำลองแล้ว')">● ถ่ายภาพ</button></div>`,
       "ปฏิทิน": `<div class="mock-card"><strong>ปฏิทิน</strong><p>วันนี้</p><p>ไม่มีนัดหมาย</p></div>`,
