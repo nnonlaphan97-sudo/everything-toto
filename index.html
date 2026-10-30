@@ -5226,9 +5226,9 @@ function renderTongChatHistory() {
     previousSender = message.from;
   });
 }
-// วาดประวัติแชตตอง
-function renderTongChatHistory() {
-  const messages = $("#tongChatMessages");
+// วาดประวัติแชตต้นหลิว
+function renderTonLiewChatHistory() {
+  const messages = $("#tonLiewChatMessages");
   if (!messages) return;
 
   messages.replaceChildren();
@@ -5236,7 +5236,7 @@ function renderTongChatHistory() {
   let lastDate = "";
   let previousSender = "";
 
-  tongChatHistory.forEach(message => {
+  tonLiewChatHistory.forEach(message => {
     if (message.date !== lastDate) {
       const dateLabel = document.createElement("div");
       dateLabel.className = "line-chat-date";
@@ -5255,21 +5255,22 @@ function renderTongChatHistory() {
       (message.from === "t" ? "sent" : "received") +
       (isNewGroup ? " first-in-group" : "");
 
-    if (message.from === "o") {
+    if (message.from !== "t") {
       if (isNewGroup) {
         const avatar = document.createElement("img");
         avatar.className = "line-chat-avatar";
 
-        const tongFriend = screen.querySelector(
-          '[data-open-chat="ตอง"] img, [data-friend-name="ตอง"] img'
+        const friend = screen.querySelector(
+          '[data-open-chat="ต้นหลิว"] img, [data-friend-name="ต้นหลิว"] img'
         );
-        if (tongFriend?.src) {
-          avatar.src = tongFriend.src;
+
+        if (friend?.src) {
+          avatar.src = friend.src;
         } else {
           avatar.style.visibility = "hidden";
         }
 
-        avatar.alt = "ตอง";
+        avatar.alt = "ต้นหลิว";
         row.appendChild(avatar);
       } else {
         const placeholder = document.createElement("span");
