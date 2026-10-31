@@ -4516,6 +4516,27 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 .ig-story-heart.liked {
   color: #ff3040;
 }
+/* พื้นที่รับท่าปัดกลับโฮมในหน้าแอป */
+#appScreen .app-home-gesture {
+  width: 140px;
+  height: 28px;
+  bottom: 0;
+  background: transparent;
+  z-index: 100;
+  touch-action: none;
+}
+
+#appScreen .app-home-gesture::after {
+  content: "";
+  position: absolute;
+  width: 108px;
+  height: 4px;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  background: #33313a;
+}
 
 </style>
 </head>
@@ -4536,8 +4557,6 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   <!-- LOCK SCREEN -->
   <section class="screen" id="lockScreen">
     <div class="camera-hole"></div>
-    
-
 
 <div class="lock-status-icon" aria-label="หน้าจอยังไม่ได้ปลดล็อก">
   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -8827,10 +8846,46 @@ if (name === "แกลเลอรี") {
      showScreen("app");
   }
   document.querySelectorAll("[data-app]").forEach(button => button.addEventListener("click", () => openApp(button.dataset.app)));
-  $("appBack").addEventListener("click", () => showScreen("home"));
-  $("appHomeGesture").addEventListener("click", () => showScreen("home"));
-  $("homeGesture").addEventListener("click", () => showScreen("lock"));
+$("appBack").addEventListener("click", () => showScreen("home"));
 
+const appGesture = $("appHomeGesture");
+
+appGesture.addEventListener("click", () => {
+  showScreen("home");
+});
+
+let appSwipeStartY = null;
+let appSwipeStartX = null;
+
+appGesture.addEventListener("touchstart", (e) => {
+  if (e.touches.length !== 1) return;
+
+  appSwipeStartY = e.touches[0].clientY;
+  appSwipeStartX = e.touches[0].clientX;
+}, { passive: true });
+
+appGesture.addEventListener("touchend", (e) => {
+  if (appSwipeStartY === null || !e.changedTouches.length) return;
+
+  const distanceY = appSwipeStartY - e.changedTouches[0].clientY;
+  const distanceX = Math.abs(
+    appSwipeStartX - e.changedTouches[0].clientX
+  );
+
+  appSwipeStartY = null;
+  appSwipeStartX = null;
+
+  if (distanceY > 35 && distanceY > distanceX) {
+    showScreen("home");
+  }
+}, { passive: true });
+
+appGesture.addEventListener("touchcancel", () => {
+  appSwipeStartY = null;
+  appSwipeStartX = null;
+});
+
+$("homeGesture").addEventListener("click", () => showScreen("lock"));
   
 let touchStartY = null;
 let touchStartedInSmsList = false;
