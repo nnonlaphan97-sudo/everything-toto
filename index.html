@@ -3692,7 +3692,21 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 .ig-dm-chat small {
   color: #888;
 }
+/* Instagram profile photos */
+.ig-story-face img,
+.ig-avatar img,
+.ig-profile-avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 50%;
+}
 
+.ig-avatar,
+.ig-profile-avatar {
+  overflow: hidden;
+}
 </style>
 </head>
 <body>
@@ -4597,7 +4611,9 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
         <div class="ig-stories">
           <button class="ig-story ig-my-story" type="button">
             <span class="ig-story-ring ig-own">
-              <span class="ig-story-face ig-face-toto">ต</span>
+              <span class="ig-story-face ig-face-toto">
+  <img src="https://i.ibb.co/j9K327YR/r07qxo-R-Download.jpg" alt="โตโต้">
+</span>
               <span class="ig-story-plus">+</span>
             </span>
             <small>สตอรี่ของคุณ</small>
@@ -4605,7 +4621,9 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
 
           <button class="ig-story ig-kanit-story" type="button">
             <span class="ig-story-ring ig-friend-ring">
-              <span class="ig-story-face ig-face-kanit">ค</span>
+            <span class="ig-story-face ig-face-kanit">
+  <img src="https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg" alt="คณิต">
+</span>
             </span>
             <small>kanit</small>
           </button>
@@ -4613,7 +4631,9 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
 
         <article class="ig-post">
           <div class="ig-post-user">
-            <span class="ig-avatar">ต</span>
+            <span class="ig-avatar">
+  <img src="https://i.ibb.co/j9K327YR/r07qxo-R-Download.jpg" alt="โตโต้">
+</span>
             <div class="ig-post-user-info">
               <strong>toto</strong>
               <small>Everything Toto</small>
@@ -4651,7 +4671,9 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
 
         <article class="ig-post">
           <div class="ig-post-user">
-            <span class="ig-avatar ig-avatar-purple">ค</span>
+           <span class="ig-avatar ig-avatar-purple">
+  <img src="https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg" alt="คณิต">
+</span>
             <div class="ig-post-user-info">
               <strong>kanit</strong>
               <small>วันพักผ่อน</small>
@@ -4713,7 +4735,9 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
           <span>☰</span>
         </div>
         <div class="ig-profile-info">
-          <div class="ig-profile-avatar">ต</div>
+         <div class="ig-profile-avatar">
+  <img src="https://i.ibb.co/j9K327YR/r07qxo-R-Download.jpg" alt="โตโต้">
+</div>
           <div><strong>12</strong><small>โพสต์</small></div>
           <div><strong>1,248</strong><small>ผู้ติดตาม</small></div>
           <div><strong>385</strong><small>กำลังติดตาม</small></div>
