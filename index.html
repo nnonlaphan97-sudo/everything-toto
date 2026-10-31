@@ -3718,15 +3718,17 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 }
 
 /* Bottom navigation */
+
 .ig-bottom-nav {
   height: 55px;
   min-height: 55px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   align-items: center;
   background: #fff;
   border-top: 1px solid #eee;
 }
+
 
 .ig-nav {
   height: 100%;
@@ -5403,7 +5405,16 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
       </button>
       <button class="ig-nav" data-ig-page="search" type="button" aria-label="ค้นหา">
         <svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="7.3"/><path d="m16.3 16.3 5 5"/></svg>
-      </button>
+      </button>     
+<button class="ig-nav ig-nav-dm"
+        type="button"
+        data-ig-page="dm"
+        aria-label="ข้อความ Direct">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M21 3.5c.5-.3 1 .2.8.8l-6.3 16.3c-.3.8-1.4.9-1.9.2l-3.7-5.5-5.5-3.7c-.7-.5-.6-1.6.2-1.9L21 3.5Z"/>
+    <path d="m9.9 15.3 6.8-6.8"/>
+  </svg>
+</button>
       <button class="ig-nav" data-ig-page="reels" type="button" aria-label="Reels">
         <svg viewBox="0 0 24 24"><rect x="2.5" y="3" width="19" height="18" rx="3"/><path d="M2.5 9h19M8 3l4 6M15 3l4 6M10 12l6 3.5-6 3.5v-7Z"/></svg>
       </button>
