@@ -4492,6 +4492,31 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   color: #ff3040;
 }
 
+/* ===== Facebook Home Icon ===== */
+
+.fb-home-icon .fb-app-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.fb-home-icon .fb-app-logo svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.fb-home-icon .app-label {
+  display: block;
+  margin-top: 5px;
+  font-size: 11px;
+  text-align: center;
+}
+
 
 </style>
 </head>
@@ -4794,6 +4819,23 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
         </span>
         <span class="app-label">Instagram</span>
       </button>
+      // แอพ Facebook //
+<button class="app-icon fb-home-icon"
+        type="button"
+        onclick="openApp('Facebook')">
+  <span class="fb-app-logo">
+   
+<svg viewBox="0 0 48 48" aria-hidden="true">
+  <rect width="48" height="48" rx="12" fill="#0866FF"/>
+  <path
+    d="M29 40V25.5h4.8l.7-5.8H29v-3.8c0-1.7.6-2.8 3-2.8h2.7V7.9c-.5-.1-2.2-.2-4.3-.2-4.4 0-7.4 2.7-7.4 7.7v4.3h-4.9v5.8H23V40Z"
+    fill="#fff"
+    transform="translate(-4 0)"
+  />
+</svg>
+  </span>
+  <span class="app-label">Facebook</span>
+</button>
     </div>
     <div class="dock">
       <button class="app-button" data-app="โทรศัพท์"><span class="app-icon" style="background:#4dbb83">☎️</span></button>
@@ -5379,6 +5421,14 @@ window.showPhoneScreen = showScreen;
 document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข้อความ");
     const content = {
       
+"Facebook": `
+  <div style="padding:24px;text-align:center">
+    <h2 style="color:#0866ff">facebook</h2>
+    <p>Facebook ของโตโต้ 💙</p>
+    <p>บัญชีส่วนตัว + Everything Toto</p>
+  </div>
+`,
+
 
 "Instagram": `
   <div class="ig-app">
