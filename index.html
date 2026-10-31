@@ -5101,6 +5101,90 @@ body:has(#appScreen:not(.hidden) .ig-app) .status-bar {
   font-size: 11px;
   color: #888;
 }
+/* ===== Instagram DM Chat History ===== */
+
+.ig-dm-message-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 83%;
+}
+
+.ig-dm-message-group.outgoing {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.ig-dm-message-group.incoming {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.ig-dm-chat-bubble {
+  padding: 10px 13px;
+  border-radius: 18px;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.ig-dm-message-group.outgoing .ig-dm-chat-bubble {
+  background: #7547ed;
+  color: #fff;
+  border-bottom-right-radius: 5px;
+}
+
+.ig-dm-message-group.incoming .ig-dm-chat-bubble {
+  background: #efefef;
+  color: #111;
+  border-bottom-left-radius: 5px;
+}
+
+.ig-dm-story-label {
+  color: #888;
+  font-size: 10px;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.ig-dm-story-mention {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  max-width: 85%;
+  padding: 10px;
+  background: #f1f1f1;
+  border-radius: 14px;
+}
+
+.ig-dm-story-mention-icon {
+  width: 40px;
+  height: 52px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(145deg, #b64bdf, #fa7a69);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.ig-dm-story-mention > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ig-dm-story-mention strong {
+  font-size: 11px;
+}
+
+.ig-dm-story-mention small {
+  font-size: 10px;
+  color: #777;
+}
+
 </style>
 </head>
 <body>
@@ -8369,7 +8453,75 @@ const dmInbox = dmPage.querySelector(".ig-dm-inbox");
 const dmRoom = dmPage.querySelector(".ig-dm-room");
 const dmRequests = dmPage.querySelector(".ig-dm-requests");
 const dmMessages = dmPage.querySelector(".ig-dm-messages");
+/* ===== ประวัติแชตโตโต้กับคณิต ===== */
 
+const kanitChatHistory = [
+  { from: "toto", text: "ทำไรอ่ะ" },
+  { from: "kanit", text: "เล่นพิลาทิสไง" },
+  { from: "kanit", text: "ดัดจริตมากกกก" },
+
+  { type: "story", from: "toto", text: "วันนี้ผัวมาหาที่ห้องเหรอ" },
+  { from: "kanit", text: "เปล่าจ่ะ" },
+  { from: "kanit", text: "ไปนอนห้องผัว" },
+
+  { type: "story", from: "toto", text: "กินเยอะอ้วน" },
+  { from: "kanit", text: "แล้วทำไมไปหนักหัวคุณ" },
+
+  { type: "story", from: "toto", text: "ทำทรงว่าทำเอง" },
+  { from: "toto", text: "ที่ไหนได้กูทำทั้งนั้น" },
+  { from: "kanit", text: "แต่ผมจ่าย" },
+
+  { type: "story", from: "toto", text: "ตอบไลน์ผมหน่อย" },
+
+  { type: "mention", from: "kanit" },
+  { type: "mention", from: "kanit" },
+
+  { from: "toto", text: "แฟนใครวะน่ารักจัง" },
+
+  { type: "story", from: "toto", text: "น่ารัก น้องณิตน่ารัก" }
+];
+
+function renderKanitChatHistory() {
+  kanitChatHistory.forEach(item => {
+
+    if (item.type === "mention") {
+      const mention = document.createElement("div");
+      mention.className = "ig-dm-story-mention";
+
+      mention.innerHTML = `
+        <div class="ig-dm-story-mention-icon">@</div>
+        <div>
+          <strong>kanittee กล่าวถึงคุณในสตอรี่</strong>
+          <small>กล่าวถึง @phanuphong_t</small>
+        </div>
+      `;
+
+      dmMessages.appendChild(mention);
+      return;
+    }
+
+    const wrapper = document.createElement("div");
+    wrapper.className =
+      "ig-dm-message-group " +
+      (item.from === "toto" ? "outgoing" : "incoming");
+
+    if (item.type === "story") {
+      const label = document.createElement("small");
+      label.className = "ig-dm-story-label";
+      label.textContent = "คุณตอบกลับสตอรี่ของ kanittee";
+      wrapper.appendChild(label);
+    }
+
+    const bubble = document.createElement("div");
+    bubble.className = "ig-dm-chat-bubble";
+    bubble.textContent = item.text;
+
+    wrapper.appendChild(bubble);
+    dmMessages.appendChild(wrapper);
+  });
+}
+
+renderKanitChatHistory();
 function showDmSection(section) {
   dmInbox.classList.toggle("hidden", section !== "inbox");
   dmRoom.classList.toggle("hidden", section !== "room");
@@ -8378,6 +8530,10 @@ function showDmSection(section) {
 
 dmPage.querySelector(".ig-dm-kanit-open").addEventListener("click", () => {
   showDmSection("room");
+
+  requestAnimationFrame(() => {
+    dmMessages.scrollTop = dmMessages.scrollHeight;
+  });
 });
 
 dmPage.querySelector(".ig-dm-room-back").addEventListener("click", () => {
