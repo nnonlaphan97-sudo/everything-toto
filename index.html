@@ -5832,10 +5832,8 @@ window.showPhoneScreen = showScreen;
 document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข้อความ");
     const content = {
       
-
 "Facebook": `
   <div class="fb-app">
-
     <header class="fb-header">
       <strong class="fb-logo">facebook</strong>
       <div class="fb-header-right">
@@ -5935,7 +5933,6 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
     </div>
   </div>
 `,
-
 
 "Instagram": `
   <div class="ig-app">
@@ -7545,7 +7542,9 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
       "อินเทอร์เน็ต": `<div class="mock-card"><strong>เบราว์เซอร์จำลอง</strong><p>ไม่มีการเปิดเว็บไซต์จริง</p><input placeholder="พิมพ์เพื่อค้นหา" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px"></div>`
     };
     $("appContent").innerHTML = content[name] || `<div class="mock-card">${name}</div>`;
-  
+  if (name === "Facebook") {
+  showScreen("app");
+}
 if (name === "Facebook") {
   const fb = document.querySelector("#appContent .fb-app");
   const fbScroll = fb.querySelector(".fb-scroll");
