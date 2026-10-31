@@ -8505,6 +8505,24 @@ if (name === "Instagram") {
   /* ===== Instagram DM Interactions ===== */
 
 const dmPage = ig.querySelector(".ig-dm-page");
+/* ===== เปิดโปรไฟล์คณิตจาก DM ===== */
+
+const dmKanitProfileLink = dmPage.querySelector(".ig-dm-room .ig-dm-header");
+
+if (dmKanitProfileLink) {
+  const kanitName = dmKanitProfileLink.querySelector(".ig-dm-room-name");
+  const kanitAvatar = dmKanitProfileLink.querySelector(".ig-dm-room-avatar");
+
+  [kanitName, kanitAvatar].forEach(element => {
+    if (!element) return;
+
+    element.style.cursor = "pointer";
+
+    element.addEventListener("click", () => {
+      openKanitProfile("dm");
+    });
+  });
+}
 const dmInbox = dmPage.querySelector(".ig-dm-inbox");
 const dmRoom = dmPage.querySelector(".ig-dm-room");
 const dmRequests = dmPage.querySelector(".ig-dm-requests");
