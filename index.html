@@ -3717,32 +3717,61 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   font-size: 11px;
 }
 
-/* Bottom navigation */
+
+/* ===== Instagram floating bottom navigation ===== */
 
 .ig-bottom-nav {
-  height: 55px;
-  min-height: 55px;
+  position: relative;
+  z-index: 10;
+  width: calc(100% - 24px);
+  height: 62px;
+  min-height: 62px;
+  margin: 0 auto 10px;
+  padding: 5px;
+  box-sizing: border-box;
+
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   align-items: center;
-  background: #fff;
-  border-top: 1px solid #eee;
+  gap: 2px;
+
+  border: 1px solid rgba(255,255,255,.75);
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.91);
+  box-shadow: 0 5px 20px rgba(0,0,0,.12);
+
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
 }
 
-
 .ig-nav {
+  position: relative;
+  width: 100%;
   height: 100%;
-  border: 0;
+  min-width: 0;
+  padding: 0;
+
+  border: none;
+  border-radius: 999px;
   background: transparent;
+  color: #111;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #161616;
+
+  -webkit-tap-highlight-color: transparent;
+  transition: background .18s ease;
+}
+
+.ig-nav.active {
+  background: rgba(0,0,0,.09);
 }
 
 .ig-nav svg {
-  width: 25px;
-  height: 25px;
+  width: 29px;
+  height: 29px;
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
@@ -3750,25 +3779,42 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   stroke-linejoin: round;
 }
 
-.ig-nav.active[data-ig-page="home"] svg {
-  fill: #161616;
+.ig-nav[data-ig-page="home"] svg {
+  width: 30px;
+  height: 30px;
 }
 
-.ig-nav-avatar {
-  width: 26px;
-  height: 26px;
+.ig-nav[data-ig-page="reels"] svg {
+  width: 29px;
+  height: 29px;
+}
+
+.ig-nav[data-ig-page="dm"] svg {
+  width: 29px;
+  height: 29px;
+}
+
+.ig-nav[data-ig-page="search"] svg {
+  width: 31px;
+  height: 31px;
+}
+
+.ig-nav[data-ig-page="profile"] svg {
+  width: 30px;
+  height: 30px;
+}
+
+.ig-dm-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: #e7c6b5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
+  background: #ff2455;
+  right: 17%;
+  bottom: 17%;
+  border: 1px solid white;
 }
 
-.ig-nav.active .ig-nav-avatar {
-  outline: 2px solid #161616;
-  outline-offset: 2px;
-}
 
 /* Search, profile and messages */
 .ig-search-page,
@@ -5399,29 +5445,65 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
   </div>
 </div>
 
-    <nav class="ig-bottom-nav">
-      <button class="ig-nav active" data-ig-page="home" type="button" aria-label="หน้าหลัก">
-        <svg viewBox="0 0 24 24"><path d="m2.5 10 9.5-8 9.5 8v11h-7v-7H10v7H2.5V10Z"/></svg>
-      </button>
-      <button class="ig-nav" data-ig-page="search" type="button" aria-label="ค้นหา">
-        <svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="7.3"/><path d="m16.3 16.3 5 5"/></svg>
-      </button>     
-<button class="ig-nav ig-nav-dm"
-        type="button"
-        data-ig-page="dm"
-        aria-label="ข้อความ Direct">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M21 3.5c.5-.3 1 .2.8.8l-6.3 16.3c-.3.8-1.4.9-1.9.2l-3.7-5.5-5.5-3.7c-.7-.5-.6-1.6.2-1.9L21 3.5Z"/>
-    <path d="m9.9 15.3 6.8-6.8"/>
-  </svg>
-</button>
-      <button class="ig-nav" data-ig-page="reels" type="button" aria-label="Reels">
-        <svg viewBox="0 0 24 24"><rect x="2.5" y="3" width="19" height="18" rx="3"/><path d="M2.5 9h19M8 3l4 6M15 3l4 6M10 12l6 3.5-6 3.5v-7Z"/></svg>
-      </button>
-      <button class="ig-nav" data-ig-page="profile" type="button" aria-label="โปรไฟล์">
-        <span class="ig-nav-avatar">ต</span>
-      </button>
-    </nav>
+    
+<nav class="ig-bottom-nav">
+
+  <!-- HOME -->
+  <button class="ig-nav active"
+          type="button"
+          data-ig-page="home"
+          aria-label="หน้าหลัก">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5.5v-7h-5v7H4a1 1 0 0 1-1-1v-9.5Z"/>
+    </svg>
+  </button>
+
+  <!-- REELS -->
+  <button class="ig-nav"
+          type="button"
+          data-ig-page="reels"
+          aria-label="รีลส์">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5"/>
+      <path d="m10 8 7 4-7 4V8Z"/>
+    </svg>
+  </button>
+
+  <!-- DIRECT MESSAGE -->
+  <button class="ig-nav ig-nav-dm"
+          type="button"
+          data-ig-page="dm"
+          aria-label="ข้อความ">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M21 3.5c.5-.3 1 .2.8.8l-6.3 16.3c-.3.8-1.4.9-1.9.2l-3.7-5.5-5.5-3.7c-.7-.5-.6-1.6.2-1.9L21 3.5Z"/>
+      <path d="m9.9 15.3 6.8-6.8"/>
+    </svg>
+    <span class="ig-dm-dot"></span>
+  </button>
+
+  <!-- SEARCH -->
+  <button class="ig-nav"
+          type="button"
+          data-ig-page="search"
+          aria-label="ค้นหา">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="10.5" cy="10.5" r="7"/>
+      <path d="m16 16 5 5"/>
+    </svg>
+  </button>
+
+  <!-- PROFILE -->
+  <button class="ig-nav"
+          type="button"
+          data-ig-page="profile"
+          aria-label="โปรไฟล์">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="9"/>
+      <circle cx="12" cy="9" r="3"/>
+      <path d="M5.5 18c1.2-2.7 3.3-4 6.5-4s5.3 1.3 6.5 4"/>
+    </svg>
+  </button>
+</nav>
   </div>
 `,
 
