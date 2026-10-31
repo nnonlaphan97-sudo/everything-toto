@@ -5897,7 +5897,13 @@ window.showPhoneScreen = showScreen;
 
   // แตะขีดเพื่อกลับโฮมได้ด้วย
   gesture.addEventListener("click", function () {
-    showScreen("home");
+   const homeKey = Object.keys(screens).find(
+  key => screens[key].id === "homeScreen"
+);
+
+if (homeKey) {
+  showScreen(homeKey);
+}
   });
 })();
 function openApp(name) {
