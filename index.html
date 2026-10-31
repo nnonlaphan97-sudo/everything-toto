@@ -4848,7 +4848,259 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 body:has(#appScreen:not(.hidden) .ig-app) .status-bar {
   display: none !important;
 }
+/* ===== Instagram DM ===== */
 
+.ig-dm-page {
+  position: relative;
+  background: #fff;
+  color: #111;
+  min-height: 100%;
+}
+
+.ig-dm-header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 52px;
+  padding: 8px 13px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ig-dm-header strong {
+  font-size: 16px;
+}
+
+.ig-dm-header button {
+  border: 0;
+  background: transparent;
+  font-size: 29px;
+  color: inherit;
+  padding: 0 4px;
+}
+
+.ig-dm-compose {
+  margin-left: auto;
+  font-size: 24px;
+}
+
+.ig-dm-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px;
+  padding: 8px 12px;
+  background: #f1f1f1;
+  border-radius: 12px;
+}
+
+.ig-dm-search span {
+  font-size: 20px;
+  color: #777;
+}
+
+.ig-dm-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-size: 13px;
+}
+
+.ig-dm-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px 14px;
+}
+
+.ig-dm-section-title strong {
+  font-size: 15px;
+}
+
+.ig-dm-requests-open {
+  border: 0;
+  background: transparent;
+  color: #3797f0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ig-dm-requests-open span {
+  margin-left: 3px;
+}
+
+.ig-dm-chat {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 10px 13px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  color: inherit;
+}
+
+.ig-dm-chat > img {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.ig-dm-chat-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ig-dm-chat-info strong {
+  font-size: 13px;
+}
+
+.ig-dm-chat-info small,
+.ig-dm-room-name small {
+  color: #888;
+  font-size: 11px;
+}
+
+.ig-dm-camera {
+  color: #777;
+  font-size: 24px;
+}
+
+.ig-dm-room,
+.ig-dm-requests {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.ig-dm-room-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ig-dm-room-name {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.ig-dm-messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.ig-dm-conversation-start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin: 18px 0;
+}
+
+.ig-dm-conversation-start img {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ig-dm-conversation-start small {
+  color: #888;
+}
+
+.ig-dm-bubble {
+  align-self: flex-end;
+  max-width: 82%;
+  padding: 9px 13px;
+  border-radius: 18px 18px 4px 18px;
+  background: #7b4dff;
+  color: white;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.ig-dm-send-form {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px 15px;
+  border-top: 1px solid #eee;
+}
+
+.ig-dm-send-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 22px;
+  outline: none;
+}
+
+.ig-dm-send-form button {
+  border: 0;
+  background: transparent;
+  color: #3797f0;
+  font-weight: 700;
+}
+
+.ig-dm-requests-note {
+  padding: 14px;
+  font-size: 12px;
+  color: #888;
+  line-height: 1.5;
+}
+
+.ig-dm-request-list {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.ig-dm-request-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 14px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.ig-dm-request-avatar {
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #eae3ff;
+  color: #7049ba;
+  font-weight: 700;
+}
+
+.ig-dm-request-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ig-dm-request-info strong {
+  font-size: 12px;
+}
+
+.ig-dm-request-info small {
+  font-size: 11px;
+  color: #888;
+}
 </style>
 </head>
 <body>
@@ -6799,17 +7051,94 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
   </div>
 </section>
 
-      <section class="ig-page ig-dm-page hidden">
-        <div class="ig-dm-header">
-          <strong>ข้อความ</strong>
-          <button class="ig-dm-back" type="button">✕</button>
-        </div>
-        <input class="ig-search-input" type="search" placeholder="ค้นหาข้อความ">
-        <div class="ig-dm-chat">
-          <span class="ig-avatar ig-avatar-purple">ค</span>
-          <div><strong>kanit</strong><small>ส่งข้อความหา Kanit</small></div>
-        </div>
-      </section>
+ <section class="ig-page ig-dm-page hidden">
+
+  <!-- กล่องข้อความหลัก -->
+  <div class="ig-dm-inbox">
+
+    <header class="ig-dm-header">
+      <button class="ig-dm-back" type="button" aria-label="กลับ">‹</button>
+      <strong>phanuphong_t</strong>
+      <span class="ig-dm-compose">✎</span>
+    </header>
+
+    <div class="ig-dm-search">
+      <span>⌕</span>
+      <input type="search" placeholder="ค้นหา">
+    </div>
+
+    <div class="ig-dm-section-title">
+      <strong>ข้อความ</strong>
+      <button class="ig-dm-requests-open" type="button">
+        คำขอ <span>99+</span>
+      </button>
+    </div>
+
+    <button class="ig-dm-chat ig-dm-kanit-open" type="button">
+      <img
+        src="https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg"
+        alt="คณิต"
+      >
+      <span class="ig-dm-chat-info">
+        <strong>kanittee</strong>
+        <small>แตะเพื่อเปิดแชต</small>
+      </span>
+      <span class="ig-dm-camera">◎</span>
+    </button>
+
+  </div>
+
+  <!-- ห้องแชตคณิต -->
+  <div class="ig-dm-room hidden">
+
+    <header class="ig-dm-header">
+      <button class="ig-dm-room-back" type="button">‹</button>
+      <img
+        class="ig-dm-room-avatar"
+        src="https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg"
+        alt="คณิต"
+      >
+      <div class="ig-dm-room-name">
+        <strong>kanittee</strong>
+        <small>คณิต</small>
+      </div>
+      <span>♡</span>
+    </header>
+
+    <div class="ig-dm-messages">
+      <div class="ig-dm-conversation-start">
+        <img src="https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg" alt="คณิต">
+        <strong>kanittee</strong>
+        <small>Instagram</small>
+      </div>
+    </div>
+
+    <form class="ig-dm-send-form">
+      <input
+        class="ig-dm-message-input"
+        type="text"
+        placeholder="ส่งข้อความ..."
+        autocomplete="off"
+      >
+      <button type="submit">ส่ง</button>
+    </form>
+
+  </div>
+
+  <!-- หน้าคำขอข้อความ -->
+  <div class="ig-dm-requests hidden">
+
+    <header class="ig-dm-header">
+      <button class="ig-dm-requests-back" type="button">‹</button>
+      <strong>คำขอข้อความ</strong>
+    </header>
+
+    <div class="ig-dm-requests-note">
+      ข้อความจากคนที่คุณยังไม่ได้รับเข้ากล่องข้อความ
+    </div>
+    <div class="ig-dm-request-list"></div>
+  </div>
+</section>
     </main>
 
 <div class="ig-story-viewer hidden">
@@ -8033,6 +8362,83 @@ if (name === "Instagram") {
       showIgPage(btn.dataset.igPage);
     });
   });
+  /* ===== Instagram DM Interactions ===== */
+
+const dmPage = ig.querySelector(".ig-dm-page");
+const dmInbox = dmPage.querySelector(".ig-dm-inbox");
+const dmRoom = dmPage.querySelector(".ig-dm-room");
+const dmRequests = dmPage.querySelector(".ig-dm-requests");
+const dmMessages = dmPage.querySelector(".ig-dm-messages");
+
+function showDmSection(section) {
+  dmInbox.classList.toggle("hidden", section !== "inbox");
+  dmRoom.classList.toggle("hidden", section !== "room");
+  dmRequests.classList.toggle("hidden", section !== "requests");
+}
+
+dmPage.querySelector(".ig-dm-kanit-open").addEventListener("click", () => {
+  showDmSection("room");
+});
+
+dmPage.querySelector(".ig-dm-room-back").addEventListener("click", () => {
+  showDmSection("inbox");
+});
+
+dmPage.querySelector(".ig-dm-requests-open").addEventListener("click", () => {
+  showDmSection("requests");
+});
+
+dmPage.querySelector(".ig-dm-requests-back").addEventListener("click", () => {
+  showDmSection("inbox");
+});
+
+dmPage.querySelector(".ig-dm-back").addEventListener("click", () => {
+  showIgPage("home");
+});
+
+dmPage.querySelector(".ig-dm-send-form").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const input = dmPage.querySelector(".ig-dm-message-input");
+  const message = input.value.trim();
+
+  if (!message) return;
+
+  const bubble = document.createElement("div");
+  bubble.className = "ig-dm-bubble";
+  bubble.textContent = message;
+
+  dmMessages.appendChild(bubble);
+  input.value = "";
+  dmMessages.scrollTop = dmMessages.scrollHeight;
+});
+
+/* ตัวอย่างคำขอข้อความ 120 รายการ */
+const requestList = dmPage.querySelector(".ig-dm-request-list");
+
+for (let i = 1; i <= 120; i++) {
+  const item = document.createElement("div");
+  item.className = "ig-dm-request-item";
+
+  const avatar = document.createElement("span");
+  avatar.className = "ig-dm-request-avatar";
+  avatar.textContent = "♡";
+
+  const info = document.createElement("div");
+  info.className = "ig-dm-request-info";
+
+  const username = document.createElement("strong");
+  username.textContent = "instagram_user_" + i;
+
+  const preview = document.createElement("small");
+  preview.textContent = "ต้องการส่งข้อความถึงคุณ";
+
+  info.append(username, preview);
+  item.append(avatar, info);
+  requestList.appendChild(item);
+}
+
+showDmSection("inbox");
 /* ===== Kanit Profile Interactions ===== */
 
 const kanitPage = ig.querySelector(".ig-kanit-page");
