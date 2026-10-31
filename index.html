@@ -3209,6 +3209,7 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   font-size: 13px;
 }
 
+
 /* ===== INSTAGRAM APP ===== */
 
 #appScreen:has(.ig-app) .app-window-header {
@@ -3235,46 +3236,61 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   display: none !important;
 }
 
+.ig-app button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .ig-header {
-  height: 58px;
-  flex-shrink: 0;
-  padding: 0 17px;
+  height: 56px;
+  min-height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 14px;
   border-bottom: 1px solid #f0f0f0;
+  background: #fff;
 }
 
 .ig-logo {
   font-family: "Brush Script MT", cursive;
-  font-size: 32px;
+  font-size: 29px;
   font-weight: 600;
   letter-spacing: -1px;
 }
 
-.ig-header-actions {
-  display: flex;
-  gap: 18px;
+.ig-logo-arrow {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  vertical-align: middle;
 }
 
-.ig-header-actions button,
-.ig-post-actions button,
-.ig-bottom-nav button,
-.ig-dm-back {
+.ig-icon-btn,
+.ig-post-more {
   border: 0;
   background: transparent;
-  color: inherit;
-  cursor: pointer;
+  color: #161616;
+  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.ig-header-actions button {
-  font-size: 29px;
+.ig-icon-btn svg {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .ig-main {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  background: #fff;
 }
 
 .ig-page {
@@ -3283,60 +3299,90 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 
 .ig-stories {
   display: flex;
-  gap: 14px;
-  padding: 14px 12px;
+  gap: 16px;
+  padding: 15px 14px 13px;
   overflow-x: auto;
-  border-bottom: 1px solid #eee;
   scrollbar-width: none;
+  border-bottom: 1px solid #eee;
 }
 
 .ig-story {
-  flex: 0 0 75px;
-  width: 75px;
+  flex: 0 0 76px;
+  width: 76px;
+  padding: 0;
   border: 0;
   background: transparent;
-  text-align: center;
   color: #222;
+  text-align: center;
 }
 
 .ig-story-ring {
-  width: 65px;
-  height: 65px;
+  width: 68px;
+  height: 68px;
+  margin: 0 auto;
   padding: 3px;
+  box-sizing: border-box;
   border-radius: 50%;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(35deg,#ffcf57,#f83d55,#a02ac5);
 }
 
-.ig-story-ring > span {
-  width: 100%;
-  height: 100%;
-  border: 3px solid #fff;
-  border-radius: 50%;
-  background: #f2d7c9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
+.ig-friend-ring {
+  background: linear-gradient(35deg,#ffd776,#fa7e1e,#e82b79,#8d35cf);
 }
 
 .ig-own {
-  background: #ddd;
+  background: #e9e9e9;
+}
+
+.ig-story-face {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.ig-face-toto {
+  background: #e7c6b5;
+}
+
+.ig-face-kanit {
+  background: #c5b9dc;
+}
+
+.ig-story-plus {
+  position: absolute;
+  right: -1px;
+  bottom: -2px;
+  width: 22px;
+  height: 22px;
+  box-sizing: border-box;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #0095f6;
+  color: #fff;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 18px;
 }
 
 .ig-story small {
   display: block;
-  font-size: 10px;
-  margin-top: 5px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  margin-top: 6px;
+  font-size: 11px;
   white-space: nowrap;
 }
 
 .ig-post {
-  padding-bottom: 18px;
+  padding-bottom: 16px;
   border-bottom: 1px solid #eee;
 }
 
@@ -3344,43 +3390,43 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   display: flex;
   align-items: center;
   gap: 9px;
-  padding: 11px 13px;
+  padding: 10px 13px;
 }
 
 .ig-avatar {
-  width: 35px;
-  height: 35px;
+  width: 36px;
+  height: 36px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: #f6b9a5;
+  background: #e7c6b5;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .ig-avatar-purple {
-  background: #d9c7f5;
+  background: #c5b9dc;
 }
 
-.ig-post-user div {
+.ig-post-user-info {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
 }
 
-.ig-post-user strong {
+.ig-post-user-info strong {
   font-size: 13px;
 }
 
-.ig-post-user small {
-  font-size: 11px;
+.ig-post-user-info small {
   color: #777;
+  font-size: 11px;
 }
 
-.ig-more {
+.ig-post-more {
   margin-left: auto;
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .ig-post-picture {
@@ -3393,31 +3439,41 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 }
 
 .ig-photo-one {
-  background: linear-gradient(145deg,#e9d3c0,#b48e79);
+  background: linear-gradient(145deg,#e8d6c8,#b58f7c);
 }
 
 .ig-photo-two {
-  background: linear-gradient(145deg,#e9b9d5,#a6a4db);
+  background: linear-gradient(145deg,#e8bcd6,#a6a3d8);
 }
 
-.ig-post-picture span {
-  color: white;
-  font-size: 34px;
-  font-weight: 800;
+.ig-photo-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  color: #fff;
+}
+
+.ig-photo-content span {
+  font-size: 24px;
   letter-spacing: 3px;
-  line-height: 1.4;
+}
+
+.ig-photo-content strong {
+  font-size: 42px;
+  letter-spacing: 4px;
+}
+
+.ig-photo-content small {
+  font-size: 11px;
+  letter-spacing: 2px;
 }
 
 .ig-post-actions {
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 8px 13px;
-}
-
-.ig-post-actions button {
-  font-size: 28px;
-  padding: 0;
+  gap: 13px;
+  padding: 9px 12px 7px;
 }
 
 .ig-post-actions .ig-bookmark {
@@ -3428,6 +3484,11 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   color: #ff3040;
 }
 
+.ig-heart.liked svg {
+  fill: #ff3040;
+  stroke: #ff3040;
+}
+
 .ig-post-likes,
 .ig-post-caption,
 .ig-view-comments {
@@ -3436,46 +3497,78 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 }
 
 .ig-view-comments {
-  border: 0;
-  background: none;
-  color: #888;
   padding: 0;
+  border: 0;
+  background: transparent;
+  color: #888;
 }
 
 .ig-bottom-nav {
-  height: 54px;
-  flex-shrink: 0;
+  height: 55px;
+  min-height: 55px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4,1fr);
   align-items: center;
-  border-top: 1px solid #eee;
   background: #fff;
+  border-top: 1px solid #eee;
 }
 
 .ig-nav {
-  font-size: 29px;
   height: 100%;
+  border: 0;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #161616;
 }
 
-.ig-nav.active {
-  font-weight: 900;
+.ig-nav svg {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ig-nav.active[data-ig-page="home"] svg {
+  fill: #161616;
+}
+
+.ig-nav-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #e7c6b5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.ig-nav.active .ig-nav-avatar {
+  outline: 2px solid #161616;
+  outline-offset: 2px;
 }
 
 .ig-search-page,
 .ig-profile-page,
 .ig-dm-page {
   padding: 16px;
+  box-sizing: border-box;
 }
 
 .ig-search-input {
   width: 100%;
+  padding: 12px 14px;
   box-sizing: border-box;
-  padding: 12px 15px;
   border: 0;
-  border-radius: 12px;
-  background: #f1f1f1;
+  border-radius: 11px;
+  background: #f0f0f0;
+  color: #222;
   font-size: 14px;
-  outline: none;
 }
 
 .ig-explore-grid,
@@ -3492,19 +3585,13 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-weight: bold;
   background: linear-gradient(135deg,#e7b9a7,#b4a5d8);
-}
-
-.ig-explore-tile:nth-child(even),
-.ig-profile-grid > div:nth-child(even) {
-  background: linear-gradient(135deg,#a9c9cf,#d3b5c9);
+  color: #fff;
+  font-weight: bold;
 }
 
 .ig-reels-page {
-  position: relative;
-  background: #171717;
+  background: #181818;
   color: #fff;
 }
 
@@ -3518,23 +3605,23 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   min-height: 350px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
 .ig-reel-preview span {
-  font-size: 27px;
-  font-weight: 800;
+  font-size: 26px;
+  font-weight: bold;
 }
 
 .ig-profile-top,
 .ig-dm-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
   font-size: 20px;
-  margin-bottom: 24px;
 }
 
 .ig-profile-info {
@@ -3545,32 +3632,32 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 }
 
 .ig-profile-avatar {
-  width: 78px;
-  height: 78px;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
-  background: #f5b8a7;
+  background: #e7c6b5;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
+  font-size: 28px;
 }
 
 .ig-profile-info > div:not(:first-child) {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 4px;
   font-size: 13px;
 }
 
 .ig-profile-info small {
   font-size: 11px;
-  margin-top: 5px;
 }
 
 .ig-profile-bio {
+  margin-top: 16px;
   font-size: 13px;
   line-height: 1.7;
-  margin-top: 16px;
 }
 
 .ig-profile-buttons {
@@ -3605,7 +3692,6 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 .ig-dm-chat small {
   color: #888;
 }
-
 
 </style>
 </head>
@@ -4493,90 +4579,116 @@ window.showPhoneScreen = showScreen;
 document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข้อความ");
     const content = {
       
+
 "Instagram": `
   <div class="ig-app">
     <header class="ig-header">
-      <span class="ig-logo">Instagram</span>
-      <div class="ig-header-actions">
-        <button type="button" class="ig-top-like" aria-label="กิจกรรม">♡</button>
-        <button type="button" class="ig-top-dm" aria-label="ข้อความ">➤</button>
-      </div>
+      <button class="ig-icon-btn ig-create" type="button" aria-label="สร้างโพสต์">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+      <div class="ig-logo">Instagram <span class="ig-logo-arrow">⌄</span></div>
+      <button class="ig-icon-btn ig-top-like" type="button" aria-label="กิจกรรม">
+        <svg viewBox="0 0 24 24"><path d="M20.8 8.6c0 4.5-8.8 10.1-8.8 10.1S3.2 13.1 3.2 8.6a4.6 4.6 0 0 1 8.8-1.8 4.6 4.6 0 0 1 8.8 1.8Z"/></svg>
+      </button>
     </header>
 
     <main class="ig-main">
       <section class="ig-page ig-home">
         <div class="ig-stories">
-          <button type="button" class="ig-story">
-            <span class="ig-story-ring ig-own"><span>ต</span></span>
+          <button class="ig-story ig-my-story" type="button">
+            <span class="ig-story-ring ig-own">
+              <span class="ig-story-face ig-face-toto">ต</span>
+              <span class="ig-story-plus">+</span>
+            </span>
             <small>สตอรี่ของคุณ</small>
           </button>
-          <button type="button" class="ig-story">
-            <span class="ig-story-ring"><span>ค</span></span>
+
+          <button class="ig-story ig-kanit-story" type="button">
+            <span class="ig-story-ring ig-friend-ring">
+              <span class="ig-story-face ig-face-kanit">ค</span>
+            </span>
             <small>kanit</small>
-          </button>
-          <button type="button" class="ig-story">
-            <span class="ig-story-ring"><span>E</span></span>
-            <small>everythingtoto</small>
-          </button>
-          <button type="button" class="ig-story">
-            <span class="ig-story-ring"><span>♡</span></span>
-            <small>friends</small>
           </button>
         </div>
 
         <article class="ig-post">
           <div class="ig-post-user">
             <span class="ig-avatar">ต</span>
-            <div>
+            <div class="ig-post-user-info">
               <strong>toto</strong>
               <small>Everything Toto</small>
             </div>
-            <span class="ig-more">•••</span>
+            <button class="ig-post-more" type="button" aria-label="เพิ่มเติม">•••</button>
           </div>
 
           <div class="ig-post-picture ig-photo-one">
-            <span>EVERYTHING<br>TOTO</span>
+            <div class="ig-photo-content">
+              <span>EVERYTHING</span>
+              <strong>TOTO</strong>
+              <small>WORK · LIFE · MEMORIES</small>
+            </div>
           </div>
 
           <div class="ig-post-actions">
-            <button type="button" class="ig-heart">♡</button>
-            <button type="button" class="ig-comment">♧</button>
-            <button type="button" class="ig-share">➤</button>
-            <button type="button" class="ig-bookmark">♧</button>
+            <button class="ig-icon-btn ig-heart" type="button" aria-label="ถูกใจ">
+              <svg viewBox="0 0 24 24"><path d="M20.8 8.6c0 4.5-8.8 10.1-8.8 10.1S3.2 13.1 3.2 8.6a4.6 4.6 0 0 1 8.8-1.8 4.6 4.6 0 0 1 8.8 1.8Z"/></svg>
+            </button>
+            <button class="ig-icon-btn ig-comment" type="button" aria-label="ความคิดเห็น">
+              <svg viewBox="0 0 24 24"><path d="M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 20l1.3-4A8.5 8.5 0 1 1 20.5 11.5Z"/></svg>
+            </button>
+            <button class="ig-icon-btn ig-share" type="button" aria-label="แชร์">
+              <svg viewBox="0 0 24 24"><path d="m21 3-9.5 18-2.7-7.8L1 10.5 21 3ZM8.8 13.2 21 3"/></svg>
+            </button>
+            <button class="ig-icon-btn ig-bookmark" type="button" aria-label="บันทึก">
+              <svg viewBox="0 0 24 24"><path d="M5 3.5h14v17l-7-4.5-7 4.5v-17Z"/></svg>
+            </button>
           </div>
+
           <div class="ig-post-likes"><span>128</span> ถูกใจ</div>
           <div class="ig-post-caption"><strong>toto</strong> อีกหนึ่งวันกับ Everything Toto 🤍</div>
-          <button type="button" class="ig-view-comments">ดูความคิดเห็นทั้งหมด</button>
+          <button class="ig-view-comments" type="button">ดูความคิดเห็นทั้งหมด</button>
         </article>
 
         <article class="ig-post">
           <div class="ig-post-user">
             <span class="ig-avatar ig-avatar-purple">ค</span>
-            <div>
+            <div class="ig-post-user-info">
               <strong>kanit</strong>
               <small>วันพักผ่อน</small>
             </div>
-            <span class="ig-more">•••</span>
+            <button class="ig-post-more" type="button">•••</button>
           </div>
 
           <div class="ig-post-picture ig-photo-two">
-            <span>GOOD<br>MEMORIES ♡</span>
+            <div class="ig-photo-content">
+              <span>GOOD</span>
+              <strong>MEMORIES ♡</strong>
+            </div>
           </div>
 
           <div class="ig-post-actions">
-            <button type="button" class="ig-heart">♡</button>
-            <button type="button" class="ig-comment">♧</button>
-            <button type="button" class="ig-share">➤</button>
-            <button type="button" class="ig-bookmark">♧</button>
+            <button class="ig-icon-btn ig-heart" type="button" aria-label="ถูกใจ">
+              <svg viewBox="0 0 24 24"><path d="M20.8 8.6c0 4.5-8.8 10.1-8.8 10.1S3.2 13.1 3.2 8.6a4.6 4.6 0 0 1 8.8-1.8 4.6 4.6 0 0 1 8.8 1.8Z"/></svg>
+            </button>
+            <button class="ig-icon-btn ig-comment" type="button" aria-label="ความคิดเห็น">
+              <svg viewBox="0 0 24 24"><path d="M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 20l1.3-4A8.5 8.5 0 1 1 20.5 11.5Z"/></svg>
+            </button>
+            <button class="ig-icon-btn ig-share" type="button" aria-label="แชร์">
+              <svg viewBox="0 0 24 24"><path d="m21 3-9.5 18-2.7-7.8L1 10.5 21 3ZM8.8 13.2 21 3"/></svg>
+            </button>
+            <button class="ig-icon-btn ig-bookmark" type="button" aria-label="บันทึก">
+              <svg viewBox="0 0 24 24"><path d="M5 3.5h14v17l-7-4.5-7 4.5v-17Z"/></svg>
+            </button>
           </div>
+
           <div class="ig-post-likes"><span>86</span> ถูกใจ</div>
           <div class="ig-post-caption"><strong>kanit</strong> วันดี ๆ ที่อยากเก็บไว้ 💗</div>
-          <button type="button" class="ig-view-comments">ดูความคิดเห็นทั้งหมด</button>
+          <button class="ig-view-comments" type="button">ดูความคิดเห็นทั้งหมด</button>
         </article>
       </section>
 
       <section class="ig-page ig-search-page hidden">
-        <input class="ig-search-input" type="search" placeholder="⌕ ค้นหา">
+        <input class="ig-search-input" type="search" placeholder="ค้นหา">
         <div class="ig-explore-grid">
           <div class="ig-explore-tile">LIFE</div>
           <div class="ig-explore-tile">♡</div>
@@ -4624,28 +4736,33 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
       <section class="ig-page ig-dm-page hidden">
         <div class="ig-dm-header">
           <strong>ข้อความ</strong>
-          <button type="button" class="ig-dm-back">✕</button>
+          <button class="ig-dm-back" type="button">✕</button>
         </div>
         <input class="ig-search-input" type="search" placeholder="ค้นหาข้อความ">
         <div class="ig-dm-chat">
           <span class="ig-avatar ig-avatar-purple">ค</span>
           <div><strong>kanit</strong><small>ส่งข้อความหา Kanit</small></div>
         </div>
-        <div class="ig-dm-chat">
-          <span class="ig-avatar">E</span>
-          <div><strong>Everything Toto</strong><small>แชทเรื่องงาน</small></div>
-        </div>
       </section>
     </main>
 
     <nav class="ig-bottom-nav">
-      <button type="button" class="ig-nav active" data-ig-page="home">⌂</button>
-      <button type="button" class="ig-nav" data-ig-page="search">⌕</button>
-      <button type="button" class="ig-nav" data-ig-page="reels">▣</button>
-      <button type="button" class="ig-nav" data-ig-page="profile">●</button>
+      <button class="ig-nav active" data-ig-page="home" type="button" aria-label="หน้าหลัก">
+        <svg viewBox="0 0 24 24"><path d="m2.5 10 9.5-8 9.5 8v11h-7v-7H10v7H2.5V10Z"/></svg>
+      </button>
+      <button class="ig-nav" data-ig-page="search" type="button" aria-label="ค้นหา">
+        <svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="7.3"/><path d="m16.3 16.3 5 5"/></svg>
+      </button>
+      <button class="ig-nav" data-ig-page="reels" type="button" aria-label="Reels">
+        <svg viewBox="0 0 24 24"><rect x="2.5" y="3" width="19" height="18" rx="3"/><path d="M2.5 9h19M8 3l4 6M15 3l4 6M10 12l6 3.5-6 3.5v-7Z"/></svg>
+      </button>
+      <button class="ig-nav" data-ig-page="profile" type="button" aria-label="โปรไฟล์">
+        <span class="ig-nav-avatar">ต</span>
+      </button>
     </nav>
   </div>
 `,
+
 
       "โทรศัพท์": `<div class="mock-card"><div style="font-size:12px;color:#777">แป้นกด</div><div style="font-size:28px;text-align:center;margin:24px 0">＋</div><button class="mock-primary" onclick="phoneDemoToast('โทรศัพท์จำลอง')">โทร</button></div>`,
 "ข้อความ": `
@@ -5305,6 +5422,7 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
     };
     $("appContent").innerHTML = content[name] || `<div class="mock-card">${name}</div>`;
   
+
 if (name === "Instagram") {
   const ig = document.querySelector("#appContent .ig-app");
   const igMain = ig.querySelector(".ig-main");
@@ -5314,7 +5432,10 @@ if (name === "Instagram") {
       el.classList.add("hidden");
     });
 
-    const target = ig.querySelector(".ig-" + page + (page === "home" ? "" : "-page"));
+    const target = ig.querySelector(
+      page === "home" ? ".ig-home" : ".ig-" + page + "-page"
+    );
+
     if (target) target.classList.remove("hidden");
 
     ig.querySelectorAll(".ig-nav").forEach(btn => {
@@ -5333,8 +5454,6 @@ if (name === "Instagram") {
   ig.querySelectorAll(".ig-heart").forEach(btn => {
     btn.addEventListener("click", () => {
       const liked = btn.classList.toggle("liked");
-      btn.textContent = liked ? "♥" : "♡";
-
       const count = btn.closest(".ig-post")
         .querySelector(".ig-post-likes span");
 
@@ -5342,25 +5461,23 @@ if (name === "Instagram") {
     });
   });
 
-  ig.querySelector(".ig-top-dm").addEventListener("click", () => {
-    showIgPage("dm");
+  ig.querySelector(".ig-my-story").addEventListener("click", () => {
+    alert("ยังไม่ได้เพิ่มสตอรี่\nแตะ + เพื่อสร้างสตอรี่ใหม่");
   });
 
-  ig.querySelector(".ig-dm-back").addEventListener("click", () => {
-    showIgPage("home");
+  ig.querySelector(".ig-kanit-story").addEventListener("click", () => {
+    alert("สตอรี่ของคณิต 💗");
+  });
+
+  ig.querySelector(".ig-create").addEventListener("click", () => {
+    alert("สร้างโพสต์หรือสตอรี่ใหม่");
   });
 
   ig.querySelector(".ig-top-like").addEventListener("click", () => {
     alert("ยังไม่มีกิจกรรมใหม่ ♡");
   });
 
-  ig.querySelectorAll(".ig-story").forEach(btn => {
-    btn.addEventListener("click", () => {
-      alert("สตอรี่ของ " + btn.innerText.trim());
-    });
-  });
-
-  ig.querySelectorAll(".ig-view-comments, .ig-comment").forEach(btn => {
+  ig.querySelectorAll(".ig-comment, .ig-view-comments").forEach(btn => {
     btn.addEventListener("click", () => {
       alert("ยังไม่มีความคิดเห็น");
     });
@@ -5374,8 +5491,20 @@ if (name === "Instagram") {
 
   ig.querySelectorAll(".ig-bookmark").forEach(btn => {
     btn.addEventListener("click", () => {
-      btn.textContent = btn.textContent === "◆" ? "♧" : "◆";
+      btn.classList.toggle("saved");
+      btn.querySelector("svg").style.fill =
+        btn.classList.contains("saved") ? "#161616" : "none";
     });
+  });
+
+  ig.querySelectorAll(".ig-post-more").forEach(btn => {
+    btn.addEventListener("click", () => {
+      alert("ตัวเลือกโพสต์");
+    });
+  });
+
+  ig.querySelector(".ig-dm-back").addEventListener("click", () => {
+    showIgPage("home");
   });
 }
 
