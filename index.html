@@ -3907,11 +3907,14 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   display: none;
 }
 
-.ig-carousel-track img {
+
+/* โพสต์ที่ 3 รูปจัตุรัส 1:1 */
+.ig-post[data-post="3"] .ig-carousel-track img {
   flex: 0 0 100%;
   width: 100%;
   aspect-ratio: 1 / 1;
-  object-fit: contain;
+  height: auto;
+  object-fit: cover;
   scroll-snap-align: start;
 }
 
