@@ -256,7 +256,48 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 .app-label { font-size: 10px; text-shadow: 0 1px 5px #0008; white-space: nowrap; }
 .dock { position: absolute; bottom: 32px; left: 15px; right: 15px; padding: 11px 8px; border: 1px solid #ffffff1c; border-radius: 25px; background: #25243775; backdrop-filter: blur(20px); display: flex; justify-content: space-around; }
 .dock .app-icon { width: 44px; height: 44px; }
-.home-gesture, .app-home-gesture { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); width: 108px; height: 4px; border-radius: 10px; background: white; }
+.home-gesture,
+.app-home-gesture {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 28px;
+  border-radius: 0;
+  background: transparent;
+  z-index: 100;
+  touch-action: none;
+  cursor: pointer;
+}
+
+/* ขีดสำหรับปัดกลับโฮม */
+.home-gesture::after,
+.app-home-gesture::after {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 108px;
+  height: 4px;
+  border-radius: 10px;
+  background: white;
+}
+
+/* สีขีดในหน้าแอป */
+#appScreen .app-home-gesture {
+  background: transparent;
+}
+
+#appScreen .app-home-gesture::after {
+  background: #33313a;
+}
+
+#appScreen.sms-mode .app-home-gesture {
+  background: transparent;
+}
+
 
 /* FULL-SIZE MUSIC PLAYER */
 #playerScreen { padding: 55px 24px 22px; display: flex; flex-direction: column; align-items: center; background: linear-gradient(180deg, #272238f2, #151522f5); backdrop-filter: blur(25px); }
@@ -285,7 +326,6 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 .app-content { padding-top: 20px; font-size: 14px; line-height: 1.7; }
 .mock-card { margin-top: 13px; padding: 16px; border-radius: 17px; background: white; box-shadow: 0 4px 15px #2416320a; }
 .mock-primary { margin-top: 12px; width: 100%; padding: 12px; border-radius: 13px; background: #6654a3; color: white; font-weight: 650; }
-#appScreen .app-home-gesture { background: #33313a; }
 
 /* ===== SAMSUNG MESSAGES LIGHT MODE ===== */
 
@@ -5817,7 +5857,49 @@ window.showPhoneScreen = showScreen;
   $("deleteDigit").addEventListener("click", () => { pin = pin.slice(0, -1); updatePinDots(); $("pinError").textContent = ""; });
   $("emergencyButton").addEventListener("click", () => showToast("หน้าจอฉุกเฉินจำลอง"));
 
-  
+  /* ===== Swipe up from bottom to Home ===== */
+(function () {
+  const gesture = document.getElementById("appHomeGesture");
+  if (!gesture) return;
+
+  let startY = 0;
+  let startX = 0;
+  let tracking = false;
+
+  gesture.addEventListener("touchstart", function (event) {
+    if (event.touches.length !== 1) return;
+
+    startY = event.touches[0].clientY;
+    startX = event.touches[0].clientX;
+    tracking = true;
+  }, { passive: true });
+
+  gesture.addEventListener("touchend", function (event) {
+    if (!tracking || !event.changedTouches.length) return;
+
+    const endY = event.changedTouches[0].clientY;
+    const endX = event.changedTouches[0].clientX;
+
+    const distanceY = startY - endY;
+    const distanceX = Math.abs(startX - endX);
+
+    tracking = false;
+
+    // ปัดขึ้นอย่างน้อย 45px และไม่ปัดเฉียงมากเกินไป
+    if (distanceY > 45 && distanceY > distanceX * 1.5) {
+      showScreen("home");
+    }
+  }, { passive: true });
+
+  gesture.addEventListener("touchcancel", function () {
+    tracking = false;
+  });
+
+  // แตะขีดเพื่อกลับโฮมได้ด้วย
+  gesture.addEventListener("click", function () {
+    showScreen("home");
+  });
+})();
 function openApp(name) {
   if (name === "เพลง") {
     openPlayer();
