@@ -3871,7 +3871,92 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   object-fit: contain;
   background: #000;
 }
-  
+
+/* Instagram post photos and carousel */
+
+.ig-post-media {
+  width: 100%;
+  background: #f3f3f3;
+}
+
+.ig-post-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 580px;
+  object-fit: contain;
+}
+
+.ig-post-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #f3f3f3;
+}
+
+.ig-carousel-track {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ig-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.ig-carousel-track img {
+  flex: 0 0 100%;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  scroll-snap-align: start;
+}
+
+.ig-carousel-count {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: rgba(0,0,0,.65);
+  color: #fff;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.ig-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin: 1px 0 9px;
+}
+
+.ig-carousel-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #c7c7c7;
+}
+
+.ig-carousel-dots span.active {
+  background: #0095f6;
+}
+
+.ig-post-comment {
+  margin: 0 13px 7px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.ig-post-date {
+  margin: 9px 13px 5px;
+  color: #888;
+  font-size: 11px;
+}
+
 </style>
 </head>
 <body>
@@ -4794,84 +4879,197 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
           </button>
         </div>
 
-        <article class="ig-post">
-          <div class="ig-post-user">
-            <span class="ig-avatar">
-  <img src="https://i.ibb.co/j9K327YR/r07qxo-R-Download.jpg" alt="โตโต้">
-</span>
-            <div class="ig-post-user-info">
-              <strong>toto</strong>
-              <small>Everything Toto</small>
-            </div>
-            <button class="ig-post-more" type="button" aria-label="เพิ่มเติม">•••</button>
-          </div>
+  
+<!-- ===== KANITTEE INSTAGRAM POSTS ===== -->
 
-          <div class="ig-post-picture ig-photo-one">
-            <div class="ig-photo-content">
-              <span>EVERYTHING</span>
-              <strong>TOTO</strong>
-              <small>WORK · LIFE · MEMORIES</small>
-            </div>
-          </div>
+<article class="ig-post" data-post="1">
+  <div class="ig-post-user">
+    <span class="ig-avatar">
+      <img src="https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg" alt="คณิต">
+    </span>
+    <div class="ig-post-user-info">
+      <strong>kanittee</strong>
+    </div>
+    <button class="ig-post-more" type="button">•••</button>
+  </div>
 
-          <div class="ig-post-actions">
-            <button class="ig-icon-btn ig-heart" type="button" aria-label="ถูกใจ">
-              <svg viewBox="0 0 24 24"><path d="M20.8 8.6c0 4.5-8.8 10.1-8.8 10.1S3.2 13.1 3.2 8.6a4.6 4.6 0 0 1 8.8-1.8 4.6 4.6 0 0 1 8.8 1.8Z"/></svg>
-            </button>
-            <button class="ig-icon-btn ig-comment" type="button" aria-label="ความคิดเห็น">
-              <svg viewBox="0 0 24 24"><path d="M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 20l1.3-4A8.5 8.5 0 1 1 20.5 11.5Z"/></svg>
-            </button>
-            <button class="ig-icon-btn ig-share" type="button" aria-label="แชร์">
-              <svg viewBox="0 0 24 24"><path d="m21 3-9.5 18-2.7-7.8L1 10.5 21 3ZM8.8 13.2 21 3"/></svg>
-            </button>
-            <button class="ig-icon-btn ig-bookmark" type="button" aria-label="บันทึก">
-              <svg viewBox="0 0 24 24"><path d="M5 3.5h14v17l-7-4.5-7 4.5v-17Z"/></svg>
-            </button>
-          </div>
+  <div class="ig-post-media">
+    <img src="https://i.ibb.co/8nMQfm0L/r07qxo-R-Download.jpg" alt="โพสต์ที่ 1 ของคณิต" loading="lazy">
+  </div>
 
-          <div class="ig-post-likes"><span>128</span> ถูกใจ</div>
-          <div class="ig-post-caption"><strong>toto</strong> อีกหนึ่งวันกับ Everything Toto 🤍</div>
-          <button class="ig-view-comments" type="button">ดูความคิดเห็นทั้งหมด</button>
-        </article>
+  <div class="ig-post-actions">
+    <button class="ig-icon-btn ig-heart" type="button" aria-label="ถูกใจ">
+      <svg viewBox="0 0 24 24"><path d="M20.8 8.6c0 4.5-8.8 10.1-8.8 10.1S3.2 13.1 3.2 8.6a4.6 4.6 0 0 1 8.8-1.8 4.6 4.6 0 0 1 8.8 1.8Z"/></svg>
+    </button>
+    <button class="ig-icon-btn ig-comment" type="button" aria-label="ความคิดเห็น">
+      <svg viewBox="0 0 24 24"><path d="M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 20l1.3-4A8.5 8.5 0 1 1 20.5 11.5Z"/></svg>
+    </button>
+    <button class="ig-icon-btn ig-share" type="button" aria-label="แชร์">
+      <svg viewBox="0 0 24 24"><path d="m21 3-9.5 18-2.7-7.8L1 10.5 21 3ZM8.8 13.2 21 3"/></svg>
+    </button>
+    <button class="ig-icon-btn ig-bookmark" type="button" aria-label="บันทึก">
+      <svg viewBox="0 0 24 24"><path d="M5 3.5h14v17l-7-4.5-7 4.5v-17Z"/></svg>
+    </button>
+  </div>
 
-        <article class="ig-post">
-          <div class="ig-post-user">
-           <span class="ig-avatar ig-avatar-purple">
-  <img src="https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg" alt="คณิต">
-</span>
-            <div class="ig-post-user-info">
-              <strong>kanit</strong>
-              <small>วันพักผ่อน</small>
-            </div>
-            <button class="ig-post-more" type="button">•••</button>
-          </div>
+  <div class="ig-post-likes"><span>128</span> ถูกใจ</div>
+  <div class="ig-post-date">2 วันที่แล้ว</div>
+</article>
 
-          <div class="ig-post-picture ig-photo-two">
-            <div class="ig-photo-content">
-              <span>GOOD</span>
-              <strong>MEMORIES ♡</strong>
-            </div>
-          </div>
+<article class="ig-post" data-post="2">
+  <div class="ig-post-user">
+    <span class="ig-avatar">
+      <img src="https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg" alt="คณิต">
+    </span>
+    <div class="ig-post-user-info">
+      <strong>kanittee</strong>
+    </div>
+    <button class="ig-post-more" type="button">•••</button>
+  </div>
 
-          <div class="ig-post-actions">
-            <button class="ig-icon-btn ig-heart" type="button" aria-label="ถูกใจ">
-              <svg viewBox="0 0 24 24"><path d="M20.8 8.6c0 4.5-8.8 10.1-8.8 10.1S3.2 13.1 3.2 8.6a4.6 4.6 0 0 1 8.8-1.8 4.6 4.6 0 0 1 8.8 1.8Z"/></svg>
-            </button>
-            <button class="ig-icon-btn ig-comment" type="button" aria-label="ความคิดเห็น">
-              <svg viewBox="0 0 24 24"><path d="M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 20l1.3-4A8.5 8.5 0 1 1 20.5 11.5Z"/></svg>
-            </button>
-            <button class="ig-icon-btn ig-share" type="button" aria-label="แชร์">
-              <svg viewBox="0 0 24 24"><path d="m21 3-9.5 18-2.7-7.8L1 10.5 21 3ZM8.8 13.2 21 3"/></svg>
-            </button>
-            <button class="ig-icon-btn ig-bookmark" type="button" aria-label="บันทึก">
-              <svg viewBox="0 0 24 24"><path d="M5 3.5h14v17l-7-4.5-7 4.5v-17Z"/></svg>
-            </button>
-          </div>
+  <div class="ig-post-media">
+    <img src="https://i.ibb.co/CK58XGcz/r07qxo-R-Download.jpg" alt="โพสต์ที่ 2 ของคณิต" loading="lazy">
+  </div>
 
-          <div class="ig-post-likes"><span>86</span> ถูกใจ</div>
-          <div class="ig-post-caption"><strong>kanit</strong> วันดี ๆ ที่อยากเก็บไว้ 💗</div>
-          <button class="ig-view-comments" type="button">ดูความคิดเห็นทั้งหมด</button>
-        </article>
+  <div class="ig-post-actions">
+    <button class="ig-icon-btn ig-heart" type="button" aria-label="ถูกใจ">
+      <svg viewBox="0 0 24 24"><path d="M20.8 8.6c0 4.5-8.8 10.1-8.8 10.1S3.2 13.1 3.2 8.6a4.6 4.6 0 0 1 8.8-1.8 4.6 4.6 0 0 1 8.8 1.8Z"/></svg>
+    </button>
+    <button class="ig-icon-btn ig-comment" type="button" aria-label="ความคิดเห็น">
+      <svg viewBox="0 0 24 24"><path d="M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 20l1.3-4A8.5 8.5 0 1 1 20.5 11.5Z"/></svg>
+    </button>
+    <button class="ig-icon-btn ig-share" type="button" aria-label="แชร์">
+      <svg viewBox="0 0 24 24"><path d="m21 3-9.5 18-2.7-7.8L1 10.5 21 3ZM8.8 13.2 21 3"/></svg>
+    </button>
+    <button class="ig-icon-btn ig-bookmark" type="button" aria-label="บันทึก">
+      <svg viewBox="0 0 24 24"><path d="M5 3.5h14v17l-7-4.5-7 4.5v-17Z"/></svg>
+    </button>
+  </div>
+
+  <div class="ig-post-likes"><span>245</span> ถูกใจ</div>
+  <div class="ig-post-caption">
+    <strong>kanittee</strong>
+    เที่ยวบินนี้ ลูกเรือคณิตได้มีโอกาสดูแลคุณธีร์ ขอบคุณที่ใช้บริการและเลือกบินกับเราเมจิกแอร์ไลน์ สวัสดีครับ
+  </div>
+  <div class="ig-post-date">5 วันที่แล้ว</div>
+</article>
+
+<article class="ig-post" data-post="3">
+  <div class="ig-post-user">
+    <span class="ig-avatar">
+      <img src="https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg" alt="คณิต">
+    </span>
+    <div class="ig-post-user-info">
+      <strong>kanittee</strong>
+    </div>
+    <button class="ig-post-more" type="button">•••</button>
+  </div>
+
+  <div class="ig-post-carousel">
+    <div class="ig-carousel-track">
+      <img src="https://i.ibb.co/20SCMj9P/r07qxo-R-Download.jpg" alt="รูปที่ 1" loading="lazy">
+      <img src="https://i.ibb.co/7tQtVFgM/r07qxo-R-Download.jpg" alt="รูปที่ 2" loading="lazy">
+      <img src="https://i.ibb.co/TxMrc01n/r07qxo-R-Download.jpg" alt="รูปที่ 3" loading="lazy">
+      <img src="https://i.ibb.co/6cBNfS3z/r07qxo-R-Download.jpg" alt="รูปที่ 4" loading="lazy">
+      <img src="https://i.ibb.co/yczQHNVc/r07qxo-R-Download.jpg" alt="รูปที่ 5" loading="lazy">
+    </div>
+    <span class="ig-carousel-count">1/5</span>
+  </div>
+
+  <div class="ig-post-actions">
+    <button class="ig-icon-btn ig-heart" type="button" aria-label="ถูกใจ">
+      <svg viewBox="0 0 24 24"><path d="M20.8 8.6c0 4.5-8.8 10.1-8.8 10.1S3.2 13.1 3.2 8.6a4.6 4.6 0 0 1 8.8-1.8 4.6 4.6 0 0 1 8.8 1.8Z"/></svg>
+    </button>
+    <button class="ig-icon-btn ig-comment" type="button" aria-label="ความคิดเห็น">
+      <svg viewBox="0 0 24 24"><path d="M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 20l1.3-4A8.5 8.5 0 1 1 20.5 11.5Z"/></svg>
+    </button>
+    <button class="ig-icon-btn ig-share" type="button" aria-label="แชร์">
+      <svg viewBox="0 0 24 24"><path d="m21 3-9.5 18-2.7-7.8L1 10.5 21 3ZM8.8 13.2 21 3"/></svg>
+    </button>
+    <button class="ig-icon-btn ig-bookmark" type="button" aria-label="บันทึก">
+      <svg viewBox="0 0 24 24"><path d="M5 3.5h14v17l-7-4.5-7 4.5v-17Z"/></svg>
+    </button>
+  </div>
+
+  <div class="ig-carousel-dots">
+    <span class="active"></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="ig-post-likes"><span>319</span> ถูกใจ</div>
+  <div class="ig-post-caption"><strong>kanittee</strong> what a day</div>
+  <div class="ig-post-date">1 สัปดาห์ที่แล้ว</div>
+</article>
+
+<article class="ig-post" data-post="4">
+  <div class="ig-post-user">
+    <span class="ig-avatar">
+      <img src="https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg" alt="คณิต">
+    </span>
+    <div class="ig-post-user-info">
+      <strong>kanittee</strong>
+    </div>
+    <button class="ig-post-more" type="button">•••</button>
+  </div>
+
+  <div class="ig-post-media">
+    <img src="https://i.ibb.co/CfYPBSx/r07qxo-R-Download.jpg" alt="โพสต์ที่ 4 ของคณิต" loading="lazy">
+  </div>
+
+  <div class="ig-post-actions">
+    <button class="ig-icon-btn ig-heart" type="button" aria-label="ถูกใจ">
+      <svg viewBox="0 0 24 24"><path d="M20.8 8.6c0 4.5-8.8 10.1-8.8 10.1S3.2 13.1 3.2 8.6a4.6 4.6 0 0 1 8.8-1.8 4.6 4.6 0 0 1 8.8 1.8Z"/></svg>
+    </button>
+    <button class="ig-icon-btn ig-comment" type="button" aria-label="ความคิดเห็น">
+      <svg viewBox="0 0 24 24"><path d="M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 20l1.3-4A8.5 8.5 0 1 1 20.5 11.5Z"/></svg>
+    </button>
+    <button class="ig-icon-btn ig-share" type="button" aria-label="แชร์">
+      <svg viewBox="0 0 24 24"><path d="m21 3-9.5 18-2.7-7.8L1 10.5 21 3ZM8.8 13.2 21 3"/></svg>
+    </button>
+    <button class="ig-icon-btn ig-bookmark" type="button" aria-label="บันทึก">
+      <svg viewBox="0 0 24 24"><path d="M5 3.5h14v17l-7-4.5-7 4.5v-17Z"/></svg>
+    </button>
+  </div>
+
+  <div class="ig-post-likes"><span>412</span> ถูกใจ</div>
+  <div class="ig-post-comment"><strong>toto</strong> สวยจังครับนางฟ้า</div>
+  <div class="ig-post-date">16 ตุลาคม 2567</div>
+</article>
+
+<article class="ig-post" data-post="5">
+  <div class="ig-post-user">
+    <span class="ig-avatar">
+      <img src="https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg" alt="คณิต">
+    </span>
+    <div class="ig-post-user-info">
+      <strong>kanittee</strong>
+    </div>
+    <button class="ig-post-more" type="button">•••</button>
+  </div>
+
+  <div class="ig-post-media">
+    <img src="https://i.ibb.co/spsGKVSc/r07qxo-R-Download.jpg" alt="โพสต์ที่ 5 ของคณิต" loading="lazy">
+  </div>
+
+  <div class="ig-post-actions">
+    <button class="ig-icon-btn ig-heart" type="button" aria-label="ถูกใจ">
+      <svg viewBox="0 0 24 24"><path d="M20.8 8.6c0 4.5-8.8 10.1-8.8 10.1S3.2 13.1 3.2 8.6a4.6 4.6 0 0 1 8.8-1.8 4.6 4.6 0 0 1 8.8 1.8Z"/></svg>
+    </button>
+    <button class="ig-icon-btn ig-comment" type="button" aria-label="ความคิดเห็น">
+      <svg viewBox="0 0 24 24"><path d="M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1 8.8 1.8Z"/></svg>
+    </button>
+    <button class="ig-icon-btn ig-share" type="button" aria-label="แชร์">
+      <svg viewBox="0 0 24 24"><path d="m21 3-9.5 18-2.7-7.8L1 10.5 21 3ZM8.8 13.2 21 3"/></svg>
+    </button>
+    <button class="ig-icon-btn ig-bookmark" type="button" aria-label="บันทึก">
+      <svg viewBox="0 0 24 24"><path d="M5 3.5h14v17l-7-4.5-7 4.5v-17Z"/></svg>
+    </button>
+  </div>
+
+  <div class="ig-post-likes"><span>267</span> ถูกใจ</div>
+  <div class="ig-post-caption"><strong>kanittee</strong> stay in paris</div>
+  <div class="ig-post-comment"><strong>toto</strong> น้องณิต น้องณิต💙</div>
+  <div class="ig-post-date">22 มิถุนายน</div>
+</article>
       </section>
 
       <section class="ig-page ig-search-page hidden">
@@ -5665,6 +5863,45 @@ if (name === "Instagram") {
     });
 
     igMain.scrollTop = 0;
+  }
+
+  // ===== ระบบปัดรูปโพสต์ที่ 3 ของคณิต =====
+  ig.querySelectorAll(".ig-post-carousel").forEach(carousel => {
+    const track = carousel.querySelector(".ig-carousel-track");
+    const images = track.querySelectorAll("img");
+    const count = carousel.querySelector(".ig-carousel-count");
+    const dots = carousel.closest(".ig-post")
+      .querySelectorAll(".ig-carousel-dots span");
+
+    function updateCarousel() {
+      if (!track.clientWidth) return;
+
+      const index = Math.max(
+        0,
+        Math.min(
+          images.length - 1,
+          Math.round(track.scrollLeft / track.clientWidth)
+        )
+      );
+
+      count.textContent = `${index + 1}/${images.length}`;
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+      });
+    }
+
+    track.addEventListener("scroll", updateCarousel, {
+      passive: true
+    });
+  });
+
+  // โค้ด Instagram ส่วนอื่น ๆ ที่มีอยู่เดิม
+  // เช่น ปุ่มเปลี่ยนหน้า ปุ่มหัวใจ และระบบสตอรี่
+  // ให้เก็บไว้ต่อจากตรงนี้เหมือนเดิม
+
+  track.addEventListener("scroll", updateCarousel, { passive: true });
+});
   }
 
   ig.querySelectorAll(".ig-nav").forEach(btn => {
