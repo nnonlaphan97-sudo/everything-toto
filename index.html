@@ -5231,7 +5231,7 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
    
 <button class="app-icon fb-home-icon"
         type="button"
-        onclick="openApp('Facebook')"
+        onclick="alert('กำลังเรียก Facebook'); try { openApp('Facebook'); } catch (e) { alert('ERROR: ' + e.message); }"
   <span class="fb-app-logo">
     <svg viewBox="0 0 48 48" aria-hidden="true">
       <rect width="48" height="48" rx="12" fill="#0866FF"/>
