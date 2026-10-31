@@ -3655,9 +3655,19 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   height: 25px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.9;
+  stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.ig-post-actions .ig-repost svg {
+  width: 26px;
+  height: 26px;
+}
+
+.ig-post-actions .ig-share svg {
+  width: 25px;
+  height: 25px;
 }
 
 .ig-post-actions .ig-bookmark {
@@ -4914,9 +4924,15 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
         <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
       </button>
       <div class="ig-logo">Instagram <span class="ig-logo-arrow">⌄</span></div>
-      <button class="ig-icon-btn ig-top-like" type="button" aria-label="กิจกรรม">
-        <svg viewBox="0 0 24 24"><path d="M20.8 8.6c0 4.5-8.8 10.1-8.8 10.1S3.2 13.1 3.2 8.6a4.6 4.6 0 0 1 8.8-1.8 4.6 4.6 0 0 1 8.8 1.8Z"/></svg>
-      </button>
+     
+<button class="ig-icon-btn ig-top-like"
+        type="button"
+        aria-label="การแจ้งเตือน">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/>
+  </svg>
+</button>
+
     </header>
 
     <main class="ig-main">
@@ -4974,21 +4990,27 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
     </svg>
   </button>
 
-  <button class="ig-icon-btn ig-repost" type="button" aria-label="รีโพสต์">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 8V6a3 3 0 0 1 3-3h11"/>
-      <path d="m15 0 3 3-3 3" transform="translate(0 0.5)"/>
-      <path d="M20 16v2a3 3 0 0 1-3 3H6"/>
-      <path d="m9 18-3 3 3 3" transform="translate(0 -3)"/>
-    </svg>
-  </button>
+ 
+<button class="ig-icon-btn ig-repost"
+        type="button"
+        aria-label="รีโพสต์">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M4 10V7a3 3 0 0 1 3-3h12"/>
+    <path d="m16 1 3 3-3 3"/>
+    <path d="M20 14v3a3 3 0 0 1-3 3H5"/>
+    <path d="m8 17-3 3 3 3"/>
+  </svg>
+</button>
 
-  <button class="ig-icon-btn ig-share" type="button" aria-label="แชร์">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M21.5 2.5 10 14"/>
-      <path d="m21.5 2.5-7 19-4.5-7.5-7.5-4.5 19-7Z"/>
-    </svg>
-  </button>
+<button class="ig-icon-btn ig-share"
+        type="button"
+        aria-label="แชร์">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M21 3.5c.5-.3 1 .2.8.8l-6.3 16.3c-.3.8-1.4.9-1.9.2l-3.7-5.5-5.5-3.7c-.7-.5-.6-1.6.2-1.9L21 3.5Z"/>
+    <path d="m9.9 15.3 6.8-6.8"/>
+  </svg>
+</button>
+
 
   <button class="ig-icon-btn ig-bookmark" type="button" aria-label="บันทึก">
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -5031,21 +5053,28 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
     </svg>
   </button>
 
-  <button class="ig-icon-btn ig-repost" type="button" aria-label="รีโพสต์">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 8V6a3 3 0 0 1 3-3h11"/>
-      <path d="m15 0 3 3-3 3" transform="translate(0 0.5)"/>
-      <path d="M20 16v2a3 3 0 0 1-3 3H6"/>
-      <path d="m9 18-3 3 3 3" transform="translate(0 -3)"/>
-    </svg>
-  </button>
+ 
+<button class="ig-icon-btn ig-repost"
+        type="button"
+        aria-label="รีโพสต์">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M4 10V7a3 3 0 0 1 3-3h12"/>
+    <path d="m16 1 3 3-3 3"/>
+    <path d="M20 14v3a3 3 0 0 1-3 3H5"/>
+    <path d="m8 17-3 3 3 3"/>
+  </svg>
+</button>
 
-  <button class="ig-icon-btn ig-share" type="button" aria-label="แชร์">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M21.5 2.5 10 14"/>
-      <path d="m21.5 2.5-7 19-4.5-7.5-7.5-4.5 19-7Z"/>
-    </svg>
-  </button>
+
+<button class="ig-icon-btn ig-share"
+        type="button"
+        aria-label="แชร์">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M21 3.5c.5-.3 1 .2.8.8l-6.3 16.3c-.3.8-1.4.9-1.9.2l-3.7-5.5-5.5-3.7c-.7-.5-.6-1.6.2-1.9L21 3.5Z"/>
+    <path d="m9.9 15.3 6.8-6.8"/>
+  </svg>
+</button>
+
 
   <button class="ig-icon-btn ig-bookmark" type="button" aria-label="บันทึก">
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -5099,21 +5128,29 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
     </svg>
   </button>
 
-  <button class="ig-icon-btn ig-repost" type="button" aria-label="รีโพสต์">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 8V6a3 3 0 0 1 3-3h11"/>
-      <path d="m15 0 3 3-3 3" transform="translate(0 0.5)"/>
-      <path d="M20 16v2a3 3 0 0 1-3 3H6"/>
-      <path d="m9 18-3 3 3 3" transform="translate(0 -3)"/>
-    </svg>
-  </button>
 
-  <button class="ig-icon-btn ig-share" type="button" aria-label="แชร์">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M21.5 2.5 10 14"/>
-      <path d="m21.5 2.5-7 19-4.5-7.5-7.5-4.5 19-7Z"/>
-    </svg>
-  </button>
+<button class="ig-icon-btn ig-repost"
+        type="button"
+        aria-label="รีโพสต์">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M4 10V7a3 3 0 0 1 3-3h12"/>
+    <path d="m16 1 3 3-3 3"/>
+    <path d="M20 14v3a3 3 0 0 1-3 3H5"/>
+    <path d="m8 17-3 3 3 3"/>
+  </svg>
+</button>
+
+
+
+<button class="ig-icon-btn ig-share"
+        type="button"
+        aria-label="แชร์">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M21 3.5c.5-.3 1 .2.8.8l-6.3 16.3c-.3.8-1.4.9-1.9.2l-3.7-5.5-5.5-3.7c-.7-.5-.6-1.6.2-1.9L21 3.5Z"/>
+    <path d="m9.9 15.3 6.8-6.8"/>
+  </svg>
+</button>
+
 
   <button class="ig-icon-btn ig-bookmark" type="button" aria-label="บันทึก">
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -5161,21 +5198,29 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
     </svg>
   </button>
 
-  <button class="ig-icon-btn ig-repost" type="button" aria-label="รีโพสต์">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 8V6a3 3 0 0 1 3-3h11"/>
-      <path d="m15 0 3 3-3 3" transform="translate(0 0.5)"/>
-      <path d="M20 16v2a3 3 0 0 1-3 3H6"/>
-      <path d="m9 18-3 3 3 3" transform="translate(0 -3)"/>
-    </svg>
-  </button>
 
-  <button class="ig-icon-btn ig-share" type="button" aria-label="แชร์">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M21.5 2.5 10 14"/>
-      <path d="m21.5 2.5-7 19-4.5-7.5-7.5-4.5 19-7Z"/>
-    </svg>
-  </button>
+<button class="ig-icon-btn ig-repost"
+        type="button"
+        aria-label="รีโพสต์">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M4 10V7a3 3 0 0 1 3-3h12"/>
+    <path d="m16 1 3 3-3 3"/>
+    <path d="M20 14v3a3 3 0 0 1-3 3H5"/>
+    <path d="m8 17-3 3 3 3"/>
+  </svg>
+</button>
+
+
+  
+<button class="ig-icon-btn ig-share"
+        type="button"
+        aria-label="แชร์">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M21 3.5c.5-.3 1 .2.8.8l-6.3 16.3c-.3.8-1.4.9-1.9.2l-3.7-5.5-5.5-3.7c-.7-.5-.6-1.6.2-1.9L21 3.5Z"/>
+    <path d="m9.9 15.3 6.8-6.8"/>
+  </svg>
+</button>
+
 
   <button class="ig-icon-btn ig-bookmark" type="button" aria-label="บันทึก">
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -5219,21 +5264,29 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
     </svg>
   </button>
 
-  <button class="ig-icon-btn ig-repost" type="button" aria-label="รีโพสต์">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 8V6a3 3 0 0 1 3-3h11"/>
-      <path d="m15 0 3 3-3 3" transform="translate(0 0.5)"/>
-      <path d="M20 16v2a3 3 0 0 1-3 3H6"/>
-      <path d="m9 18-3 3 3 3" transform="translate(0 -3)"/>
-    </svg>
-  </button>
+  
+<button class="ig-icon-btn ig-repost"
+        type="button"
+        aria-label="รีโพสต์">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M4 10V7a3 3 0 0 1 3-3h12"/>
+    <path d="m16 1 3 3-3 3"/>
+    <path d="M20 14v3a3 3 0 0 1-3 3H5"/>
+    <path d="m8 17-3 3 3 3"/>
+  </svg>
+</button>
 
-  <button class="ig-icon-btn ig-share" type="button" aria-label="แชร์">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M21.5 2.5 10 14"/>
-      <path d="m21.5 2.5-7 19-4.5-7.5-7.5-4.5 19-7Z"/>
-    </svg>
-  </button>
+
+ 
+<button class="ig-icon-btn ig-share"
+        type="button"
+        aria-label="แชร์">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M21 3.5c.5-.3 1 .2.8.8l-6.3 16.3c-.3.8-1.4.9-1.9.2l-3.7-5.5-5.5-3.7c-.7-.5-.6-1.6.2-1.9L21 3.5Z"/>
+    <path d="m9.9 15.3 6.8-6.8"/>
+  </svg>
+</button>
+
 
   <button class="ig-icon-btn ig-bookmark" type="button" aria-label="บันทึก">
     <svg viewBox="0 0 24 24" aria-hidden="true">
