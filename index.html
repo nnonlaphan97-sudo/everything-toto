@@ -3973,12 +3973,38 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   border-bottom: 1px solid #eee;
 }
 
-.ig-profile-tabs svg {
+.ig-profile-tabs {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+}
+
+.ig-toto-tab {
+  flex: 1;
+  height: 45px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #999;
+}
+
+.ig-toto-tab.active {
+  color: #111;
+  border-bottom-color: #111;
+}
+
+.ig-toto-tab svg {
   width: 23px;
   height: 23px;
   fill: none;
-  stroke: #161616;
+  stroke: currentColor;
   stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .ig-profile-gallery {
@@ -5241,6 +5267,45 @@ body:has(#appScreen:not(.hidden) .ig-app) .status-bar {
 .ig-dm-message-group.outgoing .ig-dm-story-label {
   text-align: right;
 }
+/* ไอคอนในหน้าเปิดโพสต์โตโต้ */
+.ig-toto-post-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.ig-toto-post-actions button {
+  border: 0;
+  background: transparent;
+  color: #111;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+.ig-toto-post-actions button:last-child {
+  margin-left: auto;
+}
+
+.ig-toto-post-actions svg {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ig-toto-like.liked {
+  color: #ff3040;
+}
+
+.ig-toto-like.liked svg,
+.ig-toto-save.saved svg {
+  fill: currentColor;
+}
+
 </style>
 </head>
 <body>
@@ -6901,13 +6966,38 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
       แชร์โปรไฟล์
     </button>
   </div>
+<div class="ig-profile-tabs">
 
-  <div class="ig-profile-tabs">
+  <button class="ig-toto-tab active" type="button" aria-label="โพสต์">
     <svg viewBox="0 0 24 24">
       <rect x="3" y="3" width="18" height="18" rx="1"/>
       <path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>
     </svg>
-  </div>
+  </button>
+
+  <button class="ig-toto-tab" type="button" aria-label="Reels">
+    <svg viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="16" rx="3"/>
+      <path d="M3 10h18M8 5l4 5M15 5l4 5"/>
+      <path d="M10 13l5 3-5 3z"/>
+    </svg>
+  </button>
+
+  <button class="ig-toto-tab" type="button" aria-label="รีโพสต์">
+    <svg viewBox="0 0 24 24">
+      <path d="M4 8h13l-3-3M17 8l-3 3"/>
+      <path d="M20 16H7l3-3M7 16l3 3"/>
+    </svg>
+  </button>
+
+  <button class="ig-toto-tab" type="button" aria-label="รูปที่ถูกแท็ก">
+    <svg viewBox="0 0 24 24">
+      <rect x="4" y="3" width="16" height="18" rx="2"/>
+      <circle cx="12" cy="10" r="3"/>
+      <path d="M7 18c1-4 9-4 10 0"/>
+    </svg>
+  </button>
+</div>
 
   <!-- เรียงรูปใหม่ไปเก่า รูปแรกที่ส่งมาอยู่ขวาล่าง -->
   <div class="ig-profile-gallery">
@@ -6954,12 +7044,33 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
 
     <img class="ig-toto-post-image" src="" alt="รูปโพสต์โตโต้">
 
-    <div class="ig-toto-post-actions">
-      <button class="ig-toto-like" type="button" aria-label="ถูกใจ">♡</button>
-      <button class="ig-toto-comment" type="button" aria-label="ความคิดเห็น">♧</button>
-      <button class="ig-toto-send" type="button" aria-label="แชร์">➤</button>
-      <button class="ig-toto-save" type="button" aria-label="บันทึก">♧</button>
-    </div>
+<div class="ig-toto-post-actions">
+
+  <button class="ig-toto-like" type="button" aria-label="ถูกใจ">
+    <svg viewBox="0 0 24 24">
+      <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21.2l8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/>
+    </svg>
+  </button>
+
+  <button class="ig-toto-comment" type="button" aria-label="ความคิดเห็น">
+    <svg viewBox="0 0 24 24">
+      <path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5a9 9 0 0 1-.9-4A8.5 8.5 0 0 1 12.5 3a8.5 8.5 0 0 1 8.5 8.5z"/>
+    </svg>
+  </button>
+
+  <button class="ig-toto-send" type="button" aria-label="แชร์">
+    <svg viewBox="0 0 24 24">
+      <path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/>
+    </svg>
+  </button>
+
+  <button class="ig-toto-save" type="button" aria-label="บันทึก">
+    <svg viewBox="0 0 24 24">
+      <path d="M5 3h14v18l-7-5-7 5z"/>
+    </svg>
+  </button>
+
+</div>
 
     <div class="ig-toto-post-caption">
       <strong>phanuphong_t</strong>
