@@ -4494,37 +4494,46 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 
 /* ===== Facebook Home Icon ===== */
 
-/* Facebook icon */
 .fb-home-icon {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
-  padding: 0 !important;
-  border: 0 !important;
 }
 
 .fb-home-icon .fb-app-logo {
   display: block;
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
   margin: 0 auto;
   padding: 0;
+  border-radius: 12px;
   overflow: hidden;
-  border-radius: 14px;
-  background: transparent;
 }
 
 .fb-home-icon .fb-app-logo svg {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 48px;
+  height: 48px;
 }
 
 .fb-home-icon .app-label {
   display: block;
-  margin-top: 5px;
+  width: 100%;
+  margin-top: 7px;
   text-align: center;
   font-size: 11px;
+  line-height: 1.2;
 }
+
 
 
 </style>
@@ -4830,10 +4839,10 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
       </button>
     
 
+
 <button class="app-icon fb-home-icon"
         type="button"
         onclick="openApp('Facebook')">
-
   <span class="fb-app-logo">
     <svg viewBox="0 0 48 48" aria-hidden="true">
       <rect width="48" height="48" rx="12" fill="#0866FF"/>
@@ -4844,13 +4853,9 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
       />
     </svg>
   </span>
-
   <span class="app-label">Facebook</span>
 </button>
 
-  </span>
-  <span class="app-label">Facebook</span>
-</button>
     </div>
     <div class="dock">
       <button class="app-button" data-app="โทรศัพท์"><span class="app-icon" style="background:#4dbb83">☎️</span></button>
