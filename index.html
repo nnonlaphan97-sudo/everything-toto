@@ -5231,7 +5231,7 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
    
 <button class="app-icon fb-home-icon"
         type="button"
-        onclick="alert('Facebook icon OK')"
+        onclick="openApp('Facebook')"
   <span class="fb-app-logo">
     <svg viewBox="0 0 48 48" aria-hidden="true">
       <rect width="48" height="48" rx="12" fill="#0866FF"/>
@@ -5813,7 +5813,12 @@ window.showPhoneScreen = showScreen;
   $("deleteDigit").addEventListener("click", () => { pin = pin.slice(0, -1); updatePinDots(); $("pinError").textContent = ""; });
   $("emergencyButton").addEventListener("click", () => showToast("หน้าจอฉุกเฉินจำลอง"));
 
-  function openApp(name) {
+  
+function openApp(name) {
+  if (name === "Facebook") {
+    alert("เข้า openApp Facebook แล้ว");
+  }
+
   if (name === "เพลง") {
     openPlayer();
     return;
