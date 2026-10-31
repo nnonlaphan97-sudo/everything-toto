@@ -3825,10 +3825,253 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   background: #fff;
 }
 
-.ig-profile-page,
-.ig-dm-page {
-  padding: 16px;
+/* ===== Instagram Toto Profile ===== */
+
+.ig-profile-page {
+  position: relative;
+  padding: 0;
+  background: #fff;
+  color: #161616;
+  min-height: 100%;
+}
+
+.ig-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 53px;
+  padding: 0 15px;
   box-sizing: border-box;
+}
+
+.ig-profile-header strong {
+  font-size: 19px;
+  font-weight: 750;
+}
+
+.ig-profile-chevron {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.ig-profile-menu {
+  margin-left: auto;
+  width: 32px;
+  height: 32px;
+  padding: 3px;
+  border: none;
+  background: transparent;
+}
+
+.ig-profile-menu svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: #161616;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.ig-profile-overview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 15px;
+}
+
+.ig-profile-avatar {
+  width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ig-profile-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #161616;
+  white-space: nowrap;
+}
+
+.ig-profile-stat strong {
+  font-size: 17px;
+  font-weight: 750;
+}
+
+.ig-profile-stat span {
+  font-size: 11px;
+}
+
+.ig-profile-bio {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px 15px 13px;
+  font-size: 13px;
+}
+
+.ig-profile-bio strong {
+  font-weight: 700;
+}
+
+.ig-profile-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  padding: 0 15px 16px;
+}
+
+.ig-profile-buttons button {
+  height: 34px;
+  padding: 0 5px;
+  border: none;
+  border-radius: 8px;
+  background: #efefef;
+  color: #161616;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.ig-profile-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 43px;
+  border-bottom: 1px solid #eee;
+}
+
+.ig-profile-tabs svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: #161616;
+  stroke-width: 1.8;
+}
+
+.ig-profile-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px;
+}
+
+.ig-profile-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+  background: #eee;
+}
+
+.ig-profile-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== Full post viewer ===== */
+
+.ig-toto-post-view {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  min-height: 100%;
+  background: #fff;
+  overflow-y: auto;
+}
+
+.ig-toto-post-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 52px;
+  padding: 0 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.ig-toto-post-header strong {
+  font-size: 16px;
+}
+
+.ig-toto-post-back {
+  border: none;
+  background: transparent;
+  color: #161616;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.ig-toto-post-user {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 13px;
+}
+
+.ig-toto-post-user img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ig-toto-post-user strong {
+  font-size: 13px;
+}
+
+.ig-toto-post-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 65vh;
+  object-fit: contain;
+  background: #000;
+}
+
+.ig-toto-post-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 10px 13px;
+}
+
+.ig-toto-post-actions button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #161616;
+  font-size: 27px;
+  line-height: 1;
+}
+
+.ig-toto-like.liked {
+  color: #ff3040;
+}
+
+.ig-toto-save {
+  margin-left: auto;
+}
+
+.ig-toto-post-caption {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 0 13px 18px;
+  font-size: 13px;
+}
+
+.ig-toto-post-caption strong {
+  font-weight: 700;
 }
 
 .ig-explore-searchbar {
@@ -5862,34 +6105,122 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
 
 </section>
 
+<section class="ig-page ig-profile-page hidden">
 
-      <section class="ig-page ig-profile-page hidden">
-        <div class="ig-profile-top">
-          <strong>toto</strong>
-          <span>☰</span>
-        </div>
-        <div class="ig-profile-info">
-         <div class="ig-profile-avatar">
-  <img src="https://i.ibb.co/j9K327YR/r07qxo-R-Download.jpg" alt="โตโต้">
-</div>
-          <div><strong>12</strong><small>โพสต์</small></div>
-          <div><strong>1,248</strong><small>ผู้ติดตาม</small></div>
-          <div><strong>385</strong><small>กำลังติดตาม</small></div>
-        </div>
-        <div class="ig-profile-bio">
-          <strong>Toto ♡</strong>
-          <div>Everything Toto ✨</div>
-          <div>Work • Life • Memories</div>
-        </div>
-        <div class="ig-profile-buttons">
-          <button type="button">แก้ไขโปรไฟล์</button>
-          <button type="button">แชร์โปรไฟล์</button>
-        </div>
-        <div class="ig-profile-grid">
-          <div>ET</div><div>♡</div><div>01</div>
-          <div>02</div><div>TOTO</div><div>03</div>
-        </div>
-      </section>
+  <header class="ig-profile-header">
+    <strong>phanuphong_t</strong>
+    <span class="ig-profile-chevron">⌄</span>
+    <button class="ig-profile-menu" type="button" aria-label="เมนู">
+      <svg viewBox="0 0 24 24">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </header>
+
+  <div class="ig-profile-overview">
+    <img
+      class="ig-profile-avatar"
+      src="https://i.ibb.co/j9K327YR/r07qxo-R-Download.jpg"
+      alt="โตโต้"
+    >
+
+    <div class="ig-profile-stat">
+      <strong>6</strong>
+      <span>โพสต์</span>
+    </div>
+
+    <div class="ig-profile-stat">
+      <strong>1,286</strong>
+      <span>ผู้ติดตาม</span>
+    </div>
+
+    <button class="ig-profile-stat ig-profile-following"
+            type="button">
+      <strong>1</strong>
+      <span>กำลังติดตาม</span>
+    </button>
+  </div>
+
+  <div class="ig-profile-bio">
+    <strong>Phanuphong T.</strong>
+    <span>just living my little life ♡</span>
+  </div>
+
+  <div class="ig-profile-buttons">
+    <button class="ig-profile-edit" type="button">
+      แก้ไขโปรไฟล์
+    </button>
+    <button class="ig-profile-share" type="button">
+      แชร์โปรไฟล์
+    </button>
+  </div>
+
+  <div class="ig-profile-tabs">
+    <svg viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="1"/>
+      <path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>
+    </svg>
+  </div>
+
+  <!-- เรียงรูปใหม่ไปเก่า รูปแรกที่ส่งมาอยู่ขวาล่าง -->
+  <div class="ig-profile-gallery">
+
+    <button class="ig-profile-photo" type="button" data-toto-post="6">
+      <img src="https://i.ibb.co/bjcs2Zz5/IMG-5478.jpg" alt="โพสต์ที่ 6" loading="lazy">
+    </button>
+
+    <button class="ig-profile-photo" type="button" data-toto-post="5">
+      <img src="https://i.ibb.co/rGmGhZqj/A6125416-E6-E3-43-B0-9955-6-D914089440-E.jpg" alt="โพสต์ที่ 5" loading="lazy">
+    </button>
+
+    <button class="ig-profile-photo" type="button" data-toto-post="4">
+      <img src="https://i.ibb.co/VWfnkc3w/r07qxo-R-Download.jpg" alt="โพสต์ที่ 4" loading="lazy">
+    </button>
+
+    <button class="ig-profile-photo" type="button" data-toto-post="3">
+      <img src="https://i.ibb.co/pBTP5JfK/r07qxo-R-Download.jpg" alt="โพสต์ที่ 3" loading="lazy">
+    </button>
+
+    <button class="ig-profile-photo" type="button" data-toto-post="2">
+      <img src="https://i.ibb.co/DgTZ1jT6/r07qxo-R-Download.jpg" alt="โพสต์ที่ 2" loading="lazy">
+    </button>
+
+    <button class="ig-profile-photo" type="button" data-toto-post="1">
+      <img src="https://i.ibb.co/pBddL6bb/r07qxo-R-Download.jpg" alt="โพสต์ที่ 1" loading="lazy">
+    </button>
+
+  </div>
+
+  <!-- หน้าดูโพสต์เต็ม -->
+  <div class="ig-toto-post-view hidden">
+    <div class="ig-toto-post-header">
+      <button class="ig-toto-post-back" type="button" aria-label="กลับ">
+        ‹
+      </button>
+      <strong>โพสต์</strong>
+    </div>
+
+    <div class="ig-toto-post-user">
+      <img src="https://i.ibb.co/j9K327YR/r07qxo-R-Download.jpg" alt="โตโต้">
+      <strong>phanuphong_t</strong>
+    </div>
+
+    <img class="ig-toto-post-image" src="" alt="รูปโพสต์โตโต้">
+
+    <div class="ig-toto-post-actions">
+      <button class="ig-toto-like" type="button" aria-label="ถูกใจ">♡</button>
+      <button class="ig-toto-comment" type="button" aria-label="ความคิดเห็น">♧</button>
+      <button class="ig-toto-send" type="button" aria-label="แชร์">➤</button>
+      <button class="ig-toto-save" type="button" aria-label="บันทึก">♧</button>
+    </div>
+
+    <div class="ig-toto-post-caption">
+      <strong>phanuphong_t</strong>
+      <span class="ig-toto-caption-text"></span>
+    </div>
+  </div>
+</section>
+
 
       <section class="ig-page ig-dm-page hidden">
         <div class="ig-dm-header">
@@ -6834,6 +7165,95 @@ if (name === "Instagram") {
         }
       }
     });
+  });
+
+  // ===== Toto Instagram Profile =====
+
+  const totoPosts = {
+    1: {
+      image: "https://i.ibb.co/pBddL6bb/r07qxo-R-Download.jpg",
+      caption: "little moments ♡"
+    },
+    2: {
+      image: "https://i.ibb.co/DgTZ1jT6/r07qxo-R-Download.jpg",
+      caption: "a day to remember"
+    },
+    3: {
+      image: "https://i.ibb.co/pBTP5JfK/r07qxo-R-Download.jpg",
+      caption: "my favorite day"
+    },
+    4: {
+      image: "https://i.ibb.co/VWfnkc3w/r07qxo-R-Download.jpg",
+      caption: "just me"
+    },
+    5: {
+      image: "https://i.ibb.co/rGmGhZqj/A6125416-E6-E3-43-B0-9955-6-D914089440-E.jpg",
+      caption: "somewhere in my memories"
+    },
+    6: {
+      image: "https://i.ibb.co/bjcs2Zz5/IMG-5478.jpg",
+      caption: "life lately ♡"
+    }
+  };
+
+  const totoPostView = ig.querySelector(".ig-toto-post-view");
+  const totoPostImage = ig.querySelector(".ig-toto-post-image");
+  const totoCaptionText = ig.querySelector(".ig-toto-caption-text");
+  const totoLike = ig.querySelector(".ig-toto-like");
+  const totoSave = ig.querySelector(".ig-toto-save");
+
+  ig.querySelectorAll(".ig-profile-photo").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const post = totoPosts[btn.dataset.totoPost];
+      if (!post) return;
+
+      totoPostImage.src = post.image;
+      totoCaptionText.textContent = post.caption;
+
+      totoLike.classList.remove("liked");
+      totoLike.textContent = "♡";
+
+      totoSave.classList.remove("saved");
+      totoPostView.classList.remove("hidden");
+    });
+  });
+
+  ig.querySelector(".ig-toto-post-back").addEventListener("click", () => {
+    totoPostView.classList.add("hidden");
+  });
+
+  totoLike.addEventListener("click", () => {
+    const liked = totoLike.classList.toggle("liked");
+    totoLike.textContent = liked ? "♥" : "♡";
+  });
+
+  totoSave.addEventListener("click", () => {
+    const saved = totoSave.classList.toggle("saved");
+    totoSave.textContent = saved ? "▣" : "♧";
+  });
+
+  ig.querySelector(".ig-toto-comment").addEventListener("click", () => {
+    alert("ความคิดเห็น");
+  });
+
+  ig.querySelector(".ig-toto-send").addEventListener("click", () => {
+    alert("แชร์โพสต์");
+  });
+
+  ig.querySelector(".ig-profile-following").addEventListener("click", () => {
+    alert("กำลังติดตาม\n\nkanittee");
+  });
+
+  ig.querySelector(".ig-profile-edit").addEventListener("click", () => {
+    alert("แก้ไขโปรไฟล์");
+  });
+
+  ig.querySelector(".ig-profile-share").addEventListener("click", () => {
+    alert("แชร์โปรไฟล์: phanuphong_t");
+  });
+
+  ig.querySelector(".ig-profile-menu").addEventListener("click", () => {
+    alert("เมนู Instagram");
   });
 
     ig.querySelectorAll(".ig-nav").forEach(btn => {
