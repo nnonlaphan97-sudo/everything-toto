@@ -4844,6 +4844,11 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 .ig-kanit-post-caption strong {
   margin-right: 5px;
 }
+/* ซ่อน Status Bar เฉพาะตอนเปิด Instagram */
+body:has(#appScreen:not(.hidden) .ig-app) .status-bar {
+  display: none !important;
+}
+
 </style>
 </head>
 <body>
