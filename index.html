@@ -3366,9 +3366,15 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   justify-content: center;
 }
 
+
 .ig-friend-ring {
   background: linear-gradient(35deg,#ffd776,#fa7e1e,#e82b79,#8d35cf);
 }
+
+.ig-friend-ring.ig-story-seen {
+  background: #d1d1d1;
+}
+
 
 .ig-own {
   background: #e9e9e9;
@@ -5695,7 +5701,15 @@ function closeKanitStory() {
   storyProgress.style.width = "0%";
 }
 
+
 function openKanitStory() {
+  // เปลี่ยนวงแหวนสตอรี่คณิตเป็นสีเทาหลังจากกดดู
+  const kanitRing = ig.querySelector(".ig-kanit-story .ig-friend-ring");
+  if (kanitRing) {
+    kanitRing.classList.add("ig-story-seen");
+  }
+
+  // เปิดวิดีโอสตอรี่คณิต
   storyViewer.classList.remove("hidden");
   storyProgress.style.width = "0%";
 
@@ -5704,7 +5718,6 @@ function openKanitStory() {
     alert("ไม่สามารถเล่นวิดีโอได้ กรุณาตรวจสอบชื่อไฟล์");
   });
 }
-
 storyVideo.addEventListener("timeupdate", () => {
   if (!storyVideo.duration) return;
 
