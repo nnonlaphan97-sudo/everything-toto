@@ -5895,15 +5895,6 @@ if (name === "Instagram") {
       passive: true
     });
   });
-
-  // โค้ด Instagram ส่วนอื่น ๆ ที่มีอยู่เดิม
-  // เช่น ปุ่มเปลี่ยนหน้า ปุ่มหัวใจ และระบบสตอรี่
-  // ให้เก็บไว้ต่อจากตรงนี้เหมือนเดิม
-
-  track.addEventListener("scroll", updateCarousel, { passive: true });
-});
-  }
-
   ig.querySelectorAll(".ig-nav").forEach(btn => {
     btn.addEventListener("click", () => {
       showIgPage(btn.dataset.igPage);
