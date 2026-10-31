@@ -2969,6 +2969,246 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   text-align: center;
 }
 
+/* ===== SAMSUNG NOTES ===== */
+
+#appScreen:has(.samsung-notes) .app-window-header {
+  display: none;
+}
+
+#appScreen:has(.samsung-notes) .app-content {
+  padding: 0;
+  height: 100%;
+  min-height: 0;
+}
+
+.samsung-notes {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  background: #fff;
+  color: #202020;
+  font-family: inherit;
+}
+
+.samsung-notes .hidden {
+  display: none !important;
+}
+
+.notes-home,
+.notes-editor {
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.notes-home {
+  padding: 28px 19px 90px;
+}
+
+.notes-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.notes-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 750;
+}
+
+.notes-search-btn {
+  width: 42px;
+  height: 42px;
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 33px;
+}
+
+.notes-search-wrap {
+  margin-top: 20px;
+}
+
+.notes-search {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 13px 15px;
+  border: 0;
+  border-radius: 15px;
+  background: #f2f2f2;
+  color: #222;
+  font: inherit;
+}
+
+.notes-count {
+  margin: 25px 0 14px;
+  color: #777;
+  font-size: 13px;
+}
+
+.notes-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.notes-card {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 160px;
+  padding: 16px;
+  border: 1px solid #ededed;
+  border-radius: 17px;
+  background: #fafafa;
+  color: #222;
+  text-align: left;
+  overflow: hidden;
+}
+
+.notes-card-title {
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+.notes-card-preview {
+  flex: 1;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  overflow: hidden;
+}
+
+.notes-card-date {
+  margin-top: 15px;
+  color: #999;
+  font-size: 11px;
+}
+
+.notes-empty {
+  grid-column: 1 / -1;
+  padding: 95px 15px;
+  text-align: center;
+  color: #aaa;
+  font-size: 15px;
+}
+
+.notes-add {
+  position: absolute;
+  right: 22px;
+  bottom: 25px;
+  width: 58px;
+  height: 58px;
+  border: 0;
+  border-radius: 50%;
+  background: #f2552d;
+  color: #fff;
+  font-size: 34px;
+  box-shadow: 0 4px 14px #f2552d44;
+}
+
+.notes-editor {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 19px 0;
+}
+
+.notes-editor-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.notes-editor-header button {
+  border: 0;
+  background: transparent;
+  color: #222;
+}
+
+.notes-back {
+  font-size: 34px;
+}
+
+.notes-editor-heading {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.notes-save {
+  color: #f2552d !important;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.notes-title {
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #222;
+  font: inherit;
+  font-size: 25px;
+  font-weight: 750;
+}
+
+.notes-date {
+  margin: 13px 0 20px;
+  color: #999;
+  font-size: 12px;
+}
+
+.notes-body {
+  flex: 1;
+  width: 100%;
+  min-height: 180px;
+  box-sizing: border-box;
+  resize: none;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #222;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.notes-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 0 18px;
+  border-top: 1px solid #eee;
+}
+
+.notes-toolbar button {
+  min-width: 40px;
+  height: 38px;
+  border: 0;
+  border-radius: 10px;
+  background: #f3f3f3;
+  color: #333;
+  font-size: 16px;
+}
+
+.notes-toolbar .notes-delete {
+  margin-left: auto;
+  padding: 0 14px;
+  color: #d94444;
+  font-size: 13px;
+}
+
 
 </style>
 </head>
@@ -4447,11 +4687,252 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
     </div>
   </div>
 `,
-      "โน้ต": `<div class="mock-card"><strong>โน้ตใหม่</strong><p contenteditable="true">แตะตรงนี้เพื่อพิมพ์โน้ต...</p></div>`,
+    
+"โน้ต": `
+  <div class="samsung-notes">
+
+    <div class="notes-home">
+      <div class="notes-header">
+        <h1>โน้ตทั้งหมด</h1>
+        <button class="notes-search-btn" type="button" aria-label="ค้นหา">⌕</button>
+      </div>
+
+      <div class="notes-search-wrap hidden">
+        <input class="notes-search" type="search"
+               placeholder="ค้นหาโน้ต">
+      </div>
+
+      <div class="notes-count">0 โน้ต</div>
+      <div class="notes-list"></div>
+
+      <button class="notes-add" type="button"
+              aria-label="สร้างโน้ต">+</button>
+    </div>
+
+    <div class="notes-editor hidden">
+      <div class="notes-editor-header">
+        <button class="notes-back" type="button">‹</button>
+        <span class="notes-editor-heading">แก้ไขโน้ต</span>
+        <button class="notes-save" type="button">เสร็จ</button>
+      </div>
+
+      <input class="notes-title" type="text"
+             placeholder="ชื่อเรื่อง">
+
+      <div class="notes-date"></div>
+
+      <textarea class="notes-body"
+                placeholder="เริ่มเขียนโน้ต..."></textarea>
+
+      <div class="notes-toolbar">
+        <button class="notes-bold" type="button" title="ตัวหนา">B</button>
+        <button class="notes-list-insert" type="button" title="รายการ">☷</button>
+        <button class="notes-check-insert" type="button" title="เช็กลิสต์">☑</button>
+        <button class="notes-delete" type="button" title="ลบโน้ต">ลบ</button>
+      </div>
+    </div>
+
+  </div>
+`,
       "อินเทอร์เน็ต": `<div class="mock-card"><strong>เบราว์เซอร์จำลอง</strong><p>ไม่มีการเปิดเว็บไซต์จริง</p><input placeholder="พิมพ์เพื่อค้นหา" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px"></div>`
     };
     $("appContent").innerHTML = content[name] || `<div class="mock-card">${name}</div>`;
   
+if (name === "โน้ต") {
+  const notes = document.querySelector("#appContent .samsung-notes");
+  const $n = selector => notes.querySelector(selector);
+
+  const storageKey = "toto-samsung-notes";
+  let allNotes = [];
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey));
+    allNotes = Array.isArray(saved) ? saved : [];
+  } catch {
+    allNotes = [];
+  }
+
+  let currentId = null;
+
+  function saveNotes() {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(allNotes));
+      return true;
+    } catch {
+      alert("ไม่สามารถบันทึกโน้ตได้");
+      return false;
+    }
+  }
+
+  function formatDate(value) {
+    return new Date(value).toLocaleString("th-TH", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+  }
+
+  function renderNotes() {
+    const list = $n(".notes-list");
+    const keyword = $n(".notes-search").value.trim().toLowerCase();
+
+    list.innerHTML = "";
+
+    const filtered = allNotes
+      .filter(note =>
+        (note.title + " " + note.body)
+          .toLowerCase()
+          .includes(keyword)
+      )
+      .sort((a, b) => b.updated - a.updated);
+
+    $n(".notes-count").textContent =
+      `${filtered.length} โน้ต`;
+
+    if (!filtered.length) {
+      const empty = document.createElement("div");
+      empty.className = "notes-empty";
+      empty.textContent = keyword
+        ? "ไม่พบโน้ตที่ค้นหา"
+        : "ยังไม่มีโน้ต กด + เพื่อเริ่มเขียน";
+      list.appendChild(empty);
+      return;
+    }
+
+    filtered.forEach(note => {
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "notes-card";
+
+      const title = document.createElement("div");
+      title.className = "notes-card-title";
+      title.textContent = note.title || "ไม่มีชื่อ";
+
+      const preview = document.createElement("div");
+      preview.className = "notes-card-preview";
+      preview.textContent = note.body || "ไม่มีข้อความ";
+
+      const date = document.createElement("div");
+      date.className = "notes-card-date";
+      date.textContent = formatDate(note.updated);
+
+      card.append(title, preview, date);
+      card.addEventListener("click", () => openNote(note.id));
+      list.appendChild(card);
+    });
+  }
+
+  function openNote(id = null) {
+    currentId = id;
+
+    const note = allNotes.find(item => item.id === id);
+
+    $n(".notes-title").value = note ? note.title : "";
+    $n(".notes-body").value = note ? note.body : "";
+
+    $n(".notes-date").textContent = note
+      ? formatDate(note.updated)
+      : formatDate(Date.now());
+
+    $n(".notes-delete").style.display = note ? "" : "none";
+
+    $n(".notes-home").classList.add("hidden");
+    $n(".notes-editor").classList.remove("hidden");
+    $n(".notes-title").focus();
+  }
+
+  function closeEditor() {
+    $n(".notes-editor").classList.add("hidden");
+    $n(".notes-home").classList.remove("hidden");
+    currentId = null;
+    renderNotes();
+  }
+
+  function saveCurrentNote() {
+    const title = $n(".notes-title").value.trim();
+    const body = $n(".notes-body").value.trim();
+
+    if (!title && !body) {
+      closeEditor();
+      return;
+    }
+
+    const existing = allNotes.find(note => note.id === currentId);
+
+    if (existing) {
+      existing.title = title;
+      existing.body = body;
+      existing.updated = Date.now();
+    } else {
+      const newNote = {
+        id: Date.now() + "-" + Math.random().toString(36).slice(2),
+        title,
+        body,
+        updated: Date.now()
+      };
+
+      allNotes.push(newNote);
+      currentId = newNote.id;
+    }
+
+    if (saveNotes()) closeEditor();
+  }
+
+  $n(".notes-add").addEventListener("click", () => openNote());
+
+  $n(".notes-save").addEventListener("click", saveCurrentNote);
+
+  $n(".notes-back").addEventListener("click", saveCurrentNote);
+
+  $n(".notes-search-btn").addEventListener("click", () => {
+    $n(".notes-search-wrap").classList.toggle("hidden");
+    $n(".notes-search").focus();
+  });
+
+  $n(".notes-search").addEventListener("input", renderNotes);
+
+  $n(".notes-delete").addEventListener("click", () => {
+    if (!currentId) return;
+    if (!confirm("ต้องการลบโน้ตนี้ใช่ไหม?")) return;
+
+    allNotes = allNotes.filter(note => note.id !== currentId);
+    if (saveNotes()) closeEditor();
+  });
+
+  $n(".notes-bold").addEventListener("click", () => {
+    const field = $n(".notes-body");
+    const start = field.selectionStart;
+    const end = field.selectionEnd;
+    const selectedText = field.value.slice(start, end);
+
+    field.setRangeText(
+      `**${selectedText || "ข้อความตัวหนา"}**`,
+      start,
+      end,
+      "select"
+    );
+    field.focus();
+  });
+
+  $n(".notes-list-insert").addEventListener("click", () => {
+    const field = $n(".notes-body");
+    field.setRangeText("• ", field.selectionStart,
+      field.selectionEnd, "end");
+    field.focus();
+  });
+
+  $n(".notes-check-insert").addEventListener("click", () => {
+    const field = $n(".notes-body");
+    field.setRangeText("☐ ", field.selectionStart,
+      field.selectionEnd, "end");
+    field.focus();
+  });
+
+  renderNotes();
+}
+
 if (name === "นาฬิกา") {
   const clock = document.querySelector("#appContent .samsung-clock");
   const $c = selector => clock.querySelector(selector);
