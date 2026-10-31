@@ -4537,7 +4537,313 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   border-radius: 10px;
   background: #33313a;
 }
+/* ===== Instagram Kanit Profile ===== */
 
+.ig-app .ig-kanit-page {
+  background: #fff;
+  color: #111;
+  min-height: 100%;
+  padding-bottom: 12px;
+}
+
+.ig-kanit-header {
+  height: 48px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+}
+
+.ig-kanit-header strong {
+  font-size: 17px;
+  flex: 1;
+}
+
+.ig-kanit-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ig-kanit-header button,
+.ig-kanit-post-header button {
+  border: 0;
+  background: none;
+  padding: 3px;
+  display: grid;
+  place-items: center;
+}
+
+.ig-kanit-header svg,
+.ig-kanit-post-header svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ig-kanit-more svg {
+  fill: currentColor;
+  stroke: none;
+}
+
+.ig-kanit-overview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 12px 7px;
+}
+
+.ig-kanit-avatar {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
+.ig-kanit-stat {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ig-kanit-stat strong {
+  font-size: 15px;
+  font-weight: 750;
+}
+
+.ig-kanit-stat span {
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.ig-kanit-bio {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px 13px;
+  font-size: 12px;
+}
+
+.ig-kanit-followed {
+  padding: 6px 13px 9px;
+  font-size: 10px;
+  color: #777;
+}
+
+.ig-kanit-followed strong {
+  color: #222;
+}
+
+.ig-kanit-buttons {
+  display: flex;
+  gap: 7px;
+  padding: 4px 12px 14px;
+}
+
+.ig-kanit-buttons button {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  border-radius: 8px;
+  background: #efefef;
+  color: #111;
+  padding: 9px 4px;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.ig-kanit-highlights {
+  display: flex;
+  gap: 13px;
+  overflow-x: auto;
+  padding: 0 13px 15px;
+  scrollbar-width: none;
+}
+
+.ig-kanit-highlights::-webkit-scrollbar {
+  display: none;
+}
+
+.ig-kanit-highlight {
+  min-width: 57px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ig-kanit-highlight-circle {
+  width: 55px;
+  height: 55px;
+  border: 1.5px solid #ddd;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #f8f8f8;
+  font-size: 23px;
+}
+
+.ig-kanit-highlight span {
+  font-size: 10px;
+}
+
+.ig-kanit-tabs {
+  display: flex;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.ig-kanit-tab {
+  flex: 1;
+  height: 43px;
+  border: 0;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  color: #777;
+}
+
+.ig-kanit-tab.active {
+  color: #111;
+  border-bottom: 2px solid #111;
+}
+
+.ig-kanit-tab svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ig-kanit-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px;
+  background: #fff;
+}
+
+.ig-kanit-photo {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  background: #eee;
+}
+
+.ig-kanit-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* หน้าดูโพสต์เต็ม */
+.ig-kanit-post-view {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  background: #fff;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ig-kanit-post-header {
+  height: 48px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.ig-kanit-post-header strong {
+  font-size: 16px;
+}
+
+.ig-kanit-post-user {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+.ig-kanit-post-user img {
+  width: 31px;
+  height: 31px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.ig-kanit-post-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: contain;
+  background: #fafafa;
+}
+
+.ig-kanit-post-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 11px 12px;
+}
+
+.ig-kanit-post-actions button {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: #111;
+}
+
+.ig-kanit-post-actions button:last-child {
+  margin-left: auto;
+}
+
+.ig-kanit-post-actions svg {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ig-kanit-like.liked {
+  color: #ff3040;
+}
+
+.ig-kanit-like.liked svg,
+.ig-kanit-save.saved svg {
+  fill: currentColor;
+}
+
+.ig-kanit-post-caption {
+  padding: 0 12px 20px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.ig-kanit-post-caption strong {
+  margin-right: 5px;
+}
 </style>
 </head>
 <body>
@@ -6264,7 +6570,229 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
     </div>
   </div>
 </section>
+<!-- ===== Kanit Instagram Profile ===== -->
+<section class="ig-page ig-kanit-page hidden">
 
+  <header class="ig-kanit-header">
+    <button class="ig-kanit-back" type="button" aria-label="ย้อนกลับ">
+      <svg viewBox="0 0 24 24">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+    </button>
+
+    <strong>kanittee</strong>
+
+    <div class="ig-kanit-header-actions">
+      <button type="button" class="ig-kanit-bell" aria-label="การแจ้งเตือน">
+        <svg viewBox="0 0 24 24">
+          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 8h18s-3-1-3-8M10 21h4"/>
+        </svg>
+      </button>
+
+      <button type="button" class="ig-kanit-more" aria-label="เพิ่มเติม">
+        <svg viewBox="0 0 24 24">
+          <circle cx="5" cy="12" r="1"/>
+          <circle cx="12" cy="12" r="1"/>
+          <circle cx="19" cy="12" r="1"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="ig-kanit-overview">
+    <img
+      class="ig-kanit-avatar"
+      src="https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg"
+      alt="รูปโปรไฟล์คณิต"
+    >
+
+    <div class="ig-kanit-stat">
+      <strong>332</strong>
+      <span>โพสต์</span>
+    </div>
+
+    <div class="ig-kanit-stat">
+      <strong>5,830</strong>
+      <span>ผู้ติดตาม</span>
+    </div>
+
+    <div class="ig-kanit-stat">
+      <strong>652</strong>
+      <span>กำลังติดตาม</span>
+    </div>
+  </div>
+
+  <div class="ig-kanit-bio">
+    <strong>คณิต</strong>
+    <span>kanittee ♡</span>
+  </div>
+
+  <div class="ig-kanit-followed">
+    ติดตามโดย <strong>phanuphong_t</strong>
+  </div>
+
+  <div class="ig-kanit-buttons">
+    <button class="ig-kanit-following-btn" type="button">
+      กำลังติดตาม ⌄
+    </button>
+    <button class="ig-kanit-message-btn" type="button">
+      ข้อความ
+    </button>
+  </div>
+
+  <div class="ig-kanit-highlights">
+    <div class="ig-kanit-highlight">
+      <div class="ig-kanit-highlight-circle">♡</div>
+      <span>moments</span>
+    </div>
+    <div class="ig-kanit-highlight">
+      <div class="ig-kanit-highlight-circle">✈</div>
+      <span>travel</span>
+    </div>
+    <div class="ig-kanit-highlight">
+      <div class="ig-kanit-highlight-circle">☕</div>
+      <span>daily</span>
+    </div>
+    <div class="ig-kanit-highlight">
+      <div class="ig-kanit-highlight-circle">✧</div>
+      <span>memories</span>
+    </div>
+  </div>
+
+  <div class="ig-kanit-tabs">
+    <button class="ig-kanit-tab active" type="button" aria-label="โพสต์">
+      <svg viewBox="0 0 24 24">
+        <rect x="3" y="3" width="18" height="18" rx="1"/>
+        <path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>
+      </svg>
+    </button>
+
+    <button class="ig-kanit-tab" type="button" aria-label="Reels">
+      <svg viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="16" rx="2"/>
+        <path d="M3 10h18M8 5l4 5M15 5l4 5M10 13l5 3-5 3z"/>
+      </svg>
+    </button>
+
+    <button class="ig-kanit-tab" type="button" aria-label="รีโพสต์">
+      <svg viewBox="0 0 24 24">
+        <path d="M4 8h13l-3-3M17 8l-3 3M20 16H7l3-3M7 16l3 3"/>
+      </svg>
+    </button>
+
+    <button class="ig-kanit-tab" type="button" aria-label="แท็ก">
+      <svg viewBox="0 0 24 24">
+        <rect x="4" y="3" width="16" height="18" rx="2"/>
+        <circle cx="12" cy="10" r="3"/>
+        <path d="M7 18c1-4 9-4 10 0"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- รูปใหม่อยู่ด้านบน รูปเก่าอยู่ด้านล่าง -->
+  <div class="ig-kanit-gallery">
+
+    <button class="ig-kanit-photo" type="button" data-kanit-post="12">
+      <img src="https://i.ibb.co/zqC1M4h/r07qxo-R-Download.jpg" alt="โพสต์คณิต 12" loading="lazy">
+    </button>
+
+    <button class="ig-kanit-photo" type="button" data-kanit-post="11">
+      <img src="https://i.ibb.co/zV9WsVk1/r07qxo-R-Download.jpg" alt="โพสต์คณิต 11" loading="lazy">
+    </button>
+
+    <button class="ig-kanit-photo" type="button" data-kanit-post="10">
+      <img src="https://i.ibb.co/WNJNsK4X/r07qxo-R-Download.jpg" alt="โพสต์คณิต 10" loading="lazy">
+    </button>
+
+    <button class="ig-kanit-photo" type="button" data-kanit-post="9">
+      <img src="https://i.ibb.co/ycYWMGPf/r07qxo-R-Download.jpg" alt="โพสต์คณิต 9" loading="lazy">
+    </button>
+
+    <button class="ig-kanit-photo" type="button" data-kanit-post="8">
+      <img src="https://i.ibb.co/9msRK2Rq/r07qxo-R-Download.jpg" alt="โพสต์คณิต 8" loading="lazy">
+    </button>
+
+    <button class="ig-kanit-photo" type="button" data-kanit-post="7">
+      <img src="https://i.ibb.co/S7G93jbm/r07qxo-R-Download.jpg" alt="โพสต์คณิต 7" loading="lazy">
+    </button>
+
+    <button class="ig-kanit-photo" type="button" data-kanit-post="6">
+      <img src="https://i.ibb.co/wZBshx26/r07qxo-R-Download.jpg" alt="โพสต์คณิต 6" loading="lazy">
+    </button>
+
+    <button class="ig-kanit-photo" type="button" data-kanit-post="5">
+      <img src="https://i.ibb.co/spsGKVSc/r07qxo-R-Download.jpg" alt="โพสต์คณิต 5" loading="lazy">
+    </button>
+
+    <button class="ig-kanit-photo" type="button" data-kanit-post="4">
+      <img src="https://i.ibb.co/CfYPBSx/r07qxo-R-Download.jpg" alt="โพสต์คณิต 4" loading="lazy">
+    </button>
+
+    <button class="ig-kanit-photo" type="button" data-kanit-post="3">
+      <img src="https://i.ibb.co/20SCMj9P/r07qxo-R-Download.jpg" alt="โพสต์คณิต 3" loading="lazy">
+    </button>
+
+    <button class="ig-kanit-photo" type="button" data-kanit-post="2">
+      <img src="https://i.ibb.co/CK58XGcz/r07qxo-R-Download.jpg" alt="โพสต์คณิต 2" loading="lazy">
+    </button>
+
+    <button class="ig-kanit-photo" type="button" data-kanit-post="1">
+      <img src="https://i.ibb.co/8nMQfm0L/r07qxo-R-Download.jpg" alt="โพสต์คณิต 1" loading="lazy">
+    </button>
+
+  </div>
+
+  <!-- เปิดดูโพสต์คณิต -->
+  <div class="ig-kanit-post-view hidden">
+
+    <header class="ig-kanit-post-header">
+      <button class="ig-kanit-post-back" type="button" aria-label="กลับ">
+        <svg viewBox="0 0 24 24">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <strong>โพสต์</strong>
+    </header>
+
+    <div class="ig-kanit-post-user">
+      <img src="https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg" alt="คณิต">
+      <strong>kanittee</strong>
+    </div>
+
+    <img class="ig-kanit-post-image" src="" alt="รูปโพสต์คณิต">
+
+    <div class="ig-kanit-post-actions">
+      <button class="ig-kanit-like" type="button" aria-label="ถูกใจ">
+        <svg viewBox="0 0 24 24">
+          <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21.2l8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/>
+        </svg>
+      </button>
+
+      <button class="ig-kanit-comment" type="button" aria-label="ความคิดเห็น">
+        <svg viewBox="0 0 24 24">
+          <path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5a9 9 0 0 1-.9-4A8.5 8.5 0 0 1 12.5 3a8.5 8.5 0 0 1 8.5 8.5z"/>
+        </svg>
+      </button>
+
+      <button class="ig-kanit-send" type="button" aria-label="แชร์">
+        <svg viewBox="0 0 24 24">
+          <path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/>
+        </svg>
+      </button>
+
+      <button class="ig-kanit-save" type="button" aria-label="บันทึก">
+        <svg viewBox="0 0 24 24">
+          <path d="M5 3h14v18l-7-5-7 5z"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="ig-kanit-post-caption">
+      <strong>kanittee</strong>
+      <span class="ig-kanit-caption-text"></span>
+    </div>
+  </div>
+</section>
 
       <section class="ig-page ig-dm-page hidden">
         <div class="ig-dm-header">
@@ -7500,7 +8028,100 @@ if (name === "Instagram") {
       showIgPage(btn.dataset.igPage);
     });
   });
+/* ===== Kanit Profile Interactions ===== */
 
+const kanitPage = ig.querySelector(".ig-kanit-page");
+const kanitPostView = ig.querySelector(".ig-kanit-post-view");
+const kanitPostImage = ig.querySelector(".ig-kanit-post-image");
+const kanitCaption = ig.querySelector(".ig-kanit-caption-text");
+
+let kanitPreviousPage = "home";
+
+function openKanitProfile(fromPage = "home") {
+  kanitPreviousPage = fromPage;
+  kanitPostView.classList.add("hidden");
+  showIgPage("kanit");
+}
+
+ig.querySelector(".ig-kanit-back").addEventListener("click", () => {
+  kanitPostView.classList.add("hidden");
+  showIgPage(kanitPreviousPage);
+});
+
+ig.querySelectorAll(".ig-kanit-photo").forEach(button => {
+  button.addEventListener("click", () => {
+    const image = button.querySelector("img");
+
+    kanitPostImage.src = image.src;
+    kanitCaption.textContent = "";
+    kanitPostView.classList.remove("hidden");
+  });
+});
+
+ig.querySelector(".ig-kanit-post-back").addEventListener("click", () => {
+  kanitPostView.classList.add("hidden");
+});
+
+ig.querySelector(".ig-kanit-like").addEventListener("click", function () {
+  this.classList.toggle("liked");
+});
+
+ig.querySelector(".ig-kanit-save").addEventListener("click", function () {
+  this.classList.toggle("saved");
+});
+
+ig.querySelector(".ig-kanit-comment").addEventListener("click", () => {
+  const comment = prompt("เขียนความคิดเห็น");
+  if (comment && comment.trim()) {
+    alert("แสดงความคิดเห็นแล้ว");
+  }
+});
+
+ig.querySelector(".ig-kanit-send").addEventListener("click", () => {
+  alert("แชร์โพสต์ (ระบบจำลอง)");
+});
+
+ig.querySelector(".ig-kanit-following-btn").addEventListener("click", () => {
+  alert("คุณกำลังติดตาม kanittee อยู่");
+});
+
+ig.querySelector(".ig-kanit-message-btn").addEventListener("click", () => {
+  alert("ข้อความถึง kanittee (กำลังพัฒนา)");
+});
+
+ig.querySelector(".ig-kanit-bell").addEventListener("click", () => {
+  alert("การแจ้งเตือนของ kanittee");
+});
+
+ig.querySelector(".ig-kanit-more").addEventListener("click", () => {
+  alert("ตัวเลือกโปรไฟล์ kanittee");
+});
+
+/* แตะชื่อหรือรูปโปรไฟล์คณิตจากโพสต์ในฟีด */
+ig.querySelectorAll(".ig-home .ig-post-user").forEach(user => {
+  user.style.cursor = "pointer";
+  user.addEventListener("click", () => openKanitProfile("home"));
+});
+
+/* แตะผลค้นหาบัญชี kanittee */
+ig.querySelectorAll(".ig-explore-account").forEach(button => {
+  if (button.textContent.includes("kanittee")) {
+    button.addEventListener("click", event => {
+      event.stopImmediatePropagation();
+      openKanitProfile("search");
+    }, true);
+  }
+});
+
+/* แตะกำลังติดตามจากโปรไฟล์ส่วนตัว */
+const totoFollowing = ig.querySelector(".ig-profile-following");
+
+if (totoFollowing) {
+  totoFollowing.addEventListener("click", event => {
+    event.stopImmediatePropagation();
+    openKanitProfile("profile");
+  }, true);
+}
   ig.querySelectorAll(".ig-heart").forEach(btn => {
     btn.addEventListener("click", () => {
       const liked = btn.classList.toggle("liked");
