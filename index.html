@@ -3707,6 +3707,128 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 .ig-profile-avatar {
   overflow: hidden;
 }
+
+/* Instagram story viewer */
+
+.ig-app {
+  position: relative;
+}
+
+.ig-story-viewer {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: #101010;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ig-story-progress {
+  height: 3px;
+  margin: 12px 12px 10px;
+  border-radius: 4px;
+  background: #666;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.ig-story-progress span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: white;
+}
+
+.ig-story-viewer-header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 13px;
+  flex-shrink: 0;
+}
+
+.ig-story-viewer-header img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ig-story-viewer-header strong {
+  font-size: 13px;
+}
+
+.ig-story-viewer-header > span {
+  font-size: 12px;
+  color: #bbb;
+}
+
+.ig-story-close {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: white;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.ig-story-viewer-photo {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ig-story-viewer-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.ig-story-viewer-bottom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  flex-shrink: 0;
+}
+
+.ig-story-reply {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid #888;
+  border-radius: 24px;
+  padding: 12px 15px;
+  background: transparent;
+  color: white;
+  outline: none;
+}
+
+.ig-story-reply::placeholder {
+  color: #ddd;
+}
+
+.ig-story-send,
+.ig-story-heart {
+  border: 0;
+  background: transparent;
+  color: white;
+  font-size: 25px;
+}
+
+.ig-story-heart.liked {
+  color: #ff3040;
+}
+.ig-story-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+  
 </style>
 </head>
 <body>
@@ -4770,6 +4892,39 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
       </section>
     </main>
 
+<div class="ig-story-viewer hidden">
+  <div class="ig-story-progress">
+    <span></span>
+  </div>
+
+  <div class="ig-story-viewer-header">
+    <img
+      src="https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg"
+      alt="คณิต"
+    >
+    <strong>kanit</strong>
+    <span>ตอนนี้</span>
+    <button class="ig-story-close" type="button" aria-label="ปิด">×</button>
+  </div>
+
+ 
+<div class="ig-story-viewer-photo">
+  <video
+    class="ig-story-video"
+    src="videos/@r07qxo  - R⤓Download.mp4"
+    playsinline
+    preload="metadata"
+  ></video>
+</div>
+
+
+  <div class="ig-story-viewer-bottom">
+    <input type="text" class="ig-story-reply" placeholder="ตอบกลับ kanit...">
+    <button class="ig-story-send" type="button" aria-label="ส่งข้อความ">➤</button>
+    <button class="ig-story-heart" type="button" aria-label="ถูกใจ">♡</button>
+  </div>
+</div>
+
     <nav class="ig-bottom-nav">
       <button class="ig-nav active" data-ig-page="home" type="button" aria-label="หน้าหลัก">
         <svg viewBox="0 0 24 24"><path d="m2.5 10 9.5-8 9.5 8v11h-7v-7H10v7H2.5V10Z"/></svg>
@@ -5489,9 +5644,59 @@ if (name === "Instagram") {
     alert("ยังไม่ได้เพิ่มสตอรี่\nแตะ + เพื่อสร้างสตอรี่ใหม่");
   });
 
-  ig.querySelector(".ig-kanit-story").addEventListener("click", () => {
-    alert("สตอรี่ของคณิต 💗");
+  
+const storyViewer = ig.querySelector(".ig-story-viewer");
+const storyProgress = ig.querySelector(".ig-story-progress span");
+
+
+const storyVideo = ig.querySelector(".ig-story-video");
+
+function closeKanitStory() {
+  storyVideo.pause();
+  storyVideo.currentTime = 0;
+  storyViewer.classList.add("hidden");
+  storyProgress.style.width = "0%";
+}
+
+function openKanitStory() {
+  storyViewer.classList.remove("hidden");
+  storyProgress.style.width = "0%";
+
+  storyVideo.currentTime = 0;
+  storyVideo.play().catch(() => {
+    alert("ไม่สามารถเล่นวิดีโอได้ กรุณาตรวจสอบชื่อไฟล์");
   });
+}
+
+storyVideo.addEventListener("timeupdate", () => {
+  if (!storyVideo.duration) return;
+
+  const percent = (storyVideo.currentTime / storyVideo.duration) * 100;
+  storyProgress.style.width = Math.min(percent, 100) + "%";
+});
+
+storyVideo.addEventListener("ended", closeKanitStory);
+
+
+ig.querySelector(".ig-kanit-story").addEventListener("click", openKanitStory);
+
+ig.querySelector(".ig-story-close").addEventListener("click", closeKanitStory);
+
+ig.querySelector(".ig-story-heart").addEventListener("click", function () {
+  const liked = this.classList.toggle("liked");
+  this.textContent = liked ? "♥" : "♡";
+});
+
+ig.querySelector(".ig-story-send").addEventListener("click", () => {
+  const input = ig.querySelector(".ig-story-reply");
+  const message = input.value.trim();
+
+  if (!message) return;
+
+  alert("ส่งข้อความถึงคณิต: " + message);
+  input.value = "";
+});
+
 
   ig.querySelector(".ig-create").addEventListener("click", () => {
     alert("สร้างโพสต์หรือสตอรี่ใหม่");
