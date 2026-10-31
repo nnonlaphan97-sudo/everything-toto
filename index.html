@@ -3854,7 +3854,8 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   font-weight: bold;
 }
 
-/* Reels */
+
+/* ===== Instagram Reels ===== */
 
 .ig-reels-page {
   position: relative;
@@ -3865,37 +3866,56 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   color: #fff;
 }
 
-
 .ig-reels-title {
   position: absolute;
   top: 12px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 5;
-  padding: 8px 16px;
   margin: 0;
+  padding: 8px 16px;
   color: #fff;
   font-size: 22px;
   font-weight: 700;
   text-align: center;
   white-space: nowrap;
   pointer-events: none;
+  text-shadow: 0 1px 5px rgba(0,0,0,.45);
 }
 
-
-.ig-reel-preview {
-  min-height: 350px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+.ig-reels-feed {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior-y: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
 
-.ig-reel-preview span {
-  font-size: 26px;
-  font-weight: bold;
+.ig-reels-feed::-webkit-scrollbar {
+  display: none;
 }
+
+.ig-reel-item {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  background: #000;
+}
+
+.ig-reel-item video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
 
 /* Profile */
 .ig-profile-top,
@@ -5380,13 +5400,47 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
         </div>
       </section>
 
-      <section class="ig-page ig-reels-page hidden">
-        <div class="ig-reels-title">Reels</div>
-        <div class="ig-reel-preview">
-          <span>EVERYTHING TOTO</span>
-          <p>คลิปสั้นของโตโต้ ✨</p>
-        </div>
-      </section>
+     
+<section class="ig-page ig-reels-page hidden">
+
+  <div class="ig-reels-title">Reels</div>
+
+  <div class="ig-reels-feed">
+
+    <div class="ig-reel-item">
+      <video src="videos/snaptik_7685755790166183186_v3.mp4"
+             playsinline loop preload="metadata"></video>
+    </div>
+
+    <div class="ig-reel-item">
+      <video src="videos/snaptik_7658269030410669320_v3.mp4"
+             playsinline loop preload="metadata"></video>
+    </div>
+
+    <div class="ig-reel-item">
+      <video src="videos/snaptik_7642584846417579271_v3.mp4"
+             playsinline loop preload="metadata"></video>
+    </div>
+
+    <div class="ig-reel-item">
+      <video src="videos/snaptik_7630809065920318738_v3.mp4"
+             playsinline loop preload="metadata"></video>
+    </div>
+
+    <div class="ig-reel-item">
+      <video src="videos/snaptik_7630344644466937096_v3.mp4"
+             playsinline loop preload="metadata"></video>
+    </div>
+
+    <div class="ig-reel-item">
+      <video src="videos/snaptik_7626570907678493970_v3.mp4"
+             playsinline loop preload="metadata"></video>
+    </div>
+
+  </div>
+
+</section>
+
 
       <section class="ig-page ig-profile-page hidden">
         <div class="ig-profile-top">
@@ -6188,6 +6242,74 @@ if (name === "Instagram") {
   const ig = document.querySelector("#appContent .ig-app");
   const igMain = ig.querySelector(".ig-main");
 
+  // ===== Instagram Reels: 6 videos =====
+  const reelsFeed = ig.querySelector(".ig-reels-feed");
+  const reelItems = [...ig.querySelectorAll(".ig-reel-item")];
+  const reelVideos = reelItems.map(item => item.querySelector("video"));
+
+  let activeReelIndex = 0;
+  let reelsScrollTimer = null;
+  let reelsPageActive = false;
+
+  function pauseAllReels() {
+    reelVideos.forEach(video => video.pause());
+  }
+
+  function playActiveReel() {
+    if (!reelsPageActive) return;
+
+    pauseAllReels();
+
+    const video = reelVideos[activeReelIndex];
+    if (!video) return;
+
+    video.play().catch(() => {
+      // บางเบราว์เซอร์บล็อกการเล่นอัตโนมัติพร้อมเสียง
+    });
+  }
+
+  function updateActiveReel() {
+    if (!reelsFeed || !reelsFeed.clientHeight) return;
+
+    const index = Math.round(
+      reelsFeed.scrollTop / reelsFeed.clientHeight
+    );
+
+    const nextIndex = Math.max(
+      0,
+      Math.min(reelVideos.length - 1, index)
+    );
+
+    if (nextIndex !== activeReelIndex) {
+      reelVideos[activeReelIndex]?.pause();
+      activeReelIndex = nextIndex;
+      reelVideos[activeReelIndex].currentTime = 0;
+    }
+
+    playActiveReel();
+  }
+
+  if (reelsFeed) {
+    reelsFeed.addEventListener("scroll", () => {
+      // หยุดคลิปเก่าระหว่างกำลังเลื่อน
+      pauseAllReels();
+
+      clearTimeout(reelsScrollTimer);
+      reelsScrollTimer = setTimeout(updateActiveReel, 120);
+    }, { passive: true });
+  }
+
+  reelVideos.forEach(video => {
+    video.addEventListener("click", () => {
+      if (video.paused) {
+        pauseAllReels();
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  });
+
   function showIgPage(page) {
     ig.querySelectorAll(".ig-page").forEach(el => {
       el.classList.add("hidden");
@@ -6204,7 +6326,26 @@ if (name === "Instagram") {
     });
 
     igMain.scrollTop = 0;
+
+    // เปิด Reels ให้เล่นคลิปที่กำลังแสดง
+    reelsPageActive = page === "reels";
+
+    if (reelsPageActive) {
+      activeReelIndex = Math.max(
+        0,
+        Math.min(
+          reelVideos.length - 1,
+          Math.round(reelsFeed.scrollTop / (reelsFeed.clientHeight || 1))
+        )
+      );
+
+      playActiveReel();
+    } else {
+      clearTimeout(reelsScrollTimer);
+      pauseAllReels();
+    }
   }
+
 
   // ===== ระบบปัดรูปโพสต์ที่ 3 ของคณิต =====
   ig.querySelectorAll(".ig-post-carousel").forEach(carousel => {
