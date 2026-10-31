@@ -3816,32 +3816,151 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 }
 
 
-/* Search, profile and messages */
-.ig-search-page,
+
+/* ===== Instagram Explore ===== */
+
+.ig-search-page {
+  padding: 0;
+  box-sizing: border-box;
+  background: #fff;
+}
+
 .ig-profile-page,
 .ig-dm-page {
   padding: 16px;
   box-sizing: border-box;
 }
 
-.ig-search-input {
+.ig-explore-searchbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 10px 13px;
+  background: #fff;
+}
+
+.ig-explore-searchbar svg {
+  position: absolute;
+  left: 26px;
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: #777;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.ig-explore-input {
   width: 100%;
-  padding: 12px 14px;
-  box-sizing: border-box;
+  height: 40px;
+  padding: 0 14px 0 41px;
   border: 0;
   border-radius: 11px;
-  background: #f0f0f0;
-  color: #222;
+  outline: none;
+  background: #efefef;
+  color: #161616;
   font-size: 14px;
 }
 
-.ig-explore-grid,
+.ig-explore-input::placeholder {
+  color: #888;
+}
+
+.ig-explore-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px;
+  width: 100%;
+}
+
+.ig-explore-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  overflow: hidden;
+  background: #e9e9e9;
+}
+
+.ig-explore-item img,
+.ig-explore-item video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ig-explore-reel-icon,
+.ig-explore-multiple {
+  position: absolute;
+  top: 7px;
+  right: 8px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: bold;
+  text-shadow: 0 1px 4px rgba(0,0,0,.7);
+  pointer-events: none;
+}
+
+.ig-explore-results {
+  padding: 5px 14px 12px;
+}
+
+.ig-explore-account {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 11px 2px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  color: #161616;
+}
+
+.ig-explore-account img {
+  width: 47px;
+  height: 47px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ig-explore-account span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ig-explore-account strong {
+  font-size: 14px;
+}
+
+.ig-explore-account small {
+  font-size: 12px;
+  color: #888;
+}
+
+.ig-explore-empty {
+  padding: 15px 0;
+  text-align: center;
+  color: #888;
+  font-size: 13px;
+}
+
 .ig-profile-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 3px;
   margin-top: 16px;
 }
+
 
 .ig-explore-tile,
 .ig-profile-grid > div {
@@ -5388,17 +5507,255 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
 </article>
       </section>
 
-      <section class="ig-page ig-search-page hidden">
-        <input class="ig-search-input" type="search" placeholder="ค้นหา">
-        <div class="ig-explore-grid">
-          <div class="ig-explore-tile">LIFE</div>
-          <div class="ig-explore-tile">♡</div>
-          <div class="ig-explore-tile">TOTO</div>
-          <div class="ig-explore-tile">TRAVEL</div>
-          <div class="ig-explore-tile">FOOD</div>
-          <div class="ig-explore-tile">STYLE</div>
-        </div>
-      </section>
+<section class="ig-page ig-search-page hidden">
+
+  <div class="ig-explore-searchbar">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="10.5" cy="10.5" r="6.5"/>
+      <path d="m15.5 15.5 5 5"/>
+    </svg>
+
+    <input
+      class="ig-explore-input"
+      type="search"
+      placeholder="ค้นหา"
+      autocomplete="off"
+    >
+  </div>
+
+  <!-- ผลการค้นหาบัญชี -->
+  <div class="ig-explore-results hidden">
+
+    <button class="ig-explore-account"
+            type="button"
+            data-explore-account="kanittee">
+      <img
+        src="https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg"
+        alt="คณิต"
+      >
+      <span>
+        <strong>kanittee</strong>
+        <small>คณิต</small>
+      </span>
+    </button>
+
+    <button class="ig-explore-account"
+            type="button"
+            data-explore-account="toto">
+      <img
+        src="https://i.ibb.co/j9K327YR/r07qxo-R-Download.jpg"
+        alt="โตโต้"
+      >
+      <span>
+        <strong>toto</strong>
+        <small>Everything Toto</small>
+      </span>
+    </button>
+
+    <p class="ig-explore-empty hidden">
+      ไม่พบบัญชีที่ค้นหา
+    </p>
+
+  </div>
+
+  <!-- ตาราง Explore -->
+  <div class="ig-explore-gallery">
+
+    <!-- รูปคณิต -->
+    <button class="ig-explore-item"
+            type="button"
+            data-explore-post="1"
+            aria-label="ดูโพสต์คณิตที่ 1">
+      <img
+        src="https://i.ibb.co/8nMQfm0L/r07qxo-R-Download.jpg"
+        alt="คณิต"
+        loading="lazy"
+      >
+    </button>
+
+    <!-- ท่องเที่ยว / เมจิกแอร์ไลน์ -->
+    <button class="ig-explore-item"
+            type="button"
+            data-explore-post="2"
+            aria-label="ดูโพสต์เที่ยวบิน">
+      <img
+        src="https://i.ibb.co/CK58XGcz/r07qxo-R-Download.jpg"
+        alt="เที่ยวบิน"
+        loading="lazy"
+      >
+    </button>
+
+    <!-- Reels คลิปที่ 1 -->
+    <button class="ig-explore-item ig-explore-reel"
+            type="button"
+            data-explore-reel="0"
+            aria-label="ดู Reels คลิปที่ 1">
+      <video
+        src="videos/snaptik_7685755790166183186_v3.mp4"
+        muted
+        playsinline
+        preload="metadata"
+      ></video>
+      <span class="ig-explore-reel-icon">▶</span>
+    </button>
+
+    <!-- รูปจากโพสต์ 3 -->
+    <button class="ig-explore-item"
+            type="button"
+            data-explore-post="3"
+            aria-label="ดูโพสต์คณิตที่ 3">
+      <img
+        src="https://i.ibb.co/20SCMj9P/r07qxo-R-Download.jpg"
+        alt="ความทรงจำ"
+        loading="lazy"
+      >
+      <span class="ig-explore-multiple">▣</span>
+    </button>
+
+    <!-- คาเฟ่ / บรรยากาศ -->
+    <button class="ig-explore-item"
+            type="button"
+            data-explore-post="3"
+            aria-label="ดูรูปบรรยากาศ">
+      <img
+        src="https://i.ibb.co/7tQtVFgM/r07qxo-R-Download.jpg"
+        alt="บรรยากาศ"
+        loading="lazy"
+      >
+    </button>
+
+    <!-- Reels คลิปที่ 2 -->
+    <button class="ig-explore-item ig-explore-reel"
+            type="button"
+            data-explore-reel="1"
+            aria-label="ดู Reels คลิปที่ 2">
+      <video
+        src="videos/snaptik_7658269030410669320_v3.mp4"
+        muted
+        playsinline
+        preload="metadata"
+      ></video>
+      <span class="ig-explore-reel-icon">▶</span>
+    </button>
+
+    <!-- รูปคณิต -->
+    <button class="ig-explore-item"
+            type="button"
+            data-explore-post="4"
+            aria-label="ดูโพสต์คณิตที่ 4">
+      <img
+        src="https://i.ibb.co/CfYPBSx/r07qxo-R-Download.jpg"
+        alt="คณิต"
+        loading="lazy"
+      >
+    </button>
+
+    <!-- ท่องเที่ยวปารีส -->
+    <button class="ig-explore-item"
+            type="button"
+            data-explore-post="5"
+            aria-label="ดูโพสต์ปารีส">
+      <img
+        src="https://i.ibb.co/spsGKVSc/r07qxo-R-Download.jpg"
+        alt="Paris"
+        loading="lazy"
+      >
+    </button>
+
+    <!-- Reels คลิปที่ 3 -->
+    <button class="ig-explore-item ig-explore-reel"
+            type="button"
+            data-explore-reel="2"
+            aria-label="ดู Reels คลิปที่ 3">
+      <video
+        src="videos/snaptik_7642584846417579271_v3.mp4"
+        muted
+        playsinline
+        preload="metadata"
+      ></video>
+      <span class="ig-explore-reel-icon">▶</span>
+    </button>
+
+    <!-- รูปจากโพสต์ 3 -->
+    <button class="ig-explore-item"
+            type="button"
+            data-explore-post="3"
+            aria-label="ดูรูปคณิตเพิ่มเติม">
+      <img
+        src="https://i.ibb.co/TxMrc01n/r07qxo-R-Download.jpg"
+        alt="ความทรงจำ"
+        loading="lazy"
+      >
+    </button>
+
+    <!-- รูปจากโพสต์ 3 -->
+    <button class="ig-explore-item"
+            type="button"
+            data-explore-post="3"
+            aria-label="ดูรูปท่องเที่ยว">
+      <img
+        src="https://i.ibb.co/6cBNfS3z/r07qxo-R-Download.jpg"
+        alt="ท่องเที่ยว"
+        loading="lazy"
+      >
+    </button>
+
+    <!-- Reels คลิปที่ 4 -->
+    <button class="ig-explore-item ig-explore-reel"
+            type="button"
+            data-explore-reel="3"
+            aria-label="ดู Reels คลิปที่ 4">
+      <video
+        src="videos/snaptik_7630809065920318738_v3.mp4"
+        muted
+        playsinline
+        preload="metadata"
+      ></video>
+      <span class="ig-explore-reel-icon">▶</span>
+    </button>
+
+    <!-- รูปจากโพสต์ 3 -->
+    <button class="ig-explore-item"
+            type="button"
+            data-explore-post="3"
+            aria-label="ดูรูปบรรยากาศเพิ่มเติม">
+      <img
+        src="https://i.ibb.co/yczQHNVc/r07qxo-R-Download.jpg"
+        alt="บรรยากาศ"
+        loading="lazy"
+      >
+    </button>
+
+    <!-- Reels คลิปที่ 5 -->
+    <button class="ig-explore-item ig-explore-reel"
+            type="button"
+            data-explore-reel="4"
+            aria-label="ดู Reels คลิปที่ 5">
+      <video
+        src="videos/snaptik_7630344644466937096_v3.mp4"
+        muted
+        playsinline
+        preload="metadata"
+      ></video>
+      <span class="ig-explore-reel-icon">▶</span>
+    </button>
+
+    <!-- Reels คลิปที่ 6 -->
+    <button class="ig-explore-item ig-explore-reel"
+            type="button"
+            data-explore-reel="5"
+            aria-label="ดู Reels คลิปที่ 6">
+      <video
+        src="videos/snaptik_7626570907678493970_v3.mp4"
+        muted
+        playsinline
+        preload="metadata"
+      ></video>
+      <span class="ig-explore-reel-icon">▶</span>
+    </button>
+  </div>
+</section>
+
 
      
 <section class="ig-page ig-reels-page hidden">
@@ -6320,6 +6677,100 @@ if (name === "Instagram") {
     );
 
     if (target) target.classList.remove("hidden");
+
+  // ===== Instagram Explore =====
+  const exploreInput = ig.querySelector(".ig-explore-input");
+  const exploreGallery = ig.querySelector(".ig-explore-gallery");
+  const exploreResults = ig.querySelector(".ig-explore-results");
+  const exploreAccounts = ig.querySelectorAll(".ig-explore-account");
+  const exploreEmpty = ig.querySelector(".ig-explore-empty");
+
+  // ค้นหาบัญชี
+  exploreInput.addEventListener("input", () => {
+    const query = exploreInput.value.trim().toLowerCase();
+
+    if (!query) {
+      exploreGallery.classList.remove("hidden");
+      exploreResults.classList.add("hidden");
+      return;
+    }
+
+    exploreGallery.classList.add("hidden");
+    exploreResults.classList.remove("hidden");
+
+    let found = 0;
+
+    exploreAccounts.forEach(account => {
+      const username = account.dataset.exploreAccount;
+      const match = username.includes(query);
+
+      account.classList.toggle("hidden", !match);
+      if (match) found++;
+    });
+
+    exploreEmpty.classList.toggle("hidden", found > 0);
+  });
+
+  // กดรูป Explore แล้วไปยังโพสต์ในหน้า Home
+  ig.querySelectorAll("[data-explore-post]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const postNumber = btn.dataset.explorePost;
+
+      showIgPage("home");
+
+      const post = ig.querySelector(
+        `.ig-post[data-post="${postNumber}"]`
+      );
+
+      if (post) {
+        post.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    });
+  });
+
+  // กดช่อง Reels แล้วไปยังคลิปที่เลือก
+  ig.querySelectorAll("[data-explore-reel]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const index = Number(btn.dataset.exploreReel);
+
+      // เลือกคลิปที่ต้องการก่อนเปิดหน้า Reels
+      activeReelIndex = index;
+
+      if (reelsFeed) {
+        reelsFeed.scrollTop =
+          index * reelsFeed.clientHeight;
+      }
+
+      showIgPage("reels");
+    });
+  });
+
+  // กดบัญชีจากผลการค้นหา
+  exploreAccounts.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const username = btn.dataset.exploreAccount;
+
+      if (username === "toto") {
+        showIgPage("profile");
+      } else if (username === "kanittee") {
+        showIgPage("home");
+
+        const firstPost = ig.querySelector(
+          '.ig-post[data-post="1"]'
+        );
+
+        if (firstPost) {
+          firstPost.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+        }
+      }
+    });
+  });
 
     ig.querySelectorAll(".ig-nav").forEach(btn => {
       btn.classList.toggle("active", btn.dataset.igPage === page);
