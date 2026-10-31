@@ -4534,7 +4534,398 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   line-height: 1.2;
 }
 
+/* ===== FACEBOOK APP ONLY ===== */
 
+.fb-app {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background: #f0f2f5;
+  color: #161616;
+  font-family: Arial, sans-serif;
+}
+
+.fb-app .hidden {
+  display: none !important;
+}
+
+.fb-app button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.fb-header {
+  height: 49px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  background: #fff;
+}
+
+.fb-logo {
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: #0866ff;
+}
+
+.fb-header-right {
+  display: flex;
+  gap: 8px;
+}
+
+.fb-header-right button {
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: #e9eaed;
+  color: #222;
+  font-size: 23px;
+}
+
+.fb-nav {
+  height: 45px;
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.fb-nav-btn {
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: #777;
+  font-size: 25px;
+}
+
+.fb-nav-btn.active {
+  color: #0866ff;
+  border-bottom-color: #0866ff;
+}
+
+.fb-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.fb-compose-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px;
+  background: #fff;
+}
+
+.fb-mini-avatar {
+  width: 37px;
+  height: 37px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #b6d4ff;
+  color: #0754c9;
+  font-weight: bold;
+}
+
+.fb-write-trigger {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  background: #fff;
+  color: #666;
+  text-align: left;
+  font-size: 12px;
+}
+
+.fb-stories {
+  display: flex;
+  gap: 9px;
+  padding: 11px;
+  margin-bottom: 8px;
+  overflow-x: auto;
+  background: #fff;
+}
+
+.fb-story {
+  position: relative;
+  width: 105px;
+  height: 145px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.fb-story-create {
+  background: #dce9ff;
+  color: #111;
+}
+
+.fb-story-plus {
+  position: absolute;
+  top: 47px;
+  left: 36px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #0866ff;
+  color: white;
+  font-size: 24px;
+}
+
+.fb-story-friend {
+  background: linear-gradient(145deg, #6792cb, #313b59);
+  color: white;
+}
+
+.fb-post {
+  margin-bottom: 8px;
+  padding: 12px 0 4px;
+  background: white;
+}
+
+.fb-post-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 12px 10px;
+}
+
+.fb-post-avatar {
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #dbe9ff;
+  color: #0866ff;
+  font-weight: bold;
+}
+
+.fb-post-head strong {
+  display: block;
+  font-size: 13px;
+}
+
+.fb-post-head small {
+  color: #777;
+  font-size: 11px;
+}
+
+.fb-post-text {
+  padding: 0 12px 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.fb-post-stats {
+  padding: 9px 12px;
+  font-size: 11px;
+  color: #777;
+}
+
+.fb-post-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 12px;
+  border-top: 1px solid #eee;
+}
+
+.fb-post-actions button {
+  height: 38px;
+  border: none;
+  background: transparent;
+  color: #666;
+  font-size: 12px;
+}
+
+.fb-post-actions button.liked {
+  color: #0866ff;
+  font-weight: bold;
+}
+
+.fb-placeholder {
+  padding: 25px 12px;
+  text-align: center;
+}
+
+.fb-profile {
+  background: #fff;
+}
+
+.fb-cover {
+  height: 135px;
+  background: linear-gradient(120deg, #7fb7ff, #e0efff);
+}
+
+.fb-profile-body {
+  padding: 0 15px 20px;
+}
+
+.fb-profile-avatar {
+  width: 85px;
+  height: 85px;
+  margin-top: -35px;
+  border: 4px solid white;
+  border-radius: 50%;
+  background: #0866ff;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.fb-profile-name {
+  margin: 10px 0 5px;
+  font-size: 23px;
+}
+
+.fb-profile-bio {
+  font-size: 13px;
+  color: #666;
+}
+
+.fb-profile-switch,
+.fb-menu-switch {
+  width: 100%;
+  height: 37px;
+  border: none;
+  border-radius: 8px;
+  background: #0866ff;
+  color: #fff;
+  font-weight: bold;
+}
+
+.fb-menu {
+  padding: 15px;
+}
+
+.fb-menu-identity {
+  padding: 12px 0;
+  font-size: 13px;
+  color: #666;
+}
+
+.fb-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(0,0,0,.45);
+}
+
+.fb-sheet {
+  width: 100%;
+  max-height: 90%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 15px;
+  border-radius: 18px 18px 0 0;
+  background: #fff;
+}
+
+.fb-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.fb-sheet-header button {
+  border: none;
+  background: transparent;
+  color: #0866ff;
+  font-size: 13px;
+}
+
+.fb-account {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 11px 2px;
+  border: none;
+  background: transparent;
+  text-align: left;
+}
+
+.fb-account-avatar {
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #b6d4ff;
+  color: #0866ff;
+  font-weight: bold;
+}
+
+.fb-et-avatar {
+  background: #0866ff;
+  color: #fff;
+}
+
+.fb-account strong,
+.fb-account small {
+  display: block;
+}
+
+.fb-account small {
+  margin-top: 4px;
+  color: #777;
+  font-size: 11px;
+}
+
+.fb-write-overlay {
+  align-items: stretch;
+  background: #fff;
+}
+
+.fb-write-sheet {
+  max-height: none;
+  border-radius: 0;
+}
+
+.fb-write-text {
+  display: block;
+  width: 100%;
+  min-height: 170px;
+  margin-top: 14px;
+  padding: 5px 0;
+  border: none;
+  outline: none;
+  resize: none;
+  box-sizing: border-box;
+  font: 16px Arial, sans-serif;
+}
 
 </style>
 </head>
@@ -5441,11 +5832,107 @@ window.showPhoneScreen = showScreen;
 document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข้อความ");
     const content = {
       
+
 "Facebook": `
-  <div style="padding:24px;text-align:center">
-    <h2 style="color:#0866ff">facebook</h2>
-    <p>Facebook ของโตโต้ 💙</p>
-    <p>บัญชีส่วนตัว + Everything Toto</p>
+  <div class="fb-app">
+
+    <header class="fb-header">
+      <strong class="fb-logo">facebook</strong>
+      <div class="fb-header-right">
+        <button class="fb-switch-trigger" type="button" title="สลับโปรไฟล์">⇄</button>
+        <button class="fb-search-trigger" type="button" title="ค้นหา">⌕</button>
+      </div>
+    </header>
+
+    <nav class="fb-nav">
+      <button class="fb-nav-btn active" data-fb-tab="home" type="button">⌂</button>
+      <button class="fb-nav-btn" data-fb-tab="video" type="button">▷</button>
+      <button class="fb-nav-btn" data-fb-tab="profile" type="button">♙</button>
+      <button class="fb-nav-btn" data-fb-tab="menu" type="button">☰</button>
+    </nav>
+
+    <main class="fb-scroll">
+
+      <section class="fb-view fb-home">
+        <div class="fb-compose-row">
+          <span class="fb-mini-avatar fb-current-avatar">T</span>
+          <button class="fb-write-trigger" type="button">คุณกำลังคิดอะไรอยู่?</button>
+        </div>
+
+        <div class="fb-stories">
+          <div class="fb-story fb-story-create">
+            <span class="fb-story-plus">+</span>
+            <span>สร้างสตอรี่</span>
+          </div>
+          <div class="fb-story fb-story-friend">
+            <span>คณิต</span>
+          </div>
+        </div>
+
+        <div class="fb-post-list"></div>
+      </section>
+
+      <section class="fb-view fb-video hidden">
+        <div class="fb-placeholder">
+          <h3>วิดีโอ</h3>
+          <p>เราจะเพิ่ม Reels และวิดีโอในขั้นต่อไปค่ะ</p>
+        </div>
+      </section>
+
+      <section class="fb-view fb-profile hidden">
+        <div class="fb-cover"></div>
+        <div class="fb-profile-body">
+          <div class="fb-profile-avatar">T</div>
+          <h2 class="fb-profile-name">บัญชีส่วนตัว</h2>
+          <p class="fb-profile-bio">โปรไฟล์ Facebook ส่วนตัว</p>
+          <button class="fb-profile-switch" type="button">สลับโปรไฟล์</button>
+        </div>
+      </section>
+
+      <section class="fb-view fb-menu hidden">
+        <h3>เมนู</h3>
+        <div class="fb-menu-identity">กำลังใช้งานบัญชีส่วนตัว</div>
+        <button class="fb-menu-switch" type="button">สลับโปรไฟล์ / เพจ</button>
+      </section>
+
+    </main>
+
+    <div class="fb-overlay fb-switch-overlay hidden">
+      <div class="fb-sheet">
+        <div class="fb-sheet-header">
+          <strong>เลือกโปรไฟล์</strong>
+          <button class="fb-close-switch" type="button">✕</button>
+        </div>
+
+        <button class="fb-account" data-fb-account="personal" type="button">
+          <span class="fb-account-avatar">T</span>
+          <span>
+            <strong>บัญชีส่วนตัว</strong>
+            <small>ใช้ Facebook ส่วนตัว</small>
+          </span>
+        </button>
+
+        <button class="fb-account" data-fb-account="page" type="button">
+          <span class="fb-account-avatar fb-et-avatar">ET</span>
+          <span>
+            <strong>Everything Toto</strong>
+            <small>เพจรับงานทุกประเภท</small>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div class="fb-overlay fb-write-overlay hidden">
+      <div class="fb-sheet fb-write-sheet">
+        <div class="fb-sheet-header">
+          <button class="fb-close-write" type="button">ยกเลิก</button>
+          <strong>สร้างโพสต์</strong>
+          <button class="fb-publish" type="button">โพสต์</button>
+        </div>
+        <strong class="fb-write-name">บัญชีส่วนตัว</strong>
+        <textarea class="fb-write-text" placeholder="คุณกำลังคิดอะไรอยู่?"></textarea>
+      </div>
+    </div>
   </div>
 `,
 
@@ -7059,6 +7546,203 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
     };
     $("appContent").innerHTML = content[name] || `<div class="mock-card">${name}</div>`;
   
+if (name === "Facebook") {
+  const fb = document.querySelector("#appContent .fb-app");
+  const fbScroll = fb.querySelector(".fb-scroll");
+
+  let identity = "personal";
+  let currentTab = "home";
+
+  const posts = [
+    {
+      id: 1,
+      owner: "คณิต",
+      avatar: "ค",
+      text: "วันนี้เป็นวันที่ดีอีกวัน ☁️💙",
+      likes: 24,
+      liked: false,
+      type: "friend"
+    },
+    {
+      id: 2,
+      owner: "Everything Toto",
+      avatar: "ET",
+      text: "✨ Everything Toto\nเปิดรับงานทุกประเภท ทุกไอเดีย ทุกโอกาส\nสนใจร่วมงาน ส่งข้อความมาได้เลย 💙",
+      likes: 12,
+      liked: false,
+      type: "page"
+    }
+  ];
+
+  function showTab(tab) {
+    currentTab = tab;
+
+    fb.querySelectorAll(".fb-view").forEach(view => {
+      view.classList.add("hidden");
+    });
+
+    const target = fb.querySelector(".fb-" + tab);
+    if (target) target.classList.remove("hidden");
+
+    fb.querySelectorAll(".fb-nav-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.fbTab === tab);
+    });
+
+    fbScroll.scrollTop = 0;
+  }
+
+  function renderPosts() {
+    const list = fb.querySelector(".fb-post-list");
+    list.innerHTML = "";
+
+    posts.forEach(post => {
+      const article = document.createElement("article");
+      article.className = "fb-post";
+
+      const head = document.createElement("div");
+      head.className = "fb-post-head";
+
+      const avatar = document.createElement("span");
+      avatar.className = "fb-post-avatar";
+      avatar.textContent = post.avatar;
+
+      const info = document.createElement("div");
+      const owner = document.createElement("strong");
+      owner.textContent = post.owner;
+      const time = document.createElement("small");
+      time.textContent = "เมื่อสักครู่ · 🌐";
+      info.append(owner, time);
+      head.append(avatar, info);
+
+      const body = document.createElement("div");
+      body.className = "fb-post-text";
+      body.textContent = post.text;
+
+      const stats = document.createElement("div");
+      stats.className = "fb-post-stats";
+      stats.textContent = "👍 " + post.likes + " คน";
+
+      const actions = document.createElement("div");
+      actions.className = "fb-post-actions";
+
+      const likeBtn = document.createElement("button");
+      likeBtn.type = "button";
+      likeBtn.textContent = "♡ ถูกใจ";
+      likeBtn.classList.toggle("liked", post.liked);
+
+      likeBtn.addEventListener("click", () => {
+        post.liked = !post.liked;
+        post.likes += post.liked ? 1 : -1;
+        renderPosts();
+      });
+
+      const commentBtn = document.createElement("button");
+      commentBtn.type = "button";
+      commentBtn.textContent = "☏ แสดงความคิดเห็น";
+      commentBtn.addEventListener("click", () => {
+        alert("เราจะเพิ่มระบบคอมเมนต์ในขั้นต่อไปค่ะ");
+      });
+
+      const shareBtn = document.createElement("button");
+      shareBtn.type = "button";
+      shareBtn.textContent = "➤ แชร์";
+      shareBtn.addEventListener("click", () => {
+        alert("เราจะเพิ่มระบบแชร์ในขั้นต่อไปค่ะ");
+      });
+
+      actions.append(likeBtn, commentBtn, shareBtn);
+      article.append(head, body, stats, actions);
+      list.appendChild(article);
+    });
+  }
+
+  function updateIdentity() {
+    const isPage = identity === "page";
+    const displayName = isPage ? "Everything Toto" : "บัญชีส่วนตัว";
+
+    fb.querySelector(".fb-current-avatar").textContent = isPage ? "ET" : "T";
+    fb.querySelector(".fb-profile-avatar").textContent = isPage ? "ET" : "T";
+    fb.querySelector(".fb-profile-name").textContent = displayName;
+    fb.querySelector(".fb-profile-bio").textContent = isPage
+      ? "Everything you need, Toto can do. ✨ รับงานทุกประเภท"
+      : "โปรไฟล์ Facebook ส่วนตัว";
+
+    fb.querySelector(".fb-menu-identity").textContent =
+      "กำลังใช้งานในฐานะ " + displayName;
+
+    fb.querySelector(".fb-write-name").textContent = displayName;
+
+    fb.querySelectorAll(".fb-account").forEach(btn => {
+      btn.style.background =
+        btn.dataset.fbAccount === identity ? "#eef4ff" : "transparent";
+    });
+  }
+
+  function openSwitch() {
+    fb.querySelector(".fb-switch-overlay").classList.remove("hidden");
+  }
+
+  fb.querySelector(".fb-switch-trigger").addEventListener("click", openSwitch);
+  fb.querySelector(".fb-menu-switch").addEventListener("click", openSwitch);
+  fb.querySelector(".fb-profile-switch").addEventListener("click", openSwitch);
+
+  fb.querySelector(".fb-close-switch").addEventListener("click", () => {
+    fb.querySelector(".fb-switch-overlay").classList.add("hidden");
+  });
+
+  fb.querySelectorAll(".fb-account").forEach(btn => {
+    btn.addEventListener("click", () => {
+      identity = btn.dataset.fbAccount;
+      updateIdentity();
+      fb.querySelector(".fb-switch-overlay").classList.add("hidden");
+      showTab("home");
+    });
+  });
+
+  fb.querySelectorAll(".fb-nav-btn").forEach(btn => {
+    btn.addEventListener("click", () => showTab(btn.dataset.fbTab));
+  });
+
+  fb.querySelector(".fb-write-trigger").addEventListener("click", () => {
+    fb.querySelector(".fb-write-overlay").classList.remove("hidden");
+  });
+
+  fb.querySelector(".fb-close-write").addEventListener("click", () => {
+    fb.querySelector(".fb-write-overlay").classList.add("hidden");
+  });
+
+  fb.querySelector(".fb-publish").addEventListener("click", () => {
+    const textarea = fb.querySelector(".fb-write-text");
+    const text = textarea.value.trim();
+    if (!text) return;
+
+    const isPage = identity === "page";
+
+    posts.unshift({
+      id: Date.now(),
+      owner: isPage ? "Everything Toto" : "บัญชีส่วนตัว",
+      avatar: isPage ? "ET" : "T",
+      text: text,
+      likes: 0,
+      liked: false,
+      type: isPage ? "page" : "personal"
+    });
+
+    textarea.value = "";
+    fb.querySelector(".fb-write-overlay").classList.add("hidden");
+    renderPosts();
+    showTab("home");
+  });
+
+  fb.querySelector(".fb-search-trigger").addEventListener("click", () => {
+    alert("ระบบค้นหา Facebook จะเพิ่มในขั้นถัดไปค่ะ");
+  });
+
+  renderPosts();
+  updateIdentity();
+  showTab("home");
+}
+
 
 if (name === "Instagram") {
   const ig = document.querySelector("#appContent .ig-app");
