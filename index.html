@@ -2770,6 +2770,205 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   cursor: pointer;
 }
 
+/* ===== SAMSUNG CLOCK ===== */
+.samsung-clock {
+  position: relative;
+  min-height: 100%;
+  background: #fff;
+  color: #202124;
+  padding: 22px 16px 75px;
+  box-sizing: border-box;
+}
+
+.clock-heading {
+  font-size: 30px;
+  font-weight: 750;
+  margin: 8px 0 26px;
+}
+
+.clock-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  padding: 5px;
+  background: #f2f2f5;
+  border-radius: 20px;
+  margin-bottom: 25px;
+}
+
+.clock-tab {
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
+  color: #777;
+  padding: 12px 2px;
+  font-size: 11px;
+}
+
+.clock-tab.active {
+  background: #fff;
+  color: #6045d9;
+  font-weight: 750;
+  box-shadow: 0 2px 7px #00000012;
+}
+
+.samsung-clock .hidden {
+  display: none !important;
+}
+
+.clock-panel {
+  position: relative;
+  min-height: 340px;
+}
+
+.clock-alarm-item,
+.clock-world-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 18px 12px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.clock-alarm-item strong {
+  font-size: 33px;
+  font-weight: 500;
+}
+
+.clock-alarm-item small,
+.clock-world-item small {
+  display: block;
+  color: #888;
+  margin-top: 5px;
+}
+
+.clock-alarm-item input {
+  accent-color: #6545e8;
+  width: 22px;
+  height: 22px;
+}
+
+.clock-add-alarm {
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+  width: 57px;
+  height: 57px;
+  border: 0;
+  border-radius: 50%;
+  background: #6545e8;
+  color: white;
+  font-size: 34px;
+  box-shadow: 0 4px 14px #6545e844;
+}
+
+.clock-world-item strong {
+  font-size: 17px;
+}
+
+.clock-world-time {
+  font-size: 24px;
+  font-weight: 650;
+}
+
+.clock-big-time {
+  margin: 75px 0 55px;
+  font-size: 48px;
+  font-weight: 350;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.clock-actions {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.clock-actions button {
+  min-width: 105px;
+  padding: 14px 22px;
+  border: 0;
+  border-radius: 30px;
+  background: #f1f1f5;
+  color: #333;
+  font-size: 15px;
+}
+
+.clock-actions .clock-primary {
+  background: #6545e8;
+  color: #fff;
+}
+
+.clock-timer-inputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 30px;
+}
+
+.clock-timer-inputs input {
+  width: 62px;
+  padding: 12px 2px;
+  border: 0;
+  border-radius: 12px;
+  background: #f2f2f5;
+  color: #222;
+  font-size: 24px;
+  text-align: center;
+}
+
+.clock-timer-inputs span {
+  font-size: 25px;
+}
+
+.clock-alarm-editor {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  padding: 20px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.clock-editor-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 35px;
+}
+
+.clock-editor-top button {
+  border: 0;
+  background: transparent;
+  color: #6545e8;
+}
+
+.clock-alarm-editor label {
+  display: block;
+  margin: 24px 0 8px;
+  font-size: 14px;
+}
+
+.clock-alarm-editor input,
+.clock-alarm-editor select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px;
+  border: 1px solid #e4e4e4;
+  border-radius: 14px;
+  background: #f7f7f9;
+  color: #222;
+  font: inherit;
+}
+
+.clock-alarm-editor .clock-alarm-time {
+  font-size: 34px;
+  text-align: center;
+}
+
 
 </style>
 </head>
@@ -3010,7 +3209,25 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 </button>
 
 
-      <button class="app-button" data-app="การตั้งค่า"><span class="app-icon" style="background:#c5c9d5">⚙️</span><span class="app-label">การตั้งค่า</span></button>
+     
+<button class="app-button" data-app="นาฬิกา">
+  <span class="app-icon" style="background:#6545e8;">
+    <svg width="48" height="48"
+         viewBox="0 0 64 64"
+         style="display:block;margin:auto;"
+         aria-hidden="true">
+      <circle cx="32" cy="32" r="23" fill="#ffffff"/>
+      <path d="M32 16 V32 L41 41"
+            fill="none"
+            stroke="#6545e8"
+            stroke-width="5.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+    </svg>
+  </span>
+  <span class="app-label">นาฬิกา</span>
+</button>
+
       <button class="app-button" data-app="โน้ต"><span class="app-icon" style="background:#f0dc87">📝</span><span class="app-label">โน้ต</span></button>
     </div>
     <div class="dock">
@@ -4141,12 +4358,332 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
   </div>
 `,
 
-      "การตั้งค่า": `<div class="mock-card">การเชื่อมต่อ</div><div class="mock-card">หน้าจอและความสว่าง</div><div class="mock-card">วอลเปเปอร์และสไตล์</div><div class="mock-card">ความปลอดภัยและความเป็นส่วนตัว</div>`,
+    
+"นาฬิกา": `
+  <div class="samsung-clock">
+    <div class="clock-heading">นาฬิกา</div>
+
+    <div class="clock-tabs">
+      <button class="clock-tab active" data-tab="alarm">นาฬิกาปลุก</button>
+      <button class="clock-tab" data-tab="world">เวลาโลก</button>
+      <button class="clock-tab" data-tab="stopwatch">จับเวลา</button>
+      <button class="clock-tab" data-tab="timer">ตั้งเวลา</button>
+    </div>
+
+    <div class="clock-panel" data-panel="alarm">
+      <div class="clock-alarm-list"></div>
+      <button class="clock-add-alarm">+</button>
+    </div>
+
+    <div class="clock-panel hidden" data-panel="world">
+      <div class="clock-world-list"></div>
+    </div>
+
+    <div class="clock-panel hidden" data-panel="stopwatch">
+      <div class="clock-big-time clock-stopwatch-display">00:00.00</div>
+      <div class="clock-actions">
+        <button class="clock-stopwatch-reset">รีเซ็ต</button>
+        <button class="clock-primary clock-stopwatch-toggle">เริ่ม</button>
+      </div>
+    </div>
+
+    <div class="clock-panel hidden" data-panel="timer">
+      <div class="clock-timer-inputs">
+        <input class="clock-hours" type="number" min="0" max="99" value="0">
+        <span>:</span>
+        <input class="clock-minutes" type="number" min="0" max="59" value="5">
+        <span>:</span>
+        <input class="clock-seconds" type="number" min="0" max="59" value="0">
+      </div>
+      <div class="clock-big-time clock-timer-display">05:00</div>
+      <div class="clock-actions">
+        <button class="clock-timer-reset">รีเซ็ต</button>
+        <button class="clock-primary clock-timer-toggle">เริ่ม</button>
+      </div>
+    </div>
+
+    <div class="clock-alarm-editor hidden">
+      <div class="clock-editor-top">
+        <button class="clock-editor-cancel">ยกเลิก</button>
+        <strong>เพิ่มนาฬิกาปลุก</strong>
+        <button class="clock-editor-save">บันทึก</button>
+      </div>
+      <input class="clock-alarm-time" type="time" value="07:00">
+      <label>ชื่อการปลุก</label>
+      <input class="clock-alarm-name" type="text" placeholder="นาฬิกาปลุก">
+      <label>เสียงปลุก</label>
+      <select class="clock-alarm-sound">
+        <option value="classic">เสียงคลาสสิก</option>
+        <option value="soft">เสียงเบา</option>
+        <option value="beep">เสียงบี๊บ</option>
+      </select>
+    </div>
+  </div>
+`,
       "โน้ต": `<div class="mock-card"><strong>โน้ตใหม่</strong><p contenteditable="true">แตะตรงนี้เพื่อพิมพ์โน้ต...</p></div>`,
       "อินเทอร์เน็ต": `<div class="mock-card"><strong>เบราว์เซอร์จำลอง</strong><p>ไม่มีการเปิดเว็บไซต์จริง</p><input placeholder="พิมพ์เพื่อค้นหา" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px"></div>`
     };
     $("appContent").innerHTML = content[name] || `<div class="mock-card">${name}</div>`;
-   
+  
+if (name === "นาฬิกา") {
+  const clock = document.querySelector("#appContent .samsung-clock");
+  const $c = selector => clock.querySelector(selector);
+
+  // แท็บ
+  clock.querySelectorAll(".clock-tab").forEach(button => {
+    button.addEventListener("click", () => {
+      clock.querySelectorAll(".clock-tab").forEach(tab => {
+        tab.classList.toggle("active", tab === button);
+      });
+      clock.querySelectorAll(".clock-panel").forEach(panel => {
+        panel.classList.toggle(
+          "hidden",
+          panel.dataset.panel !== button.dataset.tab
+        );
+      });
+    });
+  });
+
+  // นาฬิกาปลุก
+  const alarmKey = "toto-clock-alarms";
+  let alarms = [];
+
+  try {
+    alarms = JSON.parse(localStorage.getItem(alarmKey)) || [];
+  } catch {
+    alarms = [];
+  }
+
+  function saveAlarms() {
+    try {
+      localStorage.setItem(alarmKey, JSON.stringify(alarms));
+    } catch {
+      alert("บันทึกนาฬิกาปลุกไม่สำเร็จ");
+    }
+  }
+
+  function renderAlarms() {
+    const list = $c(".clock-alarm-list");
+    list.innerHTML = "";
+
+    if (!alarms.length) {
+      const empty = document.createElement("p");
+      empty.style.cssText = "text-align:center;color:#999;margin-top:70px";
+      empty.textContent = "ยังไม่มีนาฬิกาปลุก";
+      list.appendChild(empty);
+    }
+
+    alarms.forEach((alarm, index) => {
+      const row = document.createElement("div");
+      row.className = "clock-alarm-item";
+
+      const info = document.createElement("div");
+      const time = document.createElement("strong");
+      time.textContent = alarm.time;
+
+      const name = document.createElement("small");
+      name.textContent = alarm.name || "นาฬิกาปลุก";
+      info.append(time, name);
+
+      const toggle = document.createElement("input");
+      toggle.type = "checkbox";
+      toggle.checked = alarm.enabled;
+
+      toggle.addEventListener("change", () => {
+        alarms[index].enabled = toggle.checked;
+        saveAlarms();
+      });
+
+      row.append(info, toggle);
+      list.appendChild(row);
+    });
+  }
+
+  const alarmEditor = $c(".clock-alarm-editor");
+
+  $c(".clock-add-alarm").addEventListener("click", () => {
+    $c(".clock-alarm-time").value = "07:00";
+    $c(".clock-alarm-name").value = "";
+    alarmEditor.classList.remove("hidden");
+  });
+
+  $c(".clock-editor-cancel").addEventListener("click", () => {
+    alarmEditor.classList.add("hidden");
+  });
+
+  $c(".clock-editor-save").addEventListener("click", () => {
+    alarms.push({
+      time: $c(".clock-alarm-time").value,
+      name: $c(".clock-alarm-name").value.trim() || "นาฬิกาปลุก",
+      sound: $c(".clock-alarm-sound").value,
+      enabled: true
+    });
+    saveAlarms();
+    alarmEditor.classList.add("hidden");
+    renderAlarms();
+  });
+
+  renderAlarms();
+
+  // เวลาโลก
+  const cities = [
+    { name: "กรุงเทพมหานคร", zone: "Asia/Bangkok" },
+    { name: "โซล", zone: "Asia/Seoul" },
+    { name: "โตเกียว", zone: "Asia/Tokyo" },
+    { name: "ลอนดอน", zone: "Europe/London" },
+    { name: "นิวยอร์ก", zone: "America/New_York" }
+  ];
+
+  function renderWorld() {
+    const list = $c(".clock-world-list");
+    list.innerHTML = "";
+
+    cities.forEach(city => {
+      const row = document.createElement("div");
+      row.className = "clock-world-item";
+
+      const title = document.createElement("strong");
+      title.textContent = city.name;
+
+      const time = document.createElement("span");
+      time.className = "clock-world-time";
+      time.textContent = new Intl.DateTimeFormat("th-TH", {
+        timeZone: city.zone,
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      }).format(new Date());
+
+      row.append(title, time);
+      list.appendChild(row);
+    });
+  }
+
+  renderWorld();
+
+  // จับเวลา
+  let stopwatchElapsed = 0;
+  let stopwatchStarted = 0;
+  let stopwatchRunning = false;
+  let stopwatchInterval = null;
+
+  function renderStopwatch() {
+    const elapsed = stopwatchElapsed +
+      (stopwatchRunning ? performance.now() - stopwatchStarted : 0);
+
+    const minutes = Math.floor(elapsed / 60000);
+    const seconds = Math.floor(elapsed / 1000) % 60;
+    const hundredths = Math.floor(elapsed / 10) % 100;
+
+    $c(".clock-stopwatch-display").textContent =
+      `${String(minutes).padStart(2, "0")}:` +
+      `${String(seconds).padStart(2, "0")}.` +
+      `${String(hundredths).padStart(2, "0")}`;
+  }
+
+  $c(".clock-stopwatch-toggle").addEventListener("click", () => {
+    if (stopwatchRunning) {
+      stopwatchElapsed += performance.now() - stopwatchStarted;
+      stopwatchRunning = false;
+      clearInterval(stopwatchInterval);
+    } else {
+      stopwatchStarted = performance.now();
+      stopwatchRunning = true;
+      stopwatchInterval = setInterval(renderStopwatch, 40);
+    }
+
+    $c(".clock-stopwatch-toggle").textContent =
+      stopwatchRunning ? "หยุด" : "เริ่ม";
+    renderStopwatch();
+  });
+
+  $c(".clock-stopwatch-reset").addEventListener("click", () => {
+    clearInterval(stopwatchInterval);
+    stopwatchElapsed = 0;
+    stopwatchRunning = false;
+    $c(".clock-stopwatch-toggle").textContent = "เริ่ม";
+    renderStopwatch();
+  });
+
+  // ตั้งเวลานับถอยหลัง
+  let timerRemaining = 300;
+  let timerRunning = false;
+  let timerEnd = 0;
+  let timerInterval = null;
+
+  function formatTimer(total) {
+    const h = Math.floor(total / 3600);
+    const m = Math.floor(total / 60) % 60;
+    const s = total % 60;
+    return (h ? `${String(h).padStart(2, "0")}:` : "") +
+      `${String(m).padStart(2, "0")}:` +
+      `${String(s).padStart(2, "0")}`;
+  }
+
+  function renderTimer() {
+    $c(".clock-timer-display").textContent =
+      formatTimer(timerRemaining);
+  }
+
+  function getTimerInput() {
+    return (
+      (Number($c(".clock-hours").value) || 0) * 3600 +
+      (Number($c(".clock-minutes").value) || 0) * 60 +
+      (Number($c(".clock-seconds").value) || 0)
+    );
+  }
+
+  function stopTimerInterval() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+
+  function tickTimer() {
+    timerRemaining = Math.max(
+      0,
+      Math.ceil((timerEnd - Date.now()) / 1000)
+    );
+    renderTimer();
+
+    if (timerRemaining === 0) {
+      timerRunning = false;
+      stopTimerInterval();
+      $c(".clock-timer-toggle").textContent = "เริ่ม";
+      alert("หมดเวลาที่ตั้งไว้แล้ว!");
+    }
+  }
+
+  $c(".clock-timer-toggle").addEventListener("click", () => {
+    if (timerRunning) {
+      tickTimer();
+      timerRunning = false;
+      stopTimerInterval();
+      $c(".clock-timer-toggle").textContent = "ต่อ";
+      return;
+    }
+
+    if (timerRemaining <= 0) {
+      timerRemaining = getTimerInput();
+    }
+
+    if (timerRemaining <= 0) return;
+
+    timerEnd = Date.now() + timerRemaining * 1000;
+    timerRunning = true;
+    timerInterval = setInterval(tickTimer, 250);
+    $c(".clock-timer-toggle").textContent = "หยุด";
+  });
+
+  $c(".clock-timer-reset").addEventListener("click", () => {
+    timerRunning = false;
+    stopTimerInterval();
+    timerRemaining = getTimerInput();
+    $c(".clock-timer-toggle").textContent = "เริ่ม";
+    renderTimer();
+  });
+
+  renderTimer();
+} 
 if (name === "ปฏิทิน") {
   const cal = document.querySelector("#appContent .samsung-calendar");
 
