@@ -2483,6 +2483,250 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   font-weight: 800;
 }
 
+/* ===== SAMSUNG CALENDAR ===== */
+
+#appScreen:has(.samsung-calendar) {
+  padding: 0;
+  background: #fff;
+  color: #222;
+}
+
+#appScreen:has(.samsung-calendar) .app-window-header {
+  display: none;
+}
+
+#appScreen:has(.samsung-calendar) .app-content {
+  height: 100%;
+  padding: 0;
+}
+
+.samsung-calendar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: #fff;
+  color: #222;
+  font-family: inherit;
+}
+
+.cal-top {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 17px 17px 10px;
+}
+
+.cal-top strong {
+  flex: 1;
+  font-size: 19px;
+}
+
+.cal-top button,
+.cal-month-bar button {
+  border: 0;
+  background: transparent;
+  color: #222;
+}
+
+.cal-menu {
+  font-size: 22px;
+}
+
+.cal-today {
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.cal-month-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 22px 19px;
+}
+
+.cal-month-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 750;
+}
+
+.cal-month-bar button {
+  width: 38px;
+  height: 38px;
+  font-size: 30px;
+}
+
+.cal-weekdays,
+.cal-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  text-align: center;
+}
+
+.cal-weekdays {
+  padding: 0 9px 10px;
+  color: #777;
+  font-size: 12px;
+}
+
+.cal-weekdays span:first-child {
+  color: #e25a5a;
+}
+
+.cal-days {
+  padding: 0 9px 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.cal-day {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 47px;
+  border: 0;
+  background: transparent;
+  color: #252525;
+  font-size: 14px;
+}
+
+.cal-day.sunday {
+  color: #e25a5a;
+}
+
+.cal-day.outside {
+  color: #c7c7c7;
+}
+
+.cal-day.today::before,
+.cal-day.selected::before {
+  content: "";
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.cal-day.today::before {
+  background: #e9efff;
+}
+
+.cal-day.selected::before {
+  background: #4779ee;
+}
+
+.cal-day-number {
+  position: relative;
+  z-index: 1;
+}
+
+.cal-day.selected .cal-day-number {
+  color: white;
+  font-weight: 750;
+}
+
+.cal-event-dot {
+  position: absolute;
+  bottom: 3px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #4779ee;
+}
+
+.cal-agenda {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 19px 20px 75px;
+}
+
+.cal-agenda h3 {
+  margin: 0 0 18px;
+  font-size: 17px;
+}
+
+.cal-empty {
+  color: #999;
+  text-align: center;
+  margin-top: 55px;
+  font-size: 14px;
+}
+
+.cal-event {
+  padding: 12px 14px;
+  margin-bottom: 9px;
+  border-left: 3px solid #4779ee;
+  border-radius: 8px;
+  background: #f3f6ff;
+}
+
+.cal-event small {
+  display: block;
+  color: #777;
+}
+
+.cal-add {
+  position: absolute;
+  right: 20px;
+  bottom: 32px;
+  width: 55px;
+  height: 55px;
+  border: 0;
+  border-radius: 50%;
+  background: #4779ee;
+  color: white;
+  font-size: 30px;
+  box-shadow: 0 4px 15px #4779ee40;
+}
+
+.cal-editor {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  padding: 18px;
+  background: #fff;
+}
+
+.cal-editor.hidden {
+  display: none;
+}
+
+.cal-editor-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.cal-editor-head button {
+  border: 0;
+  background: transparent;
+  color: #4779ee;
+  font-size: 14px;
+}
+
+.cal-editor label {
+  display: block;
+  margin: 20px 0 7px;
+  font-weight: 650;
+}
+
+.cal-editor input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #f7f7f7;
+  color: #222;
+  font: inherit;
+}
+
 </style>
 </head>
 <body>
@@ -3779,13 +4023,245 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
   </div>
 `,
 
-      "ปฏิทิน": `<div class="mock-card"><strong>ปฏิทิน</strong><p>วันนี้</p><p>ไม่มีนัดหมาย</p></div>`,
+
+"ปฏิทิน": `
+  <div class="samsung-calendar">
+    <div class="cal-top">
+      <button class="cal-menu" type="button" aria-label="เมนู">☰</button>
+      <strong>ปฏิทิน</strong>
+      <button class="cal-today" type="button">วันนี้</button>
+    </div>
+
+    <div class="cal-month-bar">
+      <button class="cal-prev" type="button" aria-label="เดือนก่อน">‹</button>
+      <h2 class="cal-month-title"></h2>
+      <button class="cal-next" type="button" aria-label="เดือนถัดไป">›</button>
+    </div>
+
+    <div class="cal-weekdays">
+      <span>อา.</span><span>จ.</span><span>อ.</span>
+      <span>พ.</span><span>พฤ.</span><span>ศ.</span><span>ส.</span>
+    </div>
+
+    <div class="cal-days"></div>
+
+    <div class="cal-agenda">
+      <h3 class="cal-selected-date"></h3>
+      <div class="cal-event-list"></div>
+    </div>
+
+    <button class="cal-add" type="button" aria-label="เพิ่มกิจกรรม">+</button>
+
+    <div class="cal-editor hidden">
+      <div class="cal-editor-head">
+        <button class="cal-cancel" type="button">ยกเลิก</button>
+        <strong>เพิ่มกิจกรรม</strong>
+        <button class="cal-save" type="button">บันทึก</button>
+      </div>
+      <label>ชื่อกิจกรรม</label>
+      <input class="cal-event-name" type="text" placeholder="เพิ่มชื่อกิจกรรม">
+      <label>วันที่</label>
+      <input class="cal-event-date" type="date">
+      <label>เวลา</label>
+      <input class="cal-event-time" type="time" value="09:00">
+    </div>
+  </div>
+`,
+
       "การตั้งค่า": `<div class="mock-card">การเชื่อมต่อ</div><div class="mock-card">หน้าจอและความสว่าง</div><div class="mock-card">วอลเปเปอร์และสไตล์</div><div class="mock-card">ความปลอดภัยและความเป็นส่วนตัว</div>`,
       "โน้ต": `<div class="mock-card"><strong>โน้ตใหม่</strong><p contenteditable="true">แตะตรงนี้เพื่อพิมพ์โน้ต...</p></div>`,
       "อินเทอร์เน็ต": `<div class="mock-card"><strong>เบราว์เซอร์จำลอง</strong><p>ไม่มีการเปิดเว็บไซต์จริง</p><input placeholder="พิมพ์เพื่อค้นหา" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px"></div>`
     };
     $("appContent").innerHTML = content[name] || `<div class="mock-card">${name}</div>`;
    
+if (name === "ปฏิทิน") {
+  const cal = document.querySelector("#appContent .samsung-calendar");
+
+  const today = new Date();
+  let selected = new Date(
+    today.getFullYear(), today.getMonth(), today.getDate()
+  );
+  let month = new Date(today.getFullYear(), today.getMonth(), 1);
+
+  const months = [
+    "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
+    "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม",
+    "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+  ];
+
+  const storageKey = "toto-calendar-events";
+
+  function getEvents() {
+    try {
+      return JSON.parse(localStorage.getItem(storageKey)) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  function dateKey(date) {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return `${y}-${m}-${d}`;
+  }
+
+  function renderCalendar() {
+    cal.querySelector(".cal-month-title").textContent =
+      `${months[month.getMonth()]} ${month.getFullYear() + 543}`;
+
+    const grid = cal.querySelector(".cal-days");
+    grid.innerHTML = "";
+
+    const firstDay = new Date(
+      month.getFullYear(), month.getMonth(), 1
+    ).getDay();
+
+    const daysInMonth = new Date(
+      month.getFullYear(), month.getMonth() + 1, 0
+    ).getDate();
+
+    const events = getEvents();
+
+    for (let i = 0; i < firstDay; i++) {
+      grid.appendChild(document.createElement("span"));
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const date = new Date(
+        month.getFullYear(), month.getMonth(), day
+      );
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "cal-day";
+
+      if (date.getDay() === 0) button.classList.add("sunday");
+      if (dateKey(date) === dateKey(today)) {
+        button.classList.add("today");
+      }
+      if (dateKey(date) === dateKey(selected)) {
+        button.classList.add("selected");
+      }
+
+      const number = document.createElement("span");
+      number.className = "cal-day-number";
+      number.textContent = day;
+      button.appendChild(number);
+
+      if (events.some(event => event.date === dateKey(date))) {
+        const dot = document.createElement("span");
+        dot.className = "cal-event-dot";
+        button.appendChild(dot);
+      }
+
+      button.addEventListener("click", () => {
+        selected = date;
+        renderCalendar();
+      });
+
+      grid.appendChild(button);
+    }
+
+    renderAgenda();
+  }
+
+  function renderAgenda() {
+    cal.querySelector(".cal-selected-date").textContent =
+      `${selected.getDate()} ${months[selected.getMonth()]} ${selected.getFullYear() + 543}`;
+
+    const list = cal.querySelector(".cal-event-list");
+    list.innerHTML = "";
+
+    const events = getEvents()
+      .filter(event => event.date === dateKey(selected))
+      .sort((a, b) => a.time.localeCompare(b.time));
+
+    if (!events.length) {
+      const empty = document.createElement("p");
+      empty.className = "cal-empty";
+      empty.textContent = "ไม่มีกิจกรรมในวันนี้";
+      list.appendChild(empty);
+      return;
+    }
+
+    events.forEach(event => {
+      const item = document.createElement("div");
+      item.className = "cal-event";
+
+      const title = document.createElement("strong");
+      title.textContent = event.title;
+
+      const time = document.createElement("small");
+      time.textContent = event.time;
+
+      item.append(title, time);
+      list.appendChild(item);
+    });
+  }
+
+  cal.querySelector(".cal-prev").addEventListener("click", () => {
+    month = new Date(month.getFullYear(), month.getMonth() - 1, 1);
+    renderCalendar();
+  });
+
+  cal.querySelector(".cal-next").addEventListener("click", () => {
+    month = new Date(month.getFullYear(), month.getMonth() + 1, 1);
+    renderCalendar();
+  });
+
+  cal.querySelector(".cal-today").addEventListener("click", () => {
+    selected = new Date(
+      today.getFullYear(), today.getMonth(), today.getDate()
+    );
+    month = new Date(today.getFullYear(), today.getMonth(), 1);
+    renderCalendar();
+  });
+
+  const editor = cal.querySelector(".cal-editor");
+
+  cal.querySelector(".cal-add").addEventListener("click", () => {
+    cal.querySelector(".cal-event-name").value = "";
+    cal.querySelector(".cal-event-date").value = dateKey(selected);
+    cal.querySelector(".cal-event-time").value = "09:00";
+    editor.classList.remove("hidden");
+  });
+
+  cal.querySelector(".cal-cancel").addEventListener("click", () => {
+    editor.classList.add("hidden");
+  });
+
+  cal.querySelector(".cal-save").addEventListener("click", () => {
+    const title = cal.querySelector(".cal-event-name").value.trim();
+    const date = cal.querySelector(".cal-event-date").value;
+    const time = cal.querySelector(".cal-event-time").value;
+
+    if (!title || !date || !time) {
+      phoneDemoToast("กรุณากรอกข้อมูลให้ครบ");
+      return;
+    }
+
+    const events = getEvents();
+    events.push({ title, date, time });
+
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(events));
+    } catch {
+      phoneDemoToast("ไม่สามารถบันทึกกิจกรรมได้");
+      return;
+    }
+
+    const parts = date.split("-").map(Number);
+    selected = new Date(parts[0], parts[1] - 1, parts[2]);
+    month = new Date(parts[0], parts[1] - 1, 1);
+
+    editor.classList.add("hidden");
+    renderCalendar();
+  });
+
+  renderCalendar();
+}
+
 
 if (name === "กล้อง") {
   const camera = document.querySelector("#appContent .samsung-camera");
