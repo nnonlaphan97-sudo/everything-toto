@@ -5184,7 +5184,63 @@ body:has(#appScreen:not(.hidden) .ig-app) .status-bar {
   font-size: 10px;
   color: #777;
 }
+/* ===== สตอรี่หมดอายุใน Instagram DM ===== */
 
+.ig-dm-expired-story {
+  display: flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 10px;
+  max-width: 92%;
+  padding: 8px 2px;
+}
+
+.ig-dm-expired-story > img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.ig-dm-expired-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ig-dm-expired-content small,
+.ig-dm-story-label {
+  color: #92929a;
+  font-size: 11px;
+}
+
+.ig-dm-expired-row,
+.ig-dm-expired-reply {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #92929a;
+  font-size: 12px;
+}
+
+.ig-dm-expired-line {
+  display: block;
+  width: 4px;
+  height: 28px;
+  border-radius: 5px;
+  background: #55565f;
+  flex-shrink: 0;
+}
+
+.ig-dm-expired-reply {
+  align-self: flex-end;
+  margin: 3px 0 5px;
+}
+
+.ig-dm-message-group.outgoing .ig-dm-story-label {
+  text-align: right;
+}
 </style>
 </head>
 <body>
@@ -8485,32 +8541,48 @@ function renderKanitChatHistory() {
   kanitChatHistory.forEach(item => {
 
     if (item.type === "mention") {
-      const mention = document.createElement("div");
-      mention.className = "ig-dm-story-mention";
+  const mention = document.createElement("div");
+  mention.className = "ig-dm-expired-story";
 
-      mention.innerHTML = `
-        <div class="ig-dm-story-mention-icon">@</div>
-        <div>
-          <strong>kanittee กล่าวถึงคุณในสตอรี่</strong>
-          <small>กล่าวถึง @phanuphong_t</small>
-        </div>
-      `;
+  mention.innerHTML = `
+    <img
+      src="https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg"
+      alt="คณิต"
+    >
+    <div class="ig-dm-expired-content">
+      <small>กล่าวถึงคุณในสตอรี่ของเขา</small>
+      <div class="ig-dm-expired-row">
+        <span class="ig-dm-expired-line"></span>
+        <span>ไม่สามารถดูสตอรี่ได้</span>
+      </div>
+    </div>
+  `;
 
-      dmMessages.appendChild(mention);
-      return;
-    }
+  dmMessages.appendChild(mention);
+  return;
+}
 
     const wrapper = document.createElement("div");
     wrapper.className =
       "ig-dm-message-group " +
       (item.from === "toto" ? "outgoing" : "incoming");
 
-    if (item.type === "story") {
-      const label = document.createElement("small");
-      label.className = "ig-dm-story-label";
-      label.textContent = "คุณตอบกลับสตอรี่ของ kanittee";
-      wrapper.appendChild(label);
-    }
+ if (item.type === "story") {
+  const label = document.createElement("small");
+  label.className = "ig-dm-story-label";
+  label.textContent = "คุณตอบกลับสตอรี่ของเขา";
+  wrapper.appendChild(label);
+
+  const expired = document.createElement("div");
+  expired.className = "ig-dm-expired-reply";
+
+  expired.innerHTML = `
+    <span class="ig-dm-expired-line"></span>
+    <span>ไม่สามารถดูสตอรี่ได้</span>
+  `;
+
+  wrapper.appendChild(expired);
+}
 
     const bubble = document.createElement("div");
     bubble.className = "ig-dm-chat-bubble";
