@@ -2684,15 +2684,18 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   box-shadow: 0 4px 15px #4779ee40;
 }
 
+
 .cal-editor {
   position: absolute;
   inset: 0;
   z-index: 10;
-  padding: 18px;
+  overflow-y: auto;
+  padding: 18px 20px 35px;
   background: #fff;
 }
 
-.cal-editor.hidden {
+.cal-editor.hidden,
+.cal-delete.hidden {
   display: none;
 }
 
@@ -2700,7 +2703,11 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
+}
+
+.cal-editor-head strong {
+  font-size: 17px;
 }
 
 .cal-editor-head button {
@@ -2712,7 +2719,8 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 
 .cal-editor label {
   display: block;
-  margin: 20px 0 7px;
+  margin: 19px 0 8px;
+  font-size: 14px;
   font-weight: 650;
 }
 
@@ -2720,12 +2728,48 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   box-sizing: border-box;
   width: 100%;
   padding: 13px;
-  border: 1px solid #ddd;
+  border: 1px solid #e5e5e5;
   border-radius: 12px;
   background: #f7f7f7;
   color: #222;
   font: inherit;
 }
+
+.cal-colors {
+  display: flex;
+  gap: 17px;
+  margin-top: 14px;
+}
+
+.cal-color {
+  width: 32px;
+  height: 32px;
+  border: 3px solid transparent;
+  border-radius: 50%;
+}
+
+.cal-color.active {
+  outline: 2px solid #333;
+  outline-offset: 3px;
+}
+
+.cal-delete {
+  display: block;
+  width: 100%;
+  margin-top: 32px;
+  padding: 13px;
+  border: 0;
+  border-radius: 12px;
+  background: #fff0f0;
+  color: #e04444;
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.cal-event {
+  cursor: pointer;
+}
+
 
 </style>
 </head>
@@ -4052,19 +4096,48 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
 
     <button class="cal-add" type="button" aria-label="เพิ่มกิจกรรม">+</button>
 
-    <div class="cal-editor hidden">
-      <div class="cal-editor-head">
-        <button class="cal-cancel" type="button">ยกเลิก</button>
-        <strong>เพิ่มกิจกรรม</strong>
-        <button class="cal-save" type="button">บันทึก</button>
-      </div>
-      <label>ชื่อกิจกรรม</label>
-      <input class="cal-event-name" type="text" placeholder="เพิ่มชื่อกิจกรรม">
-      <label>วันที่</label>
-      <input class="cal-event-date" type="date">
-      <label>เวลา</label>
-      <input class="cal-event-time" type="time" value="09:00">
-    </div>
+   
+<div class="cal-editor hidden">
+  <div class="cal-editor-head">
+    <button class="cal-cancel" type="button">ยกเลิก</button>
+    <strong class="cal-editor-title">กิจกรรมใหม่</strong>
+    <button class="cal-save" type="button">บันทึก</button>
+  </div>
+
+  <label>ชื่อกิจกรรม</label>
+  <input class="cal-event-name"
+         type="text"
+         placeholder="เพิ่มชื่อกิจกรรม">
+
+  <label>วันที่</label>
+  <input class="cal-event-date" type="date">
+
+  <label>เวลาเริ่มต้น</label>
+  <input class="cal-event-time" type="time" value="09:00">
+
+  <label>เวลาสิ้นสุด</label>
+  <input class="cal-event-end" type="time" value="10:00">
+
+  <label>สีกิจกรรม</label>
+  <div class="cal-colors">
+    <button type="button" class="cal-color active"
+            data-color="#4779ee" style="background:#4779ee"
+            aria-label="สีฟ้า"></button>
+    <button type="button" class="cal-color"
+            data-color="#ed7aa7" style="background:#ed7aa7"
+            aria-label="สีชมพู"></button>
+    <button type="button" class="cal-color"
+            data-color="#51b98b" style="background:#51b98b"
+            aria-label="สีเขียว"></button>
+    <button type="button" class="cal-color"
+            data-color="#9b7be5" style="background:#9b7be5"
+            aria-label="สีม่วง"></button>
+  </div>
+
+  <button class="cal-delete hidden" type="button">
+    ลบกิจกรรม
+  </button>
+</div>
   </div>
 `,
 
@@ -4090,7 +4163,8 @@ if (name === "ปฏิทิน") {
   ];
 
   const storageKey = "toto-calendar-events";
-
+let editingIndex = -1;
+let selectedColor = "#4779ee";
   function getEvents() {
     try {
       return JSON.parse(localStorage.getItem(storageKey)) || [];
@@ -4166,39 +4240,47 @@ if (name === "ปฏิทิน") {
     renderAgenda();
   }
 
-  function renderAgenda() {
-    cal.querySelector(".cal-selected-date").textContent =
-      `${selected.getDate()} ${months[selected.getMonth()]} ${selected.getFullYear() + 543}`;
 
-    const list = cal.querySelector(".cal-event-list");
-    list.innerHTML = "";
+function renderAgenda() {
+  cal.querySelector(".cal-selected-date").textContent =
+    `${selected.getDate()} ${months[selected.getMonth()]} ${selected.getFullYear() + 543}`;
 
-    const events = getEvents()
-      .filter(event => event.date === dateKey(selected))
-      .sort((a, b) => a.time.localeCompare(b.time));
+  const list = cal.querySelector(".cal-event-list");
+  list.innerHTML = "";
 
-    if (!events.length) {
-      const empty = document.createElement("p");
-      empty.className = "cal-empty";
-      empty.textContent = "ไม่มีกิจกรรมในวันนี้";
-      list.appendChild(empty);
-      return;
-    }
+  const events = getEvents()
+    .map((event, index) => ({ ...event, index }))
+    .filter(event => event.date === dateKey(selected))
+    .sort((a, b) => a.time.localeCompare(b.time));
 
-    events.forEach(event => {
-      const item = document.createElement("div");
-      item.className = "cal-event";
-
-      const title = document.createElement("strong");
-      title.textContent = event.title;
-
-      const time = document.createElement("small");
-      time.textContent = event.time;
-
-      item.append(title, time);
-      list.appendChild(item);
-    });
+  if (!events.length) {
+    const empty = document.createElement("p");
+    empty.className = "cal-empty";
+    empty.textContent = "ไม่มีกิจกรรมในวันนี้";
+    list.appendChild(empty);
+    return;
   }
+
+  events.forEach(event => {
+    const item = document.createElement("div");
+    item.className = "cal-event";
+    item.style.borderLeftColor = event.color || "#4779ee";
+    item.style.background = "#f7f7f7";
+
+    const title = document.createElement("strong");
+    title.textContent = event.title;
+
+    const time = document.createElement("small");
+    time.textContent = event.end
+      ? `${event.time} – ${event.end}`
+      : event.time;
+
+    item.append(title, time);
+    item.addEventListener("click", () => openEditor(event.index));
+    list.appendChild(item);
+  });
+}
+
 
   cal.querySelector(".cal-prev").addEventListener("click", () => {
     month = new Date(month.getFullYear(), month.getMonth() - 1, 1);
@@ -4218,47 +4300,128 @@ if (name === "ปฏิทิน") {
     renderCalendar();
   });
 
-  const editor = cal.querySelector(".cal-editor");
 
-  cal.querySelector(".cal-add").addEventListener("click", () => {
-    cal.querySelector(".cal-event-name").value = "";
-    cal.querySelector(".cal-event-date").value = dateKey(selected);
-    cal.querySelector(".cal-event-time").value = "09:00";
-    editor.classList.remove("hidden");
+const editor = cal.querySelector(".cal-editor");
+
+function updateColors() {
+  cal.querySelectorAll(".cal-color").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.color === selectedColor
+    );
   });
+}
 
-  cal.querySelector(".cal-cancel").addEventListener("click", () => {
-    editor.classList.add("hidden");
+cal.querySelectorAll(".cal-color").forEach(button => {
+  button.addEventListener("click", () => {
+    selectedColor = button.dataset.color;
+    updateColors();
   });
+});
 
-  cal.querySelector(".cal-save").addEventListener("click", () => {
-    const title = cal.querySelector(".cal-event-name").value.trim();
-    const date = cal.querySelector(".cal-event-date").value;
-    const time = cal.querySelector(".cal-event-time").value;
+function openEditor(index = -1) {
+  editingIndex = index;
+  const event = index >= 0 ? getEvents()[index] : null;
 
-    if (!title || !date || !time) {
-      phoneDemoToast("กรุณากรอกข้อมูลให้ครบ");
-      return;
-    }
+  cal.querySelector(".cal-editor-title").textContent =
+    event ? "แก้ไขกิจกรรม" : "กิจกรรมใหม่";
 
-    const events = getEvents();
-    events.push({ title, date, time });
+  cal.querySelector(".cal-event-name").value =
+    event ? event.title : "";
 
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(events));
-    } catch {
-      phoneDemoToast("ไม่สามารถบันทึกกิจกรรมได้");
-      return;
-    }
+  cal.querySelector(".cal-event-date").value =
+    event ? event.date : dateKey(selected);
 
-    const parts = date.split("-").map(Number);
-    selected = new Date(parts[0], parts[1] - 1, parts[2]);
-    month = new Date(parts[0], parts[1] - 1, 1);
+  cal.querySelector(".cal-event-time").value =
+    event ? event.time : "09:00";
 
-    editor.classList.add("hidden");
-    renderCalendar();
-  });
+  cal.querySelector(".cal-event-end").value =
+    event ? (event.end || "10:00") : "10:00";
 
+  selectedColor = event
+    ? (event.color || "#4779ee")
+    : "#4779ee";
+
+  cal.querySelector(".cal-delete").classList.toggle(
+    "hidden", !event
+  );
+
+  updateColors();
+  editor.classList.remove("hidden");
+}
+
+cal.querySelector(".cal-add").addEventListener("click", () => {
+  openEditor();
+});
+
+cal.querySelector(".cal-cancel").addEventListener("click", () => {
+  editor.classList.add("hidden");
+});
+
+cal.querySelector(".cal-save").addEventListener("click", () => {
+  const title = cal.querySelector(".cal-event-name").value.trim();
+  const date = cal.querySelector(".cal-event-date").value;
+  const time = cal.querySelector(".cal-event-time").value;
+  const end = cal.querySelector(".cal-event-end").value;
+
+  if (!title || !date || !time || !end) {
+    alert("กรุณากรอกข้อมูลให้ครบ");
+    return;
+  }
+
+  if (end <= time) {
+    alert("เวลาสิ้นสุดต้องอยู่หลังเวลาเริ่มต้น");
+    return;
+  }
+
+  const events = getEvents();
+  const newEvent = {
+    title,
+    date,
+    time,
+    end,
+    color: selectedColor
+  };
+
+  if (editingIndex >= 0) {
+    events[editingIndex] = newEvent;
+  } else {
+    events.push(newEvent);
+  }
+
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(events));
+  } catch {
+    alert("ไม่สามารถบันทึกกิจกรรมได้");
+    return;
+  }
+
+  const parts = date.split("-").map(Number);
+  selected = new Date(parts[0], parts[1] - 1, parts[2]);
+  month = new Date(parts[0], parts[1] - 1, 1);
+
+  editor.classList.add("hidden");
+  renderCalendar();
+});
+
+cal.querySelector(".cal-delete").addEventListener("click", () => {
+  if (editingIndex < 0) return;
+  if (!confirm("ต้องการลบกิจกรรมนี้ใช่ไหม?")) return;
+
+  const events = getEvents();
+  events.splice(editingIndex, 1);
+
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(events));
+  } catch {
+    alert("ไม่สามารถลบกิจกรรมได้");
+    return;
+  }
+
+  editingIndex = -1;
+  editor.classList.add("hidden");
+  renderCalendar();
+});
   renderCalendar();
 }
 
