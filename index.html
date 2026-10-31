@@ -4491,7 +4491,373 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 .ig-story-heart.liked {
   color: #ff3040;
 }
+/* ===== Facebook App ===== */
 
+.fb-app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #f0f2f5;
+  color: #151515;
+  font-family: Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.fb-app .hidden {
+  display: none !important;
+}
+
+.fb-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 12px 14px 6px;
+}
+
+.fb-logo {
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -1.3px;
+  color: #0866ff;
+}
+
+.fb-header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.fb-top-btn {
+  border: 0;
+  background: #e9edf1;
+  border-radius: 50%;
+  width: 33px;
+  height: 33px;
+  font-size: 22px;
+  color: #111;
+}
+
+.fb-account-bar {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: #fff;
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.fb-account-avatar,
+.fb-compose-avatar,
+.fb-post-avatar,
+.fb-choice-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #dce7ff;
+  color: #0866ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.fb-account-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.fb-account-name {
+  font-size: 13px;
+}
+
+.fb-account-type {
+  font-size: 10px;
+  color: #777;
+}
+
+.fb-account-switch {
+  border: 0;
+  background: none;
+  font-size: 20px;
+}
+
+.fb-tabs {
+  display: flex;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.fb-tab {
+  flex: 1;
+  border: 0;
+  background: none;
+  height: 40px;
+  font-size: 21px;
+  color: #777;
+}
+
+.fb-tab.active {
+  color: #0866ff;
+  border-bottom: 3px solid #0866ff;
+}
+
+.fb-main {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.fb-page {
+  min-height: 100%;
+}
+
+.fb-page > h3,
+.fb-page > p {
+  padding: 0 15px;
+}
+
+.fb-compose {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: #fff;
+}
+
+.fb-compose-btn {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background: white;
+  padding: 9px;
+  text-align: left;
+  font-size: 12px;
+}
+
+.fb-photo-symbol {
+  color: #28a745;
+  font-size: 23px;
+}
+
+.fb-stories {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 12px;
+  background: #fff;
+  margin-top: 6px;
+}
+
+.fb-story {
+  width: 104px;
+  height: 155px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.fb-create-story {
+  background: linear-gradient(#d9e5ff 65%, white 65%);
+}
+
+.fb-story-plus {
+  position: absolute;
+  top: 88px;
+  background: #0866ff;
+  color: white;
+  border: 3px solid white;
+  border-radius: 50%;
+  width: 33px;
+  height: 33px;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+}
+
+.fb-sample-story {
+  background: linear-gradient(135deg, #3d69c5, #8abaff);
+  color: white;
+}
+
+.fb-post {
+  background: #fff;
+  margin-top: 7px;
+  padding: 12px;
+}
+
+.fb-post-head {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+
+.fb-post-head > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.fb-post-head strong {
+  font-size: 13px;
+}
+
+.fb-post-head small {
+  color: #777;
+  font-size: 10px;
+}
+
+.fb-post-text {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 12px 0;
+}
+
+.fb-post-actions {
+  display: flex;
+  border-top: 1px solid #eee;
+  padding-top: 8px;
+  gap: 3px;
+}
+
+.fb-post-actions button {
+  flex: 1;
+  background: none;
+  border: 0;
+  font-size: 10px;
+  color: #666;
+  padding: 7px 0;
+}
+
+.fb-post-actions .liked {
+  color: #0866ff;
+  font-weight: bold;
+}
+
+.fb-cover {
+  height: 130px;
+  background: linear-gradient(135deg, #0866ff, #8abaff);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.fb-page-profile-info {
+  padding: 12px;
+  background: #fff;
+}
+
+.fb-page-avatar {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #0866ff;
+  border: 4px solid #fff;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 22px;
+  margin-top: -43px;
+  position: relative;
+}
+
+.fb-page-profile-info h2 {
+  font-size: 20px;
+  margin: 8px 0;
+}
+
+.fb-page-profile-info p {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.fb-page-buttons {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  background: #fff;
+}
+
+.fb-page-buttons button {
+  flex: 1;
+  padding: 10px 5px;
+  border-radius: 7px;
+  border: 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.fb-page-message {
+  background: #0866ff;
+  color: white;
+}
+
+.fb-page-work {
+  background: #e4e6eb;
+  color: #111;
+}
+
+.fb-brand-avatar {
+  background: #0866ff !important;
+  color: #fff !important;
+}
+
+.fb-switch-overlay {
+  position: absolute;
+  inset: 0;
+  background: #0008;
+  display: flex;
+  align-items: flex-end;
+  z-index: 20;
+}
+
+.fb-switch-sheet {
+  width: 100%;
+  background: white;
+  border-radius: 18px 18px 0 0;
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+.fb-switch-sheet h3 {
+  margin: 0 0 14px;
+}
+
+.fb-choose-account {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 0;
+  background: white;
+  padding: 10px 0;
+  font-size: 14px;
+  text-align: left;
+}
+
+.fb-switch-cancel {
+  width: 100%;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+  background: #e4e6eb;
+}
 </style>
 </head>
 <body>
@@ -5412,8 +5778,163 @@ function openApp(name) {
   }
     $("appWindowTitle").textContent = name;
 document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข้อความ");
-    const content = {
-      
+        const content = {
+
+"Facebook": `
+  <div class="fb-app">
+
+    <header class="fb-header">
+      <div class="fb-logo">facebook</div>
+      <div class="fb-header-actions">
+        <button class="fb-top-btn fb-switch" aria-label="สลับโปรไฟล์">
+          ⇄
+        </button>
+        <button class="fb-top-btn fb-search-btn" aria-label="ค้นหา">
+          ⌕
+        </button>
+      </div>
+    </header>
+
+    <div class="fb-account-bar">
+      <div class="fb-account-avatar">T</div>
+      <div class="fb-account-info">
+        <strong class="fb-account-name">บัญชีส่วนตัว</strong>
+        <span class="fb-account-type">กำลังใช้งาน Facebook ส่วนตัว</span>
+      </div>
+      <button class="fb-account-switch">⌄</button>
+    </div>
+
+    <nav class="fb-tabs">
+      <button class="fb-tab active" data-fb-tab="home">⌂</button>
+      <button class="fb-tab" data-fb-tab="friends">♧</button>
+      <button class="fb-tab" data-fb-tab="video">▶</button>
+      <button class="fb-tab" data-fb-tab="notifications">♧</button>
+      <button class="fb-tab" data-fb-tab="menu">☰</button>
+    </nav>
+
+    <main class="fb-main">
+
+      <section class="fb-page fb-home">
+        <div class="fb-compose">
+          <div class="fb-compose-avatar">T</div>
+          <button class="fb-compose-btn">คุณกำลังคิดอะไรอยู่?</button>
+          <span class="fb-photo-symbol">▣</span>
+        </div>
+
+        <div class="fb-stories">
+          <div class="fb-story fb-create-story">
+            <div class="fb-story-plus">+</div>
+            <span>สร้างสตอรี่</span>
+          </div>
+
+          <div class="fb-story fb-sample-story">
+            <span>เรื่องราว</span>
+          </div>
+        </div>
+
+        <article class="fb-post">
+          <div class="fb-post-head">
+            <div class="fb-post-avatar">T</div>
+            <div>
+              <strong class="fb-post-author">บัญชีส่วนตัว</strong>
+              <small>เมื่อสักครู่ · 🌐</small>
+            </div>
+          </div>
+
+          <p class="fb-post-text">
+            ยินดีต้อนรับสู่ Facebook 💙
+          </p>
+
+          <div class="fb-post-actions">
+            <button class="fb-like-btn">♡ ถูกใจ</button>
+            <button class="fb-comment-btn">◯ แสดงความคิดเห็น</button>
+            <button class="fb-share-btn">↗ แชร์</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="fb-page fb-friends hidden">
+        <h3>เพื่อน</h3>
+        <p>คำขอเป็นเพื่อนและรายชื่อเพื่อนจะแสดงที่นี่</p>
+      </section>
+
+      <section class="fb-page fb-video hidden">
+        <h3>วิดีโอ</h3>
+        <p>วิดีโอและ Reels บน Facebook</p>
+      </section>
+
+      <section class="fb-page fb-notifications hidden">
+        <h3>การแจ้งเตือน</h3>
+        <p>ยังไม่มีการแจ้งเตือนใหม่</p>
+      </section>
+
+      <section class="fb-page fb-menu hidden">
+        <h3>เมนู</h3>
+        <button class="fb-menu-switch">สลับไป Everything Toto</button>
+      </section>
+
+      <section class="fb-page fb-page-profile hidden">
+        <div class="fb-cover">
+          <span>EVERYTHING TOTO</span>
+        </div>
+
+        <div class="fb-page-profile-info">
+          <div class="fb-page-avatar">ET</div>
+          <h2>Everything Toto</h2>
+          <p>Everything you need, Toto can do. ✨</p>
+          <p>รับงานหลากหลายรูปแบบ เปิดรับทุกไอเดียและทุกโอกาส 💗</p>
+        </div>
+
+        <div class="fb-page-buttons">
+          <button class="fb-page-message">ส่งข้อความ</button>
+          <button class="fb-page-work">ติดต่องาน</button>
+        </div>
+
+        <article class="fb-post">
+          <div class="fb-post-head">
+            <div class="fb-post-avatar fb-brand-avatar">ET</div>
+            <div>
+              <strong>Everything Toto</strong>
+              <small>เพจ · 🌐</small>
+            </div>
+          </div>
+
+          <p class="fb-post-text">
+            Welcome to Everything Toto! 💙<br>
+            รับงานทุกประเภท สนใจร่วมงานส่งข้อความมาได้เลย ✨
+          </p>
+
+          <div class="fb-post-actions">
+            <button class="fb-like-btn">♡ ถูกใจ</button>
+            <button class="fb-comment-btn">◯ แสดงความคิดเห็น</button>
+            <button class="fb-share-btn">↗ แชร์</button>
+          </div>
+        </article>
+      </section>
+
+    </main>
+
+    <div class="fb-switch-overlay hidden">
+      <div class="fb-switch-sheet">
+        <h3>เลือกโปรไฟล์</h3>
+
+        <button class="fb-choose-account" data-fb-account="personal">
+          <span class="fb-choice-avatar">T</span>
+          <span>บัญชีส่วนตัว</span>
+        </button>
+
+        <button class="fb-choose-account" data-fb-account="page">
+          <span class="fb-choice-avatar fb-brand-avatar">ET</span>
+          <span>Everything Toto</span>
+        </button>
+
+        <button class="fb-switch-cancel">ยกเลิก</button>
+      </div>
+    </div>
+
+  </div>
+`,
+
 "Instagram": `
   <div class="ig-app">
     <header class="ig-header">
@@ -7022,6 +7543,147 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
       "อินเทอร์เน็ต": `<div class="mock-card"><strong>เบราว์เซอร์จำลอง</strong><p>ไม่มีการเปิดเว็บไซต์จริง</p><input placeholder="พิมพ์เพื่อค้นหา" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px"></div>`
     };
     $("appContent").innerHTML = content[name] || `<div class="mock-card">${name}</div>`;
+if (name === "Facebook") {
+  const fb = document.querySelector("#appContent .fb-app");
+
+  if (fb) {
+    const overlay = fb.querySelector(".fb-switch-overlay");
+    const accountName = fb.querySelector(".fb-account-name");
+    const accountType = fb.querySelector(".fb-account-type");
+    const accountAvatar = fb.querySelector(".fb-account-avatar");
+    const composeAvatar = fb.querySelector(".fb-compose-avatar");
+    const postAvatar = fb.querySelector(".fb-home .fb-post-avatar");
+    const postAuthor = fb.querySelector(".fb-post-author");
+    const composeButton = fb.querySelector(".fb-compose-btn");
+
+    let currentAccount = "personal";
+
+    function showFbTab(tab) {
+      fb.querySelectorAll(".fb-page").forEach(page => {
+        page.classList.add("hidden");
+      });
+
+      const target = fb.querySelector(".fb-" + tab);
+
+      if (target) {
+        target.classList.remove("hidden");
+      }
+
+      fb.querySelectorAll(".fb-tab").forEach(button => {
+        button.classList.toggle(
+          "active",
+          button.dataset.fbTab === tab
+        );
+      });
+
+      fb.querySelector(".fb-main").scrollTop = 0;
+    }
+
+    function switchFbAccount(account) {
+      currentAccount = account;
+
+      if (account === "page") {
+        accountName.textContent = "Everything Toto";
+        accountType.textContent = "กำลังใช้งานในฐานะเพจ";
+        accountAvatar.textContent = "ET";
+        accountAvatar.classList.add("fb-brand-avatar");
+
+        showFbTab("page-profile");
+      } else {
+        accountName.textContent = "บัญชีส่วนตัว";
+        accountType.textContent = "กำลังใช้งาน Facebook ส่วนตัว";
+        accountAvatar.textContent = "T";
+        accountAvatar.classList.remove("fb-brand-avatar");
+
+        showFbTab("home");
+      }
+
+      overlay.classList.add("hidden");
+    }
+
+    function openFbSwitch() {
+      overlay.classList.remove("hidden");
+    }
+
+    fb.querySelector(".fb-switch").addEventListener(
+      "click",
+      openFbSwitch
+    );
+
+    fb.querySelector(".fb-account-switch").addEventListener(
+      "click",
+      openFbSwitch
+    );
+
+    fb.querySelector(".fb-menu-switch").addEventListener(
+      "click",
+      openFbSwitch
+    );
+
+    fb.querySelector(".fb-switch-cancel").addEventListener(
+      "click",
+      () => overlay.classList.add("hidden")
+    );
+
+    overlay.addEventListener("click", event => {
+      if (event.target === overlay) {
+        overlay.classList.add("hidden");
+      }
+    });
+
+    fb.querySelectorAll(".fb-choose-account").forEach(button => {
+      button.addEventListener("click", () => {
+        switchFbAccount(button.dataset.fbAccount);
+      });
+    });
+
+    fb.querySelectorAll(".fb-tab").forEach(button => {
+      button.addEventListener("click", () => {
+        if (currentAccount === "page" && button.dataset.fbTab === "home") {
+          showFbTab("page-profile");
+        } else {
+          showFbTab(button.dataset.fbTab);
+        }
+      });
+    });
+
+    fb.querySelectorAll(".fb-like-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const liked = button.classList.toggle("liked");
+        button.textContent = liked ? "♥ ถูกใจแล้ว" : "♡ ถูกใจ";
+      });
+    });
+
+    fb.querySelectorAll(".fb-comment-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const comment = prompt("เขียนความคิดเห็น");
+        if (comment && comment.trim()) {
+          alert("แสดงความคิดเห็นแล้ว: " + comment.trim());
+        }
+      });
+    });
+
+    fb.querySelectorAll(".fb-share-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        alert("แชร์โพสต์ (ระบบจำลอง)");
+      });
+    });
+
+    fb.querySelector(".fb-page-message").addEventListener(
+      "click",
+      () => alert("กล่องข้อความเพจ Everything Toto (กำลังพัฒนา)")
+    );
+
+    fb.querySelector(".fb-page-work").addEventListener(
+      "click",
+      () => alert("ช่องทางติดต่องาน Everything Toto (กำลังพัฒนา)")
+    );
+
+    composeButton.addEventListener("click", () => {
+      alert("ระบบสร้างโพสต์ (กำลังพัฒนา)");
+    });
+  }
+}
 if (name === "Instagram") {
   const ig = document.querySelector("#appContent .ig-app");
   const igMain = ig.querySelector(".ig-main");
