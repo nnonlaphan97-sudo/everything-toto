@@ -3209,6 +3209,403 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   font-size: 13px;
 }
 
+/* ===== INSTAGRAM APP ===== */
+
+#appScreen:has(.ig-app) .app-window-header {
+  display: none;
+}
+
+#appScreen:has(.ig-app) .app-content {
+  padding: 0;
+  height: 100%;
+  min-height: 0;
+}
+
+.ig-app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: #fff;
+  color: #161616;
+  font-family: Arial, sans-serif;
+}
+
+.ig-app .hidden {
+  display: none !important;
+}
+
+.ig-header {
+  height: 58px;
+  flex-shrink: 0;
+  padding: 0 17px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ig-logo {
+  font-family: "Brush Script MT", cursive;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+.ig-header-actions {
+  display: flex;
+  gap: 18px;
+}
+
+.ig-header-actions button,
+.ig-post-actions button,
+.ig-bottom-nav button,
+.ig-dm-back {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.ig-header-actions button {
+  font-size: 29px;
+}
+
+.ig-main {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.ig-page {
+  min-height: 100%;
+}
+
+.ig-stories {
+  display: flex;
+  gap: 14px;
+  padding: 14px 12px;
+  overflow-x: auto;
+  border-bottom: 1px solid #eee;
+  scrollbar-width: none;
+}
+
+.ig-story {
+  flex: 0 0 75px;
+  width: 75px;
+  border: 0;
+  background: transparent;
+  text-align: center;
+  color: #222;
+}
+
+.ig-story-ring {
+  width: 65px;
+  height: 65px;
+  padding: 3px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(35deg,#ffcf57,#f83d55,#a02ac5);
+}
+
+.ig-story-ring > span {
+  width: 100%;
+  height: 100%;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: #f2d7c9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.ig-own {
+  background: #ddd;
+}
+
+.ig-story small {
+  display: block;
+  font-size: 10px;
+  margin-top: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ig-post {
+  padding-bottom: 18px;
+  border-bottom: 1px solid #eee;
+}
+
+.ig-post-user {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 13px;
+}
+
+.ig-avatar {
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #f6b9a5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.ig-avatar-purple {
+  background: #d9c7f5;
+}
+
+.ig-post-user div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ig-post-user strong {
+  font-size: 13px;
+}
+
+.ig-post-user small {
+  font-size: 11px;
+  color: #777;
+}
+
+.ig-more {
+  margin-left: auto;
+  font-size: 18px;
+}
+
+.ig-post-picture {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.ig-photo-one {
+  background: linear-gradient(145deg,#e9d3c0,#b48e79);
+}
+
+.ig-photo-two {
+  background: linear-gradient(145deg,#e9b9d5,#a6a4db);
+}
+
+.ig-post-picture span {
+  color: white;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  line-height: 1.4;
+}
+
+.ig-post-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 8px 13px;
+}
+
+.ig-post-actions button {
+  font-size: 28px;
+  padding: 0;
+}
+
+.ig-post-actions .ig-bookmark {
+  margin-left: auto;
+}
+
+.ig-heart.liked {
+  color: #ff3040;
+}
+
+.ig-post-likes,
+.ig-post-caption,
+.ig-view-comments {
+  margin: 0 13px 7px;
+  font-size: 13px;
+}
+
+.ig-view-comments {
+  border: 0;
+  background: none;
+  color: #888;
+  padding: 0;
+}
+
+.ig-bottom-nav {
+  height: 54px;
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  border-top: 1px solid #eee;
+  background: #fff;
+}
+
+.ig-nav {
+  font-size: 29px;
+  height: 100%;
+}
+
+.ig-nav.active {
+  font-weight: 900;
+}
+
+.ig-search-page,
+.ig-profile-page,
+.ig-dm-page {
+  padding: 16px;
+}
+
+.ig-search-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 15px;
+  border: 0;
+  border-radius: 12px;
+  background: #f1f1f1;
+  font-size: 14px;
+  outline: none;
+}
+
+.ig-explore-grid,
+.ig-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 3px;
+  margin-top: 16px;
+}
+
+.ig-explore-tile,
+.ig-profile-grid > div {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(135deg,#e7b9a7,#b4a5d8);
+}
+
+.ig-explore-tile:nth-child(even),
+.ig-profile-grid > div:nth-child(even) {
+  background: linear-gradient(135deg,#a9c9cf,#d3b5c9);
+}
+
+.ig-reels-page {
+  position: relative;
+  background: #171717;
+  color: #fff;
+}
+
+.ig-reels-title {
+  padding: 20px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.ig-reel-preview {
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.ig-reel-preview span {
+  font-size: 27px;
+  font-weight: 800;
+}
+
+.ig-profile-top,
+.ig-dm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  margin-bottom: 24px;
+}
+
+.ig-profile-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ig-profile-avatar {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: #f5b8a7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.ig-profile-info > div:not(:first-child) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 13px;
+}
+
+.ig-profile-info small {
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.ig-profile-bio {
+  font-size: 13px;
+  line-height: 1.7;
+  margin-top: 16px;
+}
+
+.ig-profile-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.ig-profile-buttons button {
+  flex: 1;
+  padding: 10px 5px;
+  border: 0;
+  border-radius: 8px;
+  background: #eee;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.ig-dm-chat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 2px;
+}
+
+.ig-dm-chat > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ig-dm-chat small {
+  color: #888;
+}
+
 
 </style>
 </head>
@@ -4095,6 +4492,161 @@ window.showPhoneScreen = showScreen;
     $("appWindowTitle").textContent = name;
 document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข้อความ");
     const content = {
+      
+"Instagram": `
+  <div class="ig-app">
+    <header class="ig-header">
+      <span class="ig-logo">Instagram</span>
+      <div class="ig-header-actions">
+        <button type="button" class="ig-top-like" aria-label="กิจกรรม">♡</button>
+        <button type="button" class="ig-top-dm" aria-label="ข้อความ">➤</button>
+      </div>
+    </header>
+
+    <main class="ig-main">
+      <section class="ig-page ig-home">
+        <div class="ig-stories">
+          <button type="button" class="ig-story">
+            <span class="ig-story-ring ig-own"><span>ต</span></span>
+            <small>สตอรี่ของคุณ</small>
+          </button>
+          <button type="button" class="ig-story">
+            <span class="ig-story-ring"><span>ค</span></span>
+            <small>kanit</small>
+          </button>
+          <button type="button" class="ig-story">
+            <span class="ig-story-ring"><span>E</span></span>
+            <small>everythingtoto</small>
+          </button>
+          <button type="button" class="ig-story">
+            <span class="ig-story-ring"><span>♡</span></span>
+            <small>friends</small>
+          </button>
+        </div>
+
+        <article class="ig-post">
+          <div class="ig-post-user">
+            <span class="ig-avatar">ต</span>
+            <div>
+              <strong>toto</strong>
+              <small>Everything Toto</small>
+            </div>
+            <span class="ig-more">•••</span>
+          </div>
+
+          <div class="ig-post-picture ig-photo-one">
+            <span>EVERYTHING<br>TOTO</span>
+          </div>
+
+          <div class="ig-post-actions">
+            <button type="button" class="ig-heart">♡</button>
+            <button type="button" class="ig-comment">♧</button>
+            <button type="button" class="ig-share">➤</button>
+            <button type="button" class="ig-bookmark">♧</button>
+          </div>
+          <div class="ig-post-likes"><span>128</span> ถูกใจ</div>
+          <div class="ig-post-caption"><strong>toto</strong> อีกหนึ่งวันกับ Everything Toto 🤍</div>
+          <button type="button" class="ig-view-comments">ดูความคิดเห็นทั้งหมด</button>
+        </article>
+
+        <article class="ig-post">
+          <div class="ig-post-user">
+            <span class="ig-avatar ig-avatar-purple">ค</span>
+            <div>
+              <strong>kanit</strong>
+              <small>วันพักผ่อน</small>
+            </div>
+            <span class="ig-more">•••</span>
+          </div>
+
+          <div class="ig-post-picture ig-photo-two">
+            <span>GOOD<br>MEMORIES ♡</span>
+          </div>
+
+          <div class="ig-post-actions">
+            <button type="button" class="ig-heart">♡</button>
+            <button type="button" class="ig-comment">♧</button>
+            <button type="button" class="ig-share">➤</button>
+            <button type="button" class="ig-bookmark">♧</button>
+          </div>
+          <div class="ig-post-likes"><span>86</span> ถูกใจ</div>
+          <div class="ig-post-caption"><strong>kanit</strong> วันดี ๆ ที่อยากเก็บไว้ 💗</div>
+          <button type="button" class="ig-view-comments">ดูความคิดเห็นทั้งหมด</button>
+        </article>
+      </section>
+
+      <section class="ig-page ig-search-page hidden">
+        <input class="ig-search-input" type="search" placeholder="⌕ ค้นหา">
+        <div class="ig-explore-grid">
+          <div class="ig-explore-tile">LIFE</div>
+          <div class="ig-explore-tile">♡</div>
+          <div class="ig-explore-tile">TOTO</div>
+          <div class="ig-explore-tile">TRAVEL</div>
+          <div class="ig-explore-tile">FOOD</div>
+          <div class="ig-explore-tile">STYLE</div>
+        </div>
+      </section>
+
+      <section class="ig-page ig-reels-page hidden">
+        <div class="ig-reels-title">Reels</div>
+        <div class="ig-reel-preview">
+          <span>EVERYTHING TOTO</span>
+          <p>คลิปสั้นของโตโต้ ✨</p>
+        </div>
+      </section>
+
+      <section class="ig-page ig-profile-page hidden">
+        <div class="ig-profile-top">
+          <strong>toto</strong>
+          <span>☰</span>
+        </div>
+        <div class="ig-profile-info">
+          <div class="ig-profile-avatar">ต</div>
+          <div><strong>12</strong><small>โพสต์</small></div>
+          <div><strong>1,248</strong><small>ผู้ติดตาม</small></div>
+          <div><strong>385</strong><small>กำลังติดตาม</small></div>
+        </div>
+        <div class="ig-profile-bio">
+          <strong>Toto ♡</strong>
+          <div>Everything Toto ✨</div>
+          <div>Work • Life • Memories</div>
+        </div>
+        <div class="ig-profile-buttons">
+          <button type="button">แก้ไขโปรไฟล์</button>
+          <button type="button">แชร์โปรไฟล์</button>
+        </div>
+        <div class="ig-profile-grid">
+          <div>ET</div><div>♡</div><div>01</div>
+          <div>02</div><div>TOTO</div><div>03</div>
+        </div>
+      </section>
+
+      <section class="ig-page ig-dm-page hidden">
+        <div class="ig-dm-header">
+          <strong>ข้อความ</strong>
+          <button type="button" class="ig-dm-back">✕</button>
+        </div>
+        <input class="ig-search-input" type="search" placeholder="ค้นหาข้อความ">
+        <div class="ig-dm-chat">
+          <span class="ig-avatar ig-avatar-purple">ค</span>
+          <div><strong>kanit</strong><small>ส่งข้อความหา Kanit</small></div>
+        </div>
+        <div class="ig-dm-chat">
+          <span class="ig-avatar">E</span>
+          <div><strong>Everything Toto</strong><small>แชทเรื่องงาน</small></div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="ig-bottom-nav">
+      <button type="button" class="ig-nav active" data-ig-page="home">⌂</button>
+      <button type="button" class="ig-nav" data-ig-page="search">⌕</button>
+      <button type="button" class="ig-nav" data-ig-page="reels">▣</button>
+      <button type="button" class="ig-nav" data-ig-page="profile">●</button>
+    </nav>
+  </div>
+`,
+
       "โทรศัพท์": `<div class="mock-card"><div style="font-size:12px;color:#777">แป้นกด</div><div style="font-size:28px;text-align:center;margin:24px 0">＋</div><button class="mock-primary" onclick="phoneDemoToast('โทรศัพท์จำลอง')">โทร</button></div>`,
 "ข้อความ": `
   <div class="sms-page">
@@ -4753,6 +5305,80 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
     };
     $("appContent").innerHTML = content[name] || `<div class="mock-card">${name}</div>`;
   
+if (name === "Instagram") {
+  const ig = document.querySelector("#appContent .ig-app");
+  const igMain = ig.querySelector(".ig-main");
+
+  function showIgPage(page) {
+    ig.querySelectorAll(".ig-page").forEach(el => {
+      el.classList.add("hidden");
+    });
+
+    const target = ig.querySelector(".ig-" + page + (page === "home" ? "" : "-page"));
+    if (target) target.classList.remove("hidden");
+
+    ig.querySelectorAll(".ig-nav").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.igPage === page);
+    });
+
+    igMain.scrollTop = 0;
+  }
+
+  ig.querySelectorAll(".ig-nav").forEach(btn => {
+    btn.addEventListener("click", () => {
+      showIgPage(btn.dataset.igPage);
+    });
+  });
+
+  ig.querySelectorAll(".ig-heart").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const liked = btn.classList.toggle("liked");
+      btn.textContent = liked ? "♥" : "♡";
+
+      const count = btn.closest(".ig-post")
+        .querySelector(".ig-post-likes span");
+
+      count.textContent = Number(count.textContent) + (liked ? 1 : -1);
+    });
+  });
+
+  ig.querySelector(".ig-top-dm").addEventListener("click", () => {
+    showIgPage("dm");
+  });
+
+  ig.querySelector(".ig-dm-back").addEventListener("click", () => {
+    showIgPage("home");
+  });
+
+  ig.querySelector(".ig-top-like").addEventListener("click", () => {
+    alert("ยังไม่มีกิจกรรมใหม่ ♡");
+  });
+
+  ig.querySelectorAll(".ig-story").forEach(btn => {
+    btn.addEventListener("click", () => {
+      alert("สตอรี่ของ " + btn.innerText.trim());
+    });
+  });
+
+  ig.querySelectorAll(".ig-view-comments, .ig-comment").forEach(btn => {
+    btn.addEventListener("click", () => {
+      alert("ยังไม่มีความคิดเห็น");
+    });
+  });
+
+  ig.querySelectorAll(".ig-share").forEach(btn => {
+    btn.addEventListener("click", () => {
+      alert("แชร์โพสต์");
+    });
+  });
+
+  ig.querySelectorAll(".ig-bookmark").forEach(btn => {
+    btn.addEventListener("click", () => {
+      btn.textContent = btn.textContent === "◆" ? "♧" : "◆";
+    });
+  });
+}
+
 if (name === "โน้ต") {
   const notes = document.querySelector("#appContent .samsung-notes");
   const $n = selector => notes.querySelector(selector);
