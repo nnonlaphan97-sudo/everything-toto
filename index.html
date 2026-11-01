@@ -7643,24 +7643,18 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
         </button>
 
        <button class="gallery-album" data-album="วิดีโอ">
-  <div class="gallery-cover gallery-cover-gray">▶</div>
+  <div class="gallery-cover gallery-cover-gray">
+  <video
+    src="videos/snaptik_7685755790166183186_v3.mp4#t=0.1"
+    muted
+    playsinline
+    preload="metadata"
+    style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;"
+  ></video>
+</div>
   <strong>วิดีโอ</strong>
   <small>รูปจากวิดิอ</small>
 </button>
-
-        <button class="gallery-album" data-album="น้องณิต💙">
-          <div class="gallery-cover gallery-cover-blue">💙</div>
-          <strong>น้องณิต💙</strong>
-          <small>อัลบั้มส่วนตัว</small>
-        </button>
-
-        <button class="gallery-album" data-album="Everything Toto">
-          <div class="gallery-cover gallery-cover-green">✦</div>
-          <strong>Everything Toto</strong>
-          <small>ภาพธุรกิจ</small>
-        </button>
-      </div>
-    </div>
 
     <!-- รูปภายในอัลบั้ม -->
     <div class="gallery-album-view" hidden>
@@ -10188,16 +10182,7 @@ const galleryVideos = [
 ];
 
 
-const galleryImages = [
-  "https://picsum.photos/id/1018/800/800",
-  "https://picsum.photos/id/1015/800/800",
-  "https://picsum.photos/id/1025/800/800",
-  "https://picsum.photos/id/1035/800/800",
-  "https://picsum.photos/id/1043/800/800",
-  "https://picsum.photos/id/1050/800/800",
-  "https://picsum.photos/id/1062/800/800",
-  "https://picsum.photos/id/1074/800/800"
-];
+const galleryImages = [];
 
 let activeGalleryImages = galleryImages;
 
