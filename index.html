@@ -15421,6 +15421,51 @@ function renderNoppaphaChatHistory() {
   messages.scrollTop = messages.scrollHeight;
 }
 
+window.addRescueLoveIncomingMessage = function (from, text) {
+  const now = new Date();
+  const months = [
+    "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.",
+    "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.",
+    "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."
+  ];
+
+  rescueLoveChatHistory.push({
+    date: `${now.getDate()} ${months[now.getMonth()]}`,
+    time: now.toLocaleTimeString("th-TH", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false
+    }),
+    from: from,
+    text: text
+  });
+
+  renderRescueLoveChatHistory();
+
+  const messages = document.getElementById("rescueLoveChatMessages");
+  if (messages) messages.scrollTop = messages.scrollHeight;
+
+  const senderName = from === "akkee" ? "อัคคี" : "เบียร์🍻";
+
+  window.showLineNotification?.(
+    "กู้ภัยกู้ใจ (3)",
+    senderName + ": " + text
+  );
+};
+window.startRescueLoveConversation = function () {
+  const messages = [
+    ["akkee", "พี่โต้วันนี้เจอกันที่ร้านเจ๊โซ่"],
+    ["beer", "ไม่เอาอยากไปนั่งบ้านที่โต้"],
+    ["akkee", "เอองั้นไปบ้านพี่โต้"],
+    ["beer", "พี่คณิตมาปะวะ"]
+  ];
+
+  messages.forEach(([from, text], index) => {
+    setTimeout(() => {
+      window.addRescueLoveIncomingMessage(from, text);
+    }, 1200 + index * 2200);
+  });
+};
 
 // วาดประวัติแชตกลุ่มกู้ภัยกู้ใจ
 function renderRescueLoveChatHistory() {
@@ -15783,6 +15828,22 @@ window.openKanithChatFromNotification = function () {
     messages.scrollTop = messages.scrollHeight;
   }
 };
+window.openRescueLoveChatFromNotification = function () {
+  window.showPhoneScreen("line");
+  screen.style.display = "flex";
+
+  closeChat();
+  setTab("friends");
+  chatOpenedFrom = "chats";
+
+  openLineSubpage("rescueLoveChatPage");
+  renderRescueLoveChatHistory();
+
+  const messages = document.getElementById("rescueLoveChatMessages");
+  if (messages) {
+    messages.scrollTop = messages.scrollHeight;
+  }
+};
   // เปิด LINE เมื่อระบบหลักเรียก openApp("LINE")
   window.openLineApp = function () {
     closeChat();
@@ -15858,6 +15919,8 @@ banner.onclick = function () {
 
  if (sender === "น้องณิต💙") {
   window.openKanithChatFromNotification?.();
+} else if (sender === "กู้ภัยกู้ใจ (3)") {
+  window.openRescueLoveChatFromNotification?.();
 }
 };
 
@@ -15965,18 +16028,21 @@ window.lineNotificationTimer = setTimeout(() => {
       callScreen.hidden = true;
 
       // คณิตส่งข้อความหลังโตโต้วางสาย
-   [
+[
   "เหนื่อยมั้ย",
-   "ส่งรูปภาพ:https://i.ibb.co/SDBdB8VN/IMG-3610.jpg",
+  "ส่งรูปภาพ:https://i.ibb.co/SDBdB8VN/IMG-3610.jpg",
   "เป็นกำลังใจให้นะโตโต้"
 ].forEach((text, index) => {
   setTimeout(() => {
-  window.addKanithIncomingMessage(text);
-}, 1200 + index * 2200);
+    window.addKanithIncomingMessage(text);
+  }, 1200 + index * 2200);
 });
+
+setTimeout(() => {
+  window.startRescueLoveConversation?.();
+}, 9000);
     }
   });
-
   rejectBtn.addEventListener("click", function () {
     if (callState !== "ringing") return;
 
@@ -15991,9 +16057,14 @@ window.lineNotificationTimer = setTimeout(() => {
   "เป็นกำลังใจให้นะโตโต้"
 ].forEach((text, index) => {
   setTimeout(() => {
-  window.addKanithIncomingMessage(text);
-}, 1200 + index * 2200);
+    window.addKanithIncomingMessage(text);
+  }, 1200 + index * 2200);
 });
+
+setTimeout(() => {
+  window.startRescueLoveConversation?.();
+}, 9000);
+
 });
 })();
 
