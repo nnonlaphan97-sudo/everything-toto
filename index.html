@@ -6438,7 +6438,23 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
 #lineScreen .line-special-card[data-kind="location"] .line-special-icon {
   color: #2584d8;
 }
+#lineScreen .line-special-card[data-kind="photo"] {
+  width: auto;
+  max-width: 220px;
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+  border-radius: 12px;
+}
 
+#lineScreen .line-special-photo {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 12px;
+}
 
 </style>
 </head>
@@ -13150,7 +13166,9 @@ const kanithChatHistory = [
   { date: "09 ส.ค.", time: "10:13", from: "t", text: "จะโอนให้ก่อน 5000" },
   { date: "09 ส.ค.", time: "10:16", from: "c", text: "ไหนบอกจ่ายค่าเทอมน้อง" },
   { date: "09 ส.ค.", time: "10:18", from: "t", text: "กลัวคุณคิดว่าผมบิด" },
+  { date: "09 ส.ค.", time: "10:21", from: "c", text: "ไม่ต้องหรอก" },
   { date: "09 ส.ค.", time: "10:21", from: "c", text: "พนมารับผมที่คอนโดด้วย" },
+  { date: "09 ส.ค.", time: "10:21", from: "c", text: "ส่งโลเคชั่น:condo" },
 
   // 16 ส.ค.
   { date: "16 ส.ค.", time: "14:06", from: "t", text: "ทำไมคุณเงียบไป" },
@@ -13158,6 +13176,7 @@ const kanithChatHistory = [
   { date: "16 ส.ค.", time: "14:32", from: "c", text: "ไม่อยากนั่งรถขนศพ" },
   { date: "16 ส.ค.", time: "14:34", from: "t", text: "งั้นอยากนวดมั้ยคุณ" },
   { date: "16 ส.ค.", time: "14:35", from: "c", text: "ห้ะ" },
+  { date: "16 ส.ค.", time: "14:06", from: "t", text: "เดี๋ยวพรุ่งนี้ผมไปรับ" },
 
   // 17 ส.ค.
   { date: "17 ส.ค.", time: "11:17", from: "c", text: "คุณอยู่ไหน" },
@@ -13174,11 +13193,15 @@ const kanithChatHistory = [
   { date: "23 ส.ค.", time: "19:08", from: "c", text: "ขอบคุณที่ช่วยเพื่อนผม" },
   { date: "23 ส.ค.", time: "19:10", from: "t", text: "ผมสิต้องขอบคุณ" },
   { date: "23 ส.ค.", time: "19:12", from: "c", text: "เรื่องแผนล่ะ" },
+  { date: "23 ส.ค.", time: "19:14", from: "t", text: "ทรงนี้ไม่ห่วงเพื่อนนี่หว่า" },
+  { date: "23 ส.ค.", time: "19:14", from: "t", text: "ห่วงผัว" },
+  { date: "23 ส.ค.", time: "19:14", from: "c", text: "เพื่อนก็สำคัญ" },
+  { date: "23 ส.ค.", time: "19:14", from: "c", text: "แต่ความรักผมก็สำคัญ" },
   { date: "23 ส.ค.", time: "19:14", from: "t", text: "ผมต้องสอบสวนคุณเพิ่มก่อน" },
   { date: "23 ส.ค.", time: "19:15", from: "c", text: "จะถามอะไร" },
   { date: "23 ส.ค.", time: "19:17", from: "t", text: "เอากันล่าสุดเมื่อไหร่" },
   { date: "23 ส.ค.", time: "19:18", from: "c", text: "น่าเกลียดถามอะไร" },
-  { date: "23 ส.ค.", time: "19:20", from: "t", text: "คอล" },
+  { date: "23 ส.ค.", time: "19:20", from: "t", text: "โทรแบบเสียง 30:01" },
   { date: "23 ส.ค.", time: "19:22", from: "t", text: "พรุ่งนี้ไปพิสูจน์กัน" },
 
   // 24 ส.ค.
@@ -13191,7 +13214,7 @@ const kanithChatHistory = [
   { date: "26 ส.ค.", time: "15:18", from: "c", text: "ว่างมั้ย" },
   { date: "26 ส.ค.", time: "15:19", from: "c", text: "มีเรื่องให้ช่วย" },
   { date: "26 ส.ค.", time: "15:23", from: "t", text: "ว่ามาเลยคับคุณเจ้าหนี้" },
-  { date: "26 ส.ค.", time: "15:27", from: "c", text: "เจอกันที่ร้านอาหารสักที" },
+  { date: "26 ส.ค.", time: "15:27", from: "c", text: "เจอกันที่ร้านอาหารสักที่" },
   { date: "26 ส.ค.", time: "15:29", from: "t", text: "ร้านเจ๊โซ่มะ" },
   { date: "26 ส.ค.", time: "15:32", from: "c", text: "แล้วแต่" },
 
@@ -13205,21 +13228,21 @@ const kanithChatHistory = [
   { date: "06 ก.ย.", time: "12:17", from: "c", text: "โอ๊ยออกมาเดี๋ยวผมเลี้ยงข้าว" },
 
   // 09 ก.ย.
-  { date: "09 ก.ย.", time: "09:05", from: "c", text: "ผมหวังว่ามาออกสนามจริงจะได้คะแนนดี" },
+  { date: "09 ก.ย.", time: "09:05", from: "c", text: "ผมหวังว่ามาออกสนามจริงกับคุณแล้วจะได้คะแนนดี" },
   { date: "09 ก.ย.", time: "09:08", from: "t", text: "ได้อยู่แล้ว" },
   { date: "09 ก.ย.", time: "09:09", from: "t", text: "ยังไงก็ผ่าน ฟันธง" },
-  { date: "09 ก.ย.", time: "09:11", from: "c", text: "งั้นดีเลย จะได้ยื่นสายการบินระหว่างประเทศ" },
+  { date: "09 ก.ย.", time: "09:11", from: "c", text: "งั้นดีเลย ผมจะได้ยื่นสายการบินระหว่างประเทศ" },
   { date: "09 ก.ย.", time: "09:12", from: "c", text: "จะได้บินกับพี่ไลอ้อนสักที" },
   { date: "09 ก.ย.", time: "09:14", from: "t", text: "เป้าหมายชีวิตคุณนี่มีแต่เค้าเนอะ" },
-  { date: "09 ก.ย.", time: "09:16", from: "c", text: "ผมก็ต้องพยายามให้เหมาะสมกับเค้า" },
+  { date: "09 ก.ย.", time: "09:16", from: "c", text: "ผมก็ต้องพยายามให้เหมาะสมกับเค้าสิ" },
   { date: "09 ก.ย.", time: "09:18", from: "t", text: "แล้วทำไมมีแต่คุณที่พยายามไม่ใช่เค้า" },
   { date: "09 ก.ย.", time: "09:20", from: "c", text: "เค้าอยู่สูงกว่าผม" },
   { date: "09 ก.ย.", time: "09:22", from: "t", text: "เหนื่อยจังวะ" },
   { date: "09 ก.ย.", time: "09:24", from: "c", text: "เหนื่อยดิเป็นผมอ่ะ" },
   { date: "09 ก.ย.", time: "09:25", from: "c", text: "ทั้งเรื่องพ่อ เรื่องแฟน" },
-  { date: "09 ก.ย.", time: "09:27", from: "t", text: "ถ้าเป็นผมนะคุณไม่เหนื่อยไรเลย" },
+  { date: "09 ก.ย.", time: "09:27", from: "t", text: "ถ้าเป็นผมนะคุณไม่ต้องเหนื่อยไรเลย" },
   { date: "09 ก.ย.", time: "09:28", from: "t", text: "ผมก็รักคุณที่คุณเป็นแบบนี้" },
-  { date: "09 ก.ย.", time: "09:31", from: "c", text: "พี่ไลอ้อนมาเซอร์ไพร์ส" },
+  { date: "09 ก.ย.", time: "09:31", from: "c", text: "พี่ไลอ้อนมาเซอร์ไพร์สอ่ะ" },
   { date: "09 ก.ย.", time: "09:32", from: "c", text: "ไปก่อนนะบาย" },
 
   // 14 ก.ย.
@@ -13227,7 +13250,7 @@ const kanithChatHistory = [
   { date: "14 ก.ย.", time: "07:15", from: "t", text: "คุณทำได้อยู่แล้ว" },
 
   // 16 ก.ย.
-  { date: "16 ก.ย.", time: "16:08", from: "c", text: "เสร็จสักทีคุณ" },
+  { date: "16 ก.ย.", time: "16:08", from: "c", text: "สอบเสร็จสักทีคุณ" },
   { date: "16 ก.ย.", time: "16:10", from: "c", text: "วันเสาร์ว่างมั้ย ผมจะเลี้ยงข้าว" },
   { date: "16 ก.ย.", time: "16:13", from: "t", text: "สำหรับคุณผมว่างเสมอ" },
 
@@ -13235,6 +13258,8 @@ const kanithChatHistory = [
   { date: "19 ก.ย.", time: "18:41", from: "t", text: "คณิต คุณช่วยฟังผมก่อนได้ไหม" },
   { date: "19 ก.ย.", time: "18:44", from: "t", text: "คณิต" },
   { date: "19 ก.ย.", time: "18:46", from: "t", text: "รับสายผมหน่อย" },
+  { date: "19 ก.ย.", time: "18:46", from: "t", text: "ไม่ได้รับสาย" },
+    { date: "19 ก.ย.", time: "18:46", from: "t", text: "ไม่ได้รับสาย" },
   { date: "19 ก.ย.", time: "18:50", from: "t", text: "คณิต" },
 
   // 21 ก.ย.
@@ -13248,7 +13273,7 @@ const kanithChatHistory = [
   { date: "23 ก.ย.", time: "20:02", from: "t", text: "บอกมาเลยคับบอส" },
   { date: "23 ก.ย.", time: "20:03", from: "t", text: "คุณอยากจัดการแบบไหน" },
   { date: "23 ก.ย.", time: "20:05", from: "c", text: "ผมไม่อยากด่าให้มันจบ" },
-  { date: "23 ก.ย.", time: "20:07", from: "c", text: "ผมจะให้มันเจ็บ" },
+  { date: "23 ก.ย.", time: "20:07", from: "c", text: "ผมอยากให้มันเจ็บ" },
   { date: "23 ก.ย.", time: "20:08", from: "c", text: "เจ็บให้ถึงขั้วหัวใจ" },
   { date: "23 ก.ย.", time: "20:10", from: "t", text: "คนอย่างไลอ้อนเนี่ย" },
   { date: "23 ก.ย.", time: "20:11", from: "t", text: "มันกลัวเสียภาพลักษณ์มากกว่าความรัก" },
@@ -13258,14 +13283,15 @@ const kanithChatHistory = [
   { date: "25 ก.ย.", time: "08:12", from: "t", text: "ตื่นรึยังคุณ" },
   { date: "25 ก.ย.", time: "08:14", from: "c", text: "ร้องไห้อยู่" },
   { date: "25 ก.ย.", time: "08:16", from: "t", text: "หยุดร้องไห้แล้วเปิดประตูให้ผม" },
-  { date: "25 ก.ย.", time: "08:17", from: "t", text: "จะเอาไปเก็บศพคุณเอง" },
+  { date: "25 ก.ย.", time: "08:17", from: "t", text: "จะเข้าไปเก็บศพคุณเอง" },
   { date: "25 ก.ย.", time: "08:19", from: "c", text: "อยากอยู่คนเดียว" },
   { date: "25 ก.ย.", time: "08:21", from: "t", text: "ออกไปข้างนอกหาไรทำหน่อย" },
   { date: "25 ก.ย.", time: "08:22", from: "t", text: "เร็วเปิดประตู" },
   { date: "25 ก.ย.", time: "13:46", from: "c", text: "ขอบคุณนะวันนี้ได้ระบายอะไรเยอะเลย" },
   { date: "25 ก.ย.", time: "13:48", from: "t", text: "ไม่เป็นไรคุณ" },
-  { date: "25 ก.ย.", time: "13:49", from: "t", text: "เดี๋ยวพน. พาไปงานวัด" },
+  { date: "25 ก.ย.", time: "13:49", from: "t", text: "เดี๋ยวพรุ่งนี้พาไปงานวัด" },
   { date: "25 ก.ย.", time: "13:51", from: "c", text: "ห้ะ" },
+    { date: "19 ก.ย.", time: "18:46", from: "c", text: "จะลากผมไปอีกเหรอ" },
   { date: "25 ก.ย.", time: "13:53", from: "t", text: "อย่าให้คนเหี้ยมาทำลายชีวิตคุณ" },
 
   // 29 ก.ย.
@@ -13273,12 +13299,12 @@ const kanithChatHistory = [
   { date: "29 ก.ย.", time: "08:04", from: "c", text: "อะไรของคุณเนี่ย" },
   { date: "29 ก.ย.", time: "08:05", from: "c", text: "มารับทำไม ผมยกหนี้ให้แล้ว" },
   { date: "29 ก.ย.", time: "08:07", from: "t", text: "ไม่ได้มาจ่ายหนี้" },
-  { date: "29 ก.ย.", time: "08:08", from: "c", text: "มาจีบ" },
+  { date: "29 ก.ย.", time: "08:08", from: "t", text: "มาจีบ" },
 
   // 1 ต.ค.
-  { date: "1 ต.ค.", time: "18:16", from: "c", text: "ออกมาทำไมไม่บอก" },
+  { date: "1 ต.ค.", time: "18:16", from: "c", text: "ออกจากปาร์ตี้ไม่บอกกันเลยนะคุณ" },
   { date: "1 ต.ค.", time: "18:17", from: "c", text: "อยู่ไหน" },
-  { date: "1 ต.ค.", time: "18:22", from: "t", text: "ไม่เห็นคนโง่กลับไปหาคนเหี้ย" },
+  { date: "1 ต.ค.", time: "18:22", from: "t", text: "ไม่อยากเห็นคนโง่กลับไปหาคนเหี้ย" },
   { date: "1 ต.ค.", time: "18:24", from: "c", text: "ผมปฏิเสธเค้าไป" },
   { date: "1 ต.ค.", time: "18:25", from: "c", text: "ใครมันจะอยากแต่งงานคนที่ทำให้ร้องไห้" },
   { date: "1 ต.ค.", time: "18:26", from: "c", text: "ผมก็อยากอยู่กับคนที่ทำให้ผมหัวเราะ" },
@@ -13289,17 +13315,18 @@ const kanithChatHistory = [
   { date: "1 ต.ค.", time: "18:33", from: "c", text: "คุณยังมีโอกาสอยู่นะ" },
   { date: "1 ต.ค.", time: "18:35", from: "t", text: "โอกาสไร" },
   { date: "1 ต.ค.", time: "18:36", from: "c", text: "โอกาสจะได้ขอผมเป็นแฟนไง" },
-  { date: "1 ต.ค.", time: "18:37", from: "t", text: "รอไรอ่ะเป็นแฟนกันดิ" },
-  { date: "1 ต.ค.", time: "18:38", from: "t", text: "เป็นแฟนกันนะ" },
+  { date: "1 ต.ค.", time: "18:37", from: "t", text: "รอไรอ่ะ" },
+  { date: "1 ต.ค.", time: "18:38", from: "t", text: "เป็นแฟนดิ" },
   { date: "1 ต.ค.", time: "18:40", from: "c", text: "เอาดิ ลองดู" },
 // 03 ต.ค.
 { date: "03 ต.ค.", time: "09:12", from: "t", text: "คิดถึงคุณอ่ะ" },
-{ date: "03 ต.ค.", time: "09:13", from: "t", text: "ทำไมให้ผมค้าง" },
-{ date: "03 ต.ค.", time: "09:20", from: "c", text: "ชักว่าวรอไป" },
+{ date: "03 ต.ค.", time: "09:13", from: "t", text: "ทำไมไม่ให้ผมค้าง" },
+{ date: "03 ต.ค.", time: "09:20", from: "c", text: "ชักว่าวไปก่อนนะ" },
 { date: "03 ต.ค.", time: "09:21", from: "t", text: "โหยคณิตตตตต" },
 
 // 05 ต.ค.
 { date: "05 ต.ค.", time: "07:15", from: "t", text: "นางฟ้าของผมแลนด์รึยัง" },
+{ date: "05 ต.ค.", time: "07:15", from: "t", text: "ผมมารอรับคุณแล้วเบบี๋" },
 { date: "05 ต.ค.", time: "07:22", from: "c", text: "รอบนี้มีศพติดมาด้วยมั้ย" },
 { date: "05 ต.ค.", time: "07:23", from: "t", text: "ไม่มี ผมโยนทิ้งข้างทางไปแล้ว" },
 { date: "05 ต.ค.", time: "07:30", from: "c", text: "รถคุณจอดอยู่ไหน" },
@@ -13309,35 +13336,36 @@ const kanithChatHistory = [
 { date: "05 ต.ค.", time: "07:34", from: "c", text: "ผมไม่อายหรอกมาจอดใกล้ๆ" },
 
 // 07 ต.ค.
-{ date: "07 ต.ค.", time: "18:10", from: "c", text: "เดี๋ยวไปนอนบ้านคุณ" },
+{ date: "07 ต.ค.", time: "18:10", from: "c", text: "เดี๋ยววันนี้ไปนอนบ้านคุณนะ" },
 { date: "07 ต.ค.", time: "18:11", from: "t", text: "ดีเลยอยากขึ้นเครื่องบินพอดี" },
 { date: "07 ต.ค.", time: "18:12", from: "c", text: "สมองคิดอะไรแต่แบบนี้" },
 { date: "07 ต.ค.", time: "18:13", from: "t", text: "ขอไม่มีทรานซิสนะครับ" },
 
 // 10 ต.ค.
 { date: "10 ต.ค.", time: "10:05", from: "t", text: "คิดถึงแล้ว" },
-{ date: "10 ต.ค.", time: "10:06", from: "c", text: "เพิ่งแยกกันเมื่อกี้!" },
+{ date: "10 ต.ค.", time: "10:06", from: "c", text: "เพิ่งแยกกันเมื่อกี้นะ" },
 { date: "10 ต.ค.", time: "10:07", from: "t", text: "นั่นแหละคิดถึง" },
-{ date: "10 ต.ค.", time: "10:10", from: "c", text: "พน.ไปกับผมนะ" },
-{ date: "10 ต.ค.", time: "10:11", from: "t", text: "นี่จะพาผมไปไหนเนี่ย" },
+{ date: "10 ต.ค.", time: "10:10", from: "c", text: "พรุ่งนี้ไปกับผมนะ" },
+{ date: "10 ต.ค.", time: "10:11", from: "t", text: "นี่จะลักพาตัวผมไปไหนเนี่ย" },
 { date: "10 ต.ค.", time: "10:12", from: "t", text: "ผมกลัวนะ" },
 { date: "10 ต.ค.", time: "10:13", from: "c", text: "ไปทำมิดีมิร้ายไง" },
 { date: "10 ต.ค.", time: "10:14", from: "t", text: "เอาเลยผมชอบ" },
 { date: "10 ต.ค.", time: "10:15", from: "c", text: "555555555555" },
 
 // 14 ต.ค.
-{ date: "14 ต.ค.", time: "08:20", from: "t", text: "คุณณิตความแตกแล้ว" },
+{ date: "14 ต.ค.", time: "08:20", from: "t", text: "คณิตความแตกแล้ว" },
+{ date: "14 ต.ค.", time: "08:20", from: "t", text: "แม่คุณรู้แล้ว่าผมเป็นกู้ภัย" },
 { date: "14 ต.ค.", time: "08:21", from: "c", text: "ได้ยังไง" },
 { date: "14 ต.ค.", time: "08:22", from: "t", text: "พ่อคุณหัวใจวาย" },
 { date: "14 ต.ค.", time: "08:23", from: "t", text: "ผมเป็นคนพามาส่ง" },
 { date: "14 ต.ค.", time: "08:25", from: "c", text: "พอผมอยู่โรงบาลไหน" },
 { date: "14 ต.ค.", time: "08:26", from: "c", text: "ส่งโลมา" },
-{ date: "14 ต.ค.", time: "08:27", from: "t", text: "ส่งโลเคชั่น" },
+{ date: "14 ต.ค.", time: "08:27", from: "t", text: "ส่งโลเคชั่น: โรงพยาบาล" },
 
 // 16 ต.ค.
 { date: "16 ต.ค.", time: "06:40", from: "c", text: "คุณไปทำงานเถอะ" },
 { date: "16 ต.ค.", time: "06:41", from: "c", text: "เดี๋ยวผมขับรถไปเอง" },
-{ date: "16 ต.ค.", time: "06:45", from: "t", text: "แลนด์ตอนไหนทักมานะ" },
+{ date: "16 ต.ค.", time: "06:45", from: "t", text: "แลนตอนไหนทักมานะ" },
 { date: "16 ต.ค.", time: "06:46", from: "c", text: "ครับ" },
 
 // 18 ต.ค.
@@ -13350,7 +13378,7 @@ const kanithChatHistory = [
 { date: "19 ต.ค.", time: "14:10", from: "t", text: "ผมติดเคสว่ะคุณ" },
 { date: "19 ต.ค.", time: "14:11", from: "c", text: "ไม่เป็นไร" },
 { date: "19 ต.ค.", time: "14:15", from: "t", text: "ขอโทษจริงๆนะครับ" },
-{ date: "19 ต.ค.", time: "18:40", from: "c", text: "ส่งรูป" },
+{ date: "19 ต.ค.", time: "18:40", from: "c", text: "ส่งรูปภาพ:https://i.ibb.co/MyJMnK9F/IMG-3593.jpg" },
 { date: "19 ต.ค.", time: "18:41", from: "c", text: "พอดีมีของหวานมาฝาก" },
 
 // 20 ต.ค.
@@ -13369,7 +13397,7 @@ const kanithChatHistory = [
 { date: "21 ต.ค.", time: "16:30", from: "c", text: "มาหาก่อนแล้วจะบอก" },
 
 // 24 ต.ค.
-{ date: "24 ต.ค.", time: "10:00", from: "c", text: "วันนี่เรามาแช่อ่างกัน" },
+{ date: "24 ต.ค.", time: "10:00", from: "c", text: "วันนี้เรามาแช่อ่างกัน" },
 { date: "24 ต.ค.", time: "10:01", from: "c", text: "จะจับหมาอาบน้ำหน่อย" },
 { date: "24 ต.ค.", time: "10:10", from: "t", text: "อยากเลิกงานแล้วค้าบบบ" },
 { date: "24 ต.ค.", time: "16:30", from: "c", text: "เจ๊โซ่เป็นไงบ้างคุณ" },
@@ -13394,9 +13422,9 @@ const kanithChatHistory = [
 { date: "1 พ.ย.", time: "09:12", from: "t", text: "เดี๋ยวถ่ายมาอวดคับ" },
 
 // 3 พ.ย.
-{ date: "3 พ.ย.", time: "12:00", from: "t", text: "บอกทีเครื่องบินถไหลออกนอกรันเวย์" },
+{ date: "3 พ.ย.", time: "12:00", from: "t", text: "บอกทีเครื่องบินไถลออกนอกรันเวย์ไม่ใช่สายของคุณ" },
 { date: "3 พ.ย.", time: "12:01", from: "t", text: "น้องณิตตอบโต้ที" },
-{ date: "3 พ.ย.", time: "12:10", from: "t", text: "ไม่มีการตอบรับ" },
+{ date: "3 พ.ย.", time: "12:10", from: "t", text: "ไม่ได้รับสาย" },
 
 // 11 พ.ย.
 { date: "11 พ.ย.", time: "19:00", from: "t", text: "ผมก็แค่ผู้ชายหล่อเซอร์ที่รักเทอเท่าฟ้า" },
@@ -13411,7 +13439,7 @@ const kanithChatHistory = [
 { date: "11 พ.ย.", time: "19:16", from: "t", text: "ผมแม่งโคตรรักคุณเหี้ยๆ เลย" },
 { date: "11 พ.ย.", time: "19:17", from: "t", text: "แต่งงานกับผมนะ" },
 { date: "11 พ.ย.", time: "19:20", from: "c", text: "ก็ต้อง say yes อยู่แล้วมะ" },
-{ date: "11 พ.ย.", time: "19:21", from: "t", text: "แต่งดิวะ" },
+{ date: "11 พ.ย.", time: "19:21", from: "c", text: "แต่งดิวะ" },
 
 // 24 ธ.ค.
 { date: "24 ธ.ค.", time: "20:00", from: "t", text: "ผมอยากขึ้น first class จังครับ" },
@@ -13678,7 +13706,7 @@ const phailinChatHistory = [
   { date: "28 ต.ค.", time: "21:10", from: "t", text: "ว่าไงไพลิน" },
   { date: "28 ต.ค.", time: "21:12", from: "pl", text: "ชั้นมีวิธีให้นายได้เจอกับคณิต" },
   { date: "28 ต.ค.", time: "21:13", from: "t", text: "??" },
-  { date: "28 ต.ค.", time: "21:14", from: "pl", text: "โทรแบบเสียง 20:07" }
+  { date: "28 ต.ค.", time: "21:14", from: "pl", text: "calling" }
 ];
 const thanFoundationChatHistory = [
   // 17 ส.ค.
@@ -14739,6 +14767,15 @@ function renderRescueLoveChatHistory() {
   function getSpecialData(text) {
     const value = String(text || "").trim();
 
+const photo = value.match(/^ส่งรูปภาพ\s*:\s*(https?:\/\/\S+)$/i);
+
+if (photo) {
+  return {
+    kind: "photo",
+    url: photo[1]
+  };
+}
+
     if (value === "ไม่ได้รับสาย") {
       return {
         kind: "missed",
@@ -14788,9 +14825,19 @@ function renderRescueLoveChatHistory() {
 
     bubble.classList.add("line-special-card");
     bubble.dataset.kind = data.kind;
-    bubble.replaceChildren();
+   bubble.replaceChildren();
 
-    const main = document.createElement("div");
+if (data.kind === "photo") {
+  const img = document.createElement("img");
+  img.className = "line-special-photo";
+  img.src = data.url;
+  img.alt = "รูปภาพที่ส่งในแชต";
+  img.loading = "lazy";
+  bubble.appendChild(img);
+  return;
+}
+
+const main = document.createElement("div");
     main.className = "line-special-main";
 
     const icon = document.createElement("div");
