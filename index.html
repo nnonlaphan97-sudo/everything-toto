@@ -1897,6 +1897,11 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 #lineChatPage .line-chat-bubble-row.first-in-group .line-chat-bubble::after { content: none !important; display: none !important; }/* จัดตำแหน่งเวลาและบับเบิ้ล */
 #lineChatPage .line-chat-bubble-row { display: flex; align-items: flex-end; gap: 5px; width: 100%; }/* ฝั่งขวา: เวลา → บับเบิ้ล */
 #lineChatPage .line-chat-bubble-row.sent { justify-content: flex-end; };
+/* ซ่อนเวลาข้อความทั้งฝั่งโตโต้และคณิต */
+#lineChatPage .line-chat-bubble-row.sent .line-chat-time,
+#lineChatPage .line-chat-bubble-row.received .line-chat-time {
+  display: none !important;
+}
 /* แถบหัวแชต */
 #lineChatPage .line-subpage-header,
 #jaoOhChatPage .line-subpage-header { position: absolute; top: 0; left: 0; right: 0; height: 56px; display: flex; align-items: center; justify-content: center; padding: 0 48px; box-sizing: border-box; background: #fff; border-bottom: 1px solid #eee; z-index: 2; }#lineChatPage .line-subpage-header h2,
