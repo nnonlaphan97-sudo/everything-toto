@@ -1294,7 +1294,180 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   color: #999;
   font-size: 11px;
 }
+/* LINE NEWS */
+.line-news-page {
+  padding-bottom: 30px;
+  background: #fff;
+  color: #202020;
+}
 
+.line-news-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 20px 18px 16px;
+}
+
+.line-news-heading small {
+  color: #06b950;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.line-news-heading h2 {
+  margin: 4px 0 0;
+  font-size: 25px;
+  font-weight: 750;
+}
+
+.line-news-heading > span {
+  color: #999;
+  font-size: 10px;
+  padding-bottom: 4px;
+}
+
+.line-news-categories {
+  display: flex;
+  gap: 20px;
+  padding: 0 18px 14px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.line-news-categories::-webkit-scrollbar {
+  display: none;
+}
+
+.line-news-categories span {
+  flex-shrink: 0;
+  color: #888;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.line-news-categories span.active {
+  color: #06b950;
+}
+
+.line-news-featured {
+  margin: 17px 16px 22px;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+}
+
+.line-news-featured-image {
+  display: flex;
+  align-items: flex-end;
+  height: 145px;
+  padding: 14px;
+  background: linear-gradient(135deg, #b8dfc7, #6eaa96);
+}
+
+.line-news-featured-image span {
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: #ffffffde;
+  color: #28654b;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.line-news-featured-content {
+  padding: 14px;
+}
+
+.line-news-featured-content small,
+.line-news-item-text small {
+  color: #06b950;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.line-news-featured-content h3 {
+  margin: 7px 0;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.line-news-featured-content p {
+  margin: 0 0 12px;
+  color: #777;
+  font-size: 12px;
+}
+
+.line-news-featured-content > span,
+.line-news-item-text > span {
+  color: #aaa;
+  font-size: 10px;
+}
+
+.line-news-list-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 18px 10px;
+}
+
+.line-news-list-title strong {
+  font-size: 16px;
+}
+
+.line-news-list-title span {
+  color: #aaa;
+  font-size: 11px;
+}
+
+.line-news-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 0 18px;
+  padding: 15px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.line-news-item-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  min-width: 0;
+}
+
+.line-news-item-text strong {
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 650;
+}
+
+.line-news-thumb {
+  display: grid;
+  place-items: center;
+  flex: 0 0 94px;
+  height: 80px;
+  border-radius: 11px;
+  color: white;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.line-news-thumb.travel {
+  background: linear-gradient(135deg, #83c7e8, #327fa7);
+}
+
+.line-news-thumb.entertainment {
+  background: linear-gradient(135deg, #e6a2c7, #a95e9b);
+}
+
+.line-news-thumb.lifestyle {
+  background: linear-gradient(135deg, #d9b78c, #a47a55);
+}
 .line-news-card {
   overflow: hidden;
   margin: 0 16px 15px;
@@ -7641,24 +7814,72 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
   </form>
 </section>
 
-    <!-- NEWS -->
-    <section class="line-tab-panel" data-line-panel="news">
-      <div class="line-section-title">ข่าวสาร</div>
-      <div class="line-news-card">
-        <div class="line-news-banner">LINE TODAY</div>
-        <div class="line-news-body">
-          <strong>ข่าวสารและเรื่องราวที่น่าสนใจ</strong>
-          <p>พื้นที่จำลองสำหรับแสดงข่าวและบทความ</p>
-        </div>
+   <!-- NEWS -->
+<section class="line-tab-panel" data-line-panel="news">
+  <div class="line-news-page">
+
+    <div class="line-news-heading">
+      <div>
+        <small>LINE TODAY</small>
+        <h2>ข่าวสาร</h2>
       </div>
-      <div class="line-news-card">
-        <div class="line-news-banner line-news-banner-2">DISCOVER</div>
-        <div class="line-news-body">
-          <strong>ค้นพบสิ่งใหม่ ๆ</strong>
-          <p>อัปเดตเนื้อหาที่คุณอาจสนใจ</p>
-        </div>
+      <span>อัปเดตเรื่องราวรอบตัว</span>
+    </div>
+
+    <div class="line-news-categories">
+      <span class="active">แนะนำ</span>
+      <span>ข่าวทั่วไป</span>
+      <span>บันเทิง</span>
+      <span>ไลฟ์สไตล์</span>
+      <span>ท่องเที่ยว</span>
+    </div>
+
+    <div class="line-news-featured">
+      <div class="line-news-featured-image">
+        <span>เรื่องเด่นวันนี้</span>
       </div>
-    </section>
+      <div class="line-news-featured-content">
+        <small>ไลฟ์สไตล์</small>
+        <h3>ไอเดียจัดวันพักผ่อนให้เป็นวันที่ดี</h3>
+        <p>รวมกิจกรรมง่าย ๆ สำหรับวันสบาย ๆ</p>
+        <span>LINE TODAY · วันนี้</span>
+      </div>
+    </div>
+
+    <div class="line-news-list-title">
+      <strong>ข่าวล่าสุด</strong>
+      <span>สำหรับคุณ</span>
+    </div>
+
+    <div class="line-news-item">
+      <div class="line-news-item-text">
+        <small>ท่องเที่ยว</small>
+        <strong>สถานที่น่าเที่ยวสำหรับทริปพักผ่อน</strong>
+        <span>LINE TODAY · วันนี้</span>
+      </div>
+      <div class="line-news-thumb travel">TRAVEL</div>
+    </div>
+
+    <div class="line-news-item">
+      <div class="line-news-item-text">
+        <small>บันเทิง</small>
+        <strong>อัปเดตเรื่องราวจากวงการบันเทิง</strong>
+        <span>LINE TODAY · วันนี้</span>
+      </div>
+      <div class="line-news-thumb entertainment">ENT.</div>
+    </div>
+
+    <div class="line-news-item">
+      <div class="line-news-item-text">
+        <small>ไลฟ์สไตล์</small>
+        <strong>เทคนิคจัดบ้านให้ดูเรียบง่ายและน่าอยู่</strong>
+        <span>LINE TODAY · วันนี้</span>
+      </div>
+      <div class="line-news-thumb lifestyle">LIFE</div>
+    </div>
+
+  </div>
+</section>
 
     <!-- WALLET / SERVICES -->
     <section class="line-tab-panel" data-line-panel="wallet">
