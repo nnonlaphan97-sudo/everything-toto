@@ -7905,10 +7905,11 @@ function enterDigit(digit) {
 
   function setPlaying(value) {
     if (value) {
-      musicAudio.play().catch(() => {
-        updateMusicButtons();
-        showToast("ไม่สามารถเล่นไฟล์เพลงได้");
-      });
+      musicAudio.play().catch((error) => {
+  updateMusicButtons();
+  console.error("Music error:", error);
+  showToast("เล่นเพลงไม่ได้: " + error.name);
+});
     } else {
       musicAudio.pause();
     }
