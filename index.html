@@ -15761,7 +15761,8 @@ icon.alt = sender;
   }, 4500);
 };
 
-// ===== LINE incoming call: อัคคี =====
+
+ // ===== LINE incoming call: อัคคี =====
 (function () {
   const callScreen = document.getElementById("akkeeIncomingCall");
   const status = document.getElementById("akkeeCallStatus");
@@ -15769,52 +15770,114 @@ icon.alt = sender;
   const rejectBtn = document.getElementById("akkeeRejectCall");
   const acceptLabel = document.getElementById("akkeeAcceptLabel");
 
-  let callState = "idle";
+  const rejectAction = rejectBtn.closest(".akkee-call-action");
+  const acceptAction = acceptBtn.closest(".akkee-call-action");
+  const actions = callScreen.querySelector(".akkee-call-actions");
 
-  window.showAkkeeIncomingCall = function () {
+  const originalAcceptIcon = acceptBtn.innerHTML;
+
+  const hangupIcon = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M2 8.8C7.6 4.1 16.4 4.1 22 8.8v3.1c0 .8-.6 1.5-1.4 1.6l-3.5.6c-.8.1-1.6-.4-1.8-1.2l-.7-2.3a17.4 17.4 0 0 0-5.2 0l-.7 2.3c-.2.8-1 1.3-1.8 1.2l-3.5-.6C2.6 13.4 2 12.7 2 11.9V8.8Z"
+        fill="currentColor" stroke="none"/>
+    </svg>
+  `;
+
+  let callState = "idle";
+  let callStartedAt = 0;
+  let callTimer = null;
+
+  function stopCallTimer() {
+    if (callTimer !== null) {
+      clearInterval(callTimer);
+      callTimer = null;
+    }
+  }
+
+  function updateCallTimer() {
+    const seconds = Math.floor(
+      (Date.now() - callStartedAt) / 1000
+    );
+
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+
+    status.textContent =
+      String(minutes).padStart(2, "0") +
+      ":" +
+      String(remainingSeconds).padStart(2, "0");
+  }
+
+  function resetCallScreen() {
+    stopCallTimer();
+
     callState = "ringing";
     status.textContent = "กำลังโทรเข้าผ่าน LINE...";
+
+    rejectAction.style.display = "";
+    actions.style.justifyContent = "space-around";
+
+    acceptBtn.innerHTML = originalAcceptIcon;
+    acceptBtn.style.background = "#06c755";
+    acceptBtn.setAttribute("aria-label", "รับสาย");
     acceptLabel.textContent = "รับสาย";
-    acceptBtn.hidden = false;
+
+    acceptAction.style.display = "";
     callScreen.hidden = false;
+  }
+
+  window.showAkkeeIncomingCall = function () {
+    resetCallScreen();
   };
 
   acceptBtn.addEventListener("click", function () {
     if (callState === "ringing") {
       callState = "connected";
-      status.textContent = "กำลังสนทนา";
-      acceptLabel.textContent = "วางสาย";
+
+      // ซ่อนปุ่มปฏิเสธ และจัดปุ่มวางสายไว้กลางจอ
+      rejectAction.style.display = "none";
+      actions.style.justifyContent = "center";
+
+      // เปลี่ยนปุ่มรับสายเป็นปุ่มวางสาย
+      acceptBtn.innerHTML = hangupIcon;
       acceptBtn.style.background = "#ef4444";
+      acceptBtn.setAttribute("aria-label", "วางสาย");
+      acceptLabel.textContent = "วางสาย";
+
+      // เริ่มจับเวลาสนทนา
+      callStartedAt = Date.now();
+      updateCallTimer();
+      callTimer = setInterval(updateCallTimer, 1000);
+
       return;
     }
 
     if (callState === "connected") {
-  callState = "ended";
-  callScreen.hidden = true;
-  acceptBtn.style.background = "#06c755";
+      callState = "ended";
+      stopCallTimer();
+      callScreen.hidden = true;
 
-  // อัคคีส่งข้อความหลังโตโต้วางสาย
-// อัคคีส่งข้อความหลังโตโต้วางสาย
-setTimeout(() => {
-  window.addAkkeeIncomingMessage("วางสายทำไม");
-}, 1200);
-}
-});
-  
-rejectBtn.addEventListener("click", function () {
-  if (callState !== "ringing") return;
+      // อัคคีส่งข้อความหลังโตโต้วางสาย
+      setTimeout(() => {
+        window.addAkkeeIncomingMessage("วางสายทำไม");
+      }, 1200);
+    }
+  });
 
-  callState = "rejected";
-  callScreen.hidden = true;
+  rejectBtn.addEventListener("click", function () {
+    if (callState !== "ringing") return;
 
-  // อัคคีส่งข้อความหลังโตโต้ปฏิเสธสาย
-  // อัคคีส่งข้อความหลังโตโต้ปฏิเสธสาย
-setTimeout(() => {
-  window.addAkkeeIncomingMessage("ตัดสายทำไม");
-}, 1200);
-});
+    callState = "rejected";
+    stopCallTimer();
+    callScreen.hidden = true;
 
+    // อัคคีส่งข้อความหลังโตโต้ปฏิเสธสาย
+    setTimeout(() => {
+      window.addAkkeeIncomingMessage("ตัดสายทำไม");
+    }, 1200);
+  });
 })();
+
 </script>
 </body>
 </html>
