@@ -6338,6 +6338,107 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
   stroke-linejoin: round;
 }
 
+/* การ์ดโทรและตำแหน่งที่ตั้งใน LINE */
+#lineScreen .line-chat-bubble.line-special-card {
+  box-sizing: border-box;
+  width: 230px;
+  max-width: min(230px, 76vw);
+  padding: 0;
+  overflow: hidden;
+  border-radius: 15px;
+  white-space: normal;
+  color: #242424;
+}
+
+#lineScreen .line-special-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 12px;
+}
+
+#lineScreen .line-special-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 43px;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  background: rgba(130,130,130,.12);
+}
+
+#lineScreen .line-special-icon svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#lineScreen .line-special-info {
+  min-width: 0;
+  flex: 1;
+}
+
+#lineScreen .line-special-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+#lineScreen .line-special-subtitle {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #777;
+  overflow-wrap: anywhere;
+}
+
+#lineScreen .line-special-footer {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 12px;
+  border-top: 1px solid rgba(100,100,100,.14);
+  font-size: 11px;
+  color: #555;
+}
+
+#lineScreen .line-special-footer svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: #06c755;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#lineScreen .line-special-footer span {
+  flex: 1;
+}
+
+#lineScreen .line-special-footer .line-special-chevron {
+  stroke: #888;
+}
+
+#lineScreen .line-special-card[data-kind="missed"] .line-special-icon {
+  color: #e34b55;
+}
+
+#lineScreen .line-special-card[data-kind="no-answer"] .line-special-icon {
+  color: #555;
+}
+
+#lineScreen .line-special-card[data-kind="call"] .line-special-icon {
+  color: #06a94a;
+}
+
+#lineScreen .line-special-card[data-kind="location"] .line-special-icon {
+  color: #2584d8;
+}
+
 
 </style>
 </head>
@@ -14583,6 +14684,170 @@ function renderRescueLoveChatHistory() {
     previousSender = message.from;
   });
 }
+
+// ===== LINE: แปลงข้อความกิจกรรมเป็นการ์ด SVG ทุกห้องแชต =====
+(function setupLineSpecialMessages() {
+  const lineScreen = document.getElementById("lineScreen");
+  if (!lineScreen || lineScreen.dataset.specialMessagesReady) return;
+
+  lineScreen.dataset.specialMessagesReady = "1";
+
+  const icons = {
+    missed: `
+      <path d="M21 16.4v3a2 2 0 0 1-2.2 2
+      19.8 19.8 0 0 1-8.6-3.1
+      19.5 19.5 0 0 1-6-6
+      19.8 19.8 0 0 1-3.1-8.6
+      A2 2 0 0 1 5.1 0h3
+      a2 2 0 0 1 2 1.7l.5 3
+      a2 2 0 0 1-.6 1.7L8.5 8
+      a16 16 0 0 0 7.5 7.5l1.6-1.5
+      a2 2 0 0 1 1.7-.6l3 .5
+      A2 2 0 0 1 24 16"/>
+      <path d="m15 3 6 6m0-6-6 6"/>
+    `,
+    phone: `
+      <path d="M22 16.9v3a2 2 0 0 1-2.2 2
+      19.8 19.8 0 0 1-8.6-3.1
+      19.5 19.5 0 0 1-6-6
+      19.8 19.8 0 0 1-3.1-8.6
+      A2 2 0 0 1 4.1 2h3
+      a2 2 0 0 1 2 1.7l.5 3
+      a2 2 0 0 1-.6 1.7L7.5 10
+      a16 16 0 0 0 6.5 6.5l1.6-1.5
+      a2 2 0 0 1 1.7-.6l3 .5
+      A2 2 0 0 1 22 16.9z"/>
+    `,
+    location: `
+      <path d="M20 10c0 5-8 12-8 12S4 15 4 10
+      a8 8 0 1 1 16 0z"/>
+      <circle cx="12" cy="10" r="2.5"/>
+    `,
+    music: `
+      <path d="M9 18V5l12-2v13"/>
+      <ellipse cx="6" cy="18" rx="3" ry="2"/>
+      <ellipse cx="18" cy="16" rx="3" ry="2"/>
+    `,
+    arrow: `<path d="m9 5 7 7-7 7"/>`
+  };
+
+  function svg(name, className = "") {
+    return `<svg class="${className}" viewBox="0 0 24 24"
+      aria-hidden="true">${icons[name]}</svg>`;
+  }
+
+  function getSpecialData(text) {
+    const value = String(text || "").trim();
+
+    if (value === "ไม่ได้รับสาย") {
+      return {
+        kind: "missed",
+        title: "ไม่ได้รับสาย",
+        subtitle: ""
+      };
+    }
+
+    if (value === "ไม่มีการตอบรับ" || value === "ยกเลิก") {
+      return {
+        kind: "no-answer",
+        title: value,
+        subtitle: ""
+      };
+    }
+
+    const call = value.match(/^โทรแบบเสียง(?:\s+(\d+:\d{2}(?::\d{2})?))?$/);
+
+    if (call) {
+      return {
+        kind: "call",
+        title: "โทรแบบเสียง",
+        subtitle: call[1] || ""
+      };
+    }
+
+    const location = value.match(/^ส่งโลเคชั่น\s*:\s*(.+)$/);
+
+    if (location) {
+      return {
+        kind: "location",
+        title: location[1].trim(),
+        subtitle: "ตำแหน่งที่ตั้ง"
+      };
+    }
+
+    return null;
+  }
+
+  function makeSpecialCard(bubble) {
+    if (bubble.dataset.specialChecked) return;
+
+    const data = getSpecialData(bubble.textContent);
+
+    bubble.dataset.specialChecked = "1";
+    if (!data) return;
+
+    bubble.classList.add("line-special-card");
+    bubble.dataset.kind = data.kind;
+    bubble.replaceChildren();
+
+    const main = document.createElement("div");
+    main.className = "line-special-main";
+
+    const icon = document.createElement("div");
+    icon.className = "line-special-icon";
+    icon.innerHTML = svg(
+      data.kind === "location" ? "location" :
+      data.kind === "missed" ? "missed" : "phone"
+    );
+
+    const info = document.createElement("div");
+    info.className = "line-special-info";
+
+    const title = document.createElement("div");
+    title.className = "line-special-title";
+    title.textContent = data.title;
+    info.appendChild(title);
+
+    if (data.subtitle) {
+      const subtitle = document.createElement("div");
+      subtitle.className = "line-special-subtitle";
+      subtitle.textContent = data.subtitle;
+      info.appendChild(subtitle);
+    }
+
+    main.append(icon, info);
+    bubble.appendChild(main);
+
+    if (data.kind !== "location") {
+      const footer = document.createElement("div");
+      footer.className = "line-special-footer";
+      footer.innerHTML =
+        svg("music") +
+        "<span>เสียงเรียกเข้า &amp; เสียงรอสาย</span>" +
+        svg("arrow", "line-special-chevron");
+
+      bubble.appendChild(footer);
+    }
+  }
+
+  function updateAllLineChats() {
+    lineScreen.querySelectorAll(".line-chat-bubble").forEach(makeSpecialCard);
+  }
+
+  // รองรับข้อความที่แสดงอยู่แล้ว
+  updateAllLineChats();
+
+  // รองรับทุกห้องแชตที่สร้างข้อความขึ้นมาใหม่
+  const observer = new MutationObserver(() => {
+    updateAllLineChats();
+  });
+
+  observer.observe(lineScreen, {
+    childList: true,
+    subtree: true
+  });
+})();
+
   // เปิด LINE เมื่อระบบหลักเรียก openApp("LINE")
   window.openLineApp = function () {
     closeChat();
