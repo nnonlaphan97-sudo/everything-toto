@@ -15695,7 +15695,8 @@ const main = document.createElement("div");
   
   // เปิดห้องแชตอัคคีเมื่อกดแบนเนอร์แจ้งเตือน
 window.openAkkeeChatFromNotification = function () {
-  // เปิดหน้าจอ LINE
+  // เปิดหน้าจอ LINE ผ่านระบบสลับหน้าจอของโทรศัพท์
+  window.showPhoneScreen("line");
   screen.style.display = "flex";
 
   // ปิดห้องแชตแบบเดิมก่อน
