@@ -2238,7 +2238,19 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   color: #555;
   font-size: 14px;
 }
+.gallery-favorite-btn {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+}
 
+.gallery-favorite-btn.active {
+  color: #ff3040;
+}
 .gallery-viewer-stage {
   flex: 1;
   min-height: 0;
@@ -7598,7 +7610,13 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
         </button>
 
         <button class="gallery-album" data-album="รายการโปรด">
-          <div class="gallery-cover gallery-cover-pink">💗</div>
+          <div class="gallery-cover">
+  <img
+    src="https://i.ibb.co/bjq00SFj/A3-B6-BFF7-BC3-D-4-BEA-BA44-77-ED6-B5-AF68-A.jpg"
+    alt="รายการโปรด"
+    style="width:100%; height:100%; object-fit:cover; display:block;"
+  >
+</div>
           <strong>รายการโปรด</strong>
           <small>รูปที่ชื่นชอบ</small>
         </button>
@@ -7646,6 +7664,7 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
       <div class="gallery-viewer-header">
         <button class="gallery-viewer-back" type="button">‹</button>
         <span class="gallery-viewer-counter"></span>
+<button class="gallery-favorite-btn" type="button" aria-label="เพิ่มในรายการโปรด">♡</button>
       </div>
 
       <div class="gallery-viewer-stage">
@@ -10118,6 +10137,15 @@ const recentImages = [
   "https://i.ibb.co/dJDxP1jg/IMG-4534.jpg",
   "https://i.ibb.co/Psbt6PLC/IMG-3565.jpg",
   "https://i.ibb.co/m5P4zXB9/IMG-3564.jpg"
+  "https://i.ibb.co/bjq00SFj/A3-B6-BFF7-BC3-D-4-BEA-BA44-77-ED6-B5-AF68-A.jpg",
+  "https://i.ibb.co/5xF513s3/IMG-5478.jpg",
+  "https://i.ibb.co/LXndv7C4/IMG-5479.jpg",
+  "https://i.ibb.co/23fr6Htm/IMG-3251.jpg",
+  "https://i.ibb.co/5xS4Lynj/IMG-3248.jpg",
+  "https://i.ibb.co/QFBX0d7g/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/pBwrMQQ3/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/G3Rcmbgb/tawan-v-still.jpg",
+
 ];
 
 const galleryImages = [
@@ -10141,23 +10169,88 @@ for (let i = recentImages.length - 1; i > 0; i--) {
 
 
   let selectedPhoto = 0;
+  let favoritePhotos = JSON.parse(
+  localStorage.getItem("totoGalleryFavorites") || "[]"
+);
 
-  function showGalleryPhoto(index) {
-    selectedPhoto = (index + activeGalleryImages.length) % activeGalleryImages.length;
-    gallery.querySelector(".gallery-full-image").src =
-      activeGalleryImages[selectedPhoto];
+const defaultFavoritePhotos = [
+  "https://i.ibb.co/bjq00SFj/A3-B6-BFF7-BC3-D-4-BEA-BA44-77-ED6-B5-AF68-A.jpg",
+  "https://i.ibb.co/5xF513s3/IMG-5478.jpg",
+  "https://i.ibb.co/LXndv7C4/IMG-5479.jpg",
+  "https://i.ibb.co/23fr6Htm/IMG-3251.jpg",
+  "https://i.ibb.co/5xS4Lynj/IMG-3248.jpg",
+  "https://i.ibb.co/QFBX0d7g/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/pBwrMQQ3/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/G3Rcmbgb/tawan-v-still.jpg"
+];
 
-    gallery.querySelector(".gallery-viewer-counter").textContent =
-    `${selectedPhoto + 1} / ${activeGalleryImages.length}`;
+favoritePhotos = [
+  ...new Set([...defaultFavoritePhotos, ...favoritePhotos])
+];
 
-    viewer.hidden = false;
+localStorage.setItem(
+  "totoGalleryFavorites",
+  JSON.stringify(favoritePhotos)
+);
+
+let currentGalleryImages = galleryImages;
+let currentAlbumName = "";
+
+const favoriteBtn = gallery.querySelector(".gallery-favorite-btn");
+
+function updateFavoriteButton() {
+  const src = currentGalleryImages[selectedPhoto];
+  const liked = favoritePhotos.includes(src);
+
+  favoriteBtn.textContent = liked ? "♥" : "♡";
+  favoriteBtn.classList.toggle("active", liked);
+}
+
+favoriteBtn.addEventListener("click", () => {
+  const src = currentGalleryImages[selectedPhoto];
+  if (!src) return;
+
+  if (favoritePhotos.includes(src)) {
+    favoritePhotos = favoritePhotos.filter(photo => photo !== src);
+  } else {
+    favoritePhotos.push(src);
   }
+
+  localStorage.setItem(
+    "totoGalleryFavorites",
+    JSON.stringify(favoritePhotos)
+  );
+
+  updateFavoriteButton();
+});
+  function showGalleryPhoto(index) {
+  if (!currentGalleryImages.length) return;
+
+  selectedPhoto =
+    (index + currentGalleryImages.length) % currentGalleryImages.length;
+
+  gallery.querySelector(".gallery-full-image").src =
+    currentGalleryImages[selectedPhoto];
+
+  gallery.querySelector(".gallery-viewer-counter").textContent =
+    `${selectedPhoto + 1} / ${currentGalleryImages.length}`;
+
+  updateFavoriteButton();
+  viewer.hidden = false;
+}
 
   gallery.querySelectorAll(".gallery-album").forEach(button => {
     button.addEventListener("click", () => {
       const albumName = button.dataset.album;
-activeGalleryImages =
-  albumName === "ล่าสุด" ? recentImages : galleryImages;
+      currentAlbumName = albumName;
+      currentGalleryImages =
+      albumName === "รายการโปรด"
+    ? [...favoritePhotos]
+    : albumName === "ล่าสุด"
+      ? recentImages
+      : galleryImages;
+      activeGalleryImages =
+      albumName === "ล่าสุด" ? recentImages : galleryImages;
       gallery.querySelector(".gallery-album-title").textContent = albumName;
       gallery.querySelector(".gallery-album-count").textContent =
       `${activeGalleryImages.length} ภาพ`;
