@@ -2289,14 +2289,22 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 .gallery-bottom-tabs {
   flex-shrink: 0;
   display: flex;
+  align-items: center;
   justify-content: space-around;
+  width: 100%;
   padding: 15px 0 10px;
   background: #fafafa;
 }
 
 .gallery-bottom-tabs button {
+  flex: 1;
+  min-width: 0;
+  padding: 0 4px;
   font-size: 16px;
   color: #777;
+  text-align: center;
+  white-space: nowrap;
+  word-break: keep-all;
 }
 
 .gallery-bottom-tabs button.active {
