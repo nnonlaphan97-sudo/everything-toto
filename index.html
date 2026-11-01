@@ -10082,28 +10082,67 @@ if (name === "แกลเลอรี") {
   const viewer = gallery.querySelector(".gallery-viewer");
   const photoGrid = gallery.querySelector(".gallery-photo-grid");
 
-  // รูปตัวอย่างชั่วคราว เปลี่ยนเป็น URL รูปจริงภายหลังได้
-  const galleryImages = [
-    "https://picsum.photos/id/1018/800/800",
-    "https://picsum.photos/id/1015/800/800",
-    "https://picsum.photos/id/1025/800/800",
-    "https://picsum.photos/id/1035/800/800",
-    "https://picsum.photos/id/1043/800/800",
-    "https://picsum.photos/id/1050/800/800",
-    "https://picsum.photos/id/1062/800/800",
-    "https://picsum.photos/id/1074/800/800"
-  ];
+
+const recentImages = [
+  "https://i.ibb.co/WvwdkcXt/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/7xXN3qYh/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/mFC3rwwQ/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/8gYz7v7h/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/Mk0QgZn1/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/tPCHHBzv/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/wFYygCfs/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/B2RMQg2B/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/B5zGMXBL/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/0pWpD735/IMG-3563.jpg",
+  "https://i.ibb.co/pvVrt7x5/IMG-3562.jpg",
+  "https://i.ibb.co/HDQPKnp8/IMG-3560.jpg",
+  "https://i.ibb.co/QFcQfcpf/IMG-3559.jpg",
+  "https://i.ibb.co/rRPDFsTt/IMG-3558.jpg",
+  "https://i.ibb.co/kF7b5PG/IMG-3557.jpg",
+  "https://i.ibb.co/4ZjVWL6X/IMG-3556.jpg",
+  "https://i.ibb.co/BHcY7FY1/IMG-3555.jpg",
+  "https://i.ibb.co/KcNdrZkV/IMG-3554.jpg",
+  "https://i.ibb.co/Z1K735gX/IMG-3553.jpg",
+  "https://i.ibb.co/dJJCwNVd/IMG-3552.jpg",
+  "https://i.ibb.co/jP3SYQMQ/IMG-3551.jpg",
+  "https://i.ibb.co/MvwkmSQ/IMG-3561.jpg",
+  "https://i.ibb.co/B5vfM2fB/IMG-3569.jpg",
+  "https://i.ibb.co/kss0vQ8C/IMG-3568.jpg",
+  "https://i.ibb.co/szJrpK4/IMG-3567.jpg",
+  "https://i.ibb.co/dJDxP1jg/IMG-4534.jpg",
+  "https://i.ibb.co/Psbt6PLC/IMG-3565.jpg",
+  "https://i.ibb.co/m5P4zXB9/IMG-3564.jpg"
+];
+
+const galleryImages = [
+  "https://picsum.photos/id/1018/800/800",
+  "https://picsum.photos/id/1015/800/800",
+  "https://picsum.photos/id/1025/800/800",
+  "https://picsum.photos/id/1035/800/800",
+  "https://picsum.photos/id/1043/800/800",
+  "https://picsum.photos/id/1050/800/800",
+  "https://picsum.photos/id/1062/800/800",
+  "https://picsum.photos/id/1074/800/800"
+];
+
+let activeGalleryImages = galleryImages;
+
+for (let i = recentImages.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [recentImages[i], recentImages[j]] =
+    [recentImages[j], recentImages[i]];
+}
+
 
   let selectedPhoto = 0;
 
   function showGalleryPhoto(index) {
-    selectedPhoto = (index + galleryImages.length) % galleryImages.length;
-
+    selectedPhoto = (index + activeGalleryImages.length) % activeGalleryImages.length;
     gallery.querySelector(".gallery-full-image").src =
-      galleryImages[selectedPhoto];
+      activeGalleryImages[selectedPhoto];
 
     gallery.querySelector(".gallery-viewer-counter").textContent =
-      `${selectedPhoto + 1} / ${galleryImages.length}`;
+    `${selectedPhoto + 1} / ${activeGalleryImages.length}`;
 
     viewer.hidden = false;
   }
@@ -10111,12 +10150,13 @@ if (name === "แกลเลอรี") {
   gallery.querySelectorAll(".gallery-album").forEach(button => {
     button.addEventListener("click", () => {
       const albumName = button.dataset.album;
-
+activeGalleryImages =
+  albumName === "ล่าสุด" ? recentImages : galleryImages;
       gallery.querySelector(".gallery-album-title").textContent = albumName;
       gallery.querySelector(".gallery-album-count").textContent =
-        `${galleryImages.length} ภาพ`;
+      `${activeGalleryImages.length} ภาพ`;
 
-      photoGrid.innerHTML = galleryImages.map((src, index) => `
+ photoGrid.innerHTML = activeGalleryImages.map((src, index) => `
         <button class="gallery-photo" data-photo="${index}">
           <img src="${src}" alt="รูปภาพ ${index + 1}" loading="lazy">
         </button>
