@@ -15935,7 +15935,10 @@ window.lineNotificationTimer = setTimeout(() => {
  // ===== LINE incoming call: อัคคี =====
 (function () {
   const callScreen = document.getElementById("akkeeIncomingCall");
-  const status = document.getElementById("akkeeCallStatus");
+ const incomingRingtone = new Audio("videos/export_1793547553689.mp3");
+incomingRingtone.loop = true;
+incomingRingtone.volume = 0.7;
+   const status = document.getElementById("akkeeCallStatus");
   const acceptBtn = document.getElementById("akkeeAcceptCall");
   const rejectBtn = document.getElementById("akkeeRejectCall");
   const acceptLabel = document.getElementById("akkeeAcceptLabel");
@@ -15996,13 +15999,21 @@ window.lineNotificationTimer = setTimeout(() => {
     callScreen.hidden = false;
   }
 
-  window.showAkkeeIncomingCall = function () {
-    resetCallScreen();
-  };
+ window.showAkkeeIncomingCall = function () {
+  resetCallScreen();
+
+  incomingRingtone.currentTime = 0;
+  incomingRingtone.play().catch((error) => {
+    console.warn("ไม่สามารถเล่นเสียงเรียกเข้าได้:", error);
+  });
+};
 
   acceptBtn.addEventListener("click", function () {
-    if (callState === "ringing") {
-      callState = "connected";
+ if (callState === "ringing") {
+  callState = "connected";
+
+  incomingRingtone.pause();
+  incomingRingtone.currentTime = 0;
 
       // ซ่อนปุ่มปฏิเสธ และจัดปุ่มวางสายไว้กลางจอ
       rejectAction.style.display = "none";
@@ -16047,7 +16058,11 @@ setTimeout(() => {
     if (callState !== "ringing") return;
 
     callState = "rejected";
-    stopCallTimer();
+
+incomingRingtone.pause();
+incomingRingtone.currentTime = 0;
+
+stopCallTimer();
     callScreen.hidden = true;
 
     // อัคคีส่งข้อความหลังโตโต้ปฏิเสธสาย
