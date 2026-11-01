@@ -6690,6 +6690,203 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
   overflow-wrap: anywhere;
 }
 
+/* ===== ภารกิจนพนภา (6) ===== */
+#noppaphaChatPage .line-chat-date {
+  align-self: center;
+  margin: 14px auto 10px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: #edf0f4;
+  color: #555b65;
+  font-size: 11px;
+  text-align: center;
+}
+#noppaphaChatPage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #8cabd0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* หัวแชต เหมือนกลุ่มท้ายมูลนิธิ */
+#noppaphaChatPage .line-subpage-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 56px;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 2;
+}
+
+#noppaphaChatPage .line-subpage-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: left;
+}
+
+#noppaphaChatPage .line-back-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* พื้นที่ข้อความ */
+#noppaphaChatPage #noppaphaChatMessages {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* แถวข้อความ */
+#noppaphaChatPage .line-chat-bubble-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+#noppaphaChatPage .line-chat-bubble-row.received {
+  justify-content: flex-start;
+}
+
+#noppaphaChatPage .line-chat-bubble-row.sent {
+  justify-content: flex-end;
+}
+
+/* รูปโปรไฟล์ */
+#noppaphaChatPage .line-chat-avatar {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  max-width: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+#noppaphaChatPage .line-chat-avatar-placeholder {
+  width: 27px;
+  height: 1px;
+  flex: 0 0 27px;
+}
+
+/* กล่องรวมชื่อและข้อความ */
+#noppaphaChatPage .foundation-chat-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 74%;
+  min-width: 0;
+}
+
+#noppaphaChatPage .line-chat-bubble-row.sent
+.foundation-chat-content {
+  align-items: flex-end;
+}
+
+#noppaphaChatPage .foundation-chat-sender {
+  font-size: 11px;
+  font-weight: 500;
+  color: #34465c;
+  margin: 0 0 3px 7px;
+}
+
+/* บับเบิลข้อความ */
+#noppaphaChatPage .line-chat-bubble {
+  position: relative;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 8px 11px;
+  border-radius: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+#noppaphaChatPage .line-chat-bubble-row.received
+.line-chat-bubble {
+  background: #fff;
+  color: #222;
+}
+
+#noppaphaChatPage .line-chat-bubble-row.sent
+.line-chat-bubble {
+  background: #b8f2a6;
+  color: #222;
+}
+
+#noppaphaChatPage .line-chat-bubble::before,
+#noppaphaChatPage .line-chat-bubble::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ช่องพิมพ์ข้อความ */
+#noppaphaChatPage #noppaphaChatForm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 2;
+}
+
+#noppaphaChatPage #noppaphaChatInput {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+#noppaphaChatPage #noppaphaChatForm button {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 16px;
+  background: #06c755;
+  color: #fff;
+  cursor: pointer;
+}
+
 
 </style>
 </head>
@@ -7404,6 +7601,26 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
   <div id="rescueLoveChatMessages" class="line-chat-messages"></div>
   <form id="rescueLoveChatForm" class="line-chat-form">
     <input id="rescueLoveChatInput" type="text" placeholder="ส่งข้อความถึงกลุ่ม..." autocomplete="off">
+    <button type="submit">ส่ง</button>
+  </form>
+</section>
+
+<!-- หน้าแชตกลุ่มภารกิจนพนภา -->
+<section class="line-subpage" id="noppaphaChatPage" style="display:none;">
+  <header class="line-subpage-header">
+    <button type="button" class="line-back-btn" data-chat-back>‹</button>
+    <h2>ภารกิจนพนภา (6)</h2>
+  </header>
+
+  <div id="noppaphaChatMessages" class="line-chat-messages"></div>
+
+  <form id="noppaphaChatForm" class="line-chat-form">
+    <input
+      id="noppaphaChatInput"
+      type="text"
+      placeholder="ส่งข้อความถึงกลุ่ม..."
+      autocomplete="off"
+    >
     <button type="submit">ส่ง</button>
   </form>
 </section>
@@ -12704,8 +12921,9 @@ function openLineSubpage(page) {
     "ป๋อ": "porChatPage",
     "อัคคี": "akkeeChatPage",
     "ไพลิน": "phailinChatPage",
-    "กู้ภัยกู้ใจ (3)": "rescueLoveChatPage",
-    "ท้ายมูลนิธิ (6)": "thanFoundationChatPage"
+ "กู้ภัยกู้ใจ (3)": "rescueLoveChatPage",
+"ท้ายมูลนิธิ (6)": "thanFoundationChatPage",
+"ภารกิจนพนภา (6)": "noppaphaChatPage"
   };
 
   // แสดงข้อมูลตามแท็บที่เลือก
@@ -12782,7 +13000,7 @@ function openLineSubpage(page) {
           image: "https://i.ibb.co/ynnPcS6N/IMG-3591.jpg"
         },
         {
-          name: "ภารกิจนพนภา",
+          name: "ภารกิจนพนภา (6)",
           image: "https://i.ibb.co/rRnHtj2z/IMG-3594.jpg"
         }
       ];
@@ -13007,7 +13225,8 @@ function getChatHistoryByName(chatName) {
     "อัคคี": () => akkeeChatHistory,
     "ไพลิน": () => phailinChatHistory,
     "กู้ภัยกู้ใจ (3)": () => rescueLoveChatHistory,
-    "ท้ายมูลนิธิ (6)": () => thanFoundationChatHistory
+  "ท้ายมูลนิธิ (6)": () => thanFoundationChatHistory,
+"ภารกิจนพนภา (6)": () => noppaphaChatHistory
   };
 
   try {
@@ -13201,8 +13420,9 @@ const chatRenderers = {
   porChatPage: renderPorChatHistory,
   akkeeChatPage: renderAkkeeChatHistory,
   phailinChatPage: renderPhailinChatHistory,
-  rescueLoveChatPage: renderRescueLoveChatHistory,
-  thanFoundationChatPage: renderThanFoundationChatHistory
+  rrescueLoveChatPage: renderRescueLoveChatHistory,
+thanFoundationChatPage: renderThanFoundationChatHistory,
+noppaphaChatPage: renderNoppaphaChatHistory
 };
 
 if (chatRenderers[pageId]) {
@@ -13236,7 +13456,6 @@ function renderFriends() {
       </button>
     `).join("");
 }
-
 
   function openChat(id) {
     const chat = chats.find((item) => item.id === Number(id));
@@ -13363,6 +13582,39 @@ function renderFriends() {
   });
 
   $("#lineConversationBack").addEventListener("click", closeChat);
+
+/* ส่งข้อความในกลุ่มภารกิจนพนภา */
+const noppaphaForm = $("#noppaphaChatForm");
+
+if (noppaphaForm) {
+  noppaphaForm.addEventListener("submit", event => {
+    event.preventDefault();
+
+    const input = $("#noppaphaChatInput");
+    if (!input) return;
+
+    const text = input.value.trim();
+    if (!text) return;
+
+    noppaphaChatHistory.push({
+      date: "24 ก.ย.",
+      from: "toto",
+      text
+    });
+
+    input.value = "";
+    renderNoppaphaChatHistory();
+
+    const messages = $("#noppaphaChatMessages");
+    if (messages) {
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    if (typeof renderChats === "function") {
+      renderChats();
+    }
+  });
+}
 
   $("#lineComposer").addEventListener("submit", (event) => {
     event.preventDefault();
@@ -14287,6 +14539,88 @@ const rescueLoveChatHistory = [
   { date: "15 พ.ย.", time: "19:12", from: "beer", text: "เออผมคิดถึง" },
 
 ];
+
+const noppaphaChatHistory = [
+  // 23 ก.ย.
+  { date:"23 ก.ย.", from:"toto", text:"และนี่คือสมาชิกของภารกิจนพภาพ" },
+  { date:"23 ก.ย.", from:"toto", text:"ภารกิจจะกู้คืนศักดิ์ศรี" },
+  { date:"23 ก.ย.", from:"toto", text:"ของคนที่มาก่อนอย่างคุณ" },
+  { date:"23 ก.ย.", from:"toto", text:"คนแรกตอง หน่วยเสิร์ฟ" },
+  { date:"23 ก.ย.", from:"toto", text:"มาพร้อมกับวาจาที่เชืดเฉือน" },
+  { date:"23 ก.ย.", from:"toto", text:"ด่าเจ็บลึกถึงหัวใจ" },
+  { date:"23 ก.ย.", from:"tong", text:"กาเมสุมิจฉาจารา" },
+  { date:"23 ก.ย.", from:"tong", text:"เวระมะณี สิกขาปะทัง สะมาทิยามิ" },
+  { date:"23 ก.ย.", from:"tong", text:"อีพวกที่มันเจ้าชู้เนี่ยนะ" },
+  { date:"23 ก.ย.", from:"tong", text:"หนูอยากจะดึงไข่มันออกมา" },
+  { date:"23 ก.ย.", from:"tong", text:"แล้วตำให้แหลกไปเลย" },
+  { date:"23 ก.ย.", from:"toto", text:"เริ่ดๆๆ" },
+  { date:"23 ก.ย.", from:"toto", text:"นี่จ๊ะโอ หน่วยสันทนาการ" },
+  { date:"23 ก.ย.", from:"toto", text:"ฝ่ายดนตรี" },
+  { date:"23 ก.ย.", from:"toto", text:"ที่จะมาช่วยสร้างสีสันภารกิจของเรา" },
+  { date:"23 ก.ย.", from:"jaoOh", text:"อ้ากกกกกกกกกกก" },
+  { date:"23 ก.ย.", from:"kanith", text:"😨" },
+  { date:"23 ก.ย.", from:"toto", text:"ดีมากมิชเชล จำไว้" },
+  { date:"23 ก.ย.", from:"toto", text:"และนี่อัคคี หน่วยวางยา" },
+  { date:"23 ก.ย.", from:"toto", text:"ที่จะช่วยหันเหความสนใจของศัตรูให้กับเรา" },
+  { date:"23 ก.ย.", from:"akkee", text:"วิงกาเดียม" },
+  { date:"23 ก.ย.", from:"akkee", text:"เลวิโอซ่าาาาาาาา" },
+  { date:"23 ก.ย.", from:"kanith", text:"🫩" },
+  { date:"23 ก.ย.", from:"toto", text:"เบียร์มามั้ยลูก" },
+  { date:"23 ก.ย.", from:"beer", text:"มาไม่ได้ค้าบ" },
+  { date:"23 ก.ย.", from:"kanith", text:"แล้วอยู่ในกลุ่มทำไม" },
+  { date:"23 ก.ย.", from:"beer", text:"ผมอยากรู้ด้วยอ่ะ!" },
+  { date:"23 ก.ย.", from:"beer", text:"แต่ผมขอให้พวกเจ้าชู้เดินไปไหนตกท่อตาย" },
+  { date:"23 ก.ย.", from:"beer", text:"โผล่ในนรก" },
+  { date:"23 ก.ย.", from:"beer", text:"อันนี้พี่อัคสอนผม" },
+  { date:"23 ก.ย.", from:"akkee", text:"โทดกูอีก" },
+  { date:"23 ก.ย.", from:"tong", text:"ว่าแต่คุณกล้าทำจริงเปล่า" },
+  { date:"23 ก.ย.", from:"kanith", text:"กล้าดิคุณ" },
+  { date:"23 ก.ย.", from:"kanith", text:"ไอ้คนที่มันนอกใจ" },
+  { date:"23 ก.ย.", from:"kanith", text:"ต้องได้รับบทเรียรอย่างสาสม" },
+
+  // 24 ก.ย.
+  { date:"24 ก.ย.", from:"toto", text:"พรุ่งนี้พร้อมนะ" },
+  { date:"24 ก.ย.", from:"tong", text:"พร้อม!" },
+  { date:"24 ก.ย.", from:"akkee", text:"พร้อมค้าบบบ" },
+  { date:"24 ก.ย.", from:"beer", text:"พร้อมเสือก" },
+  { date:"24 ก.ย.", from:"jaoOh", text:"ผมพร้อมๆๆๆๆๆๆ" },
+  { date:"24 ก.ย.", from:"tong", text:"มาแล้วๆพี่" },
+  { date:"24 ก.ย.", from:"jaoOh", text:"ตองรายงานหน่อย" },
+  { date:"24 ก.ย.", from:"tong", text:"แม่งขอเป็นแฟนแบบเล่นใหญ่จัง" },
+  { date:"24 ก.ย.", from:"kanith", text:"ก่อนหน้านั้นเค้าก็ขอพี่เป็นแฟนแบบนี้แหละ" },
+  { date:"24 ก.ย.", from:"akkee", text:"ไม่ลงทุนเลยว่ะ" },
+  { date:"24 ก.ย.", from:"toto", text:"ปฏิบัติการนพภา เริ่มได้" },
+  { date:"24 ก.ย.", from:"jaoOh", text:"ขอโทษกูได้ยิน love sex" },
+  { date:"24 ก.ย.", from:"beer", text:"อะไรวะๆๆ" },
+  { date:"24 ก.ย.", from:"akkee", text:"ไอ้ตองกำลังแนะนำเมนู" },
+  { date:"24 ก.ย.", from:"akkee", text:"ลาบสองใจ" },
+  { date:"24 ก.ย.", from:"akkee", text:"ยำหน้าด้านซีฟู้ด" },
+  { date:"24 ก.ย.", from:"akkee", text:"สเต็กเนื้อคบซ้อน" },
+  { date:"24 ก.ย.", from:"jaoOh", text:"สรรหาคำมาจากไหนวะ" },
+  { date:"24 ก.ย.", from:"beer", text:"เขาไม่แปลกบ้างเหรอ" },
+  { date:"24 ก.ย.", from:"jaoOh", text:"แปลกดิวะ" },
+  { date:"24 ก.ย.", from:"jaoOh", text:"ไอ้สัสเหมือนซ้อมตกนรก" },
+  { date:"24 ก.ย.", from:"tong", text:"มันไม่สั่งเลยน้องจากไวน์" },
+  { date:"24 ก.ย.", from:"beer", text:"สั่งก็แปลกละ" },
+  { date:"24 ก.ย.", from:"toto", text:"อย่ามัวแต่คุย" },
+  { date:"24 ก.ย.", from:"toto", text:"หน่วยมิวสิคบรรเลง" },
+  { date:"24 ก.ย.", from:"akkee", text:"ไอ้จ๊ะโอ๋ร้องเพลงเพราะวะ" },
+  { date:"24 ก.ย.", from:"tong", text:"จริง เป็นนักร้องนำได้เลย" },
+  { date:"24 ก.ย.", from:"beer", text:"อัดมาให้ฟังหน่อย" },
+  { date:"24 ก.ย.", from:"toto", text:"หน่วยอาหาร let’s go" },
+  { date:"24 ก.ย.", from:"akkee", text:"ใส่เสร็จละ" },
+  { date:"24 ก.ย.", from:"beer", text:"พี่คีออกไปเสิร์ฟละเหรอ" },
+  { date:"24 ก.ย.", from:"akkee", text:"กูออกไปก็โดนจับได้อ่ะดิ" },
+  { date:"24 ก.ย.", from:"jaoOh", text:"จับพี่คณิตที" },
+  { date:"24 ก.ย.", from:"jaoOh", text:"จะพุ่งอยู่แล้ว" },
+  { date:"24 ก.ย.", from:"akkee", text:"พี่คณิต ใกล้เวลาของพี่แล้ว" },
+  { date:"24 ก.ย.", from:"tong", text:"เริ่มออกฤทธิ์แล้วๆๆ" },
+  { date:"24 ก.ย.", from:"tong", text:"ศัตรูลุกแล้วพี่" },
+  { date:"24 ก.ย.", from:"toto", text:"ได้เวลากู้ศักดิ์ศรีของคุณคืนแล้ว" },
+  { date:"24 ก.ย.", from:"toto", text:"นพภา" },
+  { date:"24 ก.ย.", from:"kanith", text:"คณิตจะไม่ยอมเป็นเหยื่อของแกอีกต่อไป" }
+];
+
   // เก็บผู้ส่งและวันที่ของข้อความก่อนหน้า
   let previousKanithSender = "";
   let previousKanithDate = "";
@@ -14944,6 +15278,93 @@ row.appendChild(avatar);
     previousSender = message.from;
   });
 }
+
+/* แสดงประวัติแชตกลุ่มภารกิจนพนภา */
+function renderNoppaphaChatHistory() {
+  const messages = $("#noppaphaChatMessages");
+  if (!messages) return;
+
+  messages.replaceChildren();
+
+  const memberNames = {
+    akkee: "อัคคี",
+    kanith: "คณิต",
+    beer: "เบียร์",
+    tong: "ตอง",
+    jaoOh: "จ๊ะโอ๋"
+  };
+
+  const memberImages = {
+    akkee: "https://i.ibb.co/BVHVS8Rz/IMG-3304.jpg",
+    kanith: "https://i.ibb.co/4ntNZx78/B2-EE0-EC1-6048-47-BA-8-F00-5569-F467-CEB4.jpg",
+    beer: "https://i.ibb.co/mFXQ1qSV/r07qxo-R-Download.jpg",
+    tong: "https://i.ibb.co/4RdSdn5C/r07qxo-R-Download.jpg",
+    jaoOh: "https://i.ibb.co/wnFJH2v/IMG-3320.jpg"
+  };
+
+  let lastDate = "";
+  let previousSender = "";
+
+  noppaphaChatHistory.forEach(message => {
+    if (message.date !== lastDate) {
+      const dateLabel = document.createElement("div");
+      dateLabel.className = "line-chat-date";
+      dateLabel.textContent = message.date;
+      messages.appendChild(dateLabel);
+
+      lastDate = message.date;
+      previousSender = "";
+    }
+
+    const isMine = message.from === "toto";
+    const isNewGroup = message.from !== previousSender;
+
+    const row = document.createElement("div");
+    row.className =
+      "line-chat-bubble-row " +
+      (isMine ? "sent" : "received") +
+      (isNewGroup ? " first-in-group" : "");
+
+    if (!isMine) {
+      if (isNewGroup) {
+        const avatar = document.createElement("img");
+        avatar.className = "line-chat-avatar";
+        avatar.src = memberImages[message.from] || "";
+        avatar.alt = memberNames[message.from] || message.from;
+        row.appendChild(avatar);
+      } else {
+        const placeholder = document.createElement("span");
+        placeholder.className = "line-chat-avatar-placeholder";
+        row.appendChild(placeholder);
+      }
+    }
+
+    const content = document.createElement("div");
+    content.className = "foundation-chat-content";
+
+    if (!isMine && isNewGroup) {
+      const senderName = document.createElement("div");
+      senderName.className = "foundation-chat-sender";
+      senderName.textContent =
+        memberNames[message.from] || message.from;
+      content.appendChild(senderName);
+    }
+
+    const bubble = document.createElement("div");
+    bubble.className = "line-chat-bubble";
+    bubble.textContent = message.text;
+    content.appendChild(bubble);
+
+    row.appendChild(content);
+    messages.appendChild(row);
+
+    previousSender = message.from;
+  });
+
+  messages.scrollTop = messages.scrollHeight;
+}
+
+
 // วาดประวัติแชตกลุ่มกู้ภัยกู้ใจ
 function renderRescueLoveChatHistory() {
   const messages = $("#rescueLoveChatMessages");
