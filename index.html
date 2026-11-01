@@ -78,7 +78,70 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   white-space: nowrap;
 }
 .lock-spacer { flex: 1; min-height: 20px; }
+/* LINE notification on lock screen */
+#lockScreen .lock-line-notification {
+  position: absolute;
+  top: 34%;
+  left: 14px;
+  right: 14px;
+  z-index: 10;
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 13px;
+  border-radius: 18px;
+  background: rgba(240, 240, 245, 0.88);
+  color: #222;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
 
+#lockScreen .lock-line-icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: #06c755;
+}
+
+#lockScreen .lock-line-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+#lockScreen .lock-line-message {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+}
+
+#lockScreen .lock-line-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+#lockScreen .lock-line-top strong {
+  font-size: 12px;
+}
+
+#lockScreen .lock-line-top span {
+  color: #777;
+  font-size: 11px;
+}
+
+#lockScreen .lock-line-name {
+  font-weight: 650;
+  margin-bottom: 3px;
+}
+
+#lockScreen .lock-line-text {
+  color: #444;
+}
 /* LOCK SCREEN BOTTOM ROW */
 .lock-bottom-row {
   position: absolute; left: 15px; right: 15px; bottom: 57px; width: auto;
@@ -6456,6 +6519,174 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
   border-radius: 12px;
 }
 
+/* หน้าสายเรียกเข้า LINE */
+.akkee-call-screen[hidden] {
+  display: none !important;
+}
+
+.akkee-call-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #333b45, #141a24 75%);
+  color: white;
+  text-align: center;
+}
+
+.akkee-call-app {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 65px;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.akkee-call-app svg {
+  width: 23px;
+  height: 23px;
+  fill: #06c755;
+}
+
+.akkee-call-profile {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.akkee-call-profile img {
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ffffff45;
+  box-shadow: 0 8px 30px #0005;
+}
+
+.akkee-call-profile h2 {
+  margin: 20px 0 8px;
+  font-size: 30px;
+  font-weight: 650;
+}
+
+.akkee-call-profile p {
+  margin: 0;
+  font-size: 14px;
+  color: #d1d5db;
+}
+
+.akkee-call-actions {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 20px 25px 85px;
+}
+
+.akkee-call-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.akkee-call-button {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border: 0;
+  border-radius: 50%;
+  color: white;
+}
+
+.akkee-call-button.reject {
+  background: #ef4444;
+}
+
+.akkee-call-button.accept {
+  background: #06c755;
+}
+
+.akkee-call-button svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.akkee-call-button.reject svg {
+  transform: rotate(0deg);
+}
+
+/* LINE notification banner */
+#lineNotificationBanner {
+  position: absolute;
+  top: 42px;
+  left: 12px;
+  right: 12px;
+  z-index: 250;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px;
+  border-radius: 17px;
+  background: rgba(245, 245, 248, .96);
+  color: #222;
+  box-shadow: 0 5px 22px #0003;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+  transition: opacity .25s, transform .25s;
+}
+
+#lineNotificationBanner.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.line-notification-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 43px;
+  width: 43px;
+  height: 43px;
+  border-radius: 12px;
+  background: #06c755;
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.line-notification-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  font-size: 13px;
+}
+
+.line-notification-content strong {
+  font-size: 12px;
+}
+
+.line-notification-content span {
+  overflow-wrap: anywhere;
+}
+
+
 </style>
 </head>
 <body>
@@ -6496,7 +6727,26 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
       <div class="lock-date" id="lockDate"></div>
       <div class="lock-clock" id="lockClock">12:00</div>
     </div>
-    <div class="lock-spacer"></div>
+      <div class="lock-spacer"></div>
+
+    <!-- LINE notification: คณิต -->
+    <div class="lock-line-notification">
+      <div class="lock-line-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="white" d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.5 7.7 8.2 8.4l-.5 2.5c-.1.5.4.8.8.5l4-2.8c4.3-.9 7.5-4.3 7.5-8.6C22 5.8 17.5 2 12 2Z"/>
+          <path fill="#06c755" d="M6 8h1.2v4H9v1H6V8Zm4 0h1.2v5H10V8Zm2.4 0h1.1l2 2.8V8h1.1v5h-1.1l-2-2.8V13h-1.1V8Zm5.2 0H21v1h-2.2v1h2v1h-2v1H21v1h-3.4V8Z"/>
+        </svg>
+      </div>
+
+      <div class="lock-line-message">
+        <div class="lock-line-top">
+          <strong>LINE</strong>
+          <span>ตอนนี้</span>
+        </div>
+        <div class="lock-line-name">คณิต</div>
+        <div class="lock-line-text">แลนแล้ว</div>
+      </div>
+    </div>
 
     <div class="lock-bottom-row">
       <button class="round-shortcut" id="flashlightButton" aria-label="ไฟฉาย">
@@ -7291,6 +7541,45 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
 </div>
 </main>
 </div>
+
+<!-- หน้าสายเรียกเข้า LINE จากอัคคี -->
+<div id="akkeeIncomingCall" class="akkee-call-screen" hidden>
+  <div class="akkee-call-app">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2C6.5 2 2 5.8 2 10.5c0 4.2 3.5 7.7 8.2 8.4l-.5 2.5 4-2.8c4.3-.9 7.5-4.3 7.5-8.6C22 5.8 17.5 2 12 2Z"/>
+    </svg>
+    LINE
+  </div>
+
+  <div class="akkee-call-profile">
+    <img src="https://i.ibb.co/BVHVS8Rz/IMG-3304.jpg" alt="อัคคี">
+    <h2>อัคคี</h2>
+    <p id="akkeeCallStatus">กำลังโทรเข้าผ่าน LINE...</p>
+  </div>
+
+  <div class="akkee-call-actions">
+    <div class="akkee-call-action">
+      <button id="akkeeRejectCall" class="akkee-call-button reject" type="button" aria-label="ปฏิเสธสาย">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 15c5-5 13-5 18 0"/>
+          <path d="M5 13l-2 5M19 13l2 5"/>
+        </svg>
+      </button>
+      <span>ปฏิเสธ</span>
+    </div>
+
+    <div class="akkee-call-action">
+      <button id="akkeeAcceptCall" class="akkee-call-button accept" type="button" aria-label="รับสาย">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.1 4.1 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.7L7.5 10a16 16 0 0 0 6.5 6.5l1.6-1.5a2 2 0 0 1 1.7-.6l3 .5A2 2 0 0 1 22 16.9Z"/>
+        </svg>
+      </button>
+      <span id="akkeeAcceptLabel">รับสาย</span>
+    </div>
+  </div>
+</div>
+
+
 <script>
 (() => {
   const CORRECT_PIN = "121269";
@@ -7348,8 +7637,23 @@ window.showPhoneScreen = showScreen;
     $("pinError").textContent = "";
     if (pin.length === 6) {
       if (pin === CORRECT_PIN) {
-        setTimeout(() => { pin = ""; updatePinDots(); showScreen("home"); }, 150);
-      } else {
+  setTimeout(() => {
+    pin = "";
+    updatePinDots();
+    showScreen("home");
+
+    // เมื่อปลดล็อกสำเร็จ ให้อัคคีโทรเข้าหลัง 1.5 วินาที
+    if (!window.akkeeCallTriggered) {
+      window.akkeeCallTriggered = true;
+
+      setTimeout(() => {
+        if (typeof window.showAkkeeIncomingCall === "function") {
+          window.showAkkeeIncomingCall();
+        }
+      }, 1500);
+    }
+  }, 150);
+} else {
         $("pinError").textContent = "PIN ไม่ถูกต้อง ลองอีกครั้ง";
         setTimeout(() => { pin = ""; updatePinDots(); }, 650);
       }
@@ -14929,6 +15233,145 @@ profileViewer?.addEventListener("click", (event) => {
   }
 });
 
+// แสดงแบนเนอร์แจ้งเตือน LINE บนโทรศัพท์จำลอง
+window.showLineNotification = function (sender, message) {
+  const phone = document.getElementById("phone");
+  if (!phone) return;
+
+  let banner = document.getElementById("lineNotificationBanner");
+
+  if (!banner) {
+    banner = document.createElement("div");
+    banner.id = "lineNotificationBanner";
+    phone.appendChild(banner);
+  }
+
+  banner.replaceChildren();
+
+  const icon = document.createElement("div");
+  icon.className = "line-notification-icon";
+  icon.textContent = "LINE";
+
+  const content = document.createElement("div");
+  content.className = "line-notification-content";
+
+  const appName = document.createElement("strong");
+  appName.textContent = "LINE · " + sender;
+
+  const text = document.createElement("span");
+  text.textContent = message;
+
+  content.append(appName, text);
+  banner.append(icon, content);
+
+  banner.classList.add("show");
+
+  clearTimeout(window.lineNotificationTimer);
+  window.lineNotificationTimer = setTimeout(() => {
+    banner.classList.remove("show");
+  }, 4500);
+};
+
+// ===== LINE incoming call: อัคคี =====
+(function () {
+  const callScreen = document.getElementById("akkeeIncomingCall");
+  const status = document.getElementById("akkeeCallStatus");
+  const acceptBtn = document.getElementById("akkeeAcceptCall");
+  const rejectBtn = document.getElementById("akkeeRejectCall");
+  const acceptLabel = document.getElementById("akkeeAcceptLabel");
+
+  let callState = "idle";
+
+  window.showAkkeeIncomingCall = function () {
+    callState = "ringing";
+    status.textContent = "กำลังโทรเข้าผ่าน LINE...";
+    acceptLabel.textContent = "รับสาย";
+    acceptBtn.hidden = false;
+    callScreen.hidden = false;
+  };
+
+  acceptBtn.addEventListener("click", function () {
+    if (callState === "ringing") {
+      callState = "connected";
+      status.textContent = "กำลังสนทนา";
+      acceptLabel.textContent = "วางสาย";
+      acceptBtn.style.background = "#ef4444";
+      return;
+    }
+
+    if (callState === "connected") {
+  callState = "ended";
+  callScreen.hidden = true;
+  acceptBtn.style.background = "#06c755";
+
+  // อัคคีส่งข้อความหลังโตโต้วางสาย
+  setTimeout(() => {
+    const now = new Date();
+
+    akkeeChatHistory.push({
+      date: `${now.getDate()} ${[
+        "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.",
+        "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.",
+        "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."
+      ][now.getMonth()]}`,
+      time: now.toLocaleTimeString("th-TH", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      }),
+      from: "a",
+      text: "วางสายทำไม"
+    });
+
+    renderAkkeeChatHistory();
+
+    const chat = document.getElementById("akkeeChatMessages");
+    if (chat) chat.scrollTop = chat.scrollHeight;
+
+    // แจ้งเตือนข้อความจากอัคคี
+    if (typeof window.showLineNotification === "function") {
+      window.showLineNotification("อัคคี", "วางสายทำไม");
+    }
+  }, 1200);
+}
+
+  
+rejectBtn.addEventListener("click", function () {
+  if (callState !== "ringing") return;
+
+  callState = "rejected";
+  callScreen.hidden = true;
+
+  // อัคคีส่งข้อความหลังโตโต้ปฏิเสธสาย
+  setTimeout(() => {
+    const now = new Date();
+
+    akkeeChatHistory.push({
+      date: `${now.getDate()} ${[
+        "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.",
+        "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.",
+        "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."
+      ][now.getMonth()]}`,
+      time: now.toLocaleTimeString("th-TH", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      }),
+      from: "a",
+      text: "ตัดสายทำไม"
+    });
+
+    renderAkkeeChatHistory();
+
+    const chat = document.getElementById("akkeeChatMessages");
+    if (chat) chat.scrollTop = chat.scrollHeight;
+
+    window.showLineNotification("อัคคี", "ตัดสายทำไม");
+  }, 1200);
+});
+
+})();
 </script>
 </body>
 </html>
+
