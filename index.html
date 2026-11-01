@@ -8146,84 +8146,37 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
   <button class="clock-tab" data-tab="stopwatch">การจับเวลา</button>
   <button class="clock-tab" data-tab="timer">ตัวตั้งเวลา</button>
 </div>
+<div class="clock-panel" data-panel="alarm">
 
- 
-/* ALARM SCREEN - SAMSUNG LAYOUT */
-.samsung-clock [data-panel="alarm"] {
-  padding: 0 12px 24px;
-}
+  <div class="clock-alarm-hero">
+    <div class="clock-alarm-headline">
+      การเตือน<br>ทั้งหมดปิดอยู่
+    </div>
+  </div>
 
-.clock-alarm-hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 245px;
-  padding: 25px 0;
-}
+  <div class="clock-alarm-toolbar">
+    <button class="clock-add-alarm" aria-label="เพิ่มการเตือน">
+      <svg viewBox="0 0 24 24" width="28" height="28"
+           fill="none" stroke="currentColor" stroke-width="1.7"
+           stroke-linecap="round">
+        <path d="M12 3v18M3 12h18"/>
+      </svg>
+    </button>
 
-.clock-alarm-headline {
-  font-size: clamp(34px, 9vw, 48px);
-  font-weight: 400;
-  line-height: 1.12;
-  text-align: center;
-  letter-spacing: -1px;
-  color: #222;
-}
+    <button class="clock-alarm-more" aria-label="ตัวเลือกเพิ่มเติม">
+      <svg viewBox="0 0 24 24" width="24" height="24"
+           fill="currentColor">
+        <circle cx="12" cy="5" r="1.7"/>
+        <circle cx="12" cy="12" r="1.7"/>
+        <circle cx="12" cy="19" r="1.7"/>
+      </svg>
+    </button>
+  </div>
 
-.clock-alarm-toolbar {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 15px;
-  margin: 0 4px 18px;
-}
+  <div class="clock-alarm-list"></div>
 
-.samsung-clock .clock-alarm-toolbar button {
-  position: static;
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 42px;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: #222;
-  box-shadow: none;
-}
+</div>
 
-.samsung-clock .clock-alarm-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.samsung-clock .clock-alarm-item {
-  min-height: 116px;
-  padding: 20px;
-  border: 0;
-  border-radius: 18px;
-  background: #f3f3f5;
-}
-
-.samsung-clock .clock-alarm-item strong {
-  font-size: 37px;
-  font-weight: 400;
-  color: #333;
-  font-variant-numeric: tabular-nums;
-}
-
-.samsung-clock .clock-alarm-item small {
-  margin-top: 5px;
-  font-size: 13px;
-  color: #777;
-}
-
-.samsung-clock .clock-alarm-item input[type="checkbox"] {
-  width: 35px;
-  height: 22px;
-  accent-color: #60aeff;
-}
 
 
     <div class="clock-panel hidden" data-panel="world">
