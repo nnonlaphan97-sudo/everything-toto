@@ -2288,16 +2288,17 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 
 .gallery-bottom-tabs {
   flex-shrink: 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: center;
-  justify-content: space-around;
   width: 100%;
+  box-sizing: border-box;
   padding: 15px 0 10px;
   background: #fafafa;
 }
 
 .gallery-bottom-tabs button {
-  flex: 1;
+  width: 100%;
   min-width: 0;
   padding: 0 4px;
   font-size: 16px;
@@ -2305,6 +2306,7 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   text-align: center;
   white-space: nowrap;
   word-break: keep-all;
+  box-sizing: border-box;
 }
 
 .gallery-bottom-tabs button.active {
@@ -10179,7 +10181,7 @@ const recentImages = [
 
 ];
 recentImages.push(...cameraImages);
-
+recentImages.push(...galleryVideos);
 const galleryVideos = [
   "videos/snaptik_7685755790166183186_v3.mp4",
   "videos/snaptik_7658269030410669320_v3.mp4",
@@ -10266,7 +10268,7 @@ function showGalleryPhoto(index) {
   const src = currentGalleryImages[selectedPhoto];
   const image = gallery.querySelector(".gallery-full-image");
   const video = gallery.querySelector(".gallery-full-video");
-  const isVideo = currentAlbumName === "วิดีโอ";
+  const isVideo = /\.(mp4|webm|mov)(\?|#|$)/i.test(src);
 
   video.pause();
   video.hidden = !isVideo;
@@ -10305,16 +10307,22 @@ function showGalleryPhoto(index) {
     `${currentGalleryImages.length} ภาพ`;
     
     
-photoGrid.innerHTML = currentGalleryImages.map((src, index) => `
-  <button class="gallery-photo" data-photo="${index}">
-    ${albumName === "วิดีโอ"
-      ? `<video src="${src}#t=0.1" preload="metadata"
-           muted playsinline
-           style="width:100%;height:100%;object-fit:cover;pointer-events:none;"></video>`
-      : `<img src="${src}" alt="รูปภาพ ${index + 1}" loading="lazy">`
-    }
-  </button>
-`).join("");
+
+photoGrid.innerHTML = currentGalleryImages.map((src, index) => {
+  const isVideo = /\.(mp4|webm|mov)(\?|#|$)/i.test(src);
+
+  return `
+    <button class="gallery-photo" data-photo="${index}">
+      ${isVideo
+        ? `<video src="${src}#t=0.1" preload="metadata"
+             muted playsinline
+             style="width:100%;height:100%;object-fit:cover;pointer-events:none;"></video>`
+        : `<img src="${src}" alt="รูปภาพ ${index + 1}" loading="lazy">`
+      }
+    </button>
+  `;
+}).join("");
+
 
 
       photoGrid.querySelectorAll(".gallery-photo").forEach(photo => {
