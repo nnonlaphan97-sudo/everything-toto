@@ -10157,11 +10157,11 @@ if (name === "อินเทอร์เน็ต") {
     input.blur();
   });
 
-  clearButton.addEventListener("click", () => {
-    history = [];
-    saveHistory();
-    renderHistory();
-  });
+ clearButton.addEventListener("click", () => {
+  history = [];
+  localStorage.removeItem(storageKey);
+  renderHistory();
+});
 
   renderHistory();
 }
