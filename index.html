@@ -7622,7 +7622,13 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
         </button>
 
         <button class="gallery-album" data-album="กล้องถ่ายรูป">
-          <div class="gallery-cover gallery-cover-purple">📷</div>
+          <div class="gallery-cover">
+  <img
+    src="https://i.ibb.co/ZpXC7Sqb/r07qxo-R-Download.jpg"
+    alt="กล้องถ่ายรูป"
+    style="width:100%; height:100%; object-fit:cover; display:block;"
+  >
+</div>
           <strong>กล้องถ่ายรูป</strong>
           <small>รูปจากกล้อง</small>
         </button>
@@ -10108,6 +10114,19 @@ if (name === "แกลเลอรี") {
   const photoGrid = gallery.querySelector(".gallery-photo-grid");
 
 
+const cameraImages = [
+  "https://i.ibb.co/ZpXC7Sqb/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/RpYVLjfw/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/tMT9kq9M/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/dwy6bj3m/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/39d6w9x8/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/j9tssM7V/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/0xJkftd/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/NgkxZTrV/r07qxo-R-Download.jpg",
+  "https://i.ibb.co/zWFyny87/r07qxo-R-Download.jpg"
+];
+
+
 const recentImages = [
   "https://i.ibb.co/WvwdkcXt/r07qxo-R-Download.jpg",
   "https://i.ibb.co/7xXN3qYh/r07qxo-R-Download.jpg",
@@ -10147,6 +10166,7 @@ const recentImages = [
   "https://i.ibb.co/G3Rcmbgb/tawan-v-still.jpg",
 
 ];
+recentImages.push(...cameraImages);
 
 const galleryImages = [
   "https://picsum.photos/id/1018/800/800",
@@ -10242,13 +10262,14 @@ favoriteBtn.addEventListener("click", () => {
   gallery.querySelectorAll(".gallery-album").forEach(button => {
     button.addEventListener("click", () => {
       const albumName = button.dataset.album;
-      currentAlbumName = albumName;
-      currentGalleryImages =
-      albumName === "รายการโปรด"
+     currentGalleryImages =
+  albumName === "รายการโปรด"
     ? [...favoritePhotos]
     : albumName === "ล่าสุด"
       ? recentImages
-      : galleryImages;
+      : albumName === "กล้องถ่ายรูป"
+        ? cameraImages
+        : galleryImages;
       gallery.querySelector(".gallery-album-title").textContent = albumName;
       gallery.querySelector(".gallery-album-count").textContent =
     `${currentGalleryImages.length} ภาพ`;
