@@ -9679,7 +9679,21 @@ if (name === "นาฬิกา") {
   }
 
   renderWorld();
+function updateIndochinaClock() {
+  const digital = document.querySelector(".clock-world-digital");
+  if (!digital) return;
 
+  digital.textContent = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Bangkok",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hourCycle: "h23"
+  }).format(new Date());
+}
+
+updateIndochinaClock();
+setInterval(updateIndochinaClock, 1000);
   // อัปเดตเวลาทุกวินาทีเฉพาะตอนหน้าเวลาโลกยังอยู่ในแอป
   const worldClockInterval = setInterval(() => {
     if (!clock.isConnected) {
