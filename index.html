@@ -90,7 +90,7 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   gap: 11px;
   padding: 13px;
   border-radius: 18px;
-  background: rgba(240, 240, 245, 0.38);
+  background: rgba(240, 240, 245, 0.8);
   color: #222;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
   backdrop-filter: blur(18px);
@@ -15201,7 +15201,32 @@ const main = document.createElement("div");
     subtree: true
   });
 })();
+  window.addAkkeeIncomingMessage = function (text) {
+    const now = new Date();
+    const months = [
+      "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.",
+      "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.",
+      "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."
+    ];
 
+    akkeeChatHistory.push({
+      date: `${now.getDate()} ${months[now.getMonth()]}`,
+      time: now.toLocaleTimeString("th-TH", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      }),
+      from: "a",
+      text: text
+    });
+
+    renderAkkeeChatHistory();
+
+    const chat = document.getElementById("akkeeChatMessages");
+    if (chat) chat.scrollTop = chat.scrollHeight;
+
+    window.showLineNotification?.("อัคคี", text);
+  };
   // เปิด LINE เมื่อระบบหลักเรียก openApp("LINE")
   window.openLineApp = function () {
     closeChat();
@@ -15304,34 +15329,10 @@ window.showLineNotification = function (sender, message) {
   acceptBtn.style.background = "#06c755";
 
   // อัคคีส่งข้อความหลังโตโต้วางสาย
-  setTimeout(() => {
-    const now = new Date();
-
-    akkeeChatHistory.push({
-      date: `${now.getDate()} ${[
-        "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.",
-        "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.",
-        "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."
-      ][now.getMonth()]}`,
-      time: now.toLocaleTimeString("th-TH", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false
-      }),
-      from: "a",
-      text: "วางสายทำไม"
-    });
-
-    renderAkkeeChatHistory();
-
-    const chat = document.getElementById("akkeeChatMessages");
-    if (chat) chat.scrollTop = chat.scrollHeight;
-
-    // แจ้งเตือนข้อความจากอัคคี
-    if (typeof window.showLineNotification === "function") {
-      window.showLineNotification("อัคคี", "วางสายทำไม");
-    }
-  }, 1200);
+// อัคคีส่งข้อความหลังโตโต้วางสาย
+setTimeout(() => {
+  window.addAkkeeIncomingMessage("วางสายทำไม");
+}, 1200);
 }
 });
   
@@ -15342,31 +15343,10 @@ rejectBtn.addEventListener("click", function () {
   callScreen.hidden = true;
 
   // อัคคีส่งข้อความหลังโตโต้ปฏิเสธสาย
-  setTimeout(() => {
-    const now = new Date();
-
-    akkeeChatHistory.push({
-      date: `${now.getDate()} ${[
-        "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.",
-        "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.",
-        "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."
-      ][now.getMonth()]}`,
-      time: now.toLocaleTimeString("th-TH", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false
-      }),
-      from: "a",
-      text: "ตัดสายทำไม"
-    });
-
-    renderAkkeeChatHistory();
-
-    const chat = document.getElementById("akkeeChatMessages");
-    if (chat) chat.scrollTop = chat.scrollHeight;
-
-    window.showLineNotification("อัคคี", "ตัดสายทำไม");
-  }, 1200);
+  // อัคคีส่งข้อความหลังโตโต้ปฏิเสธสาย
+setTimeout(() => {
+  window.addAkkeeIncomingMessage("ตัดสายทำไม");
+}, 1200);
 });
 
 })();
