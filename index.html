@@ -896,24 +896,11 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   pointer-events: none;
 }
 /* LINE: ขีดกลับหน้าโฮม */
-#lineScreen .line-home-gesture {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: 140px;
-  height: 28px;
-  z-index: 10000;
-  background: transparent;
-  touch-action: none;
-  cursor: pointer;
-}
-
 #lineScreen .line-home-gesture::after {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: 10px;
+  bottom: 5px;
   transform: translateX(-50%);
   width: 108px;
   height: 4px;
