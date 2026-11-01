@@ -15695,25 +15695,26 @@ const main = document.createElement("div");
   
   // เปิดห้องแชตอัคคีเมื่อกดแบนเนอร์แจ้งเตือน
 window.openAkkeeChatFromNotification = function () {
+  // เปิดหน้าจอ LINE
+  screen.style.display = "flex";
+
+  // ปิดห้องแชตแบบเดิมก่อน
   closeChat();
 
-   // เปิด LINE ผ่านระบบเดิม โดยไม่ซ่อนหน้าจอด้วยตัวเอง
-  window.openLineApp();
-
-  // เปิดแท็บเพื่อนตามระบบ LINE เดิม
+  // เลือกแท็บเพื่อน
   setTab("friends");
 
-  // เปิดห้องแชตอัคคีด้วยระบบนำทางเดิม
+  // เปิดห้องแชตอัคคีโดยตรง
   openLineSubpage("akkeeChatPage");
 
-  // แสดงข้อความที่ได้รับทั้งหมด
+  // แสดงประวัติข้อความ
   renderAkkeeChatHistory();
 
-  // เลื่อนไปข้อความล่าสุด
   const messages = document.getElementById("akkeeChatMessages");
   if (messages) {
     messages.scrollTop = messages.scrollHeight;
   }
+};
 };
   
   // เปิด LINE เมื่อระบบหลักเรียก openApp("LINE")
