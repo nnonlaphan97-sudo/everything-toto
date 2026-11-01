@@ -4904,8 +4904,9 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 .ig-kanit-post-caption strong {
   margin-right: 5px;
 }
-/* ซ่อน Status Bar เฉพาะตอนเปิด Instagram */
-body:has(#appScreen:not(.hidden) .ig-app) .status-bar {
+/* ซ่อน Status Bar ตอนเปิด Instagram และกล้อง */
+body:has(#appScreen:not(.hidden) .ig-app) .status-bar,
+body:has(#appScreen:not(.hidden) .samsung-camera) .status-bar {
   display: none !important;
 }
 /* ===== Instagram DM ===== */
