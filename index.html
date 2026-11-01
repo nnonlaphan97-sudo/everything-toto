@@ -2827,13 +2827,34 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 }
 
 /* ===== SAMSUNG CLOCK ===== */
+#appScreen:has(.samsung-clock) {
+  padding: 0;
+  background: #fff;
+}
+
+#appScreen:has(.samsung-clock) .app-window-header {
+  display: none;
+}
+
+#appScreen:has(.samsung-clock) .app-content {
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  line-height: normal;
+}
+
 .samsung-clock {
   position: relative;
-  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
   background: #fff;
   color: #202124;
-  padding: 22px 16px 75px;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .clock-heading {
@@ -2843,29 +2864,53 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 }
 
 .clock-tabs {
+  order: 10;
+  flex-shrink: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
-  padding: 5px;
-  background: #f2f2f5;
-  border-radius: 20px;
-  margin-bottom: 25px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  height: 76px;
+  padding: 0 8px 14px;
+  margin: 0;
+  background: #fff;
+  border-radius: 0;
+  box-sizing: border-box;
 }
 
 .clock-tab {
+  position: relative;
+  min-width: 0;
+  height: 52px;
+  padding: 8px 0;
   border: 0;
-  border-radius: 16px;
+  border-radius: 0;
   background: transparent;
   color: #777;
-  padding: 12px 2px;
-  font-size: 11px;
+  font-size: 13px;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: none;
 }
 
 .clock-tab.active {
-  background: #fff;
-  color: #6045d9;
-  font-weight: 750;
-  box-shadow: 0 2px 7px #00000012;
+  background: transparent;
+  color: #258bf2;
+  font-weight: 700;
+  box-shadow: none;
+}
+
+.clock-tab.active::after {
+  content: "";
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  bottom: 3px;
+  height: 3px;
+  border-radius: 3px;
+  background: #258bf2;
 }
 
 .samsung-clock .hidden {
@@ -2874,7 +2919,14 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 
 .clock-panel {
   position: relative;
-  min-height: 340px;
+  flex: 1;
+  min-height: 0;
+  padding: 65px 20px 20px;
+  overflow-y: auto;
+}
+
+.clock-heading {
+  display: none;
 }
 
 .clock-alarm-item,
@@ -7924,12 +7976,12 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
   <div class="samsung-clock">
     <div class="clock-heading">นาฬิกา</div>
 
-    <div class="clock-tabs">
-      <button class="clock-tab active" data-tab="alarm">นาฬิกาปลุก</button>
-      <button class="clock-tab" data-tab="world">เวลาโลก</button>
-      <button class="clock-tab" data-tab="stopwatch">จับเวลา</button>
-      <button class="clock-tab" data-tab="timer">ตั้งเวลา</button>
-    </div>
+<div class="clock-tabs">
+  <button class="clock-tab active" data-tab="alarm">เตือน</button>
+  <button class="clock-tab" data-tab="world">เวลาโลก</button>
+  <button class="clock-tab" data-tab="stopwatch">การจับเวลา</button>
+  <button class="clock-tab" data-tab="timer">ตัวตั้งเวลา</button>
+</div>
 
     <div class="clock-panel" data-panel="alarm">
       <div class="clock-alarm-list"></div>
