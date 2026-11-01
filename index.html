@@ -5276,7 +5276,6 @@ body:has(#appScreen:not(.hidden) .ig-app) .status-bar {
   align-items: center;
   gap: 15px;
   padding: 10px 13px;
-  background: #ffff00 !important;
 }
 
 /* ปุ่มไอคอนทุกตัว */
@@ -5305,11 +5304,12 @@ body:has(#appScreen:not(.hidden) .ig-app) .status-bar {
   stroke-linejoin: round;
 }
 
-/* หัวใจใหญ่ใต้โพสโตโต้ */
-.ig-toto-post-actions .ig-toto-like svg {
-  width: 32px;
-  height: 32px;
-  stroke-width: 3;
+/* ทดสอบ SVG หัวใจโตโต้ */
+#appScreen .ig-toto-post-actions button.ig-toto-like svg {
+  width: 36px !important;
+  height: 36px !important;
+  stroke: red !important;
+  stroke-width: 4 !important;
 }
 
 /* ปุ่มบันทึกชิดขวา */
