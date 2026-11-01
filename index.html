@@ -3352,7 +3352,8 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   justify-content: center;
 }
 
-.ig-top-like svg {
+.ig-top-like svg,
+#appScreen .ig-toto-post-actions .ig-toto-like svg {
   width: 25px;
   height: 25px;
   fill: none;
@@ -4096,12 +4097,23 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
 }
 
 .ig-toto-post-actions button {
+  width: 25px;
+  height: 25px;
   padding: 0;
   border: none;
   background: transparent;
   color: #161616;
-  font-size: 27px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   line-height: 1;
+}
+
+.ig-toto-post-actions button svg {
+  display: block;
+  width: 25px;
+  height: 25px;
 }
 
 .ig-toto-like.liked {
@@ -5321,18 +5333,6 @@ body:has(#appScreen:not(.hidden) .ig-app) .status-bar {
   stroke-linejoin: round;
 }
 /* หัวใจใต้โพสต์ ใช้ขนาดและเส้นเหมือนหัวใจมุมขวาบน */
-#appScreen .ig-toto-post-actions .ig-toto-like svg {
-  width: 25px;
-  height: 25px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.ig-toto-like.liked {
-  color: #ff3040;
-}
 
 .ig-toto-like.liked svg,
 .ig-toto-save.saved svg {
