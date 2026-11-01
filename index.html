@@ -5721,14 +5721,18 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
 .yt-channel-avatar {
   width: 38px;
   height: 38px;
-  border-radius: 50%;
-  background: #f1f1f1;
-  display: grid;
-  place-items: center;
   flex-shrink: 0;
-  font-size: 17px;
-  font-weight: 700;
-  color: #333;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f1f1f1;
+}
+
+.yt-channel-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .yt-video-text {
@@ -5778,7 +5782,48 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
   line-height: 1;
 }
 
-.yt-nav-item.active .yt-nav-icon {
+.yt-action-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  color: #111;
+}
+
+.yt-action-icon svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.yt-nav-svg {
+  width: 27px;
+  height: 27px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.yt-plus {
+  width: 34px;
+  height: 34px;
+  stroke-width: 1.7;
+}
+
+.yt-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 10px;
   color: #111;
 }
 
@@ -7801,11 +7846,20 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
           <span class="yt-logo-icon"></span>
           <span>Premium</span>
         </div>
-
-        <div class="yt-header-actions">
-          <span>♧</span>
-          <span>⌕</span>
-        </div>
+<div class="yt-header-actions">
+  <span class="yt-action-icon" aria-label="การแจ้งเตือน">
+    <svg viewBox="0 0 24 24">
+      <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+      <path d="M10 21h4"/>
+    </svg>
+  </span>
+  <span class="yt-action-icon" aria-label="ค้นหา">
+    <svg viewBox="0 0 24 24">
+      <circle cx="10.8" cy="10.8" r="7.2"/>
+      <path d="m16.2 16.2 5 5"/>
+    </svg>
+  </span>
+</div>
       </div>
 
       <div class="yt-tabs">
@@ -7827,9 +7881,14 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
                src="https://img.youtube.com/vi/KRFXpH_cYBo/hqdefault.jpg"
                alt="หน้าปกวิดีโอ 1">
           <div class="yt-video-info">
-            <div class="yt-channel-avatar">▶</div>
+            <div class="yt-channel-avatar">
+  <img
+    src="https://i.ibb.co/HTLspMnQ/8-B27-CCE6-16-C2-4834-A41-F-DA497-DD30-B5-B.jpg"
+    alt="รูปโปรไฟล์ช่อง"
+  >
+</div>
             <div class="yt-video-text">
-              <div class="yt-video-title">วิดีโอ YouTube คลิปที่ 1</div>
+              <div class="yt-video-title">หมาเห่าเครื่องบิน A Dog and A Plane</div>
               <div class="yt-video-meta">รับชมบน YouTube</div>
             </div>
             <span class="yt-video-more">⋮</span>
@@ -7845,9 +7904,14 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
                src="https://img.youtube.com/vi/q0KVndy_O3E/hqdefault.jpg"
                alt="หน้าปกวิดีโอ 2">
           <div class="yt-video-info">
-            <div class="yt-channel-avatar">▶</div>
+            <div class="yt-channel-avatar">
+  <img
+    src="https://i.ibb.co/HTLspMnQ/8-B27-CCE6-16-C2-4834-A41-F-DA497-DD30-B5-B.jpg"
+    alt="รูปโปรไฟล์ช่อง"
+  >
+</div>
             <div class="yt-video-text">
-              <div class="yt-video-title">วิดีโอ YouTube คลิปที่ 2</div>
+              <div class="yt-video-title">Scarlet Heart Ullavee ปาฏิหาริย์ข้ามกาลเวลา</div>
               <div class="yt-video-meta">รับชมบน YouTube</div>
             </div>
             <span class="yt-video-more">⋮</span>
@@ -7863,9 +7927,14 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
                src="https://img.youtube.com/vi/oMGtK8yLlUE/hqdefault.jpg"
                alt="หน้าปกวิดีโอ 3">
           <div class="yt-video-info">
-            <div class="yt-channel-avatar">▶</div>
+           <div class="yt-channel-avatar">
+  <img
+    src="https://i.ibb.co/HTLspMnQ/8-B27-CCE6-16-C2-4834-A41-F-DA497-DD30-B5-B.jpg"
+    alt="รูปโปรไฟล์ช่อง"
+  >
+</div>
             <div class="yt-video-text">
-              <div class="yt-video-title">วิดีโอ YouTube คลิปที่ 3</div>
+              <div class="yt-video-title">I am POLCASAN - POLCASAN</div>
               <div class="yt-video-meta">รับชมบน YouTube</div>
             </div>
             <span class="yt-video-more">⋮</span>
@@ -7876,26 +7945,44 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
     </div>
 
     <div class="yt-bottom">
-      <div class="yt-nav-item active">
-        <span class="yt-nav-icon">⌂</span>
-        <span>หน้าแรก</span>
-      </div>
-      <div class="yt-nav-item">
-        <span class="yt-nav-icon">▣</span>
-        <span>Shorts</span>
-      </div>
-      <div class="yt-nav-item">
-        <span class="yt-nav-icon">⊕</span>
-      </div>
-      <div class="yt-nav-item">
-        <span class="yt-nav-icon">▤</span>
-        <span>การติดตาม</span>
-      </div>
-      <div class="yt-nav-item">
-        <span class="yt-nav-icon">◉</span>
-        <span>คุณ</span>
-      </div>
-    </div>
+  <div class="yt-nav-item active">
+    <svg class="yt-nav-svg" viewBox="0 0 24 24">
+      <path d="M3 10 12 3l9 7v11h-7v-7h-4v7H3z" fill="currentColor" stroke="currentColor"/>
+    </svg>
+    <span>หน้าแรก</span>
+  </div>
+
+  <div class="yt-nav-item">
+    <svg class="yt-nav-svg" viewBox="0 0 24 24">
+      <path d="m8 3 11-2-5 7 5 3-11 10-5-4 5-6-5-3z"/>
+      <path d="m10 9 6 3-6 4z"/>
+    </svg>
+    <span>Shorts</span>
+  </div>
+
+  <div class="yt-nav-item">
+    <svg class="yt-nav-svg yt-plus" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 7v10M7 12h10"/>
+    </svg>
+  </div>
+
+  <div class="yt-nav-item">
+    <svg class="yt-nav-svg" viewBox="0 0 24 24">
+      <rect x="5" y="6" width="16" height="15" rx="2"/>
+      <path d="M2 3h15M9 11l6 3-6 3z"/>
+    </svg>
+    <span>การติดตาม</span>
+  </div>
+
+  <div class="yt-nav-item">
+    <svg class="yt-nav-svg" viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="4"/>
+      <path d="M4 21c0-5 3-7 8-7s8 2 8 7"/>
+    </svg>
+    <span>คุณ</span>
+  </div>
+</div>
 
   </div>
 `,
