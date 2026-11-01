@@ -15705,6 +15705,9 @@ window.openAkkeeChatFromNotification = function () {
   // เลือกแท็บเพื่อน
   setTab("friends");
 
+   // เมื่อย้อนกลับจากแชตอัคคี ให้กลับไปแท็บแชต
+  chatOpenedFrom = "chats";
+
   // เปิดห้องแชตอัคคีโดยตรง
   openLineSubpage("akkeeChatPage");
 
