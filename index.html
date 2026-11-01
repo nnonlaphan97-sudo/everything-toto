@@ -2259,7 +2259,16 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   justify-content: space-between;
   gap: 4px;
 }
+.gallery-full-video {
+  width: 80%;
+  max-height: 100%;
+  object-fit: contain;
+}
 
+.gallery-full-video[hidden],
+.gallery-full-image[hidden] {
+  display: none !important;
+}
 .gallery-full-image {
   width: 80%;
   max-height: 100%;
@@ -7633,11 +7642,11 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
           <small>รูปจากกล้อง</small>
         </button>
 
-        <button class="gallery-album" data-album="ภาพหน้าจอ">
-          <div class="gallery-cover gallery-cover-gray">▣</div>
-          <strong>ภาพหน้าจอ</strong>
-          <small>ภาพที่บันทึกจากหน้าจอ</small>
-        </button>
+       <button class="gallery-album" data-album="วิดีโอ">
+  <div class="gallery-cover gallery-cover-gray">▶</div>
+  <strong>วิดีโอ</strong>
+  <small>รูปจากวิดิอ</small>
+</button>
 
         <button class="gallery-album" data-album="น้องณิต💙">
           <div class="gallery-cover gallery-cover-blue">💙</div>
@@ -7676,7 +7685,8 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
       <div class="gallery-viewer-stage">
         <button class="gallery-prev" type="button" aria-label="รูปก่อนหน้า">‹</button>
         <img class="gallery-full-image" alt="รูปภาพในแกลเลอรี">
-        <button class="gallery-next" type="button" aria-label="รูปถัดไป">›</button>
+       <video class="gallery-full-video" controls playsinline preload="metadata" hidden></video>
+         <button class="gallery-next" type="button" aria-label="รูปถัดไป">›</button>
       </div>
     </div>
 
@@ -10168,6 +10178,16 @@ const recentImages = [
 ];
 recentImages.push(...cameraImages);
 
+const galleryVideos = [
+  "videos/snaptik_7685755790166183186_v3.mp4",
+  "videos/snaptik_7658269030410669320_v3.mp4",
+  "videos/snaptik_7642584846417579271_v3.mp4",
+  "videos/snaptik_7630809065920318738_v3.mp4",
+  "videos/snaptik_7630344644466937096_v3.mp4",
+  "videos/snaptik_7626570907678493970_v3.mp4"
+];
+
+
 const galleryImages = [
   "https://picsum.photos/id/1018/800/800",
   "https://picsum.photos/id/1015/800/800",
@@ -10243,42 +10263,66 @@ favoriteBtn.addEventListener("click", () => {
 
   updateFavoriteButton();
 });
-  function showGalleryPhoto(index) {
+ 
+function showGalleryPhoto(index) {
   if (!currentGalleryImages.length) return;
 
   selectedPhoto =
     (index + currentGalleryImages.length) % currentGalleryImages.length;
 
-  gallery.querySelector(".gallery-full-image").src =
-    currentGalleryImages[selectedPhoto];
+  const src = currentGalleryImages[selectedPhoto];
+  const image = gallery.querySelector(".gallery-full-image");
+  const video = gallery.querySelector(".gallery-full-video");
+  const isVideo = currentAlbumName === "วิดีโอ";
+
+  video.pause();
+  video.hidden = !isVideo;
+  image.hidden = isVideo;
+
+  if (isVideo) {
+    video.src = src;
+    video.load();
+  } else {
+    image.src = src;
+  }
 
   gallery.querySelector(".gallery-viewer-counter").textContent =
     `${selectedPhoto + 1} / ${currentGalleryImages.length}`;
 
-  updateFavoriteButton();
+  favoriteBtn.hidden = isVideo;
+  if (!isVideo) updateFavoriteButton();
+
   viewer.hidden = false;
 }
+
 
   gallery.querySelectorAll(".gallery-album").forEach(button => {
     button.addEventListener("click", () => {
       const albumName = button.dataset.album;
-     currentGalleryImages =
+  currentGalleryImages =
   albumName === "รายการโปรด"
     ? [...favoritePhotos]
     : albumName === "ล่าสุด"
       ? recentImages
-      : albumName === "กล้องถ่ายรูป"
-        ? cameraImages
+      : albumName === "วิดีโอ"
+        ? galleryVideos
         : galleryImages;
       gallery.querySelector(".gallery-album-title").textContent = albumName;
       gallery.querySelector(".gallery-album-count").textContent =
     `${currentGalleryImages.length} ภาพ`;
     
-    photoGrid.innerHTML = currentGalleryImages.map((src, index) => `
-        <button class="gallery-photo" data-photo="${index}">
-          <img src="${src}" alt="รูปภาพ ${index + 1}" loading="lazy">
-        </button>
-      `).join("");
+    
+photoGrid.innerHTML = currentGalleryImages.map((src, index) => `
+  <button class="gallery-photo" data-photo="${index}">
+    ${albumName === "วิดีโอ"
+      ? `<video src="${src}#t=0.1" preload="metadata"
+           muted playsinline
+           style="width:100%;height:100%;object-fit:cover;pointer-events:none;"></video>`
+      : `<img src="${src}" alt="รูปภาพ ${index + 1}" loading="lazy">`
+    }
+  </button>
+`).join("");
+
 
       photoGrid.querySelectorAll(".gallery-photo").forEach(photo => {
         photo.addEventListener("click", () => {
@@ -10295,7 +10339,7 @@ favoriteBtn.addEventListener("click", () => {
     albumView.hidden = true;
     albumsView.hidden = false;
   });
-
+gallery.querySelector(".gallery-full-video").pause();
   gallery.querySelector(".gallery-viewer-back").addEventListener("click", () => {
     viewer.hidden = true;
   });
