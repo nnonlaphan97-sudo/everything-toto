@@ -5826,6 +5826,272 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
   font-size: 10px;
   color: #111;
 }
+/* ===== SAMSUNG PHONE LIGHT MODE ===== */
+#appScreen:has(.samsung-phone) {
+  padding: 0;
+  background: #f7f7f7;
+  color: #171717;
+  overflow: hidden;
+}
+
+#appScreen:has(.samsung-phone) .app-window-header {
+  display: none;
+}
+
+#appScreen:has(.samsung-phone) .app-content {
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.samsung-phone {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #f7f7f7;
+  color: #171717;
+}
+
+.phone-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 76px 22px 22px;
+}
+
+.phone-header h1 {
+  margin: 0;
+  font-size: 29px;
+  font-weight: 700;
+}
+
+.phone-header-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.phone-header-actions button {
+  width: 27px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  color: #171717;
+}
+
+.phone-header-actions svg {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.phone-search-wrap {
+  padding: 0 20px 12px;
+}
+
+.phone-search-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 0;
+  border-radius: 18px;
+  background: #eaeaea;
+  color: #171717;
+  font-size: 15px;
+  outline: none;
+}
+
+.phone-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.phone-content::-webkit-scrollbar {
+  display: none;
+}
+
+.phone-section-title {
+  padding: 23px 24px 12px;
+  color: #666;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.phone-contact-card {
+  overflow: hidden;
+  margin: 0 12px 8px;
+  border-radius: 24px;
+  background: #fff;
+}
+
+.phone-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-height: 68px;
+  padding: 10px 20px;
+  font-size: 17px;
+}
+
+.phone-contact-row + .phone-contact-row {
+  border-top: 1px solid #f1f1f1;
+}
+
+.phone-contact-avatar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 43px;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  background: #e7edf1;
+  color: #536a78;
+  font-size: 19px;
+}
+
+.phone-contact-avatar.self {
+  background: #87a5b5;
+  color: white;
+}
+
+.phone-bottom-tabs {
+  flex-shrink: 0;
+  display: flex;
+  height: 76px;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: 15px;
+  background: #f7f7f7;
+}
+
+.phone-tab {
+  position: relative;
+  flex: 1;
+  padding: 10px 0;
+  background: transparent;
+  color: #777;
+  font-size: 16px;
+}
+
+.phone-tab.active {
+  color: #258bf2;
+  font-weight: 700;
+}
+
+.phone-tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  width: 45px;
+  height: 3px;
+  transform: translateX(-50%);
+  border-radius: 4px;
+  background: #258bf2;
+}
+
+.phone-empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: #999;
+}
+
+.phone-keypad {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100%;
+  padding: 12px 22px 20px;
+}
+
+.phone-dialed-number {
+  min-height: 55px;
+  text-align: center;
+  font-size: 29px;
+  overflow-wrap: anywhere;
+}
+
+.phone-key-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.phone-key-grid button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 68px;
+  padding: 0;
+  background: transparent;
+  color: #171717;
+  font-size: 34px;
+  line-height: 1;
+}
+
+.phone-key-grid small {
+  margin-top: 4px;
+  color: #777;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.phone-call-row {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.phone-call {
+  display: grid;
+  place-items: center;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #08b94e;
+  color: white;
+}
+
+.phone-call svg {
+  width: 30px;
+  height: 30px;
+  fill: currentColor;
+}
+
+.phone-delete-digit {
+  position: absolute;
+  right: 25px;
+  background: transparent;
+  color: #777;
+  font-size: 25px;
+}
+
+.phone-recent-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+  background: white;
+}
+
+.phone-recent-name {
+  flex: 1;
+  font-size: 16px;
+}
+
+.phone-recent-time {
+  color: #888;
+  font-size: 12px;
+}
 
 </style>
 </head>
@@ -6162,7 +6428,6 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
       </g>
     </svg>
   </span>
-  <span class="app-label">LINE</span>
 </button>
       <button class="app-button" data-app="อินเทอร์เน็ต"><span class="app-icon" style="background:#8ab7e8">🌐</span></button>
       <button class="app-button" data-app="กล้อง">
@@ -6176,7 +6441,6 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
       <circle cx="35.5" cy="17.5" r="1.5" fill="#F0F0F2"/>
     </svg>
   </span>
-  <span class="app-label">กล้อง</span>
 </button>
     </div>
     <div class="home-gesture" id="homeGesture"></div>
@@ -7870,9 +8134,90 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
 </nav>
   </div>
 `,
+"โทรศัพท์": `
+  <div class="samsung-phone">
+    <header class="phone-header">
+      <h1>โทรศัพท์</h1>
+      <div class="phone-header-actions">
+        <button class="phone-add" type="button" aria-label="เพิ่มรายชื่อ">
+          <svg viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></svg>
+        </button>
+        <button class="phone-search-btn" type="button" aria-label="ค้นหา">
+          <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></svg>
+        </button>
+        <button class="phone-menu" type="button" aria-label="เมนู">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1.5" fill="currentColor" stroke="none"/></svg>
+        </button>
+      </div>
+    </header>
 
+    <div class="phone-search-wrap hidden">
+      <input class="phone-search-input" type="search" placeholder="ค้นหารายชื่อ">
+    </div>
 
-      "โทรศัพท์": `<div class="mock-card"><div style="font-size:12px;color:#777">แป้นกด</div><div style="font-size:28px;text-align:center;margin:24px 0">＋</div><button class="mock-primary" onclick="phoneDemoToast('โทรศัพท์จำลอง')">โทร</button></div>`,
+    <main class="phone-content">
+
+      <section class="phone-panel phone-contacts">
+        <div class="phone-section-title">ข้อมูลส่วนตัว</div>
+        <div class="phone-contact-card">
+          <div class="phone-contact-row">
+            <span class="phone-contact-avatar self">ต</span>
+            <span>โตโต้รักน้องณิต</span>
+          </div>
+        </div>
+
+        <div class="phone-section-title">★ &nbsp; รายชื่อที่ชอบ</div>
+        <div class="phone-contact-card">
+          <div class="phone-contact-row">
+            <span class="phone-contact-avatar">ณ</span>
+            <span>น้องณิต+</span>
+          </div>
+        </div>
+
+        <div class="phone-section-title">รายชื่อ</div>
+        <div class="phone-contact-card phone-contact-list"></div>
+      </section>
+
+      <section class="phone-panel phone-recents hidden">
+        <div class="phone-section-title">ล่าสุด</div>
+        <div class="phone-recent-list">
+          <div class="phone-empty">ยังไม่มีประวัติการโทร</div>
+        </div>
+      </section>
+
+      <section class="phone-panel phone-keypad hidden">
+        <div class="phone-dialed-number"></div>
+        <div class="phone-key-grid">
+          <button data-digit="1">1<small>○○</small></button>
+          <button data-digit="2">2<small>ABC</small></button>
+          <button data-digit="3">3<small>DEF</small></button>
+          <button data-digit="4">4<small>GHI</small></button>
+          <button data-digit="5">5<small>JKL</small></button>
+          <button data-digit="6">6<small>MNO</small></button>
+          <button data-digit="7">7<small>PQRS</small></button>
+          <button data-digit="8">8<small>TUV</small></button>
+          <button data-digit="9">9<small>WXYZ</small></button>
+          <button data-digit="*">*</button>
+          <button data-digit="0">0<small>+</small></button>
+          <button data-digit="#">#</button>
+        </div>
+        <div class="phone-call-row">
+          <button class="phone-call" type="button" aria-label="โทร">
+            <svg viewBox="0 0 24 24"><path d="M6.5 3 3.8 5.7c-.5.5-.7 1.2-.5 1.9 1.5 6.2 6.4 11.1 12.6 12.6.7.2 1.4 0 1.9-.5l2.7-2.7-4.6-4.6-2.6 2.1a14 14 0 0 1-4.8-4.8l2.1-2.6z"/></svg>
+          </button>
+          <button class="phone-delete-digit" type="button" aria-label="ลบตัวเลข">⌫</button>
+        </div>
+      </section>
+
+    </main>
+
+    <nav class="phone-bottom-tabs">
+      <button class="phone-tab" type="button" data-phone-tab="keypad">ปุ่มกด</button>
+      <button class="phone-tab" type="button" data-phone-tab="recents">ล่าสุด</button>
+      <button class="phone-tab active" type="button" data-phone-tab="contacts">รายชื่อ</button>
+    </nav>
+  </div>
+`,
 "YouTube": `
   <div class="yt-app">
 
@@ -10887,7 +11232,152 @@ if (name === "กล้อง") {
     phoneDemoToast("ตัวเลือกกล้อง");
   });
 }
+if (name === "โทรศัพท์") {
+  const phone = document.querySelector("#appContent .samsung-phone");
+  const tabs = phone.querySelectorAll(".phone-tab");
+  const panels = {
+    contacts: phone.querySelector(".phone-contacts"),
+    recents: phone.querySelector(".phone-recents"),
+    keypad: phone.querySelector(".phone-keypad")
+  };
 
+  function showPhoneTab(tabName) {
+    Object.entries(panels).forEach(([key, panel]) => {
+      panel.classList.toggle("hidden", key !== tabName);
+    });
+
+    tabs.forEach(tab => {
+      tab.classList.toggle("active", tab.dataset.phoneTab === tabName);
+    });
+
+    phone.querySelector(".phone-header").style.visibility =
+      tabName === "keypad" ? "hidden" : "visible";
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      showPhoneTab(tab.dataset.phoneTab);
+    });
+  });
+
+  // ใช้รายชื่อเดียวกับแอปข้อความ
+  const smsContactRows = [
+    ...document.querySelectorAll(".sms-contacts .sms-contact-card:not(.sms-contact-group) .sms-contact-row")
+  ];
+
+  // หากแอปข้อความยังไม่ได้เปิด ให้อ่านรายชื่อจากแม่แบบของแอปข้อความ
+  let contacts = smsContactRows
+    .map(row => row.querySelector("span:last-child")?.textContent.trim())
+    .filter(Boolean);
+
+  if (!contacts.length && typeof content["ข้อความ"] === "string") {
+    const template = document.createElement("div");
+    template.innerHTML = content["ข้อความ"];
+    contacts = [
+      ...template.querySelectorAll(
+        ".sms-contacts .sms-contact-card:not(.sms-contact-group) .sms-contact-row"
+      )
+    ]
+      .map(row => row.querySelector("span:last-child")?.textContent.trim())
+      .filter(Boolean);
+  }
+
+  // สองรายชื่อแรกแสดงในหมวดส่วนตัวและรายการโปรดแล้ว
+  const otherContacts = contacts.filter(name =>
+    name !== "โตโต้รักน้องณิต" && name !== "น้องณิต+"
+  );
+
+  const contactList = phone.querySelector(".phone-contact-list");
+
+  otherContacts.forEach(name => {
+    const row = document.createElement("div");
+    row.className = "phone-contact-row";
+
+    const avatar = document.createElement("span");
+    avatar.className = "phone-contact-avatar";
+    avatar.textContent = name.charAt(0);
+
+    const label = document.createElement("span");
+    label.textContent = name;
+
+    row.append(avatar, label);
+    contactList.appendChild(row);
+  });
+
+  const searchWrap = phone.querySelector(".phone-search-wrap");
+  const searchInput = phone.querySelector(".phone-search-input");
+
+  phone.querySelector(".phone-search-btn").addEventListener("click", () => {
+    showPhoneTab("contacts");
+    searchWrap.classList.toggle("hidden");
+    if (!searchWrap.classList.contains("hidden")) searchInput.focus();
+  });
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLowerCase();
+    phone.querySelectorAll(".phone-contact-row").forEach(row => {
+      row.style.display =
+        row.textContent.toLowerCase().includes(query) ? "" : "none";
+    });
+  });
+
+  phone.querySelector(".phone-add").addEventListener("click", () => {
+    phoneDemoToast("เพิ่มรายชื่อ (โหมดจำลอง)");
+  });
+
+  phone.querySelector(".phone-menu").addEventListener("click", () => {
+    phoneDemoToast("เมนูโทรศัพท์");
+  });
+
+  let dialed = "";
+  const dialDisplay = phone.querySelector(".phone-dialed-number");
+
+  phone.querySelectorAll("[data-digit]").forEach(button => {
+    button.addEventListener("click", () => {
+      dialed += button.dataset.digit;
+      dialDisplay.textContent = dialed;
+    });
+  });
+
+  phone.querySelector(".phone-delete-digit").addEventListener("click", () => {
+    dialed = dialed.slice(0, -1);
+    dialDisplay.textContent = dialed;
+  });
+
+  phone.querySelector(".phone-call").addEventListener("click", () => {
+    if (!dialed) {
+      phoneDemoToast("กรุณากดหมายเลขโทรศัพท์");
+      return;
+    }
+
+    const recentList = phone.querySelector(".phone-recent-list");
+    recentList.querySelector(".phone-empty")?.remove();
+
+    const row = document.createElement("div");
+    row.className = "phone-recent-row";
+
+    const name = document.createElement("span");
+    name.className = "phone-recent-name";
+    name.textContent = "↗ " + dialed;
+
+    const time = document.createElement("span");
+    time.className = "phone-recent-time";
+    time.textContent = new Date().toLocaleTimeString("th-TH", {
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+
+    row.append(name, time);
+    recentList.prepend(row);
+
+    phoneDemoToast("โทรศัพท์จำลอง: " + dialed);
+    dialed = "";
+    dialDisplay.textContent = "";
+    showPhoneTab("recents");
+  });
+
+  showPhoneTab("contacts");
+}
 if (name === "ข้อความ") {
   const smsPage = document.querySelector("#appContent .sms-page");
   const smsDetail = smsPage.querySelector(".sms-detail");
