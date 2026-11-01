@@ -7709,7 +7709,13 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
       <form class="line-composer" id="lineComposer">
         <button type="button" id="lineComposerPlus" aria-label="เพิ่มเติม">＋</button>
         <input id="lineMessageInput" placeholder="พิมพ์ข้อความ" autocomplete="off">
-        <button type="submit" aria-label="ส่งข้อความ">➤</button>
+        <button type="submit" aria-label="ส่งข้อความ"><svg width="24" height="24" viewBox="0 0 24 24"
+     fill="none" stroke="currentColor"
+     stroke-width="2" stroke-linecap="round"
+     stroke-linejoin="round" aria-hidden="true">
+  <path d="m22 2-7 20-4-9-9-4Z"/>
+  <path d="M22 2 11 13"/>
+</svg></button>
       </form>
     </section>
 
@@ -8498,7 +8504,7 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
 
   <div class="ig-profile-bio">
     <strong>Phanuphong T.</strong>
-    <span>just living my little life ♡</span>
+    <span>TN♡</span>
   </div>
 
   <div class="ig-profile-buttons">
@@ -8680,7 +8686,7 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
 
   <div class="ig-kanit-bio">
     <strong>คณิต</strong>
-    <span>kanittee ♡</span>
+    <span>kanittee</span>
   </div>
 
   <div class="ig-kanit-followed">
@@ -8949,7 +8955,14 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
     >
     <strong>kanit</strong>
     <span>ตอนนี้</span>
-    <button class="ig-story-close" type="button" aria-label="ปิด">×</button>
+    <button class="ig-story-close" type="button" aria-label="ปิด">
+  <svg width="24" height="24" viewBox="0 0 24 24"
+       fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round"
+       stroke-linejoin="round" aria-hidden="true">
+    <path d="M18 6 6 18M6 6l12 12"/>
+  </svg>
+</button>
   </div>
 
  
@@ -8964,9 +8977,20 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
 
 
   <div class="ig-story-viewer-bottom">
-    <input type="text" class="ig-story-reply" placeholder="ตอบกลับ kanit...">
-    <button class="ig-story-send" type="button" aria-label="ส่งข้อความ">➤</button>
-    <button class="ig-story-heart" type="button" aria-label="ถูกใจ">♡</button>
+    <input type="text" class="ig-story-reply" placeholder="ตอบกลับ kanitte...">
+    <button class="ig-story-send" type="button" aria-label="ส่งข้อความ"><svg width="24" height="24" viewBox="0 0 24 24"
+     fill="none" stroke="currentColor"
+     stroke-width="2" stroke-linecap="round"
+     stroke-linejoin="round" aria-hidden="true">
+  <path d="m22 2-7 20-4-9-9-4Z"/>
+  <path d="M22 2 11 13"/>
+</svg></button>
+    <button class="ig-story-heart" type="button" aria-label="ถูกใจ"><svg width="26" height="26" viewBox="0 0 24 24"
+     fill="none" stroke="currentColor"
+     stroke-width="2" stroke-linecap="round"
+     stroke-linejoin="round" aria-hidden="true">
+  <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>
+</svg></button>
   </div>
 </div>
 
@@ -9649,7 +9673,7 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
       <div class="gallery-viewer-header">
         <button class="gallery-viewer-back" type="button">‹</button>
         <span class="gallery-viewer-counter"></span>
-<button class="gallery-favorite-btn" type="button" aria-label="เพิ่มในรายการโปรด">♡</button>
+<button class="gallery-favorite-btn" type="button" aria-label="เพิ่มในรายการโปรด"> </button>
       </div>
 
       <div class="gallery-viewer-stage">
@@ -10605,27 +10629,27 @@ if (exploreGallery) {
   const totoPosts = {
     1: {
       image: "https://i.ibb.co/pBddL6bb/r07qxo-R-Download.jpg",
-      caption: "little moments ♡"
+      caption: "ที่ประจำ"
     },
     2: {
       image: "https://i.ibb.co/DgTZ1jT6/r07qxo-R-Download.jpg",
-      caption: "a day to remember"
+      caption: "ประสบการณ์เข้าคุกครั้งแรก"
     },
     3: {
       image: "https://i.ibb.co/pBTP5JfK/r07qxo-R-Download.jpg",
-      caption: "my favorite day"
+      caption: "ความสงบ (ไม่เคยมี)"
     },
     4: {
       image: "https://i.ibb.co/VWfnkc3w/r07qxo-R-Download.jpg",
-      caption: "just me"
+      caption: "เสี่ยมารับแล้วหนู"
     },
     5: {
       image: "https://i.ibb.co/rGmGhZqj/A6125416-E6-E3-43-B0-9955-6-D914089440-E.jpg",
-      caption: "somewhere in my memories"
+      caption: "แฟนผมน่ารัก"
     },
     6: {
       image: "https://i.ibb.co/bjcs2Zz5/IMG-5478.jpg",
-      caption: "life lately ♡"
+      caption: "กินเยอะๆ ค้าบ"
     }
   };
 
@@ -11051,7 +11075,7 @@ if (totoFollowing) {
   storyHeader.querySelector("img").alt = "โตโต้";
   storyHeader.querySelector("strong").textContent = "phanuphong_t";
 
-  storyReply.placeholder = "ตอบกลับ toto...";
+  storyReply.placeholder = "ตอบกลับ phanuphong_t...";
   storyProgress.style.width = "0%";
 
   storyViewer.classList.remove("hidden");
