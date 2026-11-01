@@ -15697,13 +15697,7 @@ const main = document.createElement("div");
 window.openAkkeeChatFromNotification = function () {
   closeChat();
 
-  // ซ่อนหน้าจออื่นก่อนเปิด LINE
-  ["lockScreen", "pinScreen", "homeScreen", "appScreen", "playerScreen"].forEach(id => {
-    const page = document.getElementById(id);
-    if (page) page.classList.add("hidden");
-  });
-
-    // เปิด LINE ผ่านระบบเดิม
+   // เปิด LINE ผ่านระบบเดิม โดยไม่ซ่อนหน้าจอด้วยตัวเอง
   window.openLineApp();
 
   // เปิดแท็บเพื่อนตามระบบ LINE เดิม
