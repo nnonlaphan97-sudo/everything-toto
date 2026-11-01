@@ -14709,10 +14709,26 @@ const noppaphaChatHistory = [
     }
 
         // ข้อความทั้งฝั่งภาณุพงศ์และคณิต ไม่มีเวลาแสดง
-    const bubble = document.createElement("div");
-    bubble.className = "line-chat-bubble";
-    bubble.textContent = text;
-    row.appendChild(bubble);
+   const bubble = document.createElement("div");
+bubble.className = "line-chat-bubble";
+
+if (text.startsWith("ส่งรูปภาพ:")) {
+  const img = document.createElement("img");
+  img.src = text.slice("ส่งรูปภาพ:".length);
+  img.alt = "รูปภาพจากน้องณิต";
+  img.style.width = "100%";
+  img.style.maxWidth = "220px";
+  img.style.borderRadius = "10px";
+  img.style.display = "block";
+
+  bubble.style.padding = "0";
+  bubble.style.overflow = "hidden";
+  bubble.appendChild(img);
+} else {
+  bubble.textContent = text;
+}
+
+row.appendChild(bubble);
 
     messages.appendChild(row);
 
@@ -15666,6 +15682,37 @@ const main = document.createElement("div");
     subtree: true
   });
 })();
+window.addKanithIncomingMessage = function (text) {
+  const now = new Date();
+  const months = [
+    "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.",
+    "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.",
+    "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."
+  ];
+
+  kanithChatHistory.push({
+    date: `${now.getDate()} ${months[now.getMonth()]}`,
+    time: now.toLocaleTimeString("th-TH", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false
+    }),
+    from: "c",
+    text: text
+  });
+
+  renderKanithChatHistory();
+
+  const chat = document.getElementById("kanithChatMessages");
+  if (chat) chat.scrollTop = chat.scrollHeight;
+
+  const notificationText = text.startsWith("ส่งรูปภาพ:")
+    ? "ส่งรูปภาพ"
+    : text;
+
+  window.showLineNotification?.("น้องณิต💙", notificationText);
+};
+
   window.addAkkeeIncomingMessage = function (text) {
     const now = new Date();
     const months = [
@@ -15719,7 +15766,22 @@ window.openAkkeeChatFromNotification = function () {
     messages.scrollTop = messages.scrollHeight;
   }
 };
-  
+    // เปิดห้องแชตน้องณิตเมื่อกดแบนเนอร์
+  window.openKanithChatFromNotification = function () {
+    window.showPhoneScreen("line");
+    screen.style.display = "flex";
+
+    closeChat();
+    setTab("chats");
+    chatOpenedFrom = "chats";
+
+    openLineSubpage("chat");
+
+    const messages = document.getElementById("kanithChatMessages");
+    if (messages) {
+      messages.scrollTop = messages.scrollHeight;
+    }
+  };
   // เปิด LINE เมื่อระบบหลักเรียก openApp("LINE")
   window.openLineApp = function () {
     closeChat();
@@ -15767,7 +15829,9 @@ window.showLineNotification = function (sender, message) {
 
   const icon = document.createElement("img");
 icon.className = "line-notification-icon";
-icon.src = "https://i.ibb.co/BVHVS8Rz/IMG-3304.jpg";
+icon.src = sender === "น้องณิต💙"
+  ? "https://i.ibb.co/4ntNZx78/B2-EE0-EC1-6048-47-BA-8-F00-5569-F467-CEB4.jpg"
+  : "https://i.ibb.co/BVHVS8Rz/IMG-3304.jpg";
 icon.alt = sender;
 
   const content = document.createElement("div");
@@ -15791,9 +15855,9 @@ banner.onclick = function () {
   clearTimeout(window.lineNotificationTimer);
   banner.classList.remove("show");
 
-  if (sender === "อัคคี") {
-    window.openAkkeeChatFromNotification?.();
-  }
+ if (sender === "น้องณิต💙") {
+  window.openKanithChatFromNotification?.();
+}
 };
 
 // แบนเนอร์หายเอง แม้ไม่ได้กด
@@ -15899,16 +15963,15 @@ window.lineNotificationTimer = setTimeout(() => {
       stopCallTimer();
       callScreen.hidden = true;
 
-      // อัคคีส่งข้อความหลังโตโต้วางสาย
-    [
-  "วางสายทำไมพี่โต้",
-  "ผมคิดถึงแฟน",
-  "พี่โต้ไปสนามบินปะ",
-  "ฝากรับแฟนกลับบ้านหน่อย"
+      // คณิตส่งข้อความหลังโตโต้วางสาย
+   [
+  "เหนื่อยมั้ย",
+   "ส่งรูปภาพ:https://i.ibb.co/SDBdB8VN/IMG-3610.jpg",
+  "เป็นกำลังใจให้นะโตโต้"
 ].forEach((text, index) => {
   setTimeout(() => {
-    window.addAkkeeIncomingMessage(text);
-  }, 1200 + index * 2200);
+  window.addKanithIncomingMessage(text);
+}, 1200 + index * 2200);
 });
     }
   });
@@ -15921,15 +15984,14 @@ window.lineNotificationTimer = setTimeout(() => {
     callScreen.hidden = true;
 
     // อัคคีส่งข้อความหลังโตโต้ปฏิเสธสาย
-    [
-  "รับสายผมหน่อย",
-  "ผมคิดถึงแฟน",
-  "พี่โต้ไปสนามบินปะ",
-  "ฝากรับแฟนกลับบ้านหน่อย"
+[
+  "ยุ่งอยู่เหรอ",
+  "ส่งรูปภาพ:https://i.ibb.co/SDBdB8VN/IMG-3610.jpg",
+  "เป็นกำลังใจให้นะโตโต้"
 ].forEach((text, index) => {
   setTimeout(() => {
-    window.addAkkeeIncomingMessage(text);
-  }, 1200 + index * 2200);
+  window.addKanithIncomingMessage(text);
+}, 1200 + index * 2200);
 });
 });
 })();
