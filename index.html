@@ -13895,26 +13895,11 @@ const rescueLoveChatHistory = [
       }
     }
 
-    // เวลาอยู่ด้านนอกบับเบิ้ล
-    if (time && from === "t") {
-      const timeLabel = document.createElement("span");
-      timeLabel.className = "line-chat-time";
-      timeLabel.textContent = time;
-      row.appendChild(timeLabel);
-    }
-
-    // ข้อความ
+        // ข้อความทั้งฝั่งภาณุพงศ์และคณิต ไม่มีเวลาแสดง
     const bubble = document.createElement("div");
     bubble.className = "line-chat-bubble";
     bubble.textContent = text;
     row.appendChild(bubble);
-
-    if (time && from !== "t") {
-      const timeLabel = document.createElement("span");
-      timeLabel.className = "line-chat-time";
-      timeLabel.textContent = time;
-      row.appendChild(timeLabel);
-    }
 
     messages.appendChild(row);
 
