@@ -5411,6 +5411,93 @@ body:has(#appScreen:not(.hidden) .samsung-camera) .status-bar {
   fill: currentColor;
 }
 
+/* WORLD CLOCK - SAMSUNG STYLE, LIGHT MODE */
+.samsung-clock [data-panel="world"] {
+  padding: 0 14px 20px;
+  background: #fff;
+}
+
+.clock-world-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 39%;
+  min-height: 190px;
+  text-align: center;
+}
+
+.clock-world-digital {
+  color: #171717;
+  font-size: clamp(42px, 11vw, 65px);
+  font-weight: 350;
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.clock-world-zone {
+  margin-top: 8px;
+  color: #555;
+  font-size: 17px;
+}
+
+.clock-world-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 5px 22px;
+  color: #333;
+  font-size: 17px;
+}
+
+.clock-world-more {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 36px;
+}
+
+.samsung-clock .clock-world-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.samsung-clock .clock-world-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 112px;
+  padding: 22px 20px;
+  border: none;
+  border-radius: 18px;
+  background: #f4f4f5;
+}
+
+.clock-world-city strong {
+  display: block;
+  color: #222;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.clock-world-city small {
+  display: block;
+  margin-top: 4px;
+  color: #888;
+  font-size: 12px;
+}
+
+.samsung-clock .clock-world-time {
+  color: #222;
+  font-size: 32px;
+  font-weight: 450;
+  font-variant-numeric: tabular-nums;
+}
+
+
 </style>
 </head>
 <body>
@@ -7989,8 +8076,25 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
     </div>
 
     <div class="clock-panel hidden" data-panel="world">
-      <div class="clock-world-list"></div>
-    </div>
+  <div class="clock-world-hero">
+    <div class="clock-world-digital">00:00:00</div>
+    <div class="clock-world-zone">เวลาอินโดจีน</div>
+  </div>
+
+  <div class="clock-world-toolbar">
+    <span>เวลาโลก</span>
+    <span class="clock-world-more">
+      <svg width="23" height="23" viewBox="0 0 24 24"
+           fill="currentColor" aria-hidden="true">
+        <circle cx="12" cy="5" r="1.8"/>
+        <circle cx="12" cy="12" r="1.8"/>
+        <circle cx="12" cy="19" r="1.8"/>
+      </svg>
+    </span>
+  </div>
+
+  <div class="clock-world-list"></div>
+</div>
 
     <div class="clock-panel hidden" data-panel="stopwatch">
       <div class="clock-big-time clock-stopwatch-display">00:00.00</div>
@@ -9538,14 +9642,56 @@ if (name === "นาฬิกา") {
 
   renderAlarms();
 
-  // เวลาโลก
+
+  // เวลาโลก: กรุงเทพฯ และดูไบ
   const cities = [
-    { name: "กรุงเทพมหานคร", zone: "Asia/Bangkok" },
-    { name: "โซล", zone: "Asia/Seoul" },
-    { name: "โตเกียว", zone: "Asia/Tokyo" },
-    { name: "ลอนดอน", zone: "Europe/London" },
-    { name: "นิวยอร์ก", zone: "America/New_York" }
+    { name: "กรุงเทพฯ", zone: "Asia/Bangkok", detail: "ไทม์โซนท้องถิ่น" },
+    { name: "ดูไบ", zone: "Asia/Dubai", detail: "ช้ากว่ากรุงเทพฯ 3 ชั่วโมง" }
   ];
+
+  function getCityTime(zone, showSeconds = false) {
+    return new Intl.DateTimeFormat("en-GB", {
+      timeZone: zone,
+      hour: "2-digit",
+      minute: "2-digit",
+      ...(showSeconds ? { second: "2-digit" } : {}),
+      hour12: false
+    }).format(new Date());
+  }
+
+  function renderWorld() {
+    const list = $c(".clock-world-list");
+    const digital = $c(".clock-world-digital");
+
+    digital.textContent = getCityTime("Asia/Bangkok", true);
+
+    list.innerHTML = cities.map(city => `
+      <div class="clock-world-item">
+        <div class="clock-world-city">
+          <strong>${city.name}</strong>
+          <small>${city.detail}</small>
+        </div>
+        <span class="clock-world-time">
+          ${getCityTime(city.zone)}
+        </span>
+      </div>
+    `).join("");
+  }
+
+  renderWorld();
+
+  // อัปเดตเวลาทุกวินาทีเฉพาะตอนหน้าเวลาโลกยังอยู่ในแอป
+  const worldClockInterval = setInterval(() => {
+    if (!clock.isConnected) {
+      clearInterval(worldClockInterval);
+      return;
+    }
+
+    if (!$c('[data-panel="world"]').classList.contains("hidden")) {
+      renderWorld();
+    }
+  }, 1000);
+
 
   function renderWorld() {
     const list = $c(".clock-world-list");
