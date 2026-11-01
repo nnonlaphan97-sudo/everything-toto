@@ -10081,14 +10081,17 @@ if (name === "อินเทอร์เน็ต") {
     "วิธีมัดใจพ่อตา"
   ];
 
-  let history;
+let history;
 
-  try {
-    const saved = JSON.parse(localStorage.getItem(storageKey));
-    history = Array.isArray(saved) ? saved : [...defaultHistory];
-  } catch {
-    history = [...defaultHistory];
-  }
+try {
+  const saved = JSON.parse(localStorage.getItem(storageKey));
+
+  history = Array.isArray(saved) && saved.length > 0
+    ? saved
+    : [...defaultHistory];
+} catch {
+  history = [...defaultHistory];
+}
 
   function saveHistory() {
     try {
