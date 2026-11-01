@@ -7663,9 +7663,10 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
   ></video>
 </div>
   <strong>วิดีโอ</strong>
-  <small>รูปจากวิดิอ</small>
+  <small>รูปจากวิดิโอ</small>
 </button>
-
+</div>
+</div>
     <!-- รูปภายในอัลบั้ม -->
     <div class="gallery-album-view" hidden>
       <div class="gallery-subheader">
@@ -10192,6 +10193,8 @@ const galleryVideos = [
 ];
 
 
+recentImages.push(...galleryVideos);
+
 const galleryImages = [];
 
 let activeGalleryImages = galleryImages;
@@ -10299,9 +10302,11 @@ function showGalleryPhoto(index) {
     ? [...favoritePhotos]
     : albumName === "ล่าสุด"
       ? recentImages
-      : albumName === "วิดีโอ"
-        ? galleryVideos
-        : galleryImages;
+      : albumName === "กล้องถ่ายรูป"
+        ? cameraImages
+        : albumName === "วิดีโอ"
+          ? galleryVideos
+          : galleryImages;
       gallery.querySelector(".gallery-album-title").textContent = albumName;
       gallery.querySelector(".gallery-album-count").textContent =
     `${currentGalleryImages.length} ภาพ`;
@@ -10340,10 +10345,10 @@ photoGrid.innerHTML = currentGalleryImages.map((src, index) => {
     albumView.hidden = true;
     albumsView.hidden = false;
   });
-gallery.querySelector(".gallery-full-video").pause();
-  gallery.querySelector(".gallery-viewer-back").addEventListener("click", () => {
-    viewer.hidden = true;
-  });
+gallery.querySelector(".gallery-viewer-back").addEventListener("click", () => {
+  gallery.querySelector(".gallery-full-video").pause();
+  viewer.hidden = true;
+});
 
   gallery.querySelector(".gallery-prev").addEventListener("click", () => {
     showGalleryPhoto(selectedPhoto - 1);
