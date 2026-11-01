@@ -15691,6 +15691,28 @@ const main = document.createElement("div");
 
     window.showLineNotification?.("อัคคี", text);
   };
+  
+  // เปิดห้องแชตอัคคีเมื่อกดแบนเนอร์แจ้งเตือน
+window.openAkkeeChatFromNotification = function () {
+  closeChat();
+  screen.style.display = "flex";
+
+  // เปิดแท็บเพื่อนตามระบบ LINE เดิม
+  setTab("friends");
+
+  // เปิดห้องแชตอัคคีด้วยระบบนำทางเดิม
+  openLineSubpage("akkeeChatPage");
+
+  // แสดงข้อความที่ได้รับทั้งหมด
+  renderAkkeeChatHistory();
+
+  // เลื่อนไปข้อความล่าสุด
+  const messages = document.getElementById("akkeeChatMessages");
+  if (messages) {
+    messages.scrollTop = messages.scrollHeight;
+  }
+};
+  
   // เปิด LINE เมื่อระบบหลักเรียก openApp("LINE")
   window.openLineApp = function () {
     closeChat();
@@ -15755,10 +15777,23 @@ icon.alt = sender;
 
   banner.classList.add("show");
 
+// กดแบนเนอร์เพื่อเปิดห้องแชตอัคคี
+banner.style.cursor = "pointer";
+
+banner.onclick = function () {
   clearTimeout(window.lineNotificationTimer);
-  window.lineNotificationTimer = setTimeout(() => {
-    banner.classList.remove("show");
-  }, 4500);
+  banner.classList.remove("show");
+
+  if (sender === "อัคคี") {
+    window.openAkkeeChatFromNotification?.();
+  }
+};
+
+// แบนเนอร์หายเอง แม้ไม่ได้กด
+clearTimeout(window.lineNotificationTimer);
+window.lineNotificationTimer = setTimeout(() => {
+  banner.classList.remove("show");
+}, 4500);
 };
 
 
@@ -15858,9 +15893,16 @@ icon.alt = sender;
       callScreen.hidden = true;
 
       // อัคคีส่งข้อความหลังโตโต้วางสาย
-      setTimeout(() => {
-        window.addAkkeeIncomingMessage("วางสายทำไม");
-      }, 1200);
+    [
+  "วางสายทำไมพี่โต้",
+  "ผมคิดถึงแฟน",
+  "พี่โต้ไปสนามบินปะ",
+  "ฝากรับแฟนกลับบ้านหน่อย"
+].forEach((text, index) => {
+  setTimeout(() => {
+    window.addAkkeeIncomingMessage(text);
+  }, 1200 + index * 2200);
+});
     }
   });
 
@@ -15872,10 +15914,16 @@ icon.alt = sender;
     callScreen.hidden = true;
 
     // อัคคีส่งข้อความหลังโตโต้ปฏิเสธสาย
-    setTimeout(() => {
-      window.addAkkeeIncomingMessage("ตัดสายทำไม");
-    }, 1200);
-  });
+    [
+  "รับสายผมหน่อย",
+  "ผมคิดถึงแฟน",
+  "พี่โต้ไปสนามบินปะ",
+  "ฝากรับแฟนกลับบ้านหน่อย"
+].forEach((text, index) => {
+  setTimeout(() => {
+    window.addAkkeeIncomingMessage(text);
+  }, 1200 + index * 2200);
+});
 })();
 
 </script>
