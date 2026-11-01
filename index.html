@@ -7001,7 +7001,7 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
       <button class="key" data-digit="0"><span class="key-number">0</span><span class="key-letters">&nbsp;</span></button>
       <button class="key action" id="deleteDigit">ลบ</button>
     </div>
-    <div class="pin-bottom"><div class="gesture-bar" id="pinGestureBack"></div></div>
+    <div class="pin-bottom"><div class="gesture-bar" id="pinGestureBack" style="opacity: 0;"></div></div>
   </section>
 
   <!-- HOME -->
@@ -7859,8 +7859,13 @@ window.showPhoneScreen = showScreen;
     $("pinError").textContent = "";
     showScreen("pin");
   }
-  function enterDigit(digit) {
+function enterDigit(digit) {
     if (pin.length >= 6) return;
+
+    if (typeof window.prepareIncomingRingtone === "function") {
+      window.prepareIncomingRingtone();
+    }
+
     pin += digit;
     updatePinDots();
     $("pinError").textContent = "";
@@ -15892,7 +15897,26 @@ window.lineNotificationTimer = setTimeout(() => {
   const callScreen = document.getElementById("akkeeIncomingCall");
  const incomingRingtone = new Audio("videos/export_1793547553689.mp3");
 incomingRingtone.loop = true;
-incomingRingtone.volume = 0.7;
+incomingRingtone.volume = 1;
+incomingRingtone.preload = "auto";
+
+let ringtonePrepared = false;
+
+window.prepareIncomingRingtone = function () {
+  if (ringtonePrepared) return;
+
+  incomingRingtone.muted = true;
+
+  incomingRingtone.play().then(() => {
+    incomingRingtone.pause();
+    incomingRingtone.currentTime = 0;
+    incomingRingtone.muted = false;
+    ringtonePrepared = true;
+  }).catch((error) => {
+    incomingRingtone.muted = false;
+    console.warn("เตรียมเสียงเรียกเข้าไม่สำเร็จ:", error);
+  });
+};
    const status = document.getElementById("akkeeCallStatus");
   const acceptBtn = document.getElementById("akkeeAcceptCall");
   const rejectBtn = document.getElementById("akkeeRejectCall");
