@@ -11034,8 +11034,31 @@ if (totoFollowing) {
   });
 
   ig.querySelector(".ig-my-story").addEventListener("click", () => {
-    alert("ยังไม่ได้เพิ่มสตอรี่\nแตะ + เพื่อสร้างสตอรี่ใหม่");
+  const storyViewer = ig.querySelector(".ig-story-viewer");
+  const storyVideo = ig.querySelector(".ig-story-video");
+  const storyHeader = ig.querySelector(".ig-story-viewer-header");
+  const storyReply = ig.querySelector(".ig-story-reply");
+  const storyProgress = ig.querySelector(".ig-story-progress span");
+
+  storyVideo.pause();
+  storyVideo.src = "videos/snaptik_7601115564639161607_v3.mp4";
+  storyVideo.load();
+
+  storyHeader.querySelector("img").src =
+    "https://i.ibb.co/j9K327YR/r07qxo-R-Download.jpg";
+  storyHeader.querySelector("img").alt = "โตโต้";
+  storyHeader.querySelector("strong").textContent = "toto";
+
+  storyReply.placeholder = "ตอบกลับ toto...";
+  storyProgress.style.width = "0%";
+
+  storyViewer.classList.remove("hidden");
+
+  storyVideo.currentTime = 0;
+  storyVideo.play().catch(() => {
+    alert("ไม่สามารถเล่นวิดีโอได้ กรุณาตรวจสอบไฟล์");
   });
+});
 
   
 const storyViewer = ig.querySelector(".ig-story-viewer");
@@ -11053,6 +11076,18 @@ function closeKanitStory() {
 
 
 function openKanitStory() {
+  storyVideo.pause();
+storyVideo.src = "videos/@r07qxo  - R⤓Download.mp4";
+storyVideo.load();
+
+const storyHeader = ig.querySelector(".ig-story-viewer-header");
+
+storyHeader.querySelector("img").src =
+  "https://i.ibb.co/d03N2Nsx/r07qxo-R-Download.jpg";
+storyHeader.querySelector("img").alt = "คณิต";
+storyHeader.querySelector("strong").textContent = "kanit";
+
+ig.querySelector(".ig-story-reply").placeholder = "ตอบกลับ kanit...";
   // เปลี่ยนวงแหวนสตอรี่คณิตเป็นสีเทาหลังจากกดดู
   const kanitRing = ig.querySelector(".ig-kanit-story .ig-friend-ring");
   if (kanitRing) {
