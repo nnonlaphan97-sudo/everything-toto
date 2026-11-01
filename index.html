@@ -895,7 +895,31 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   z-index: 30;
   pointer-events: none;
 }
+/* LINE: ขีดกลับหน้าโฮม */
+#lineScreen .line-home-gesture {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 28px;
+  z-index: 10000;
+  background: transparent;
+  touch-action: none;
+  cursor: pointer;
+}
 
+#lineScreen .line-home-gesture::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  width: 108px;
+  height: 4px;
+  border-radius: 10px;
+  background: #33313a;
+}
 /* ===== LINE APP: LIGHT THEME ===== */
 #lineScreen {
   --line-green: #06c755;
@@ -931,7 +955,9 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   padding: max(env(safe-area-inset-top), 8px) 16px 10px;
   background: #fff;
 }
-
+#lineScreen #lineBackBtn {
+  display: none;
+}
 .line-header-top {
   height: 45px;
   display: flex;
@@ -6734,7 +6760,7 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
   
 <!-- LINE App Screen -->
 <div id="lineScreen" class="app-screen line-screen" style="display:none">
-
+  <div class="line-home-gesture" id="lineHomeGesture"></div>
   <header class="line-header">
     <div class="line-header-top">
       <button class="line-header-btn" id="lineBackBtn" aria-label="กลับหน้า Home">
@@ -12880,14 +12906,41 @@ function renderFriends() {
     renderFriends();
   });
 
-  $("#lineBackBtn").addEventListener("click", () => {
-  closeChat();
-  screen.style.display = "none";
+    function lineGoHome() {
+    closeChat();
+    screen.style.display = "none";
 
-  if (typeof window.showPhoneScreen === "function") {
-    window.showPhoneScreen("home");
+    if (typeof window.showPhoneScreen === "function") {
+      window.showPhoneScreen("home");
+    }
   }
-});
+
+  $("#lineBackBtn").addEventListener("click", lineGoHome);
+
+  const lineGesture = $("#lineHomeGesture");
+  let lineSwipeStartY = null;
+
+  lineGesture.addEventListener("click", lineGoHome);
+
+  lineGesture.addEventListener("touchstart", event => {
+    if (event.touches.length !== 1) return;
+    lineSwipeStartY = event.touches[0].clientY;
+  }, { passive: true });
+
+  lineGesture.addEventListener("touchend", event => {
+    if (lineSwipeStartY === null || !event.changedTouches.length) return;
+
+    const distance = lineSwipeStartY - event.changedTouches[0].clientY;
+    lineSwipeStartY = null;
+
+    if (distance > 35) {
+      lineGoHome();
+    }
+  }, { passive: true });
+
+  lineGesture.addEventListener("touchcancel", () => {
+    lineSwipeStartY = null;
+  });
 
   $("#lineConversationBack").addEventListener("click", closeChat);
 
