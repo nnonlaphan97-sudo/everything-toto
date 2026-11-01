@@ -90,7 +90,7 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   gap: 11px;
   padding: 13px;
   border-radius: 18px;
-  background: rgba(240, 240, 245, 0.88);
+  background: rgba(240, 240, 245, 0.38);
   color: #222;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
   backdrop-filter: blur(18px);
@@ -6740,11 +6740,10 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
 
       <div class="lock-line-message">
         <div class="lock-line-top">
-          <strong>LINE</strong>
           <span>ตอนนี้</span>
         </div>
         <div class="lock-line-name">คณิต</div>
-        <div class="lock-line-text">แลนแล้ว</div>
+        <div class="lock-line-text">โต้ ผมแลนแล้วนะ</div>
       </div>
     </div>
 
@@ -15334,7 +15333,7 @@ window.showLineNotification = function (sender, message) {
     }
   }, 1200);
 }
-
+});
   
 rejectBtn.addEventListener("click", function () {
   if (callState !== "ringing") return;
