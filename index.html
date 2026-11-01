@@ -4189,7 +4189,32 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   height: 100%;
   object-fit: cover;
 }
+/* เปิดดูรูป Explore */
 
+.ig-explore-photo-viewer {
+  position: absolute;
+  inset: 0;
+  z-index: 9999;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ig-explore-photo-viewer img {
+  width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.ig-explore-photo-close {
+  position: absolute;
+  top: 18px;
+  left: 16px;
+  z-index: 2;
+  border: 0;
+  background: transparent;
+  color: white;
+  font-size: 32px;
+}
 
 .ig-explore-reel-icon,
 .ig-explore-multiple {
@@ -6638,252 +6663,8 @@ document.getElementById("appScreen").classList.toggle("sms-mode", name === "ข�
   </div>
 
   <!-- ตาราง Explore -->
-  <div class="ig-explore-gallery">
-
-    <!-- รูปคณิต -->
-    <button class="ig-explore-item"
-            type="button"
-            data-explore-post="1"
-            aria-label="ดูโพสต์คณิตที่ 1">
-      <img
-        src="https://i.ibb.co/8nMQfm0L/r07qxo-R-Download.jpg"
-        alt="คณิต"
-        loading="lazy"
-      >
-    </button>
-
-    <!-- ท่องเที่ยว / เมจิกแอร์ไลน์ -->
-    <button class="ig-explore-item"
-            type="button"
-            data-explore-post="2"
-            aria-label="ดูโพสต์เที่ยวบิน">
-      <img
-        src="https://i.ibb.co/CK58XGcz/r07qxo-R-Download.jpg"
-        alt="เที่ยวบิน"
-        loading="lazy"
-      >
-    </button>
-
-    <!-- Reels คลิปที่ 1 -->
-    <button class="ig-explore-item ig-explore-reel"
-            type="button"
-            data-explore-reel="0"
-            aria-label="ดู Reels คลิปที่ 1">
-      <video
-        src="videos/snaptik_7685755790166183186_v3.mp4"
-        muted
-        playsinline
-        preload="metadata"
-      ></video>
-    
-<span class="ig-explore-reel-icon">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <rect x="3" y="3" width="18" height="18" rx="4"/>
-    <path d="M3 9h18M8 3l4 6M15 3l4 6"/>
-    <path d="m10 12 5 3-5 3v-6Z"/>
-  </svg>
-</span>
-
-    </button>
-
-    <!-- รูปจากโพสต์ 3 -->
-    <button class="ig-explore-item"
-            type="button"
-            data-explore-post="3"
-            aria-label="ดูโพสต์คณิตที่ 3">
-      <img
-        src="https://i.ibb.co/20SCMj9P/r07qxo-R-Download.jpg"
-        alt="ความทรงจำ"
-        loading="lazy"
-      >
-      <span class="ig-explore-multiple">▣</span>
-    </button>
-
-    <!-- คาเฟ่ / บรรยากาศ -->
-    <button class="ig-explore-item"
-            type="button"
-            data-explore-post="3"
-            aria-label="ดูรูปบรรยากาศ">
-      <img
-        src="https://i.ibb.co/7tQtVFgM/r07qxo-R-Download.jpg"
-        alt="บรรยากาศ"
-        loading="lazy"
-      >
-    </button>
-
-    <!-- Reels คลิปที่ 2 -->
-    <button class="ig-explore-item ig-explore-reel"
-            type="button"
-            data-explore-reel="1"
-            aria-label="ดู Reels คลิปที่ 2">
-      <video
-        src="videos/snaptik_7658269030410669320_v3.mp4"
-        muted
-        playsinline
-        preload="metadata"
-      ></video>
-     
-<span class="ig-explore-reel-icon">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <rect x="3" y="3" width="18" height="18" rx="4"/>
-    <path d="M3 9h18M8 3l4 6M15 3l4 6"/>
-    <path d="m10 12 5 3-5 3v-6Z"/>
-  </svg>
-</span>
-
-    </button>
-
-    <!-- รูปคณิต -->
-    <button class="ig-explore-item"
-            type="button"
-            data-explore-post="4"
-            aria-label="ดูโพสต์คณิตที่ 4">
-      <img
-        src="https://i.ibb.co/CfYPBSx/r07qxo-R-Download.jpg"
-        alt="คณิต"
-        loading="lazy"
-      >
-    </button>
-
-    <!-- ท่องเที่ยวปารีส -->
-    <button class="ig-explore-item"
-            type="button"
-            data-explore-post="5"
-            aria-label="ดูโพสต์ปารีส">
-      <img
-        src="https://i.ibb.co/spsGKVSc/r07qxo-R-Download.jpg"
-        alt="Paris"
-        loading="lazy"
-      >
-    </button>
-
-    <!-- Reels คลิปที่ 3 -->
-    <button class="ig-explore-item ig-explore-reel"
-            type="button"
-            data-explore-reel="2"
-            aria-label="ดู Reels คลิปที่ 3">
-      <video
-        src="videos/snaptik_7642584846417579271_v3.mp4"
-        muted
-        playsinline
-        preload="metadata"
-      ></video>
-  
-<span class="ig-explore-reel-icon">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <rect x="3" y="3" width="18" height="18" rx="4"/>
-    <path d="M3 9h18M8 3l4 6M15 3l4 6"/>
-    <path d="m10 12 5 3-5 3v-6Z"/>
-  </svg>
-</span>
-
-    </button>
-
-    <!-- รูปจากโพสต์ 3 -->
-    <button class="ig-explore-item"
-            type="button"
-            data-explore-post="3"
-            aria-label="ดูรูปคณิตเพิ่มเติม">
-      <img
-        src="https://i.ibb.co/TxMrc01n/r07qxo-R-Download.jpg"
-        alt="ความทรงจำ"
-        loading="lazy"
-      >
-    </button>
-
-    <!-- รูปจากโพสต์ 3 -->
-    <button class="ig-explore-item"
-            type="button"
-            data-explore-post="3"
-            aria-label="ดูรูปท่องเที่ยว">
-      <img
-        src="https://i.ibb.co/6cBNfS3z/r07qxo-R-Download.jpg"
-        alt="ท่องเที่ยว"
-        loading="lazy"
-      >
-    </button>
-
-    <!-- Reels คลิปที่ 4 -->
-    <button class="ig-explore-item ig-explore-reel"
-            type="button"
-            data-explore-reel="3"
-            aria-label="ดู Reels คลิปที่ 4">
-      <video
-        src="videos/snaptik_7630809065920318738_v3.mp4"
-        muted
-        playsinline
-        preload="metadata"
-      ></video>
-
-<span class="ig-explore-reel-icon">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <rect x="3" y="3" width="18" height="18" rx="4"/>
-    <path d="M3 9h18M8 3l4 6M15 3l4 6"/>
-    <path d="m10 12 5 3-5 3v-6Z"/>
-  </svg>
-</span>
-
-    </button>
-
-    <!-- รูปจากโพสต์ 3 -->
-    <button class="ig-explore-item"
-            type="button"
-            data-explore-post="3"
-            aria-label="ดูรูปบรรยากาศเพิ่มเติม">
-      <img
-        src="https://i.ibb.co/yczQHNVc/r07qxo-R-Download.jpg"
-        alt="บรรยากาศ"
-        loading="lazy"
-      >
-    </button>
-
-    <!-- Reels คลิปที่ 5 -->
-    <button class="ig-explore-item ig-explore-reel"
-            type="button"
-            data-explore-reel="4"
-            aria-label="ดู Reels คลิปที่ 5">
-      <video
-        src="videos/snaptik_7630344644466937096_v3.mp4"
-        muted
-        playsinline
-        preload="metadata"
-      ></video>
-     
-<span class="ig-explore-reel-icon">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <rect x="3" y="3" width="18" height="18" rx="4"/>
-    <path d="M3 9h18M8 3l4 6M15 3l4 6"/>
-    <path d="m10 12 5 3-5 3v-6Z"/>
-  </svg>
-</span>
-
-    </button>
-
-    <!-- Reels คลิปที่ 6 -->
-    <button class="ig-explore-item ig-explore-reel"
-            type="button"
-            data-explore-reel="5"
-            aria-label="ดู Reels คลิปที่ 6">
-      <video
-        src="videos/snaptik_7626570907678493970_v3.mp4"
-        muted
-        playsinline
-        preload="metadata"
-      ></video>
-     
-<span class="ig-explore-reel-icon">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <rect x="3" y="3" width="18" height="18" rx="4"/>
-    <path d="M3 9h18M8 3l4 6M15 3l4 6"/>
-    <path d="m10 12 5 3-5 3v-6Z"/>
-  </svg>
-</span>
-
-    </button>
-  </div>
+<div class="ig-explore-gallery"></div>
 </section>
-
-
      
 <section class="ig-page ig-reels-page hidden">
 
@@ -8298,6 +8079,149 @@ if (name === "Facebook") {
 }
 if (name === "Instagram") {
   const ig = document.querySelector("#appContent .ig-app");
+  /* ===== Explore: 15 ช่อง สุ่มรูปและคลิป ===== */
+
+const exploreNewPhotos = [
+  "https://i.ibb.co/gLcZw2mF/29330-B2-D-F46-F-4694-91-FA-AB4-C37-A19405.jpg",
+  "https://i.ibb.co/2pcXQJw/48-EFCA4-E-495-F-43-E4-BC8-A-99-B857755-E4-E.jpg",
+  "https://i.ibb.co/7dxq4h8B/IMG-0865.png",
+  "https://i.ibb.co/G3N1VVNh/IMG-9653.jpg",
+  "https://i.ibb.co/LXCjNNbP/FDC2-EF1-E-1-A5-B-4029-A3-DD-F5-A60-FFB085-D.jpg",
+  "https://i.ibb.co/PG0F3cLB/D8408-FA9-353-A-4-AA3-AEBE-AB4-EDBBEFC38.jpg",
+  "https://i.ibb.co/Qjt0Mxry/IMG-7325.jpg",
+  "https://i.ibb.co/Y7PpYk6N/IMG-20261025-173710.jpg",
+  "https://i.ibb.co/7dw5SfwZ/IMG-7207.jpg"
+];
+
+/* รูปคณิตและโตโต้ที่เคยส่งมา */
+const exploreOldPhotos = [
+  { src: "https://i.ibb.co/8nMQfm0L/r07qxo-R-Download.jpg", post: 1 },
+  { src: "https://i.ibb.co/CK58XGcz/r07qxo-R-Download.jpg", post: 2 },
+  { src: "https://i.ibb.co/20SCMj9P/r07qxo-R-Download.jpg", post: 3 },
+  { src: "https://i.ibb.co/CfYPBSx/r07qxo-R-Download.jpg", post: 4 },
+  { src: "https://i.ibb.co/spsGKVSc/r07qxo-R-Download.jpg", post: 5 },
+  { src: "https://i.ibb.co/bjcs2Zz5/IMG-5478.jpg" },
+  { src: "https://i.ibb.co/rGmGhZqj/A6125416-E6-E3-43-B0-9955-6-D914089440-E.jpg" },
+  { src: "https://i.ibb.co/VWfnkc3w/r07qxo-R-Download.jpg" },
+  { src: "https://i.ibb.co/pBddL6bb/r07qxo-R-Download.jpg" }
+];
+
+/* คลิปเดิม 6 คลิป พร้อมรูปปก */
+const exploreReels = [
+  {
+    reel: 0,
+    cover: "https://i.ibb.co/gLcZw2mF/29330-B2-D-F46-F-4694-91-FA-AB4-C37-A19405.jpg"
+  },
+  {
+    reel: 1,
+    cover: "https://i.ibb.co/2pcXQJw/48-EFCA4-E-495-F-43-E4-BC8-A-99-B857755-E4-E.jpg"
+  },
+  {
+    reel: 2,
+    cover: "https://i.ibb.co/7dxq4h8B/IMG-0865.png"
+  },
+  {
+    reel: 3,
+    cover: "https://i.ibb.co/G3N1VVNh/IMG-9653.jpg"
+  },
+  {
+    reel: 4,
+    cover: "https://i.ibb.co/LXCjNNbP/FDC2-EF1-E-1-A5-B-4029-A3-DD-F5-A60-FFB085-D.jpg"
+  },
+  {
+    reel: 5,
+    cover: "https://i.ibb.co/PG0F3cLB/D8408-FA9-353-A-4-AA3-AEBE-AB4-EDBBEFC38.jpg"
+  }
+];
+
+/* สุ่มแบบไม่แก้ข้อมูลต้นฉบับ */
+function shuffleExplore(items) {
+  const result = [...items];
+
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+
+  return result;
+}
+
+const exploreGallery = ig.querySelector(".ig-explore-gallery");
+
+if (exploreGallery) {
+  const items = [
+    ...exploreNewPhotos.map(src => ({
+      type: "new",
+      src
+    })),
+
+    ...shuffleExplore(exploreOldPhotos).slice(0, 3).map(photo => ({
+      type: "old",
+      ...photo
+    })),
+
+    ...shuffleExplore(exploreReels).slice(0, 3).map(reel => ({
+      type: "reel",
+      ...reel
+    }))
+  ];
+
+  exploreGallery.innerHTML = "";
+
+  shuffleExplore(items).forEach(item => {
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "ig-explore-item";
+
+    const img = document.createElement("img");
+    img.src = item.type === "reel" ? item.cover : item.src;
+    img.alt = item.type === "reel" ? "ปก Reels" : "รูป Explore";
+    img.loading = "lazy";
+
+    button.appendChild(img);
+
+    if (item.type === "reel") {
+      button.classList.add("ig-explore-reel");
+      button.dataset.exploreReel = item.reel;
+
+      const icon = document.createElement("span");
+      icon.className = "ig-explore-reel-icon";
+      icon.innerHTML = `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="4"/>
+          <path d="M3 9h18M8 3l4 6M15 3l4 6"/>
+          <path d="m10 12 5 3-5 3v-6Z"/>
+        </svg>
+      `;
+
+      button.appendChild(icon);
+
+    } else if (item.type === "old" && item.post) {
+      button.dataset.explorePost = item.post;
+
+    } else {
+      /* รูปใหม่และรูปโตโต้ เปิดภาพจริงเมื่อกด */
+      button.addEventListener("click", () => {
+        const viewer = document.createElement("div");
+        viewer.className = "ig-explore-photo-viewer";
+
+        viewer.innerHTML = `
+          <button type="button" class="ig-explore-photo-close"
+                  aria-label="ปิดรูป">×</button>
+          <img src="${item.src}" alt="รูป Explore">
+        `;
+
+        ig.appendChild(viewer);
+
+        viewer.querySelector(".ig-explore-photo-close")
+          .addEventListener("click", () => viewer.remove());
+      });
+    }
+
+    exploreGallery.appendChild(button);
+  });
+}
   const igMain = ig.querySelector(".ig-main");
 
   // ===== Instagram Reels: 6 videos =====
@@ -8381,7 +8305,6 @@ if (name === "Instagram") {
 
   // ===== Instagram Explore =====
   const exploreInput = ig.querySelector(".ig-explore-input");
-  const exploreGallery = ig.querySelector(".ig-explore-gallery");
   const exploreResults = ig.querySelector(".ig-explore-results");
   const exploreAccounts = ig.querySelectorAll(".ig-explore-account");
   const exploreEmpty = ig.querySelector(".ig-explore-empty");
