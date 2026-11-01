@@ -15703,7 +15703,8 @@ window.openAkkeeChatFromNotification = function () {
     if (page) page.classList.add("hidden");
   });
 
-  screen.style.display = "flex";
+    // เปิด LINE ผ่านระบบเดิม
+  window.openLineApp();
 
   // เปิดแท็บเพื่อนตามระบบ LINE เดิม
   setTab("friends");
