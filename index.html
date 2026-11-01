@@ -11225,8 +11225,7 @@ if (name === "โน้ต") {
   const notes = document.querySelector("#appContent .samsung-notes");
   const $n = selector => notes.querySelector(selector);
 
-  const storageKey = "toto-samsung-notes";
-  
+  const storageKey = "toto-samsung-notes-v2";
 let allNotes = [];
 
 const defaultNotes = [
@@ -15897,18 +15896,18 @@ let ringtonePrepared = false;
 window.prepareIncomingRingtone = function () {
   if (ringtonePrepared) return;
 
-  incomingRingtone.muted = true;
+  incomingRingtone.volume = 0;
 
   incomingRingtone.play().then(() => {
-    incomingRingtone.pause();
-    incomingRingtone.currentTime = 0;
-    incomingRingtone.muted = false;
     ringtonePrepared = true;
-  }).catch((error) => {
-    incomingRingtone.muted = false;
-    console.warn("เตรียมเสียงเรียกเข้าไม่สำเร็จ:", error);
+  }).catch(error => {
+    console.error("เริ่มเสียงไม่ได้:", error);
   });
 };
+
+incomingRingtone.addEventListener("error", () => {
+  console.error("โหลดไฟล์เสียงไม่ได้:", incomingRingtone.src);
+});
    const status = document.getElementById("akkeeCallStatus");
   const acceptBtn = document.getElementById("akkeeAcceptCall");
   const rejectBtn = document.getElementById("akkeeRejectCall");
@@ -15973,10 +15972,13 @@ window.prepareIncomingRingtone = function () {
  window.showAkkeeIncomingCall = function () {
   resetCallScreen();
 
-  incomingRingtone.currentTime = 0;
-  incomingRingtone.play().catch((error) => {
-    console.warn("ไม่สามารถเล่นเสียงเรียกเข้าได้:", error);
-  });
+  incomingRingtone.volume = 1;
+
+  if (incomingRingtone.paused) {
+    incomingRingtone.play().catch(error => {
+      console.error("เสียงเรียกเข้าเล่นไม่ได้:", error);
+    });
+  }
 };
 
   acceptBtn.addEventListener("click", function () {
