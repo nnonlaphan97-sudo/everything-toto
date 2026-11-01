@@ -10249,13 +10249,11 @@ favoriteBtn.addEventListener("click", () => {
     : albumName === "ล่าสุด"
       ? recentImages
       : galleryImages;
-      activeGalleryImages =
-      albumName === "ล่าสุด" ? recentImages : galleryImages;
       gallery.querySelector(".gallery-album-title").textContent = albumName;
       gallery.querySelector(".gallery-album-count").textContent =
-      `${activeGalleryImages.length} ภาพ`;
-
- photoGrid.innerHTML = activeGalleryImages.map((src, index) => `
+    `${currentGalleryImages.length} ภาพ`;
+    
+    photoGrid.innerHTML = currentGalleryImages.map((src, index) => `
         <button class="gallery-photo" data-photo="${index}">
           <img src="${src}" alt="รูปภาพ ${index + 1}" loading="lazy">
         </button>
