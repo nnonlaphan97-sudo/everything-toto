@@ -10802,7 +10802,7 @@ const dmMessages = dmPage.querySelector(".ig-dm-messages");
 const kanitChatHistory = [
   { from: "toto", text: "ทำไรอ่ะ" },
   { from: "kanit", text: "เล่นพิลาทิสไง" },
-  { from: "kanit", text: "ดัดจริตมากกกก" },
+  { from: "toto", text: "ดัดจริตมากกกก" },
 
   { type: "story", from: "toto", text: "วันนี้ผัวมาหาที่ห้องเหรอ" },
   { from: "kanit", text: "เปล่าจ่ะ" },
@@ -11075,8 +11075,9 @@ if (totoFollowing) {
   storyHeader.querySelector("img").alt = "โตโต้";
   storyHeader.querySelector("strong").textContent = "phanuphong_t";
 
-  storyReply.placeholder = "ตอบกลับ phanuphong_t...";
-  storyProgress.style.width = "0%";
+  storyReply.closest(".ig-story-reply")?.classList.add("hidden");
+storyReply.style.display = "none";
+storyProgress.style.width = "0%";
 
   storyViewer.classList.remove("hidden");
 
@@ -11113,13 +11114,17 @@ storyHeader.querySelector("img").src =
 storyHeader.querySelector("img").alt = "คณิต";
 storyHeader.querySelector("strong").textContent = "kanittee";
 
-ig.querySelector(".ig-story-reply").placeholder = "ตอบกลับ kanit...";
+const kanitStoryReply = ig.querySelector(".ig-story-reply");
+kanitStoryReply.placeholder = "ตอบกลับ kanit...";
+kanitStoryReply.style.display = "";
+kanitStoryReply.classList.remove("hidden");
+
   // เปลี่ยนวงแหวนสตอรี่คณิตเป็นสีเทาหลังจากกดดู
   const kanitRing = ig.querySelector(".ig-kanit-story .ig-friend-ring");
   if (kanitRing) {
     kanitRing.classList.add("ig-story-seen");
   }
-
+ig.querySelector(".ig-story-viewer-bottom").style.display = "flex";
   // เปิดวิดีโอสตอรี่คณิต
   storyViewer.classList.remove("hidden");
   storyProgress.style.width = "0%";
