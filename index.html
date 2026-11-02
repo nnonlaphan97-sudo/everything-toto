@@ -16077,10 +16077,9 @@ window.showLineNotification = function (sender, message) {
 
   const icon = document.createElement("img");
 icon.className = "line-notification-icon";
-const senderChat = chats.find(chat => chat.name === sender);
-
-icon.src = senderChat?.image ||
-  "https://i.ibb.co/BVHVS8Rz/IMG-3304.jpg";
+icon.src = sender === "น้องณิต💙"
+  ? "https://i.ibb.co/4ntNZx78/B2-EE0-EC1-6048-47-BA-8-F00-5569-F467-CEB4.jpg"
+  : "https://i.ibb.co/BVHVS8Rz/IMG-3304.jpg";
 icon.alt = sender;
 
   const content = document.createElement("div");
