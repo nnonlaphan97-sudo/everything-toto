@@ -8094,11 +8094,7 @@ window.showPhoneScreen = showScreen;
   }
 function enterDigit(digit) {
     if (pin.length >= 6) return;
-
-    if (typeof window.prepareIncomingRingtone === "function") {
-      window.prepareIncomingRingtone();
-    }
-
+    
     pin += digit;
     updatePinDots();
     $("pinError").textContent = "";
@@ -16133,19 +16129,6 @@ incomingRingtone.loop = true;
 incomingRingtone.volume = 1;
 incomingRingtone.preload = "auto";
 
-let ringtonePrepared = false;
-
-window.prepareIncomingRingtone = function () {
-  if (ringtonePrepared) return;
-
-  incomingRingtone.volume = 0;
-
-  incomingRingtone.play().then(() => {
-    ringtonePrepared = true;
-  }).catch(error => {
-    console.error("เริ่มเสียงไม่ได้:", error);
-  });
-};
 
 incomingRingtone.addEventListener("error", () => {
   console.error("โหลดไฟล์เสียงไม่ได้:", incomingRingtone.src);
@@ -16211,9 +16194,11 @@ incomingRingtone.addEventListener("error", () => {
     callScreen.hidden = false;
   }
 
- window.showAkkeeIncomingCall = function () {
+window.showAkkeeIncomingCall = function () {
   resetCallScreen();
 
+  incomingRingtone.pause();
+  incomingRingtone.currentTime = 0;
   incomingRingtone.volume = 1;
 
   if (incomingRingtone.paused) {
