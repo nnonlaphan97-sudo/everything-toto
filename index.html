@@ -1108,6 +1108,18 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; touch-action
   display: block;
 }
 
+.line-tab-panel[data-line-panel="news"].active {
+  display: block !important;
+  min-height: 100%;
+  background: #fff;
+  color: #222;
+}
+
+.line-tab-panel[data-line-panel="news"].active .line-news-page {
+  display: block;
+  min-height: 100%;
+}
+
 .line-filter-row {
   display: flex;
   gap: 8px;
