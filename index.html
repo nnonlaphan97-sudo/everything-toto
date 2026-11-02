@@ -7455,7 +7455,7 @@ body:has(#appScreen:not(.hidden) .yt-app) .status-bar {
     <div class="home-gesture" id="homeGesture"></div>
   </section>
 
-<audio id="musicAudio" src="videos/v14044g50000d945ovnog65ucmino3rg.mp3" preload="metadata"></audio>
+<audio id="musicAudio" src="videos/ไม่คิดนอกใจ.mp3" preload="metadata"></audio>
 
 <!-- LARGE MUSIC PLAYER -->
   <section class="screen hidden" id="playerScreen">
@@ -16077,9 +16077,16 @@ window.showLineNotification = function (sender, message) {
 
   const icon = document.createElement("img");
 icon.className = "line-notification-icon";
-icon.src = sender === "น้องณิต💙"
-  ? "https://i.ibb.co/4ntNZx78/B2-EE0-EC1-6048-47-BA-8-F00-5569-F467-CEB4.jpg"
-  : "https://i.ibb.co/BVHVS8Rz/IMG-3304.jpg";
+const notificationAvatars = {
+  "กู้ภัยกู้ใจ (3)": "https://i.ibb.co/GvP7f8Tt/r07qxo-R-Download.jpg",
+  "น้องณิต💙": "https://i.ibb.co/4ntNZx78/B2-EE0-EC1-6048-47-BA-8-F00-5569-F467-CEB4.jpg",
+  "ท้ายมูลนิธิ (6)": "https://i.ibb.co/zhD7Hbp8/r07qxo-R-Download.jpg",
+  "ภารกิจนพนภา (6)": "https://i.ibb.co/rRnHtj2z/IMG-3594.jpg",
+  "อัคคี": "https://i.ibb.co/BVHVS8Rz/IMG-3304.jpg"
+};
+
+icon.src = notificationAvatars[sender] ||
+  "https://i.ibb.co/BVHVS8Rz/IMG-3304.jpg";
 icon.alt = sender;
 
   const content = document.createElement("div");
