@@ -14939,7 +14939,10 @@ row.appendChild(bubble);
       if (message.date !== lastDate) {
         const dateLabel = document.createElement("div");
         dateLabel.className = "line-chat-date";
-        dateLabel.textContent = message.date;
+      dateLabel.textContent =
+  message.date === history[history.length - 1]?.date
+    ? "วันนี้"
+    : message.date;
         messages.appendChild(dateLabel);
         lastDate = message.date;
       }
